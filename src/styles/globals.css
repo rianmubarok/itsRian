@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html,
+  body {
+    @apply transition-colors;
+    font-family: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+  }
+}
