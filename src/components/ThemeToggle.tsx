@@ -20,8 +20,11 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      aria-label="Toggle theme"
+      aria-label={`Switch to ${
+        resolvedTheme === "dark" ? "light" : "dark"
+      } mode`}
       className="ml-4 px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 text-sm dark:text-white transition"
+      type="button"
     >
       {resolvedTheme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
     </button>

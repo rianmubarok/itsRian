@@ -5,7 +5,17 @@
 @layer base {
   html,
   body {
-    @apply transition-colors;
+    @apply transition-colors bg-[FAFAFA] dark:bg-[121212];
     font-family: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+  }
+
+  .font-playfair {
+    font-family: var(--font-playfair), "Playfair Display", serif;
+  }
+
+  .font-playfair-medium-italic {
+    font-family: var(--font-playfair), "Playfair Display", serif;
+    font-weight: 500;
+    font-style: italic;
   }
 }

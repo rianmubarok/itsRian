@@ -1,23 +1,11 @@
 import "../styles/globals.css";
-import Navbar from "../components/Navbar";
-import { ThemeProvider } from "next-themes";
-import { DM_Sans, Playfair_Display } from "next/font/google";
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-dm-sans",
-});
-
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-playfair",
-});
+import Layout from "../components/Layout";
+import { dmSans, playfairDisplay } from "../lib/fonts";
+import { siteMetadata } from "../lib/metadata";
 
 export const metadata = {
-  title: "Rian – Portfolio",
-  description: "My Personal Portfolio",
+  title: siteMetadata.title,
+  description: siteMetadata.description,
 };
 
 export default function RootLayout({
@@ -31,16 +19,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${dmSans.variable} ${playfairDisplay.variable}`}
     >
-      <body className={dmSans.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          {children}
-        </ThemeProvider>
+      <body
+        className={`${dmSans.className} bg-primary-light dark:bg-primary-dark tracking-tight max-w-6xl mx-auto px-8`}
+      >
+        <Layout>{children}</Layout>
       </body>
     </html>
   );
