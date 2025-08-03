@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="max-w-6xl mx-auto mt-24 flex" role="main">
+    <main className="max-w-6xl mx-auto mt-24 mb-48 flex" role="main">
       <section className="flex gap-4 w-full">
-        <article className="basis-2/3">
+        <article className="basis-2/3 text-primary-dark dark:text-primary-light">
           <header className="flex items-center gap-4 mb-6">
             <figure className="w-[60px] h-[60px] rounded-full overflow-hidden">
               <Image
@@ -26,8 +26,10 @@ export default function Home() {
 
         <aside className="basis-1/3 flex items-end justify-end">
           <address className="text-right not-italic">
-            <p className="text-sm text-gray-500 dark:text-gray-400">Based in</p>
-            <p className="text-lg font-medium">Jepara, Indonesia</p>
+            <p className="text-base text-primary-gray">Based in</p>
+            <p className="text-lg text-primary-dark dark:text-primary-light">
+              Jepara, Indonesia
+            </p>
           </address>
         </aside>
       </section>

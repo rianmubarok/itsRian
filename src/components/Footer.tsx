@@ -3,7 +3,7 @@ import ThemeToggle from "./ThemeToggle";
 export default function Footer() {
   return (
     <footer
-      className="px-6 py-4 bg-primary-light dark:bg-primary-dark text-gray-900 dark:text-white border-t border-gray-200 dark:border-gray-700"
+      className="py-4 bg-primary-light dark:bg-primary-dark text-gray-900 dark:text-white border-t border-gray-200 dark:border-gray-700"
       role="contentinfo"
     >
       <div className="max-w-6xl mx-auto flex justify-between items-center">

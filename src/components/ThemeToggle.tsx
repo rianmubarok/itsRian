@@ -23,7 +23,7 @@ export default function ThemeToggle() {
       aria-label={`Switch to ${
         resolvedTheme === "dark" ? "light" : "dark"
       } mode`}
-      className="ml-4 px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 text-sm dark:text-white transition"
+      className="p-2 rounded dark:text-primary-white transition"
       type="button"
     >
       {resolvedTheme === "dark" ? <Sun size={16} /> : <Moon size={16} />}

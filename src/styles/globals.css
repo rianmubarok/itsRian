@@ -2,19 +2,26 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  /* COLOR */
+  --color-primary-light: #fafafa;
+  --color-primary-dark: #121212;
+  --color-primary-gray: #606060;
+
+  /* FONTS */
+  --font-sans: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+  --font-playfair: var(--font-playfair), "Playfair Display", serif;
+}
+
 @layer base {
   html,
   body {
-    @apply transition-colors bg-[FAFAFA] dark:bg-[121212];
-    font-family: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
-  }
-
-  .font-playfair {
-    font-family: var(--font-playfair), "Playfair Display", serif;
+    @apply transition-colors bg-primary-light dark:bg-primary-dark text-primary-light dark:text-primary-dark;
+    font-family: var(--font-sans);
   }
 
   .font-playfair-medium-italic {
-    font-family: var(--font-playfair), "Playfair Display", serif;
+    font-family: var(--font-playfair);
     font-weight: 500;
     font-style: italic;
   }

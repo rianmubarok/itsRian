@@ -2,13 +2,23 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { navItems } from "../lib/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
-    <header className="py-5 bg-primary-light dark:bg-primary-dark text-primary-dark dark:text-white">
+    <header className="py-5 text-primary-dark dark:text-primary-light">
       <nav
         className="max-w-6xl mx-auto"
         role="navigation"
@@ -21,7 +31,8 @@ export default function Navbar() {
             </Link>
           </h1>
 
-          <ul className="flex space-x-8" role="menubar">
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex space-x-8" role="menubar">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
 
@@ -29,7 +40,7 @@ export default function Navbar() {
                 <li key={item.name} role="none">
                   <Link
                     href={item.href}
-                    className="group relative inline-block text-xl text-primary-dark dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition-colors duration-200 font-regular"
+                    className="group relative inline-block text-xl text-primary-dark dark:text-primary-light transition-colors duration-200 font-regular"
                     role="menuitem"
                     aria-current={isActive ? "page" : undefined}
                   >
@@ -41,6 +52,72 @@ export default function Navbar() {
                       }`}
                     >
                       {item.name}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Hamburger Menu Button */}
+          <button
+            className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
+            onClick={toggleMenu}
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            <span
+              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                isMenuOpen ? "rotate-45 translate-y-2" : ""
+              }`}
+            />
+            <span
+              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                isMenuOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+              }`}
+            />
+          </button>
+        </div>
+
+        {/* Mobile Navigation Menu */}
+        <div
+          id="mobile-menu"
+          className={`md:hidden ${
+            isMenuOpen
+              ? "max-h-96 opacity-100 visible"
+              : "max-h-0 opacity-0 invisible"
+          } transition-all duration-300 ease-in-out overflow-hidden`}
+        >
+          <ul className="flex flex-col space-y-4 py-4 border-primary-dark dark:border-primary-light mt-4">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+
+              return (
+                <li key={item.name} role="none">
+                  <Link
+                    href={item.href}
+                    className="block text-xl text-primary-dark dark:text-primary-light  transition-colors duration-200 font-regular py-2"
+                    role="menuitem"
+                    aria-current={isActive ? "page" : undefined}
+                    onClick={closeMenu}
+                  >
+                    <span
+                      className={`relative ${
+                        isActive
+                          ? "text-gray-800 dark:text-primary-light font-medium"
+                          : ""
+                      }`}
+                    >
+                      {item.name}
+                      {isActive && (
+                        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-current" />
+                      )}
                     </span>
                   </Link>
                 </li>
