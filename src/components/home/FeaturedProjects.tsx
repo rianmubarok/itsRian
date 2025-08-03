@@ -4,17 +4,15 @@ import { projects } from "../../lib/projects";
 import ProjectCard from "../project/ProjectCard";
 
 export default function FeaturedProjects() {
-  const featuredProjects = projects.slice(0, 3);
+  const featuredProjects = projects.slice(0, 4);
 
   return (
     <section className="mb-16">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-[32px] font-regular text-primary-dark dark:text-primary-light">
-          My Featured Projects
-        </h2>
+      <div className="flex items-center justify-between mb-6 text-primary-dark dark:text-primary-light">
+        <h2 className="text-[32px] font-regular">My Featured Projects</h2>
         <Link
           href="/projects"
-          className="text-lg text-primary-dark font-light inline-flex items-center gap-2"
+          className="text-lg font-light inline-flex items-center gap-2"
         >
           View all projects
           <ArrowRight className="w-6 h-6 stroke-1" />

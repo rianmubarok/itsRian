@@ -12,18 +12,22 @@ interface OtherProjectsProps {
 export default function OtherProjects({
   currentProjectSlug,
 }: OtherProjectsProps) {
-  // Filter out current project and get 3 random projects
   const otherProjects = projects
     .filter((project) => project.slug !== currentProjectSlug)
     .sort(() => Math.random() - 0.5) // Shuffle array
-    .slice(0, 3);
+    .slice(0, 4);
 
   return (
     <section>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-[32px] font-regular text-primary-dark dark:text-primary-light">
-          View Other Projects
-        </h2>
+      <div className="flex items-center justify-between mb-6 text-primary-dark dark:text-primary-light">
+        <h2 className="text-[32px] font-regular">View Other Projects</h2>
+        <Link
+          href="/projects"
+          className="text-lg font-light inline-flex items-center gap-2"
+        >
+          View all projects
+          <ArrowRight className="w-6 h-6 stroke-1" />
+        </Link>
       </div>
 
       {/* Scrollable Projects Container */}

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { Project } from "../../types/project";
+import { Project } from "../../types/index";
 
 interface ProjectCardProps {
   project: Project;

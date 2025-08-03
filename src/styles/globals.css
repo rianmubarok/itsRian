@@ -12,6 +12,11 @@
   /* FONTS */
   --font-sans: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
   --font-playfair: var(--font-playfair), "Playfair Display", serif;
+
+  /* CUSTOM COLORS */
+  --color-primary: #121212;
+  --color-primary-light: #fafafa;
+  --color-primary-dark: #121212;
 }
 
 @layer base {
@@ -57,6 +62,20 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
   }
+
+  /* Infinite loop animation for skills */
+  @keyframes looping-tag {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-looping-tag {
+    animation: looping-tag 30s linear infinite;
+  }
 }
 
 /* Custom NProgress styles */
@@ -80,7 +99,8 @@
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px var(--color-primary-gray), 0 0 5px var(--color-primary-gray);
+  box-shadow: 0 0 10px var(--color-primary-gray),
+    0 0 5px var(--color-primary-gray);
   opacity: 1;
   transform: rotate(3deg) translate(0px, -4px);
 }

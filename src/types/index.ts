@@ -10,13 +10,16 @@ export interface SocialLink {
 }
 
 export interface Project {
-  id: string;
+  id: number;
   title: string;
+  slug: string;
   description: string;
   image: string;
-  url: string;
-  technologies: string[];
-  featured?: boolean;
+  tags: string[];
+  createdAt: string;
+  detail: string;
+  sourceCode?: string;
+  liveProject?: string;
 }
 
 export interface BlogPost {
@@ -27,6 +30,22 @@ export interface BlogPost {
   tags: string[];
   url: string;
   featured?: boolean;
+}
+
+export interface Blog {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  tags: string[];
+  content: {
+    en: string;
+    id: string;
+  };
+  thumbnail: string;
+  createdAt: string;
+  viewCount: string;
+  readingTime: string;
 }
 
 export interface Theme {

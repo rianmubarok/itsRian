@@ -17,7 +17,7 @@ export default function IntroSection() {
           </figure>
           <p className="text-[32px]">Hey there, I'm Rian 👋</p>
         </header>
-        <h1 className="text-6xl font-medium leading-snug tracking-tight">
+        <h1 className="text-6xl font-medium leading-tight tracking-tight">
           a visual designer exploring the intersection of design and
           development
         </h1>

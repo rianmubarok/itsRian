@@ -1,16 +1,17 @@
 "use client";
 
-import { projects } from "../../lib/projects";
-import ProjectCard from "../../components/project/ProjectCard";
+import { blogs } from "../../lib/blog";
+import BlogCard from "../../components/blog/BlogCard";
+import FeaturedBlogRotator from "../../components/blog/FeaturedBlogRotator";
 import { useInfiniteScroll } from "../../hooks";
 import {
-  ProjectCardSkeleton,
+  BlogCardSkeleton,
   LoadingSpinner,
 } from "../../components/ui/SkeletonLoader";
 
-export default function ProjectsPage() {
+export default function BlogPage() {
   const { displayedItems, isLoading, hasMore, loadingRef } = useInfiniteScroll(
-    projects,
+    blogs,
     {
       itemsPerPage: 4,
       threshold: 200,
@@ -22,21 +23,21 @@ export default function ProjectsPage() {
       className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
       role="main"
     >
-      <h1 className="text-6xl font-medium leading-snug tracking-tight mb-6">
-        All Projects
-      </h1>
+      {/* Featured Blog Rotator */}
+      <FeaturedBlogRotator blogs={blogs} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {displayedItems.map((project) => (
-          <ProjectCard key={project.id} project={project} variant="grid" />
+      {/* All Blogs in Grid - 2 Columns */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {displayedItems.map((blog) => (
+          <BlogCard key={blog.id} blog={blog} variant="list" />
         ))}
       </div>
 
       {/* Loading indicator */}
       {isLoading && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
           {[1, 2, 3, 4].map((item) => (
-            <ProjectCardSkeleton key={item} />
+            <BlogCardSkeleton key={item} />
           ))}
         </div>
       )}
@@ -49,7 +50,7 @@ export default function ProjectsPage() {
         >
           <div className="flex items-center gap-3 text-primary-gray text-sm">
             <LoadingSpinner />
-            <span>Loading more projects...</span>
+            <span>Loading more articles...</span>
           </div>
         </div>
       )}

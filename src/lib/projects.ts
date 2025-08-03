@@ -1,4 +1,4 @@
-import { Project } from "../types/project";
+import { Project } from "../types/index";
 
 export const projects: Project[] = [
   {
@@ -56,5 +56,65 @@ export const projects: Project[] = [
     tags: ["React", "Redux", "Firebase", "GithubAPI"],
     createdAt: "2025-05-10",
     liveProject: "https://gitprofile.vercel.app",
+  },
+  {
+    id: 5,
+    title: "E-Commerce Platform",
+    slug: "ecommerce-platform",
+    description:
+      "Full-stack e-commerce solution with payment integration and admin dashboard",
+    detail:
+      "A comprehensive e-commerce platform built with Next.js, featuring product management, user authentication, payment processing with Stripe, and a powerful admin dashboard. Includes inventory management, order tracking, and analytics.",
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&h=600&fit=crop",
+    tags: ["Next.js", "Stripe", "MongoDB", "Tailwind CSS"],
+    createdAt: "2025-04-15",
+    sourceCode: "https://github.com/yourname/ecommerce-platform",
+    liveProject: "https://ecommerce-platform.vercel.app",
+  },
+  {
+    id: 6,
+    title: "Task Management App",
+    slug: "task-management-app",
+    description:
+      "Collaborative task management application with real-time updates",
+    detail:
+      "A real-time task management application built with React and Firebase. Features include team collaboration, task assignment, progress tracking, and real-time notifications. Uses Firebase Realtime Database for instant updates.",
+    image:
+      "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=800&h=600&fit=crop",
+    tags: ["React", "Firebase", "Material-UI", "Real-time"],
+    createdAt: "2025-03-20",
+    sourceCode: "https://github.com/yourname/task-management",
+    liveProject: "https://task-management.vercel.app",
+  },
+  {
+    id: 7,
+    title: "Weather Dashboard",
+    slug: "weather-dashboard",
+    description:
+      "Interactive weather application with location-based forecasts",
+    detail:
+      "A weather dashboard that provides detailed weather information for any location. Features include 7-day forecasts, hourly predictions, weather maps, and location-based services. Integrates with multiple weather APIs for comprehensive data.",
+    image:
+      "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=800&h=600&fit=crop",
+    tags: ["Vue.js", "Weather API", "Chart.js", "Geolocation"],
+    createdAt: "2025-02-10",
+    sourceCode: "https://github.com/yourname/weather-dashboard",
+    liveProject: "https://weather-dashboard.vercel.app",
+  },
+  {
+    id: 8,
+    title: "Social Media Analytics",
+    slug: "social-media-analytics",
+    description:
+      "Analytics platform for social media performance tracking",
+    detail:
+      "A comprehensive analytics platform for tracking social media performance across multiple platforms. Features include data visualization, trend analysis, competitor tracking, and automated reporting. Built with modern data visualization libraries.",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&h=600&fit=crop",
+    tags: ["React", "D3.js", "Node.js", "PostgreSQL"],
+    createdAt: "2025-01-25",
+    sourceCode: "https://github.com/yourname/social-analytics",
+    liveProject: "https://social-analytics.vercel.app",
   },
 ];
