@@ -3,6 +3,8 @@ import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { projects } from "../../../lib/projects";
 import { notFound } from "next/navigation";
 import { use } from "react";
+import { formatDate } from "../../../lib/utils";
+import OtherProjects from "../../../components/project/OtherProjects";
 
 interface ProjectDetailPageProps {
   params: Promise<{
@@ -20,16 +22,16 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
 
   return (
     <main
-      className="text-primary-dark dark:text-primary-light mx-auto mt-24 mb-48"
+      className="text-primary-dark dark:text-primary-light mx-auto mt-48"
       role="main"
     >
       {/* Back Button */}
       <Link
         href="/projects"
-        className="inline-flex items-center gap-2 text-lg font-light mb-8 transition-colors duration-200"
+        className="inline-flex items-center gap-2 text-lg font-light mb-8"
       >
         <ArrowLeft className="w-6 h-6 stroke-1" />
-        Back to Projects
+        Back to projects
       </Link>
 
       {/* Project Header */}
@@ -44,7 +46,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
 
       {/* Project Image */}
       <div className="mb-12">
-        <div className="relative h-100 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-2xl">
+        <div className="relative h-96 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-2xl">
           <img
             src={project.image}
             alt={project.title}
@@ -69,7 +71,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
         {project.detail}
       </p>
 
-      <div className="mt-12 flex flex-col items-start md:flex-row md:items-center md:justify-between gap-2 w-full">
+      <div className="mt-32 mb-16 flex flex-col items-start md:flex-row md:items-center md:justify-between gap-2 w-full">
         <div className="text-lg text-primary-dark dark:text-primary-light font-light flex flex-wrap items-center gap-8">
           {project.sourceCode && (
             <Link
@@ -101,14 +103,14 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
         </div>
 
         <span className="text-base text-primary-gray mt-2 md:mt-0 md:text-right">
-          Created:{" "}
-          {new Date(project.createdAt).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+          Created: {formatDate(project.createdAt)}
         </span>
       </div>
+
+      <hr className="border-t border-primary-gray my-12" />
+
+      {/* Other Projects Section */}
+      <OtherProjects currentProjectSlug={project.slug} />
     </main>
   );
 }

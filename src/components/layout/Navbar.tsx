@@ -3,10 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { navItems } from "../lib/navigation";
+import ThemeToggle from "../common/ThemeToggle";
+import { useScrollDirection } from "../../hooks/useScrollDirection";
+import { navItems } from "../../lib/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { isVisible, lastScrollY } = useScrollDirection();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -18,21 +21,28 @@ export default function Navbar() {
   };
 
   return (
-    <header className="py-5 text-primary-dark dark:text-primary-light">
-      <nav
-        className="max-w-6xl mx-auto"
-        role="navigation"
-        aria-label="Main navigation"
-      >
-        <div className="flex justify-between items-center">
-          <h1 className="text-[32px] font-playfair-medium-italic">
-            <Link href="/" aria-label="Home - itsRian Portfolio">
-              itsRian
-            </Link>
-          </h1>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-5 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      } ${
+        lastScrollY > 100
+          ? "bg-primary-light/80 dark:bg-primary-dark/80 backdrop-blur-md border-b border-primary-gray/20"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="text-[32px] font-playfair-medium-italic text-primary-dark dark:text-primary-light transition-opacity duration-200"
+            aria-label="Home - itsRian Portfolio"
+          >
+            itsRian
+          </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex space-x-8" role="menubar">
+          <ul className="hidden md:flex space-x-8 ml-auto" role="menubar">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
 
@@ -59,30 +69,38 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* Hamburger Menu Button */}
-          <button
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
-            onClick={toggleMenu}
-            aria-label="Toggle navigation menu"
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-menu"
-          >
-            <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
-                isMenuOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            />
-            <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
-                isMenuOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
-                isMenuOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            />
-          </button>
+          {/* Mobile Menu */}
+          <div className="flex items-center gap-4">
+            {/* Theme Toggle - Mobile Only */}
+            <div className="md:hidden">
+              <ThemeToggle />
+            </div>
+
+            {/* Hamburger Menu Button */}
+            <button
+              className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 text-primary-dark dark:text-primary-light"
+              onClick={toggleMenu}
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+            >
+              <span
+                className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                  isMenuOpen ? "rotate-45 translate-y-2" : ""
+                }`}
+              />
+              <span
+                className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                  isMenuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                  isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                }`}
+              />
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation Menu */}
@@ -102,7 +120,7 @@ export default function Navbar() {
                 <li key={item.name} role="none">
                   <Link
                     href={item.href}
-                    className="block text-xl text-primary-dark dark:text-primary-light  transition-colors duration-200 font-regular py-2"
+                    className="block text-xl text-primary-dark dark:text-primary-light transition-colors duration-200 font-regular py-2"
                     role="menuitem"
                     aria-current={isActive ? "page" : undefined}
                     onClick={closeMenu}
@@ -125,7 +143,7 @@ export default function Navbar() {
             })}
           </ul>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
 }
