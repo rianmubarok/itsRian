@@ -20,22 +20,27 @@ export default function ProjectsPage() {
             key={project.id}
             className="block transition-all duration-300 overflow-hidden group"
           >
-            {/* Image (clickable) */}
+            {/* Image */}
             <Link href={`/projects/${project.slug}`}>
-              <div className="relative h-80 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-lg">
+              <div className="relative h-80 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-2xl">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-white text-2xl font-regular">
-                    View Details
-                  </span>
-                  <ArrowUpRight className="text-white w-10 h-10 stroke-1" />
+                {/* Content Container - positioned at bottom with flex layout */}
+                <div className="absolute bottom-5 left-5 right-5 flex flex-col gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0 z-20">
+                  {/* Title & Icon */}
+                  <div className="flex items-start justify-between">
+                    <span className="text-white text-2xl font-regular flex-1">
+                      View Details
+                    </span>
+                    <ArrowUpRight className="text-white w-10 h-10 stroke-1 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 flex-shrink-0 ml-3" />
+                  </div>
                 </div>
               </div>
             </Link>

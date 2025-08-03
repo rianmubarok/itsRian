@@ -44,7 +44,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
 
       {/* Project Image */}
       <div className="mb-12">
-        <div className="relative h-auto bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-lg">
+        <div className="relative h-100 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-2xl">
           <img
             src={project.image}
             alt={project.title}
