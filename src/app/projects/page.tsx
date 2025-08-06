@@ -2,8 +2,11 @@
 
 import { projects } from "../../data";
 import ProjectCard from "../../components/project/ProjectCard";
-import { useInfiniteScroll } from "../../hooks";
-import { useIntersectionObserver } from "../../hooks";
+import {
+  useInfiniteScroll,
+  useIntersectionObserver,
+  useInfiniteScrollAnimation,
+} from "../../hooks";
 import {
   ProjectCardSkeleton,
   LoadingSpinner,
@@ -30,6 +33,11 @@ export default function ProjectsPage() {
       rootMargin: "0px 0px -50px 0px",
     });
 
+  const { getItemAnimationProps } = useInfiniteScrollAnimation(
+    displayedItems,
+    gridIntersecting
+  );
+
   return (
     <main
       className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
@@ -54,21 +62,19 @@ export default function ProjectsPage() {
             : "translate-y-8 opacity-0"
         }`}
       >
-        {displayedItems.map((project, index) => (
-          <div
-            key={project.id}
-            className="transition-all duration-700 ease-out"
-            style={{
-              transitionDelay: `${600 + index * 100}ms`,
-              transform: gridIntersecting
-                ? "translateY(0) scale(1)"
-                : "translateY(20px) scale(0.95)",
-              opacity: gridIntersecting ? 1 : 0,
-            }}
-          >
-            <ProjectCard project={project} variant="grid" />
-          </div>
-        ))}
+        {displayedItems.map((project, index) => {
+          const animationProps = getItemAnimationProps(project, index);
+
+          return (
+            <div
+              key={project.id}
+              className={animationProps.className}
+              style={animationProps.style}
+            >
+              <ProjectCard project={project} variant="grid" />
+            </div>
+          );
+        })}
       </div>
 
       {/* Loading indicator */}

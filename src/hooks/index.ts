@@ -7,6 +7,7 @@ export { useInfiniteScroll } from "./useInfiniteScroll";
 
 // Animation hooks
 export { useIntersectionObserver } from "./useIntersectionObserver";
+export { useInfiniteScrollAnimation } from "./useInfiniteScrollAnimation";
 
 // Guestbook hooks
 export { useGuestbook } from "./useGuestbook";
