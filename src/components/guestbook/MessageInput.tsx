@@ -187,11 +187,7 @@ export default function MessageInput({
           value={input}
           onChange={handleInputChange}
           onKeyDown={handleInputKeyDown}
-          placeholder={
-            newMessage.length === 0
-              ? "Ketik @ untuk tag user, lalu lanjutkan text..."
-              : ""
-          }
+          placeholder={newMessage.length === 0 ? "Type @ to tag a user" : ""}
           disabled={isSubmitting}
           className="flex-1 min-w-[80px] px-0 py-1 border-none outline-none bg-transparent text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 text-sm"
           style={{ minWidth: 60 }}
