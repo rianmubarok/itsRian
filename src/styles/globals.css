@@ -124,6 +124,36 @@
   }
 }
 
+@keyframes dropdown {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-dropdown {
+  animation: dropdown 0.2s ease-out;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadein {
+  animation: fadein 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }

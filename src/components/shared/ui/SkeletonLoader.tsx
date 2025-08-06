@@ -66,7 +66,10 @@ export const LoadingSpinner = () => {
 
 export const AboutMeSkeleton = () => {
   return (
-    <main className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48" role="main">
+    <main
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      role="main"
+    >
       {/* Header */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
         <Skeleton className="h-12 w-full md:col-span-2" />
@@ -106,7 +109,10 @@ export const AboutMeSkeleton = () => {
 
 export const ContactSkeleton = () => {
   return (
-    <main className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48" role="main">
+    <main
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      role="main"
+    >
       <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
         {/* Header */}
         <div className="md:col-span-2 space-y-8 mb-12">
@@ -138,6 +144,47 @@ export const ContactSkeleton = () => {
               <Skeleton className="h-12 w-full" />
             </div>
             <Skeleton className="h-12 w-32" />
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export const GuestbookSkeleton = () => {
+  return (
+    <main
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      role="main"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 mb-6">
+        {/* Header */}
+        <div className="lg:col-span-3 space-y-8 mb-12">
+          <Skeleton className="h-10 w-3/4 mb-4" />
+          <div className="space-y-3">
+            <Skeleton className="h-4 w-1/2" />
+          </div>
+          <div className="flex gap-4">
+            <Skeleton className="h-10 w-24 rounded-lg" />
+            <Skeleton className="h-10 w-24 rounded-lg" />
+          </div>
+        </div>
+        {/* Message List */}
+        <div className="lg:col-span-3">
+          <div className="space-y-4">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="flex gap-3 items-start">
+                <Skeleton className="w-10 h-10 rounded-full flex-shrink-0" />
+                <div className="flex-1 space-y-2">
+                  <Skeleton className="h-4 w-1/4" />
+                  <Skeleton className="h-6 w-full" />
+                  <Skeleton className="h-4 w-1/2" />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6">
+            <Skeleton className="h-12 w-full rounded-xl" />
           </div>
         </div>
       </div>

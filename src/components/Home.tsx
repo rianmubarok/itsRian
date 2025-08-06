@@ -4,7 +4,7 @@ import IntroSection from "./home/IntroSection";
 import FeaturedProjects from "./home/FeaturedProjects";
 import FeaturedBlogs from "./home/FeaturedBlogs";
 import SkillsSection from "./home/SkillsSection";
-import { AnimatedSection } from "./shared/ui";
+import { AnimatedSection, FloatingContactButton } from "./shared/ui";
 
 export default function Home() {
   return (
@@ -36,6 +36,9 @@ export default function Home() {
       <AnimatedSection direction="up" delay={1200}>
         <SkillsSection />
       </AnimatedSection>
+
+      {/* Floating Contact Button */}
+      <FloatingContactButton />
     </main>
   );
 }

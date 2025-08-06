@@ -127,7 +127,7 @@ export default function ContactPage() {
                 id="message"
                 name="message"
                 rows={1}
-                className="w-full text-[32px] font-regular text-primary-dark bg-transparent border-b-1 border-primary-gray focus:border-primary-dark dark:focus:border-primary-light transition-colors duration-300 placeholder-primary-gray"
+                className="w-full text-[32px] font-regular text-primary-dark dark:text-primary-light bg-transparent border-b-1 border-primary-gray focus:border-primary-dark dark:focus:border-primary-light transition-colors duration-300 placeholder-primary-gray"
                 placeholder="Tell me about your project or just say hello!"
               />
             </div>

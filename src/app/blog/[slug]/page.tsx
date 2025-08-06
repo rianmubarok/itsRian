@@ -4,9 +4,11 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { blogs } from "../../../data";
 import { notFound } from "next/navigation";
-import { use } from "react";
+import { use, useState } from "react";
 import { formatDate } from "../../../utils";
 import BlogCard from "../../../components/blog/BlogCard";
+import BlogMetrics from "../../../components/blog/BlogMetrics";
+import { LanguageSwitcher } from "../../../components/shared/ui";
 import { useIntersectionObserver } from "../../../hooks";
 
 interface BlogDetailPageProps {
@@ -18,6 +20,7 @@ interface BlogDetailPageProps {
 export default function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { slug } = use(params);
   const blog = blogs.find((b) => b.slug === slug);
+  const [currentLanguage, setCurrentLanguage] = useState<"en" | "id">("en");
 
   if (!blog) {
     notFound();
@@ -25,30 +28,41 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
 
   const relatedPosts = blogs.filter((b) => b.slug !== slug).slice(0, 4);
 
-  const { ref: backButtonRef, isIntersecting: backButtonIntersecting } = useIntersectionObserver<HTMLAnchorElement>({
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px',
-  });
+  const { ref: backButtonRef, isIntersecting: backButtonIntersecting } =
+    useIntersectionObserver<HTMLAnchorElement>({
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    });
 
-  const { ref: headerRef, isIntersecting: headerIntersecting } = useIntersectionObserver<HTMLDivElement>({
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px',
-  });
+  const { ref: headerRef, isIntersecting: headerIntersecting } =
+    useIntersectionObserver<HTMLDivElement>({
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    });
 
-  const { ref: imageRef, isIntersecting: imageIntersecting } = useIntersectionObserver<HTMLDivElement>({
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px',
-  });
+  const { ref: imageRef, isIntersecting: imageIntersecting } =
+    useIntersectionObserver<HTMLDivElement>({
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    });
 
-  const { ref: contentRef, isIntersecting: contentIntersecting } = useIntersectionObserver<HTMLElement>({
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px',
-  });
+  const { ref: contentRef, isIntersecting: contentIntersecting } =
+    useIntersectionObserver<HTMLElement>({
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    });
 
-  const { ref: relatedRef, isIntersecting: relatedIntersecting } = useIntersectionObserver<HTMLElement>({
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px',
-  });
+  const { ref: relatedRef, isIntersecting: relatedIntersecting } =
+    useIntersectionObserver<HTMLElement>({
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    });
+
+  const { ref: tagsRef, isIntersecting: tagsIntersecting } =
+    useIntersectionObserver<HTMLDivElement>({
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    });
 
   return (
     <main
@@ -60,7 +74,9 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
         ref={backButtonRef}
         href="/blog"
         className={`group text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 mb-8 transition-all duration-300${
-          backButtonIntersecting ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
+          backButtonIntersecting
+            ? "translate-x-0 opacity-100"
+            : "-translate-x-4 opacity-0"
         }`}
       >
         <ArrowLeft className="w-6 h-6 stroke-1" />
@@ -68,43 +84,38 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
       </Link>
 
       {/* Blog Header */}
-      <div 
+      <div
         ref={headerRef}
         className={`mb-12 transition-all duration-700 ease-out delay-200 ${
-          headerIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          headerIntersecting
+            ? "translate-y-0 opacity-100"
+            : "translate-y-8 opacity-0"
         }`}
       >
-        <div className="flex flex-wrap gap-2 mb-6">
-          {blog.tags.map((tag, index) => (
-            <span
-              key={tag}
-              className="px-4 py-1 text-sm font-light rounded-full border border-primary-dark dark:border-primary-light transition-all duration-700 ease-out"
-              style={{
-                transitionDelay: `${400 + index * 100}ms`,
-                transform: headerIntersecting ? 'translateY(0) scale(1)' : 'translateY(10px) scale(0.95)',
-                opacity: headerIntersecting ? 1 : 0,
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
         <h1 className="text-5xl font-medium leading-tight tracking-tight mb-6">
           {blog.title}
         </h1>
         <p className="text-xl text-primary-gray mb-6 leading-relaxed">
           {blog.description}
         </p>
-        <time className="text-base text-primary-gray">
-          {formatDate(blog.createdAt)}
-        </time>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+          <time className="text-base text-primary-gray">
+            Published on {formatDate(blog.createdAt)}
+          </time>
+          <BlogMetrics
+            viewCount={blog.viewCount}
+            readingTime={blog.readingTime}
+          />
+        </div>
       </div>
 
       {/* Blog Thumbnail */}
-      <div 
+      <div
         ref={imageRef}
-        className={`mb-12 transition-all duration-700 ease-out delay-400 ${
-          imageIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        className={`mb-8 transition-all duration-700 ease-out delay-400 ${
+          imageIntersecting
+            ? "translate-y-0 opacity-100"
+            : "translate-y-8 opacity-0"
         }`}
       >
         <div className="relative h-80 md:h-180 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-2xl">
@@ -116,15 +127,53 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
         </div>
       </div>
 
-      {/* Blog Content */}
-      <article 
-        ref={contentRef}
-        className={`prose prose-lg max-w-none mb-16 transition-all duration-700 ease-out delay-600 ${
-          contentIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+      {/* Tags and Language Switcher */}
+      <div
+        ref={tagsRef}
+        className={`mb-8 transition-all duration-700 ease-out delay-500 ${
+          tagsIntersecting
+            ? "translate-y-0 opacity-100"
+            : "translate-y-8 opacity-0"
         }`}
       >
-        <div className="whitespace-pre-line text-lg leading-relaxed text-primary-gray">
-          {blog.content.en}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex flex-wrap gap-2">
+            {blog.tags.map((tag, index) => (
+              <span
+                key={tag}
+                className="px-4 py-1 text-sm font-light rounded-full border border-primary-dark dark:border-primary-light transition-all duration-700 ease-out"
+                style={{
+                  transitionDelay: `${600 + index * 100}ms`,
+                  transform: tagsIntersecting
+                    ? "translateY(0) scale(1)"
+                    : "translateY(10px) scale(0.95)",
+                  opacity: tagsIntersecting ? 1 : 0,
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <LanguageSwitcher
+            currentLanguage={currentLanguage}
+            onLanguageChange={setCurrentLanguage}
+          />
+        </div>
+      </div>
+      {/* Blog Content */}
+      <article
+        ref={contentRef}
+        className={`prose prose-lg max-w-none mb-16 transition-all duration-700 ease-out delay-600 ${
+          contentIntersecting
+            ? "translate-y-0 opacity-100"
+            : "translate-y-8 opacity-0"
+        }`}
+      >
+        <div
+          key={currentLanguage}
+          className="whitespace-pre-line text-lg leading-relaxed text-primary-gray transition-opacity duration-300"
+        >
+          {blog.content[currentLanguage]}
         </div>
       </article>
 
@@ -132,10 +181,12 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
-        <section 
+        <section
           ref={relatedRef}
           className={`mb-16 transition-all duration-700 ease-out delay-800 ${
-            relatedIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            relatedIntersecting
+              ? "translate-y-0 opacity-100"
+              : "translate-y-8 opacity-0"
           }`}
         >
           <div className="flex items-center justify-between mb-8 text-primary-dark dark:text-primary-light">
@@ -156,14 +207,13 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
                 className="transition-all duration-700 ease-out"
                 style={{
                   transitionDelay: `${1000 + index * 150}ms`,
-                  transform: relatedIntersecting ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
+                  transform: relatedIntersecting
+                    ? "translateY(0) scale(1)"
+                    : "translateY(20px) scale(0.95)",
                   opacity: relatedIntersecting ? 1 : 0,
                 }}
               >
-                <BlogCard
-                  blog={relatedBlog}
-                  variant="list"
-                />
+                <BlogCard blog={relatedBlog} variant="list" />
               </div>
             ))}
           </div>

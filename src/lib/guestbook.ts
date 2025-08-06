@@ -1,7 +1,12 @@
+export interface GuestbookMessagePart {
+  type: "text" | "user";
+  value: string;
+}
+
 export interface GuestbookMessage {
   id: string;
   name: string;
-  message: string;
+  message: GuestbookMessagePart[];
   date: string;
   profilePic: string;
   email?: string;
@@ -12,8 +17,13 @@ export const guestbookMessages: GuestbookMessage[] = [
   {
     id: "1",
     name: "Sarah Chen",
-    message:
-      "Love your portfolio! The design is so clean and modern. Really inspiring work. Keep it up! 👏",
+    message: [
+      {
+        type: "text",
+        value:
+          "Love your portfolio! The design is so clean and modern. Really inspiring work. Keep it up! 👏",
+      },
+    ],
     date: "2024-12-05T10:00:00Z",
     profilePic:
       "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
@@ -21,8 +31,13 @@ export const guestbookMessages: GuestbookMessage[] = [
   {
     id: "2",
     name: "Alex Rodriguez",
-    message:
-      "Great projects! I especially liked the blog section. Would love to collaborate on something sometime.",
+    message: [
+      {
+        type: "text",
+        value:
+          "Great projects! I especially liked the blog section. Would love to collaborate on something sometime.",
+      },
+    ],
     date: "2024-12-06T14:30:00Z",
     profilePic:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
@@ -30,8 +45,13 @@ export const guestbookMessages: GuestbookMessage[] = [
   {
     id: "3",
     name: "Emma Wilson",
-    message:
-      "Your tech stack choices are spot on! Really enjoyed reading your blog posts about Next.js and React.",
+    message: [
+      {
+        type: "text",
+        value:
+          "Your tech stack choices are spot on! Really enjoyed reading your blog posts about Next.js and React.",
+      },
+    ],
     date: "2024-12-07T09:15:00Z",
     profilePic:
       "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
@@ -39,8 +59,13 @@ export const guestbookMessages: GuestbookMessage[] = [
   {
     id: "4",
     name: "Mike Johnson",
-    message:
-      "Awesome portfolio! The dark mode toggle is a nice touch. Clean and professional design.",
+    message: [
+      {
+        type: "text",
+        value:
+          "Awesome portfolio! The dark mode toggle is a nice touch. Clean and professional design.",
+      },
+    ],
     date: "2024-12-08T11:20:00Z",
     profilePic:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
@@ -48,8 +73,13 @@ export const guestbookMessages: GuestbookMessage[] = [
   {
     id: "5",
     name: "David Kim",
-    message:
-      "Really impressed with your work! The guestbook feature is amazing.",
+    message: [
+      {
+        type: "text",
+        value:
+          "Really impressed with your work! The guestbook feature is amazing.",
+      },
+    ],
     date: "2024-12-09T16:45:00Z",
     profilePic:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
@@ -57,8 +87,13 @@ export const guestbookMessages: GuestbookMessage[] = [
   {
     id: "6",
     name: "Rian Mubarok",
-    message:
-      "Hello! This is a great portfolio. What do you think about the design?",
+    message: [
+      {
+        type: "text",
+        value:
+          "Hello! This is a great portfolio. What do you think about the design?",
+      },
+    ],
     date: "2024-12-10T13:00:00Z",
     profilePic:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",

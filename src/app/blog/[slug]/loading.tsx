@@ -1,52 +1,47 @@
 import { BlogCardSkeleton } from "../../../components/shared/ui/SkeletonLoader";
+import Skeleton from "../../../components/shared/ui/SkeletonLoader";
 
 export default function BlogDetailLoading() {
   return (
     <main
-      className="text-primary-dark dark:text-primary-light mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light mx-auto mt-32 px-4 md:px-0"
       role="main"
     >
       {/* Back Button Skeleton */}
-      <div className="flex items-center gap-2 mb-8">
-        <div className="w-6 h-6 bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
-        <div className="h-6 w-24 bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
+      <div className="flex items-center gap-3 mb-8">
+        <Skeleton className="w-8 h-8 rounded-full" />
+        <Skeleton className="h-6 w-28 rounded" />
       </div>
 
       {/* Blog Header Skeleton */}
-      <div className="mb-12">
+      <div className="mb-10 space-y-4">
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          <div className="h-8 w-20 bg-gray-200 dark:bg-white/50 rounded-full animate-pulse"></div>
-          <div className="h-8 w-16 bg-gray-200 dark:bg-white/50 rounded-full animate-pulse"></div>
-          <div className="h-8 w-24 bg-gray-200 dark:bg-white/50 rounded-full animate-pulse"></div>
+        <div className="flex flex-wrap gap-2 mb-4">
+          <Skeleton className="h-7 w-20 rounded-full" />
+          <Skeleton className="h-7 w-16 rounded-full" />
+          <Skeleton className="h-7 w-24 rounded-full" />
         </div>
-
         {/* Title */}
-        <div className="h-16 w-full bg-gray-200 dark:bg-white/50 rounded mb-6 animate-pulse"></div>
-
+        <Skeleton className="h-12 w-3/4 rounded-lg" />
         {/* Description */}
-        <div className="h-8 w-3/4 bg-gray-200 dark:bg-white/50 rounded mb-6 animate-pulse"></div>
-
+        <Skeleton className="h-6 w-2/3 rounded" />
         {/* Date */}
-        <div className="h-6 w-32 bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
+        <Skeleton className="h-5 w-32 rounded" />
       </div>
 
       {/* Blog Thumbnail Skeleton */}
-      <div className="mb-12">
-        <div className="h-96 w-full bg-gray-200 dark:bg-white/50 rounded-2xl animate-pulse"></div>
+      <div className="mb-10">
+        <Skeleton className="h-72 w-full rounded-2xl" />
       </div>
 
       {/* Blog Content Skeleton */}
       <div className="space-y-4 mb-16">
-        <div className="h-6 w-full bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
-        <div className="h-6 w-full bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
-        <div className="h-6 w-3/4 bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
-        <div className="h-6 w-full bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
-        <div className="h-6 w-5/6 bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
-        <div className="h-6 w-full bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
-        <div className="h-6 w-4/5 bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
-        <div className="h-6 w-full bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
-        <div className="h-6 w-3/4 bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
+        {[...Array(8)].map((_, i) => (
+          <Skeleton
+            key={i}
+            className={`h-5 ${i % 3 === 0 ? "w-4/5" : "w-full"} rounded`}
+          />
+        ))}
       </div>
 
       <hr className="border-t border-primary-gray my-12" />
@@ -54,10 +49,10 @@ export default function BlogDetailLoading() {
       {/* Related Posts Skeleton */}
       <section className="mb-16">
         <div className="flex items-center justify-between mb-8">
-          <div className="h-10 w-48 bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
+          <Skeleton className="h-8 w-48 rounded" />
           <div className="flex items-center gap-2">
-            <div className="h-6 w-32 bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
-            <div className="w-6 h-6 bg-gray-200 dark:bg-white/50 rounded animate-pulse"></div>
+            <Skeleton className="h-5 w-32 rounded" />
+            <Skeleton className="w-8 h-8 rounded-full" />
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

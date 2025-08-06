@@ -3,17 +3,29 @@ import {
   getGuestbookMessages,
   addGuestbookMessage,
   deleteGuestbookMessage,
+  GuestbookMessagePart,
 } from "@/lib/guestbook";
 import { GuestbookMessage } from "@/lib/guestbook";
 
 export function useGuestbook() {
-  const [messages, setMessages] = useState(getGuestbookMessages());
+  const [messages, setMessages] = useState<GuestbookMessage[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState<GuestbookMessagePart[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const messageListRef = useRef<HTMLDivElement>(null);
+
+  // Simulate async fetch for guestbook messages
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setMessages(getGuestbookMessages());
+      setIsLoading(false);
+    }, 1200); // 1.2s loading for skeleton
+    return () => clearTimeout(timer);
+  }, []);
 
   // Auto-scroll to bottom when new message is added
   useEffect(() => {
@@ -32,14 +44,14 @@ export function useGuestbook() {
 
   const handleSignOut = () => {
     setIsSignedIn(false);
-    setNewMessage("");
+    setNewMessage([]);
     setIsAdmin(false);
     setUserEmail("");
   };
 
   const handleSubmitMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newMessage.trim()) return;
+    if (newMessage.length === 0) return;
 
     setIsSubmitting(true);
 
@@ -55,7 +67,7 @@ export function useGuestbook() {
       });
 
       setMessages((prev) => [...prev, newGuestbookMessage]);
-      setNewMessage("");
+      setNewMessage([]);
     } catch (error) {
       console.error("Failed to send message:", error);
     } finally {
@@ -78,6 +90,7 @@ export function useGuestbook() {
 
   return {
     messages,
+    isLoading,
     isSignedIn,
     newMessage,
     setNewMessage,
