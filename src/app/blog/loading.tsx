@@ -1,4 +1,4 @@
-import { BlogCardSkeleton } from "../../components/ui/SkeletonLoader";
+import { BlogCardSkeleton } from "../../components/shared/ui/SkeletonLoader";
 
 export default function BlogLoading() {
   return (
@@ -8,8 +8,8 @@ export default function BlogLoading() {
     >
       {/* Featured Blog Rotator Skeleton */}
       <div className="mb-16">
-        <div className="h-16 w-64 bg-gray-200 dark:bg-gray-700 rounded mb-6 animate-pulse"></div>
-        <div className="h-80 bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse"></div>
+        <div className="h-16 w-64 bg-gray-200 dark:bg-white/50 rounded mb-6 animate-pulse"></div>
+        <div className="h-80 bg-gray-200 dark:bg-white/50 rounded-xl animate-pulse"></div>
       </div>
 
       {/* Blog Grid Skeleton */}

@@ -1,4 +1,4 @@
-import Skills from "../ui/Skills";
+import Skills from "../shared/ui/Skills";
 
 const SkillsSection = () => {
   return (

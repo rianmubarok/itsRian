@@ -1,12 +1,12 @@
 "use client";
 
-import { projects } from "../../lib/projects";
+import { projects } from "../../data";
 import ProjectCard from "../../components/project/ProjectCard";
 import { useInfiniteScroll } from "../../hooks";
 import {
   ProjectCardSkeleton,
   LoadingSpinner,
-} from "../../components/ui/SkeletonLoader";
+} from "../../components/shared/ui/SkeletonLoader";
 
 export default function ProjectsPage() {
   const { displayedItems, isLoading, hasMore, loadingRef } = useInfiniteScroll(

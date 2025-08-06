@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import ThemeToggle from "../common/ThemeToggle";
+import ThemeToggle from "../shared/common/ThemeToggle";
 import { useScrollDirection } from "../../hooks/useScrollDirection";
-import { navItems } from "../../lib/navigation";
+import { navItems } from "../../lib/config";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -27,7 +27,7 @@ export default function Navbar() {
       } ${
         lastScrollY > 100
           ? "bg-primary-light/80 dark:bg-primary-dark/80 backdrop-blur-md border-b border-primary-gray/20"
-          : "bg-transparent"
+          : "md:bg-transparent bg-primary-light/80 dark:bg-primary-dark/80 backdrop-blur-md"
       }`}
     >
       <div className="max-w-6xl mx-auto px-8">

@@ -4,7 +4,7 @@ export { default as Navbar } from "./layout/Navbar";
 export { default as Footer } from "./layout/Footer";
 
 // Common Components
-export { default as ThemeToggle } from "./common/ThemeToggle";
+export { default as ThemeToggle } from "./shared/common/ThemeToggle";
 export { default as ProgressBar } from "./ProgressBar";
 
 // UI Components

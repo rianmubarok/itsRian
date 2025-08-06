@@ -15,7 +15,7 @@ export default function ProjectCard({
     return (
       <div className="flex-shrink-0 w-[450px] group">
         <Link href={`/projects/${project.slug}`}>
-          <div className="relative h-[300px] bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-xl">
+          <div className="relative h-[300px] bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
             {/* Project Image */}
             <img
               src={project.image}
@@ -59,7 +59,7 @@ export default function ProjectCard({
     <div className="block transition-all duration-300 overflow-hidden group">
       {/* Image */}
       <Link href={`/projects/${project.slug}`}>
-        <div className="relative h-80 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-2xl">
+        <div className="relative h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-2xl">
           <img
             src={project.image}
             alt={project.title}

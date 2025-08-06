@@ -34,4 +34,4 @@ export function getFeaturedProjects(count: number = 3) {
 export function truncateText(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength) + "...";
-}
+} 

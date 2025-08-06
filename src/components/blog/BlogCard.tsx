@@ -30,7 +30,7 @@ export default function BlogCard({ blog, variant = "list" }: BlogCardProps) {
             </div>
 
             {/* Thumbnail */}
-            <div className="flex-shrink-0 w-full lg:w-110 h-80 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-xl">
+            <div className="flex-shrink-0 w-full lg:w-110 h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
               <img
                 src={blog.thumbnail}
                 alt={blog.title}
@@ -48,6 +48,15 @@ export default function BlogCard({ blog, variant = "list" }: BlogCardProps) {
     <article className="group">
       <Link href={`/blog/${blog.slug}`} className="block">
         <div className="flex flex-col md:flex-row gap-6 mb-5">
+          {/* Thumbnail - moved to top on mobile */}
+          <div className="flex-shrink-0 w-full md:w-50 h-80 md:h-50 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl order-first md:order-last">
+            <img
+              src={blog.thumbnail}
+              alt={blog.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+
           {/* Content */}
           <div className="flex-1">
             {/* Meta info */}
@@ -74,15 +83,6 @@ export default function BlogCard({ blog, variant = "list" }: BlogCardProps) {
               </span>
               <ArrowUpRight className="w-4 h-4 stroke-1" />
             </div>
-          </div>
-
-          {/* Thumbnail */}
-          <div className="flex-shrink-0 w-full md:w-50 h-50 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-xl">
-            <img
-              src={blog.thumbnail}
-              alt={blog.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
           </div>
         </div>
       </Link>

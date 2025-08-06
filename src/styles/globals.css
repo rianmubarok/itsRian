@@ -12,6 +12,7 @@
   /* FONTS */
   --font-sans: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
   --font-playfair: var(--font-playfair), "Playfair Display", serif;
+  --font-sacramento: var(--font-sacramento), "Sacramento", cursive;
 
   /* CUSTOM COLORS */
   --color-primary: #121212;
@@ -30,6 +31,13 @@
     font-family: var(--font-playfair);
     font-weight: 500;
     font-style: italic;
+  }
+
+  .font-sacramento-signature {
+    font-family: var(--font-sacramento);
+    font-weight: 400;
+    font-size: 2.5rem;
+    letter-spacing: 0.05em;
   }
 }
 
@@ -74,8 +82,16 @@
   }
 
   .animate-looping-tag {
-    animation: looping-tag 30s linear infinite;
+    animation: looping-tag 60s linear infinite;
+    will-change: transform;
   }
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Custom NProgress styles */

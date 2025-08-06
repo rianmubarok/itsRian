@@ -1,37 +1,37 @@
-import ThemeToggle from "../common/ThemeToggle";
+import ThemeToggle from "../shared/common/ThemeToggle";
 
 export default function Footer() {
   return (
     <footer className="border-t border-primary-gray/20 py-8 mt-24">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-primary-gray">
-            © 2024 Rian. All rights reserved.
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-row items-center justify-between gap-4">
+          <p className="text-sm font-medium text-primary-dark dark:text-primary-light">
+            Muhammad Fitrian Mubarok ⏤ 2025
           </p>
           <div className="flex items-center gap-6 text-sm text-primary-gray">
             <a
-              href="https://github.com/itsrian"
+              href="https://www.linkedin.com/in/rianmubarok/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary-dark dark:hover:text-primary-light transition-colors duration-200"
             >
-              GitHub
+              Linkedin
             </a>
             <a
-              href="https://linkedin.com/in/itsrian"
+              href="https://dribbble.com/fitrianmubarok"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary-dark dark:hover:text-primary-light transition-colors duration-200"
             >
-              LinkedIn
+              Dribbble
             </a>
             <a
-              href="mailto:rian@example.com"
+              href="https://www.instagram.com/m.fitrianm_/"
               className="hover:text-primary-dark dark:hover:text-primary-light transition-colors duration-200"
             >
-              Email
+              Instagram
             </a>
-            
+
             {/* Theme Toggle - Desktop Only */}
             <div className="hidden md:block">
               <ThemeToggle />

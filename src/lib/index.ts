@@ -1,12 +1,8 @@
-// Data
-export { projects } from "./projects";
-export { navItems } from "./navigation";
+// Re-export all config exports
+export * from "./config";
 
-// Config
-export { siteConfig } from "./config";
+// Re-export all metadata exports
+export * from "./metadata";
 
-// Utils
-export { cn, formatDate, truncateText } from "./utils";
-
-// Metadata
-export { siteMetadata } from "./metadata";
+// Re-export all fonts exports
+export * from "./fonts";

@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { blogs } from "../../lib/blog";
+import { blogs } from "../../data";
 import BlogCard from "../blog/BlogCard";
 
 export default function FeaturedBlogs() {
-  // Get the 4 most recent blog posts
   const featuredBlogs = blogs
     .sort(
       (a, b) =>
@@ -18,7 +17,7 @@ export default function FeaturedBlogs() {
         <h2 className="text-[32px] font-regular">Latest Articles</h2>
         <Link
           href="/blog"
-          className="text-lg font-light inline-flex items-center gap-2"
+          className="group text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300"
         >
           View all articles
           <ArrowRight className="w-6 h-6 stroke-1" />

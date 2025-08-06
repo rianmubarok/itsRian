@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
-import { projects } from "../../../lib/projects";
+import { projects } from "../../../data";
 import { notFound } from "next/navigation";
 import { use } from "react";
-import { formatDate } from "../../../lib/utils";
+import { formatDate } from "../../../utils";
 import OtherProjects from "../../../components/project/OtherProjects";
 
 interface ProjectDetailPageProps {
@@ -28,7 +28,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
       {/* Back Button */}
       <Link
         href="/projects"
-        className="inline-flex items-center gap-2 text-lg font-light mb-8"
+        className="group text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 mb-8"
       >
         <ArrowLeft className="w-6 h-6 stroke-1" />
         Back to projects
@@ -46,7 +46,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
 
       {/* Project Image */}
       <div className="mb-12">
-        <div className="relative h-96 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-2xl">
+        <div className="relative h-80 md:h-180 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-2xl">
           <img
             src={project.image}
             alt={project.title}
@@ -107,7 +107,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
         </span>
       </div>
 
-      <hr className="border-t border-primary-gray my-12" />
+      <hr className="border-t border-primary-gray/20 my-12" />
 
       {/* Other Projects Section */}
       <OtherProjects currentProjectSlug={project.slug} />

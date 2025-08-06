@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { blogs } from "../../../lib/blog";
+import { blogs } from "../../../data";
 import { notFound } from "next/navigation";
 import { use } from "react";
-import { formatDate } from "../../../lib/utils";
+import { formatDate } from "../../../utils";
 import BlogCard from "../../../components/blog/BlogCard";
 
 interface BlogDetailPageProps {
@@ -20,7 +20,6 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
     notFound();
   }
 
-  // Get related posts (excluding current post)
   const relatedPosts = blogs.filter((b) => b.slug !== slug).slice(0, 4);
 
   return (
@@ -31,7 +30,7 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
       {/* Back Button */}
       <Link
         href="/blog"
-        className="inline-flex items-center gap-2 text-lg font-light mb-8"
+        className="group text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 mb-8"
       >
         <ArrowLeft className="w-6 h-6 stroke-1" />
         Back to blog
@@ -62,7 +61,7 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
 
       {/* Blog Thumbnail */}
       <div className="mb-12">
-        <div className="relative h-96 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-2xl">
+        <div className="relative h-80 md:h-180 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-2xl">
           <img
             src={blog.thumbnail}
             alt={blog.title}
@@ -78,7 +77,7 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
         </div>
       </article>
 
-      <hr className="border-t border-primary-gray my-12" />
+      <hr className="border-t border-primary-gray/20 my-12" />
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
@@ -87,7 +86,7 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
             <h2 className="text-[32px] font-regular ">Related Articles</h2>
             <Link
               href="/blog"
-              className="text-lg font-light inline-flex items-center gap-2"
+              className="group text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300"
             >
               View all articles
               <ArrowRight className="w-6 h-6 stroke-1" />

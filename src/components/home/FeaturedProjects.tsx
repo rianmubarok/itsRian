@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { projects } from "../../lib/projects";
+import { projects } from "../../data";
 import ProjectCard from "../project/ProjectCard";
 
 export default function FeaturedProjects() {
@@ -12,7 +12,7 @@ export default function FeaturedProjects() {
         <h2 className="text-[32px] font-regular">My Featured Projects</h2>
         <Link
           href="/projects"
-          className="text-lg font-light inline-flex items-center gap-2"
+          className="group text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300"
         >
           View all projects
           <ArrowRight className="w-6 h-6 stroke-1" />

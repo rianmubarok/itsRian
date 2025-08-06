@@ -1,13 +1,13 @@
 "use client";
 
-import { blogs } from "../../lib/blog";
+import { blogs } from "../../data";
 import BlogCard from "../../components/blog/BlogCard";
 import FeaturedBlogRotator from "../../components/blog/FeaturedBlogRotator";
 import { useInfiniteScroll } from "../../hooks";
 import {
   BlogCardSkeleton,
   LoadingSpinner,
-} from "../../components/ui/SkeletonLoader";
+} from "../../components/shared/ui/SkeletonLoader";
 
 export default function BlogPage() {
   const { displayedItems, isLoading, hasMore, loadingRef } = useInfiniteScroll(

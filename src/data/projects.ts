@@ -117,4 +117,4 @@ export const projects: Project[] = [
     sourceCode: "https://github.com/yourname/social-analytics",
     liveProject: "https://social-analytics.vercel.app",
   },
-];
+]; 
