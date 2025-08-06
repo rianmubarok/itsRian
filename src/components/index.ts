@@ -11,7 +11,7 @@ export { default as ProgressBar } from "./ProgressBar";
 export {
   default as SkeletonLoader,
   ProjectCardSkeleton,
-} from "./ui/SkeletonLoader";
+} from "./shared/ui/SkeletonLoader";
 
 // Project Components
 export { default as ProjectCard } from "./project/ProjectCard";
@@ -20,3 +20,9 @@ export { default as OtherProjects } from "./project/OtherProjects";
 // Home Components
 export { default as IntroSection } from "./home/IntroSection";
 export { default as FeaturedProjects } from "./home/FeaturedProjects";
+
+// Guestbook Components
+export { default as GuestbookMessage } from "./guestbook/GuestbookMessage";
+export { default as MessageInput } from "./guestbook/MessageInput";
+export { default as AuthButtons } from "./guestbook/AuthButtons";
+export { default as MessageList } from "./guestbook/MessageList";

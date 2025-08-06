@@ -49,6 +49,43 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+  /* Custom thin scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin; /* For Firefox */
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px; /* For Chrome, Edge, Safari */
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
+
+  /* Hide scrollbar arrows (up/down buttons) */
+  .scrollbar-thin::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+    width: 0;
+  }
+
+  /* Dark mode scrollbar */
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #4b5563;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
 
   .line-clamp-1 {
     overflow: hidden;
@@ -87,6 +124,10 @@
   }
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 input:focus,
 textarea:focus,
 select:focus {
@@ -119,4 +160,17 @@ select:focus {
     0 0 5px var(--color-primary-gray);
   opacity: 1;
   transform: rotate(3deg) translate(0px, -4px);
+}
+
+/* Contenteditable placeholder */
+[contenteditable]:empty:before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+[contenteditable]:focus:empty:before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  pointer-events: none;
 }

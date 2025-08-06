@@ -4,6 +4,7 @@ import { blogs } from "../../data";
 import BlogCard from "../../components/blog/BlogCard";
 import FeaturedBlogRotator from "../../components/blog/FeaturedBlogRotator";
 import { useInfiniteScroll } from "../../hooks";
+import { useIntersectionObserver } from "../../hooks";
 import {
   BlogCardSkeleton,
   LoadingSpinner,
@@ -18,6 +19,11 @@ export default function BlogPage() {
     }
   );
 
+  const { ref: gridRef, isIntersecting: gridIntersecting } = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px',
+  });
+
   return (
     <main
       className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
@@ -27,9 +33,24 @@ export default function BlogPage() {
       <FeaturedBlogRotator blogs={blogs} />
 
       {/* All Blogs in Grid - 2 Columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {displayedItems.map((blog) => (
-          <BlogCard key={blog.id} blog={blog} variant="list" />
+      <div 
+        ref={gridRef}
+        className={`grid grid-cols-1 lg:grid-cols-2 gap-8 transition-all duration-700 ease-out delay-300 ${
+          gridIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}
+      >
+        {displayedItems.map((blog, index) => (
+          <div
+            key={blog.id}
+            className="transition-all duration-700 ease-out"
+            style={{
+              transitionDelay: `${600 + index * 100}ms`,
+              transform: gridIntersecting ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
+              opacity: gridIntersecting ? 1 : 0,
+            }}
+          >
+            <BlogCard blog={blog} variant="list" />
+          </div>
         ))}
       </div>
 

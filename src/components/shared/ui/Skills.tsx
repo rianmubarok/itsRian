@@ -1,42 +1,53 @@
-import React, { JSX, memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import InfiniteLoopSlider from "./InfiniteLoopSlider";
 import { STACKS } from "../../../constants";
 
-const Tag = memo(({ icon, title }: { icon: JSX.Element; title: string }) => (
-  <div className="flex items-center gap-2 bg-white dark:bg-gray-800 px-3 py-2 rounded-full border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-200">
-    {icon}
-    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-      {title}
-    </span>
-  </div>
-));
+const Tag = memo(
+  ({ icon, title }: { icon: React.ReactElement; title: string }) => (
+    <div className="mr-3 flex w-max items-center gap-2 rounded-full border border-neutral-300 bg-neutral-50 px-5 py-2 text-[15px] shadow-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-50">
+      {icon}
+      <span>{title}</span>
+    </div>
+  )
+);
 
 Tag.displayName = "Tag";
 
 const Skills = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [shuffledSkills, setShuffledSkills] = useState<
+    Array<[string, React.ReactElement]>
+  >([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 100);
-
-    return () => clearTimeout(timer);
+    const skillsArray = Object.entries(STACKS);
+    const shuffledArray = [...skillsArray].sort(() => Math.random() - 0.5);
+    setShuffledSkills(shuffledArray);
   }, []);
 
-  const stackEntries = Object.entries(STACKS);
-
-  return (
-    <div
-      className={`transition-opacity duration-1000 ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-    >
-      <InfiniteLoopSlider speed={50}>
-        {stackEntries.map(([title, icon]) => (
-          <Tag key={title} icon={icon} title={title} />
+  const sliders = Array.from({ length: 2 }, (_, index) => {
+    const sliderSkills = [...shuffledSkills].sort(() => Math.random() - 0.5);
+    return (
+      <InfiniteLoopSlider key={index} isReverse={index === 1}>
+        {sliderSkills.map(([title, icon], itemIndex) => (
+          <Tag key={`${title}-${itemIndex}`} icon={icon} title={title} />
         ))}
       </InfiniteLoopSlider>
+    );
+  });
+
+  return (
+    <div className="space-y-8">
+      <div className="flex w-full">
+        <div className="relative flex w-full flex-col justify-start gap-y-4 overflow-hidden py-2">
+          {sliders}
+          <div className="pointer-events-none absolute inset-0 z-10 flex justify-between">
+            {/* Left fade */}
+            <div className="w-[200px] bg-gradient-to-r from-primary-light to-transparent dark:from-primary-dark dark:to-transparent" />
+            {/* Right fade */}
+            <div className="w-[200px] bg-gradient-to-l from-primary-light to-transparent dark:from-primary-dark dark:to-transparent" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

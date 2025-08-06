@@ -68,7 +68,7 @@ export const STACKS: StackProps = {
     <BsFillBootstrapFill size={iconSize} className="text-purple-500" />
   ),
   // GraphQL: <SiGraphql size={iconSize} className="text-pink-600" />,
-  Apollo: <SiApollographql size={iconSize} />,
+  // Apollo: <SiApollographql size={iconSize} />,
   WordPress: <SiWordpress size={iconSize} />,
   Laravel: <SiLaravel size={iconSize} className="text-red-500" />,
   // "Material UI": <SiMui size={iconSize} className="text-sky-400" />,
@@ -114,4 +114,4 @@ export const STACKS: StackProps = {
   SQLite: <SiSqlite size={iconSize} className="text-blue-600" />,
   Dart: <SiDart size={iconSize} className="text-blue-600" />,
   Flutter: <SiFlutter size={iconSize} className="text-cyan-500" />,
-}; 
+};

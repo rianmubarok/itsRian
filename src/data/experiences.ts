@@ -1,0 +1,24 @@
+export interface Experience {
+  id: string;
+  period: string;
+  title: string;
+  company: string;
+  duration: string;
+  type: string;
+  location: string;
+  description: string;
+}
+
+export const experiences: Experience[] = [
+  {
+    id: "1",
+    period: "Okt 2023 - Present",
+    title: "Icon Designer",
+    company: "Mangun Creative",
+    duration: "1 Year, 9 Months",
+    type: "Part-time",
+    location: "Remote",
+    description: "Started my creative journey in the world of design, focusing on consistent and scalable icon systems. This experience sharpened my visual precision and built a strong foundation for crafting functional and intuitive UI/UX as a developer."
+  }
+  // Add more experiences here as needed
+]; 

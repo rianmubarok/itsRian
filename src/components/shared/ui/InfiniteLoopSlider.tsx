@@ -1,29 +1,23 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface InfiniteLoopSliderProps {
   children: ReactNode;
-  speed?: number;
+  isReverse?: boolean;
 }
 
 const InfiniteLoopSlider = ({
   children,
-  speed = 50,
+  isReverse = false,
 }: InfiniteLoopSliderProps) => {
   return (
-    <div className="flex w-full">
-      <div className="relative flex w-full flex-col justify-start gap-y-4 overflow-hidden py-2">
-        <div
-          className="flex animate-scroll"
-          style={
-            {
-              "--animation-duration": `${speed}s`,
-            } as React.CSSProperties
-          }
-        >
-          <div className="flex gap-4">{children}</div>
-          <div className="flex gap-4">{children}</div>
-        </div>
-      </div>
+    <div
+      className="flex w-fit animate-looping-tag"
+      style={{
+        animationDirection: isReverse ? "reverse" : "normal",
+      }}
+    >
+      {children}
+      {children}
     </div>
   );
 };

@@ -3,6 +3,7 @@
 import { projects } from "../../data";
 import ProjectCard from "../../components/project/ProjectCard";
 import { useInfiniteScroll } from "../../hooks";
+import { useIntersectionObserver } from "../../hooks";
 import {
   ProjectCardSkeleton,
   LoadingSpinner,
@@ -17,18 +18,56 @@ export default function ProjectsPage() {
     }
   );
 
+  const { ref: headerRef, isIntersecting: headerIntersecting } =
+    useIntersectionObserver<HTMLHeadingElement>({
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    });
+
+  const { ref: gridRef, isIntersecting: gridIntersecting } =
+    useIntersectionObserver<HTMLDivElement>({
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    });
+
   return (
     <main
       className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
       role="main"
     >
-      <h1 className="text-6xl font-medium leading-snug tracking-tight mb-6">
+      <h1
+        ref={headerRef}
+        className={`text-6xl font-medium leading-snug tracking-tight mb-6 transition-all duration-700 ease-out ${
+          headerIntersecting
+            ? "translate-y-0 opacity-100"
+            : "translate-y-8 opacity-0"
+        }`}
+      >
         All Projects
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {displayedItems.map((project) => (
-          <ProjectCard key={project.id} project={project} variant="grid" />
+      <div
+        ref={gridRef}
+        className={`grid grid-cols-1 md:grid-cols-2 gap-8 transition-all duration-700 ease-out delay-300 ${
+          gridIntersecting
+            ? "translate-y-0 opacity-100"
+            : "translate-y-8 opacity-0"
+        }`}
+      >
+        {displayedItems.map((project, index) => (
+          <div
+            key={project.id}
+            className="transition-all duration-700 ease-out"
+            style={{
+              transitionDelay: `${600 + index * 100}ms`,
+              transform: gridIntersecting
+                ? "translateY(0) scale(1)"
+                : "translateY(20px) scale(0.95)",
+              opacity: gridIntersecting ? 1 : 0,
+            }}
+          >
+            <ProjectCard project={project} variant="grid" />
+          </div>
         ))}
       </div>
 
