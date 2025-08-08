@@ -1,20 +1,31 @@
-import { BlogCardSkeleton } from "../../../components/shared/ui/SkeletonLoader";
-import Skeleton from "../../../components/shared/ui/SkeletonLoader";
+import Skeleton from "../shared/ui/SkeletonLoader";
+import { BlogCardSkeleton } from "../shared/ui/SkeletonLoader";
 
-export default function BlogDetailLoading() {
+interface BlogSkeletonProps {
+  hasMounted: boolean;
+}
+
+export default function BlogSkeleton({ hasMounted }: BlogSkeletonProps) {
   return (
-    <main
-      className="text-primary-dark dark:text-primary-light mx-auto mt-32 px-4 md:px-0"
-      role="main"
-    >
+    <div className="space-y-8">
       {/* Back Button Skeleton */}
-      <div className="flex items-center gap-3 mb-8">
+      <div
+        className={`flex items-center gap-3 mb-8 transition-all duration-700 ease-out delay-100 ${
+          hasMounted
+            ? "translate-x-0 opacity-100"
+            : "-translate-x-4 opacity-0"
+        }`}
+      >
         <Skeleton className="w-8 h-8 rounded-full" />
         <Skeleton className="h-6 w-28 rounded" />
       </div>
 
       {/* Blog Header Skeleton */}
-      <div className="mb-10 space-y-4">
+      <div
+        className={`mb-10 space-y-4 transition-all duration-700 ease-out delay-200 ${
+          hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        }`}
+      >
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
           <Skeleton className="h-7 w-20 rounded-full" />
@@ -30,12 +41,20 @@ export default function BlogDetailLoading() {
       </div>
 
       {/* Blog Thumbnail Skeleton */}
-      <div className="mb-10">
-        <Skeleton className="h-72 w-full rounded-2xl" />
+      <div
+        className={`mb-10 transition-all duration-700 ease-out delay-300 ${
+          hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        }`}
+      >
+        <Skeleton className="h-72 w-full rounded-xl" />
       </div>
 
       {/* Blog Content Skeleton */}
-      <div className="space-y-4 mb-16">
+      <div
+        className={`space-y-4 mb-16 transition-all duration-700 ease-out delay-500 ${
+          hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        }`}
+      >
         {[...Array(8)].map((_, i) => (
           <Skeleton
             key={i}
@@ -47,7 +66,11 @@ export default function BlogDetailLoading() {
       <hr className="border-t border-primary-gray my-12" />
 
       {/* Related Posts Skeleton */}
-      <section className="mb-16">
+      <section
+        className={`mb-16 transition-all duration-700 ease-out delay-600 ${
+          hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        }`}
+      >
         <div className="flex items-center justify-between mb-8">
           <Skeleton className="h-8 w-48 rounded" />
           <div className="flex items-center gap-2">
@@ -61,6 +84,6 @@ export default function BlogDetailLoading() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
-}
+} 

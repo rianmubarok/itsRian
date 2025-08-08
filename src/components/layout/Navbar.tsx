@@ -1,14 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ThemeToggle from "../shared/common/ThemeToggle";
 import { useScrollDirection } from "../../hooks/useScrollDirection";
-import { navItems } from "../../lib/config";
+import {
+  DesktopNavigation,
+  MobileNavigation,
+  HamburgerButton,
+} from "./navbar/index";
 
 export default function Navbar() {
-  const pathname = usePathname();
   const { isVisible, lastScrollY } = useScrollDirection();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -22,7 +24,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-5 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-4 md:pt-5 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       } ${
         lastScrollY > 100
@@ -30,44 +32,19 @@ export default function Navbar() {
           : "md:bg-transparent bg-primary-light/80 dark:bg-primary-dark/80 backdrop-blur-md"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-8">
+      <div className="max-w-6xl mx-auto px-6 md:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
             href="/"
-            className="text-[32px] font-playfair-medium-italic text-primary-dark dark:text-primary-light transition-opacity duration-200"
+            className="text-2xl sm:text-3xl md:text-[32px] font-playfair-medium-italic text-primary-dark dark:text-primary-light transition-opacity duration-200"
             aria-label="Home - itsRian Portfolio"
           >
             itsRian
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex space-x-8 ml-auto" role="menubar">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href;
-
-              return (
-                <li key={item.name} role="none">
-                  <Link
-                    href={item.href}
-                    className="group relative inline-block text-xl text-primary-dark dark:text-primary-light transition-colors duration-200 font-regular"
-                    role="menuitem"
-                    aria-current={isActive ? "page" : undefined}
-                  >
-                    <span
-                      className={`after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:transition-transform after:duration-300 after:bg-current ${
-                        isActive
-                          ? "after:scale-x-100"
-                          : "after:scale-x-0 group-hover:after:scale-x-100"
-                      }`}
-                    >
-                      {item.name}
-                    </span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          <DesktopNavigation />
 
           {/* Mobile Menu */}
           <div className="flex items-center gap-4">
@@ -77,72 +54,12 @@ export default function Navbar() {
             </div>
 
             {/* Hamburger Menu Button */}
-            <button
-              className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 text-primary-dark dark:text-primary-light"
-              onClick={toggleMenu}
-              aria-label="Toggle navigation menu"
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-menu"
-            >
-              <span
-                className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
-                  isMenuOpen ? "rotate-45 translate-y-2" : ""
-                }`}
-              />
-              <span
-                className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
-                  isMenuOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
-                  isMenuOpen ? "-rotate-45 -translate-y-2" : ""
-                }`}
-              />
-            </button>
+            <HamburgerButton isOpen={isMenuOpen} onClick={toggleMenu} />
           </div>
         </div>
 
         {/* Mobile Navigation Menu */}
-        <div
-          id="mobile-menu"
-          className={`md:hidden ${
-            isMenuOpen
-              ? "max-h-96 opacity-100 visible"
-              : "max-h-0 opacity-0 invisible"
-          } transition-all duration-300 ease-in-out overflow-hidden`}
-        >
-          <ul className="flex flex-col space-y-4 py-4 border-primary-dark dark:border-primary-light mt-4">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href;
-
-              return (
-                <li key={item.name} role="none">
-                  <Link
-                    href={item.href}
-                    className="block text-xl text-primary-dark dark:text-primary-light transition-colors duration-200 font-regular py-2"
-                    role="menuitem"
-                    aria-current={isActive ? "page" : undefined}
-                    onClick={closeMenu}
-                  >
-                    <span
-                      className={`relative ${
-                        isActive
-                          ? "text-gray-800 dark:text-primary-light font-medium"
-                          : ""
-                      }`}
-                    >
-                      {item.name}
-                      {isActive && (
-                        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-current" />
-                      )}
-                    </span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        <MobileNavigation isOpen={isMenuOpen} onClose={closeMenu} />
       </div>
     </nav>
   );

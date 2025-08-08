@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { projects } from "../../data";
 import ProjectCard from "./ProjectCard";
-import { useIntersectionObserver } from "../../hooks";
+import { useIntersectionObserver, useProjects } from "../../hooks";
 
 interface OtherProjectsProps {
   currentProjectSlug: string;
@@ -13,6 +12,8 @@ interface OtherProjectsProps {
 export default function OtherProjects({
   currentProjectSlug,
 }: OtherProjectsProps) {
+  const { projects, loading } = useProjects();
+
   const otherProjects = projects
     .filter((project) => project.slug !== currentProjectSlug)
     .sort(() => Math.random() - 0.5) // Shuffle array
@@ -25,9 +26,9 @@ export default function OtherProjects({
 
   return (
     <section ref={ref}>
-      <div className="flex items-center justify-between mb-6 text-primary-dark dark:text-primary-light">
+      <div className="flex items-center justify-between mb-4 sm:mb-6 text-primary-dark dark:text-primary-light">
         <h2
-          className={`text-[32px] font-regular transition-all duration-700 ease-out ${
+          className={`text-2xl sm:text-3xl md:text-[32px] font-regular transition-all duration-700 ease-out ${
             isIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-4 opacity-0"
@@ -37,21 +38,21 @@ export default function OtherProjects({
         </h2>
         <Link
           href="/projects"
-          className={`group text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 ${
+          className={`group text-base sm:text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 ${
             isIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-4 opacity-0"
           }`}
         >
           View all projects
-          <ArrowRight className="w-6 h-6 stroke-1" />
+          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
         </Link>
       </div>
 
       {/* Scrollable Projects Container */}
       <div className="relative">
         <div
-          className={`flex gap-6 overflow-x-auto scrollbar-hide pb-4 cursor-pointer active:cursor-grabbing transition-all duration-700 ease-out delay-400 ${
+          className={`flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide pb-4 cursor-pointer active:cursor-grabbing transition-all duration-700 ease-out delay-400 ${
             isIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"
@@ -76,21 +77,29 @@ export default function OtherProjects({
             window.addEventListener("mouseup", onMouseUp);
           }}
         >
-          {otherProjects.map((project, index) => (
-            <div
-              key={project.id}
-              className="transition-all duration-700 ease-out"
-              style={{
-                transitionDelay: `${600 + index * 100}ms`,
-                transform: isIntersecting
-                  ? "translateY(0) scale(1)"
-                  : "translateY(20px) scale(0.95)",
-                opacity: isIntersecting ? 1 : 0,
-              }}
-            >
-              <ProjectCard project={project} variant="featured" />
-            </div>
-          ))}
+          {loading
+            ? // Loading skeleton
+              Array.from({ length: 4 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="min-w-[300px] h-64 bg-gray-200 dark:bg-white/50 rounded-lg animate-pulse"
+                />
+              ))
+            : otherProjects.map((project, index) => (
+                <div
+                  key={project.id}
+                  className="transition-all duration-700 ease-out"
+                  style={{
+                    transitionDelay: `${600 + index * 100}ms`,
+                    transform: isIntersecting
+                      ? "translateY(0) scale(1)"
+                      : "translateY(20px) scale(0.95)",
+                    opacity: isIntersecting ? 1 : 0,
+                  }}
+                >
+                  <ProjectCard project={project} variant="featured" />
+                </div>
+              ))}
         </div>
       </div>
     </section>

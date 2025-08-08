@@ -1,6 +1,7 @@
 import { Project } from "../types/index";
 
-export const projects: Project[] = [
+// Fallback data jika API Notion tidak tersedia
+export const fallbackProjects: Project[] = [
   {
     id: 1,
     title: "Proxy Provider Website",
@@ -106,8 +107,7 @@ export const projects: Project[] = [
     id: 8,
     title: "Social Media Analytics",
     slug: "social-media-analytics",
-    description:
-      "Analytics platform for social media performance tracking",
+    description: "Analytics platform for social media performance tracking",
     detail:
       "A comprehensive analytics platform for tracking social media performance across multiple platforms. Features include data visualization, trend analysis, competitor tracking, and automated reporting. Built with modern data visualization libraries.",
     image:
@@ -117,4 +117,38 @@ export const projects: Project[] = [
     sourceCode: "https://github.com/yourname/social-analytics",
     liveProject: "https://social-analytics.vercel.app",
   },
-]; 
+];
+
+// Function untuk mengambil projects dari API
+export async function getProjectsFromAPI(): Promise<Project[]> {
+  try {
+    const response = await fetch("/api/projects");
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch projects: ${response.status}`);
+    }
+
+    const projects = await response.json();
+    return projects;
+  } catch (error) {
+    console.error("Error fetching projects from API:", error);
+    return fallbackProjects;
+  }
+}
+
+// Function untuk mengambil project berdasarkan slug
+export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  try {
+    const response = await fetch(`/api/projects/${slug}`);
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const project = await response.json();
+    return project;
+  } catch (error) {
+    console.error("Error fetching project by slug:", error);
+    return fallbackProjects.find((project) => project.slug === slug) || null;
+  }
+}

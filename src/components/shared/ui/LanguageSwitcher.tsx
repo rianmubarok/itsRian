@@ -62,7 +62,14 @@ export default function LanguageSwitcher({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="absolute bottom-full mb-2 right-0 bg-primary-light dark:bg-primary-dark border border-primary-gray rounded-lg z-50 min-w-[160px] animate-dropdown transition-all duration-200"
+            className="
+    absolute bottom-full mb-2 right-0 
+    bg-primary-light dark:bg-primary-dark border border-primary-gray 
+    rounded-lg z-50 min-w-[160px] animate-dropdown transition-all duration-200
+
+    /* Mobile full-width, left aligned */
+    sm:right-0 sm:w-auto w-full left-0 sm:left-auto
+  "
             role="menu"
             aria-label="Language options"
           >

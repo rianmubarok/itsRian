@@ -17,30 +17,30 @@ export default function ContactPage() {
 
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
       role="main"
     >
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 mb-4 sm:mb-6">
         {/* Header */}
         <div
           ref={headerRef}
-          className={`md:col-span-2 space-y-8 mb-12 transition-all duration-700 ease-out ${
+          className={`md:col-span-2 space-y-6 sm:space-y-8 mb-8 sm:mb-12 transition-all duration-700 ease-out ${
             headerIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"
           }`}
         >
-          <h2 className="text-[32px] leading-tight font-regular text-primary-dark dark:text-primary-light ">
+          <h2 className="text-2xl sm:text-3xl md:text-[32px] leading-tight font-regular text-primary-dark dark:text-primary-light ">
             Feel free to reach out — always open for creative discussions
           </h2>
 
           {/* Contact Info */}
-          <div className="text-primary-gray text-sm font-light">
+          <div className="text-primary-gray text-xs sm:text-sm font-light">
             <p>Avg. Response: Within 1–2 hours (Working Hours, GMT+7).</p>
             <p>For urgent matters, reach out via social media.</p>
           </div>
 
-          <div className="flex items-center gap-6 text-sm text-primary-gray">
+          <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-primary-gray">
             <a
               href="https://www.linkedin.com/in/rianmubarok/"
               target="_blank"
@@ -75,14 +75,14 @@ export default function ContactPage() {
               : "translate-y-8 opacity-0"
           }`}
         >
-          <form className="space-y-12" autoComplete="off">
+          <form className="space-y-8 sm:space-y-12" autoComplete="off">
             <div
               className="transition-all duration-700 ease-out"
               style={{ transitionDelay: "400ms" }}
             >
               <label
                 htmlFor="name"
-                className="block text-2xl font-regular text-primary-dark dark:text-primary-light mb-2"
+                className="block text-lg sm:text-xl md:text-2xl font-regular text-primary-dark dark:text-primary-light mb-2"
               >
                 Name
               </label>
@@ -90,7 +90,7 @@ export default function ContactPage() {
                 type="text"
                 id="name"
                 name="name"
-                className="w-full text-[32px] font-regular text-primary-dark bg-transparent border-b-1 border-primary-gray focus:border-primary-dark dark:focus:border-primary-light transition-colors duration-300 placeholder-primary-gray"
+                className="w-full text-xl sm:text-2xl md:text-[32px] font-regular text-primary-dark dark:text-primary-light bg-transparent border-b-1 border-primary-gray focus:border-primary-dark dark:focus:border-primary-light transition-colors duration-300 placeholder-primary-gray"
                 placeholder="Your name"
               />
             </div>
@@ -101,7 +101,7 @@ export default function ContactPage() {
             >
               <label
                 htmlFor="email"
-                className="block text-2xl font-regular text-primary-dark dark:text-primary-light mb-2"
+                className="block text-lg sm:text-xl md:text-2xl font-regular text-primary-dark dark:text-primary-light mb-2"
               >
                 Email
               </label>
@@ -109,7 +109,7 @@ export default function ContactPage() {
                 type="email"
                 id="email"
                 name="email"
-                className="w-full text-[32px] font-regular text-primary-dark bg-transparent border-b-1 border-primary-gray focus:border-primary-dark dark:focus:border-primary-light transition-colors duration-300 placeholder-primary-gray"
+                className="w-full text-xl sm:text-2xl md:text-[32px] font-regular text-primary-dark dark:text-primary-light bg-transparent border-b-1 border-primary-gray focus:border-primary-dark dark:focus:border-primary-light transition-colors duration-300 placeholder-primary-gray"
                 placeholder="your@email.com"
               />
             </div>
@@ -119,7 +119,7 @@ export default function ContactPage() {
             >
               <label
                 htmlFor="message"
-                className="block text-2xl font-regular text-primary-dark dark:text-primary-light mb-2"
+                className="block text-lg sm:text-xl md:text-2xl font-regular text-primary-dark dark:text-primary-light mb-2"
               >
                 Message
               </label>
@@ -127,14 +127,14 @@ export default function ContactPage() {
                 id="message"
                 name="message"
                 rows={1}
-                className="w-full text-[32px] font-regular text-primary-dark dark:text-primary-light bg-transparent border-b-1 border-primary-gray focus:border-primary-dark dark:focus:border-primary-light transition-colors duration-300 placeholder-primary-gray"
+                className="w-full text-xl sm:text-2xl md:text-[32px] font-regular text-primary-dark dark:text-primary-light bg-transparent border-b-1 border-primary-gray focus:border-primary-dark dark:focus:border-primary-light transition-colors duration-300 placeholder-primary-gray"
                 placeholder="Tell me about your project or just say hello!"
               />
             </div>
 
             <button
               type="submit"
-              className="px-6 py-3 hover:px-8 transition-all duration-300 bg-primary-dark dark:bg-primary-light text-primary-light dark:text-primary-dark rounded-full text-base font-medium cursor-pointer transition-all duration-300"
+              className="px-4 sm:px-6 py-2 sm:py-3 hover:px-6 sm:hover:px-8 transition-all duration-300 bg-primary-dark dark:bg-primary-light text-primary-light dark:text-primary-dark rounded-full text-sm sm:text-base font-medium cursor-pointer transition-all duration-300"
             >
               Send Message
             </button>

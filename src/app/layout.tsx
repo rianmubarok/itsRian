@@ -20,7 +20,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${playfairDisplay.variable} ${sacramento.variable}`}
     >
       <body
-        className={`${dmSans.className} bg-primary-light dark:bg-primary-dark tracking-tight max-w-6xl mx-auto px-8`}
+        className={`${dmSans.className} bg-primary-light dark:bg-primary-dark tracking-tight max-w-6xl mx-auto px-6 md:px-8`}
       >
         <Layout>{children}</Layout>
       </body>

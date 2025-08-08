@@ -1,6 +1,5 @@
 "use client";
 
-import { blogs } from "../../data";
 import BlogCard from "../../components/blog/BlogCard";
 import FeaturedBlogRotator from "../../components/blog/FeaturedBlogRotator";
 import {
@@ -12,8 +11,13 @@ import {
   BlogCardSkeleton,
   LoadingSpinner,
 } from "../../components/shared/ui/SkeletonLoader";
+import { useBlogs } from "../../hooks/useBlogs";
+import { useEffect, useState } from "react";
+import { AnimatedBlogCard } from "../../components/blog/BlogCard";
 
 export default function BlogPage() {
+  const { blogs, loading, error } = useBlogs();
+
   const { displayedItems, isLoading, hasMore, loadingRef } = useInfiniteScroll(
     blogs,
     {
@@ -33,41 +37,58 @@ export default function BlogPage() {
     gridIntersecting
   );
 
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (loading) {
+    return (
+      <main className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+          {[1, 2, 3, 4].map((item) => (
+            <BlogCardSkeleton key={item} />
+          ))}
+        </div>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48">
+        <div className="text-center">
+          <p className="text-red-500">Error loading blogs: {error}</p>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
       role="main"
     >
       {/* Featured Blog Rotator */}
       <FeaturedBlogRotator blogs={blogs} />
 
       {/* All Blogs in Grid - 2 Columns */}
-      <div
-        ref={gridRef}
-        className={`grid grid-cols-1 lg:grid-cols-2 gap-8 transition-all duration-700 ease-out delay-300 ${
-          gridIntersecting
-            ? "translate-y-0 opacity-100"
-            : "translate-y-8 opacity-0"
-        }`}
-      >
+      <div ref={gridRef} className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
         {displayedItems.map((blog, index) => {
-          const animationProps = getItemAnimationProps(blog, index);
-
+          if (!blog) return null;
           return (
-            <div
-              key={blog.id}
-              className={animationProps.className}
-              style={animationProps.style}
-            >
-              <BlogCard blog={blog} variant="list" />
-            </div>
+            <AnimatedBlogCard
+              key={blog.id || index}
+              blog={blog}
+              variant="list"
+            />
           );
         })}
       </div>
 
       {/* Loading indicator */}
       {isLoading && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mt-6 sm:mt-8">
           {[1, 2, 3, 4].map((item) => (
             <BlogCardSkeleton key={item} />
           ))}

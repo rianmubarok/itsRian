@@ -149,7 +149,7 @@ export default function MessageInput({
       part.type === "user" ? (
         <span
           key={i}
-          className="inline-flex items-center bg-yellow-100 dark:bg-yellow-900/60 text-yellow-600 dark:text-yellow-400 px-3 py-0.5 rounded-full text-sm font-medium "
+          className="inline-flex items-center bg-yellow-100 dark:bg-yellow-900/60 text-yellow-600 dark:text-yellow-400 px-2 sm:px-3 py-0.5 rounded-full text-xs sm:text-sm font-medium "
         >
           @{part.value}
         </span>
@@ -173,9 +173,9 @@ export default function MessageInput({
   };
 
   return (
-    <form onSubmit={onSubmit} className="my-6 relative">
+    <form onSubmit={onSubmit} className="my-4 sm:my-6 relative">
       <div
-        className="flex gap-2 items-center flex-wrap min-h-[32px] p-3 border border-gray-300 dark:border-primary-gray rounded-xl bg-white dark:bg-white/10 text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 cursor-text relative"
+        className="flex gap-2 items-center flex-wrap min-h-[32px] p-2 sm:p-3 border border-gray-300 dark:border-primary-gray rounded-xl bg-white dark:bg-white/10 text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 cursor-text relative"
         onClick={handleWrapperClick}
         ref={wrapperRef}
         tabIndex={-1}
@@ -189,23 +189,23 @@ export default function MessageInput({
           onKeyDown={handleInputKeyDown}
           placeholder={newMessage.length === 0 ? "Type @ to tag a user" : ""}
           disabled={isSubmitting}
-          className="flex-1 min-w-[80px] px-0 py-1 border-none outline-none bg-transparent text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 text-sm"
+          className="flex-1 min-w-[80px] px-0 py-1 border-none outline-none bg-transparent text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 text-xs sm:text-sm"
           style={{ minWidth: 60 }}
         />
         <button
           type="submit"
           disabled={(!input.trim() && newMessage.length === 0) || isSubmitting}
-          className="ml-2 px-4 bg-blue-500 text-white rounded-lg font-medium text-sm hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 h-8"
+          className="ml-2 px-3 sm:px-4 bg-blue-500 text-white rounded-lg font-medium text-xs sm:text-sm hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 h-7 sm:h-8"
         >
           {isSubmitting ? "Sending..." : "Send"}
         </button>
         {/* Dropdown autocomplete di atas input */}
         {showAutocomplete && autocompleteUsers.length > 0 && (
-          <ul className="absolute z-10 bg-primary-light dark:bg-primary-dark border border-gray-100 dark:border-gray-700 rounded shadow w-72 max-w-full bottom-full mb-2 left-0">
+          <ul className="absolute z-10 bg-primary-light dark:bg-primary-dark border border-gray-100 dark:border-gray-700 rounded shadow w-64 sm:w-72 max-w-full bottom-full mb-2 left-0">
             {autocompleteUsers.map((user, i) => (
               <li
                 key={user.id}
-                className={`px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                className={`px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 text-xs sm:text-sm ${
                   i === cursor ? "bg-gray-100 dark:bg-gray-700" : ""
                 }`}
                 onMouseDown={() => selectUser(user)}

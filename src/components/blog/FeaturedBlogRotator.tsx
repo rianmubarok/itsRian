@@ -15,7 +15,10 @@ export default function FeaturedBlogRotator({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
 
+  // Don't start rotation if no blogs or only one blog
   useEffect(() => {
+    if (blogs.length <= 1) return;
+
     const interval = setInterval(() => {
       setDirection("next");
       setIsTransitioning(true);
@@ -36,6 +39,8 @@ export default function FeaturedBlogRotator({
   }, [blogs.length]);
 
   const handleManualChange = (newIndex: number) => {
+    if (blogs.length <= 1) return;
+
     setDirection(newIndex > currentIndex ? "next" : "prev");
     setIsTransitioning(true);
 
@@ -44,6 +49,13 @@ export default function FeaturedBlogRotator({
       setIsTransitioning(false);
     }, 400);
   };
+
+  // Don't render if no blogs
+  if (!blogs || blogs.length === 0) {
+    return null;
+  }
+
+  const safeBlog = blogs[currentIndex] || blogs[0];
 
   return (
     <div className="mb-16 hidden lg:block">
@@ -55,7 +67,7 @@ export default function FeaturedBlogRotator({
             : "opacity-100 transform scale-100"
         }`}
       >
-        <BlogCard blog={blogs[currentIndex]} variant="featured" />
+        <BlogCard blog={safeBlog} variant="featured" />
       </div>
     </div>
   );

@@ -1,11 +1,10 @@
 "use client";
 
-import { projects } from "../../data";
 import ProjectCard from "../../components/project/ProjectCard";
 import {
   useInfiniteScroll,
   useIntersectionObserver,
-  useInfiniteScrollAnimation,
+  useProjects,
 } from "../../hooks";
 import {
   ProjectCardSkeleton,
@@ -13,6 +12,8 @@ import {
 } from "../../components/shared/ui/SkeletonLoader";
 
 export default function ProjectsPage() {
+  const { projects, loading, error } = useProjects();
+
   const { displayedItems, isLoading, hasMore, loadingRef } = useInfiniteScroll(
     projects,
     {
@@ -27,25 +28,14 @@ export default function ProjectsPage() {
       rootMargin: "0px 0px -50px 0px",
     });
 
-  const { ref: gridRef, isIntersecting: gridIntersecting } =
-    useIntersectionObserver<HTMLDivElement>({
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    });
-
-  const { getItemAnimationProps } = useInfiniteScrollAnimation(
-    displayedItems,
-    gridIntersecting
-  );
-
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
       role="main"
     >
       <h1
         ref={headerRef}
-        className={`text-6xl font-medium leading-snug tracking-tight mb-6 transition-all duration-700 ease-out ${
+        className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-snug tracking-tight mb-4 sm:mb-6 transition-all duration-700 ease-out ${
           headerIntersecting
             ? "translate-y-0 opacity-100"
             : "translate-y-8 opacity-0"
@@ -54,32 +44,31 @@ export default function ProjectsPage() {
         All Projects
       </h1>
 
-      <div
-        ref={gridRef}
-        className={`grid grid-cols-1 md:grid-cols-2 gap-8 transition-all duration-700 ease-out delay-300 ${
-          gridIntersecting
-            ? "translate-y-0 opacity-100"
-            : "translate-y-8 opacity-0"
-        }`}
-      >
-        {displayedItems.map((project, index) => {
-          const animationProps = getItemAnimationProps(project, index);
-
-          return (
-            <div
-              key={project.id}
-              className={animationProps.className}
-              style={animationProps.style}
-            >
-              <ProjectCard project={project} variant="grid" />
-            </div>
-          );
-        })}
-      </div>
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {[1, 2, 3, 4].map((item) => (
+            <ProjectCardSkeleton key={item} />
+          ))}
+        </div>
+      ) : error ? (
+        <div className="text-center">
+          <p className="text-red-500">Error loading projects: {error}</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {displayedItems.map((project, index) => {
+            return (
+              <div key={project.id}>
+                <ProjectCard project={project} variant="grid" />
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* Loading indicator */}
       {isLoading && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-6 sm:mt-8">
           {[1, 2, 3, 4].map((item) => (
             <ProjectCardSkeleton key={item} />
           ))}

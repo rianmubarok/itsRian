@@ -1,4 +1,8 @@
 export { blogs } from "./blogs";
-export { projects } from "./projects";
+export {
+  fallbackProjects,
+  getProjectsFromAPI,
+  getProjectBySlug,
+} from "./projects";
 export { experiences } from "./experiences";
 export type { Experience } from "./experiences";

@@ -46,6 +46,7 @@ export interface Blog {
   createdAt: string;
   viewCount: string;
   readingTime: string;
+  blocks?: any[];
 }
 
 export interface Theme {
