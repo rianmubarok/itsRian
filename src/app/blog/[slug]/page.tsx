@@ -1,18 +1,6 @@
-"use client";
-
 import { notFound } from "next/navigation";
-import { useState, useEffect } from "react";
-import { useBlog, useBlogs } from "../../../hooks/useBlogs";
-import { useBlogAnimation } from "../../../hooks/useBlogAnimation";
-import {
-  BackButton,
-  BlogHeader,
-  BlogThumbnail,
-  BlogTags,
-  BlogContent,
-  RelatedPosts,
-  BlogSkeleton,
-} from "../../../components/blog";
+import { siteMetadata } from "../../../lib/metadata";
+import { getBlogBySlug } from "../../../lib/notion-service";
 
 interface BlogDetailPageProps {
   params: Promise<{
@@ -20,73 +8,72 @@ interface BlogDetailPageProps {
   }>;
 }
 
-export default function BlogDetailPage({ params }: BlogDetailPageProps) {
-  const [slug, setSlug] = useState<string>("");
-  useEffect(() => {
-    (async () => {
-      const { slug } = await params;
-      setSlug(slug);
-    })();
-  }, [params]);
+export async function generateMetadata({ params }: BlogDetailPageProps) {
+  const { slug } = await params;
+  const blog = await getBlogBySlug(slug);
 
-  const { blog, loading, error } = useBlog(slug);
-  const { blogs } = useBlogs();
-  const [currentLanguage, setCurrentLanguage] = useState<"en" | "id">("en");
-
-  const { hasMounted, showContent, handleContentShow, refs } =
-    useBlogAnimation();
-
-  useEffect(() => {
-    handleContentShow(loading, blog);
-  }, [loading, blog, handleContentShow]);
-
-  if (!loading && (error || !blog)) {
-    notFound();
+  if (!blog) {
+    return {
+      title: `Blog Post Not Found - ${siteMetadata.title}`,
+      description: "The requested blog post could not be found.",
+    };
   }
 
-  const relatedPosts = blogs.filter((b) => b.slug !== slug).slice(0, 4);
+  return {
+    title: `${blog.title} - ${siteMetadata.title}`,
+    description:
+      blog.description ||
+      `Read ${blog.title} - insights and thoughts on web development, design, and technology.`,
+    keywords: [
+      "blog",
+      "article",
+      blog.title,
+      ...(blog.tags || []),
+      "web development",
+      "technology",
+      "programming",
+    ],
+    openGraph: {
+      title: `${blog.title} - ${siteMetadata.title}`,
+      description: blog.description || `Read ${blog.title}`,
+      url: `${siteMetadata.siteUrl}/blog/${slug}`,
+      siteName: siteMetadata.title,
+      images: [
+        {
+          url:
+            blog.thumbnail ||
+            `${siteMetadata.siteUrl}${siteMetadata.socialBanner}`,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
+      locale: siteMetadata.locale,
+      type: "article",
+      publishedTime: blog.createdAt,
+      authors: [siteMetadata.author],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${blog.title} - ${siteMetadata.title}`,
+      description: blog.description || `Read ${blog.title}`,
+      images: [
+        blog.thumbnail ||
+          `${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`,
+      ],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: `${siteMetadata.siteUrl}/blog/${slug}`,
+    },
+  };
+}
 
-  return (
-    <main
-      className="relative max-w-2xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48 min-h-screen text-primary-dark dark:text-primary-light"
-      role="main"
-    >
-      {/* Skeleton Loader */}
-      <div
-        className={`absolute inset-0 w-full min-h-full z-10 bg-white/80 dark:bg-primary-dark/80 transition-opacity duration-500 ${
-          showContent ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
-      >
-        <BlogSkeleton hasMounted={hasMounted} />
-      </div>
+import BlogDetailPageClient from "@/app/blog/[slug]/BlogDetailPageClient";
 
-      {/* Blog Content */}
-      <div
-        className={`transition-opacity duration-500 ${
-          showContent ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        {!blog ? null : (
-          <>
-            <BackButton hasMounted={hasMounted} />
-            <BlogHeader blog={blog} hasMounted={hasMounted} />
-            <BlogThumbnail blog={blog} hasMounted={hasMounted} />
-            <BlogTags
-              blog={blog}
-              hasMounted={hasMounted}
-              currentLanguage={currentLanguage}
-              onLanguageChange={setCurrentLanguage}
-            />
-            <BlogContent
-              blog={blog}
-              hasMounted={hasMounted}
-              currentLanguage={currentLanguage}
-            />
-            <hr className="border-t border-primary-gray/20 my-12" />
-            <RelatedPosts relatedPosts={relatedPosts} hasMounted={hasMounted} />
-          </>
-        )}
-      </div>
-    </main>
-  );
+export default function BlogDetailPage({ params }: BlogDetailPageProps) {
+  return <BlogDetailPageClient params={params} />;
 }

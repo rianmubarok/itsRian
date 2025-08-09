@@ -1,112 +1,54 @@
-"use client";
+import { siteMetadata } from "../../lib/metadata";
 
-import BlogCard from "../../components/blog/BlogCard";
-import FeaturedBlogRotator from "../../components/blog/FeaturedBlogRotator";
-import {
-  useInfiniteScroll,
-  useIntersectionObserver,
-  useInfiniteScrollAnimation,
-} from "../../hooks";
-import {
-  BlogCardSkeleton,
-  LoadingSpinner,
-} from "../../components/shared/ui/SkeletonLoader";
-import { useBlogs } from "../../hooks/useBlogs";
-import { useEffect, useState } from "react";
-import { AnimatedBlogCard } from "../../components/blog/BlogCard";
+export const metadata = {
+  title: `Blog - ${siteMetadata.title}`,
+  description:
+    "Read my latest thoughts on web development, design, technology, and programming. Insights, tutorials, and experiences from a passionate developer.",
+  keywords: [
+    "blog",
+    "articles",
+    "web development",
+    "programming",
+    "technology",
+    "design",
+    "tutorials",
+    "insights",
+  ],
+  openGraph: {
+    title: `Blog - ${siteMetadata.title}`,
+    description:
+      "Read my latest thoughts on web development, design, technology, and programming.",
+    url: `${siteMetadata.siteUrl}/blog`,
+    siteName: siteMetadata.title,
+    images: [
+      {
+        url: `${siteMetadata.siteUrl}${siteMetadata.socialBanner}`,
+        width: 1200,
+        height: 630,
+        alt: "Blog Articles",
+      },
+    ],
+    locale: siteMetadata.locale,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Blog - ${siteMetadata.title}`,
+    description:
+      "Read my latest thoughts on web development, design, and technology.",
+    images: [`${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: `${siteMetadata.siteUrl}/blog`,
+  },
+};
+
+import BlogPageClient from "./BlogPageClient";
 
 export default function BlogPage() {
-  const { blogs, loading, error } = useBlogs();
-
-  const { displayedItems, isLoading, hasMore, loadingRef } = useInfiniteScroll(
-    blogs,
-    {
-      itemsPerPage: 4,
-      threshold: 200,
-    }
-  );
-
-  const { ref: gridRef, isIntersecting: gridIntersecting } =
-    useIntersectionObserver<HTMLDivElement>({
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    });
-
-  const { getItemAnimationProps } = useInfiniteScrollAnimation(
-    displayedItems,
-    gridIntersecting
-  );
-
-  const [hasMounted, setHasMounted] = useState(false);
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (loading) {
-    return (
-      <main className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          {[1, 2, 3, 4].map((item) => (
-            <BlogCardSkeleton key={item} />
-          ))}
-        </div>
-      </main>
-    );
-  }
-
-  if (error) {
-    return (
-      <main className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48">
-        <div className="text-center">
-          <p className="text-red-500">Error loading blogs: {error}</p>
-        </div>
-      </main>
-    );
-  }
-
-  return (
-    <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
-      role="main"
-    >
-      {/* Featured Blog Rotator */}
-      <FeaturedBlogRotator blogs={blogs} />
-
-      {/* All Blogs in Grid - 2 Columns */}
-      <div ref={gridRef} className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-        {displayedItems.map((blog, index) => {
-          if (!blog) return null;
-          return (
-            <AnimatedBlogCard
-              key={blog.id || index}
-              blog={blog}
-              variant="list"
-            />
-          );
-        })}
-      </div>
-
-      {/* Loading indicator */}
-      {isLoading && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mt-6 sm:mt-8">
-          {[1, 2, 3, 4].map((item) => (
-            <BlogCardSkeleton key={item} />
-          ))}
-        </div>
-      )}
-
-      {/* Intersection observer target */}
-      {hasMore && (
-        <div
-          ref={loadingRef}
-          className="h-20 flex items-center justify-center mt-8"
-        >
-          <div className="flex items-center gap-3 text-primary-gray text-sm">
-            <LoadingSpinner />
-            <span>Loading more articles...</span>
-          </div>
-        </div>
-      )}
-    </main>
-  );
+  return <BlogPageClient />;
 }

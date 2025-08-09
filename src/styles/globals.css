@@ -231,6 +231,7 @@ select:focus {
   font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
+  line-height: 1.75rem;
 }
 
 .prose p {

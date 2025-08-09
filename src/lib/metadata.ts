@@ -1,8 +1,8 @@
 export const siteMetadata = {
   title: "Rian – Portfolio",
   description: "My Personal Portfolio",
-  author: "Muhammad Fitrian Mubarok",
-  siteUrl: "https://itsrian.com",
+  author: "Rian Mubarok",
+  siteUrl: "https://itsrian.my.id",
   language: "en",
   socialBanner: "/og-image.png",
   twitterBanner: "/og-image.png",
@@ -13,9 +13,9 @@ export const siteMetadata = {
   github: "https://github.com/rianmubarok",
   twitter: "https://twitter.com/itsrian",
   facebook: "https://web.facebook.com/m.fitrian.37",
-  youtube: "https://youtube.com/@itsrian",
-  linkedin: "https://linkedin.com/in/itsrian",
-  instagram: "https://instagram.com/itsrian",
+  youtube: "https://youtube.com/@rianmub",
+  linkedin: "https://linkedin.com/in/rianmubarok",
+  instagram: "https://instagram.com/m.fitrianm_/",
   locale: "en-US",
   analyticsURL: "https://analytics.itsrian.com",
   analytics: {
