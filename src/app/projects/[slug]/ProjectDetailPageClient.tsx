@@ -167,14 +167,14 @@ export default function ProjectDetailPageClient({
 
                 {!project.sourceCode && !project.liveProject && (
                   <p className="text-sm sm:text-base text-primary-gray">
-                    Oops! This project has no live link — maybe it's private or
-                    in progress.{" "}
+                    Oops! This project has no live link — maybe it&apos;s
+                    private or in progress.{" "}
                     <Link
                       href="/contact"
                       className="group inline-flex items-center transition-all duration-300"
                     >
                       <span className="relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:transition-transform after:duration-300 after:scale-x-0 group-hover:after:scale-x-100 after:bg-current">
-                        Contact me if you're interested
+                        Contact me if you&apos;re interested
                       </span>
                     </Link>
                     .

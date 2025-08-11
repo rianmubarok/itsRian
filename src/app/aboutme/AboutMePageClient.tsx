@@ -39,11 +39,11 @@ export default function AboutMePageClient() {
           Hello! Thank you for visiting my personal website.
         </h2>
         <p className="text-primary-gray font-regular text-base sm:text-lg md:col-span-3">
-          I'm Rian, a passionate web developer and UI/UX enthusiast who thrives
-          on turning ideas into clean, functional, and engaging digital
-          experiences. Over the years, I've dedicated myself to understanding
-          both the visual side of design and the logical side of development —
-          bridging creativity and code.
+          I&apos;m Rian, a passionate web developer and UI/UX enthusiast who
+          thrives on turning ideas into clean, functional, and engaging digital
+          experiences. Over the years, I&apos;ve dedicated myself to
+          understanding both the visual side of design and the logical side of
+          development — bridging creativity and code.
         </p>
       </div>
 
@@ -76,7 +76,7 @@ export default function AboutMePageClient() {
           that align with project goals.
         </p>
         <p>
-          I'm excited about future opportunities to collaborate and build
+          I&apos;m excited about future opportunities to collaborate and build
           purposeful, user-centered digital products.
         </p>
         <p>Best regards,</p>

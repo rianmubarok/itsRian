@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Globe } from "lucide-react";
-// @ts-ignore
+// @ts-expect-error
 import { AnimatePresence, motion } from "framer-motion";
 
 interface LanguageSwitcherProps {

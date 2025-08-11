@@ -31,7 +31,7 @@ export function useAutocomplete(
   const showAutocompleteForInput = useCallback(
     (input: string, newMessage: GuestbookMessagePart[] = []) => {
       // First check if there's an @ in the current input
-      let at = getLastAt(input);
+      const at = getLastAt(input);
 
       // If no @ in current input, check if we're continuing after a mention
       if (at === null && newMessage.length > 0) {

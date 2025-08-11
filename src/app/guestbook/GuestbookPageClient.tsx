@@ -44,7 +44,9 @@ export default function GuestbookPageClient() {
             </h2>
 
             <div className="text-primary-gray text-xs sm:text-sm font-light space-y-2 sm:space-y-3">
-              <p>Please sign in to start. Don't worry, your data is safe.</p>
+              <p>
+                Please sign in to start. Don&apos;t worry, your data is safe.
+              </p>
             </div>
 
             <AuthButtons

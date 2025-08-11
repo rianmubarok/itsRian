@@ -40,7 +40,7 @@ export default function IntroSection() {
                 : "translate-x-4 opacity-0",
             ].join(" ")}
           >
-            Hey there, I'm Rian{" "}
+            Hey there, I&apos;m Rian{" "}
             <span className="wave-hand" role="img" aria-label="waving hand">
               👋
             </span>
