@@ -144,7 +144,6 @@ export default function AuthErrorPopup({
                 <AuthErrorPopupActions
                   onRetry={onRetry}
                   onClose={handleClose}
-                  errorCode={errorCode}
                   getGradientClass={getGradientClass}
                 />
               </div>
