@@ -47,7 +47,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ formRef, intersecting }) => {
     if (Object.keys(validationErrors).length > 0) return;
     setStatus("loading");
     try {
-      const res = await fetch("https://formspree.io/f/meozvddb", {
+      const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
+      const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
