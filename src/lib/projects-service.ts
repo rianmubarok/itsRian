@@ -17,7 +17,7 @@ export async function getProjects(): Promise<Project[]> {
 
     return response.results.map(
       (page: Record<string, unknown>, index: number) => {
-        const properties = page.properties;
+        const properties = page.properties as Record<string, any>;
 
         return {
           id: index + 1, // Generate ID based on index
@@ -62,7 +62,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     }
 
     const page = response.results[0] as Record<string, unknown>;
-    const properties = page.properties;
+    const properties = page.properties as Record<string, any>;
 
     return {
       id: 1, // You might want to store this as a number property in Notion
