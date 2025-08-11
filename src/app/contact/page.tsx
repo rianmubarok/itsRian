@@ -1,7 +1,7 @@
 import { siteMetadata } from "../../lib/metadata";
 
 export const metadata = {
-  title: `Contact - ${siteMetadata.title}`,
+  title: `Contact`,
   description:
     "Get in touch with me for creative discussions, project collaborations, or any questions. I'm always open to new opportunities and connections.",
   keywords: [
@@ -14,7 +14,7 @@ export const metadata = {
     "project inquiry",
   ],
   openGraph: {
-    title: `Contact - ${siteMetadata.title}`,
+    title: `Contact`,
     description:
       "Get in touch with me for creative discussions, project collaborations, or any questions.",
     url: `${siteMetadata.siteUrl}/contact`,
@@ -32,7 +32,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `Contact - ${siteMetadata.title}`,
+    title: `Contact`,
     description:
       "Get in touch with me for creative discussions and project collaborations.",
     images: [`${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`],

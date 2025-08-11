@@ -1,4 +1,4 @@
-import { FooterContent } from "./footer-components/index";
+import { FooterContent } from "./footer/index";
 
 export default function Footer() {
   return (

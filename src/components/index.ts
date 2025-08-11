@@ -23,6 +23,6 @@ export { default as FeaturedProjects } from "./home/FeaturedProjects";
 
 // Guestbook Components
 export { default as GuestbookMessage } from "./guestbook/GuestbookMessage";
-export { default as MessageInput } from "./guestbook/MessageInput";
+export { MessageInput } from "./guestbook/MessageInput";
 export { default as AuthButtons } from "./guestbook/AuthButtons";
 export { default as MessageList } from "./guestbook/MessageList";

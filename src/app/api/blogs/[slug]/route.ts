@@ -13,6 +13,10 @@ export async function GET(
   try {
     const { slug } = await params;
 
+    // Check if it's a bot request (optional)
+    const userAgent = request.headers.get("user-agent") || "";
+    const isBot = /bot|crawler|spider|crawling/i.test(userAgent);
+
     // Get blog data
     const blog = await getBlogBySlug(slug);
 
@@ -20,10 +24,12 @@ export async function GET(
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
 
-    // Increment view count
-    await incrementViewCount(slug);
+    // Only increment view count for real users (not bots)
+    if (!isBot) {
+      await incrementViewCount(slug);
+    }
 
-    // Get updated view count
+    // Get current view count
     const viewCount = await getViewCount(slug);
 
     const blogWithViews = {

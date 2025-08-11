@@ -1,7 +1,7 @@
 export const siteMetadata = {
-  title: "Rian – Portfolio",
+  title: "itsRian",
   description: "My Personal Portfolio",
-  author: "Rian Mubarok",
+  author: "itsRian",
   siteUrl: "https://itsrian.my.id",
   language: "en",
   socialBanner: "/og-image.png",

@@ -1,7 +1,7 @@
 import { siteMetadata } from "@/lib/metadata";
 
 export const metadata = {
-  title: `Guestbook - ${siteMetadata.title}`,
+  title: `Guestbook`,
   description:
     "Leave a message, suggestion, or question in my guestbook. Share your thoughts and connect with other visitors to my portfolio.",
   keywords: [
@@ -13,7 +13,7 @@ export const metadata = {
     "suggestions",
   ],
   openGraph: {
-    title: `Guestbook - ${siteMetadata.title}`,
+    title: `Guestbook`,
     description:
       "Leave a message, suggestion, or question in my guestbook. Share your thoughts and connect with other visitors.",
     url: `${siteMetadata.siteUrl}/guestbook`,
@@ -31,7 +31,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `Guestbook - ${siteMetadata.title}`,
+    title: `Guestbook`,
     description: "Leave a message, suggestion, or question in my guestbook.",
     images: [`${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`],
   },

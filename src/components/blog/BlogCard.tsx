@@ -13,25 +13,25 @@ export default function BlogCard({ blog, variant = "list" }: BlogCardProps) {
     return (
       <article className="group">
         <Link href={`/blog/${blog.slug}`} className="block">
-                  <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
-          {/* Content */}
-          <div className="flex-1 flex flex-col justify-between">
-            {/* Title */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-tight tracking-tight">
-              {blog.title}
-            </h1>
+          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
+            {/* Content */}
+            <div className="flex-1 flex flex-col justify-between">
+              {/* Title */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-tight tracking-tight">
+                {blog.title}
+              </h1>
 
-            {/* Read more button */}
-            <div className="mt-auto flex items-center gap-2 text-sm sm:text-base font-medium text-primary-dark dark:text-primary-light">
-              <span className="relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:transition-transform after:duration-300 after:scale-x-0 group-hover:after:scale-x-100 after:bg-current">
-                Read more
-              </span>
-              <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-1" />
+              {/* Read more button */}
+              <div className="mt-auto flex items-center gap-2 text-sm sm:text-base font-medium text-primary-dark dark:text-primary-light">
+                <span className="relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:transition-transform after:duration-300 after:scale-x-0 group-hover:after:scale-x-100 after:bg-current">
+                  Read more
+                </span>
+                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-1" />
+              </div>
             </div>
-          </div>
 
-          {/* Thumbnail */}
-          <div className="flex-shrink-0 w-full lg:w-110 h-60 sm:h-72 md:h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
+            {/* Thumbnail */}
+            <div className="flex-shrink-0 w-full lg:w-110 h-60 sm:h-72 md:h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
               <img
                 src={blog.thumbnail}
                 alt={blog.title}

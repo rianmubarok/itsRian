@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "firebase": "^10.13.2",
     "@notionhq/client": "^4.0.1",
     "@supabase/supabase-js": "^2.53.0",
     "clsx": "^2.1.1",

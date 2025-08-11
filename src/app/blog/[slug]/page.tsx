@@ -14,13 +14,13 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
 
   if (!blog) {
     return {
-      title: `Blog Post Not Found - ${siteMetadata.title}`,
+      title: `Blog Post Not Found`,
       description: "The requested blog post could not be found.",
     };
   }
 
   return {
-    title: `${blog.title} - ${siteMetadata.title}`,
+    title: `${blog.title}`,
     description:
       blog.description ||
       `Read ${blog.title} - insights and thoughts on web development, design, and technology.`,
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
       "programming",
     ],
     openGraph: {
-      title: `${blog.title} - ${siteMetadata.title}`,
+      title: `${blog.title}`,
       description: blog.description || `Read ${blog.title}`,
       url: `${siteMetadata.siteUrl}/blog/${slug}`,
       siteName: siteMetadata.title,
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${blog.title} - ${siteMetadata.title}`,
+      title: ` ${blog.title}`,
       description: blog.description || `Read ${blog.title}`,
       images: [
         blog.thumbnail ||

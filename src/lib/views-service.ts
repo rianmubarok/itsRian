@@ -22,23 +22,28 @@ export async function getViewCount(slug: string): Promise<number> {
 
 export async function incrementViewCount(slug: string): Promise<void> {
   try {
-    // Try to update existing record
-    const { error: updateError } = await supabase
-      .from("views")
-      .update({ count: supabase.rpc("increment") })
-      .eq("slug", slug);
+    // Use the database function we created
+    const { error } = await supabase.rpc("increment_view_count", {
+      slug_param: slug
+    });
 
-    // If no record exists, create one
-    if (updateError && updateError.code === "PGRST116") {
-      const { error: insertError } = await supabase
+    if (error) {
+      console.error("Error incrementing view count:", error);
+      
+      // Fallback: try manual insert/update if function fails
+      const { error: fallbackError } = await supabase
         .from("views")
-        .insert({ slug, count: 1 });
-
-      if (insertError) {
-        console.error("Error creating view count:", insertError);
+        .upsert(
+          { slug, count: 1 },
+          { 
+            onConflict: "slug",
+            ignoreDuplicates: false 
+          }
+        );
+      
+      if (fallbackError) {
+        console.error("Fallback error:", fallbackError);
       }
-    } else if (updateError) {
-      console.error("Error updating view count:", updateError);
     }
   } catch (error) {
     console.error("Error incrementing view count:", error);
@@ -46,7 +51,9 @@ export async function incrementViewCount(slug: string): Promise<void> {
 }
 
 export function formatViewCount(count: number): string {
-  if (count >= 1000) {
+  if (count >= 1000000) {
+    return `${(count / 1000000).toFixed(1)}M`;
+  } else if (count >= 1000) {
     return `${(count / 1000).toFixed(1)}k`;
   }
   return count.toString();

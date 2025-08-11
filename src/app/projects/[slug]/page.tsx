@@ -19,13 +19,13 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
 
   if (!project) {
     return {
-      title: `Project Not Found - ${siteMetadata.title}`,
+      title: `Project Not Found`,
       description: "The requested project could not be found.",
     };
   }
 
   return {
-    title: `${project.title} - ${siteMetadata.title}`,
+    title: `${project.title}`,
     description:
       project.description ||
       `Explore the ${project.title} project - a showcase of modern web development and design.`,
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
       "TypeScript",
     ],
     openGraph: {
-      title: `${project.title} - ${siteMetadata.title}`,
+      title: `${project.title}`,
       description:
         project.description || `Explore the ${project.title} project`,
       url: `${siteMetadata.siteUrl}/projects/${slug}`,
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} - ${siteMetadata.title}`,
+      title: `${project.title}`,
       description:
         project.description || `Explore the ${project.title} project`,
       images: [

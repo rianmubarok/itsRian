@@ -4,20 +4,36 @@ import { getViewCount, formatViewCount } from "../../../lib/views-service";
 
 export async function GET() {
   try {
+    // Get all blogs from Notion
     const blogs = await getBlogs();
 
     // Get view counts for all blogs
     const blogsWithViews = await Promise.all(
       blogs.map(async (blog) => {
-        const viewCount = await getViewCount(blog.slug);
-        return {
-          ...blog,
-          viewCount: formatViewCount(viewCount),
-        };
+        try {
+          const viewCount = await getViewCount(blog.slug);
+          return {
+            ...blog,
+            viewCount: formatViewCount(viewCount),
+          };
+        } catch (error) {
+          console.error(`Error getting view count for ${blog.slug}:`, error);
+          return {
+            ...blog,
+            viewCount: "0",
+          };
+        }
       })
     );
 
-    return NextResponse.json(blogsWithViews);
+    // Add cache headers for better performance
+    const response = NextResponse.json(blogsWithViews);
+    response.headers.set(
+      "Cache-Control",
+      "public, s-maxage=300, stale-while-revalidate=600"
+    );
+
+    return response;
   } catch (error) {
     console.error("Error fetching blogs:", error);
     return NextResponse.json(

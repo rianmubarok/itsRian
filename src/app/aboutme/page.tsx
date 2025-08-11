@@ -1,7 +1,7 @@
 import { siteMetadata } from "../../lib/metadata";
 
 export const metadata = {
-  title: `About Me - ${siteMetadata.title}`,
+  title: `About Me`,
   description:
     "Learn about my journey as a web developer and UI/UX designer. Discover my experience, skills, and passion for creating digital solutions.",
   keywords: [
@@ -15,7 +15,7 @@ export const metadata = {
     "expertise",
   ],
   openGraph: {
-    title: `About Me - ${siteMetadata.title}`,
+    title: `About Me`,
     description:
       "Learn about my journey as a web developer and UI/UX designer. Discover my experience, skills, and passion for creating digital solutions.",
     url: `${siteMetadata.siteUrl}/aboutme`,
@@ -33,7 +33,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `About Me - ${siteMetadata.title}`,
+    title: `About Me`,
     description:
       "Learn about my journey as a web developer and UI/UX designer.",
     images: [`${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`],

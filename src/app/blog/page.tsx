@@ -1,7 +1,7 @@
 import { siteMetadata } from "../../lib/metadata";
 
 export const metadata = {
-  title: `Blog - ${siteMetadata.title}`,
+  title: `Blog`,
   description:
     "Read my latest thoughts on web development, design, technology, and programming. Insights, tutorials, and experiences from a passionate developer.",
   keywords: [
@@ -15,7 +15,7 @@ export const metadata = {
     "insights",
   ],
   openGraph: {
-    title: `Blog - ${siteMetadata.title}`,
+    title: `Blog`,
     description:
       "Read my latest thoughts on web development, design, technology, and programming.",
     url: `${siteMetadata.siteUrl}/blog`,
@@ -33,7 +33,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `Blog - ${siteMetadata.title}`,
+    title: `Blog`,
     description:
       "Read my latest thoughts on web development, design, and technology.",
     images: [`${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`],

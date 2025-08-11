@@ -13,98 +13,17 @@ export interface GuestbookMessage {
   isAuthor?: boolean;
 }
 
-export const guestbookMessages: GuestbookMessage[] = [
-  {
-    id: "1",
-    name: "Sarah Chen",
-    message: [
-      {
-        type: "text",
-        value:
-          "Love your portfolio! The design is so clean and modern. Really inspiring work. Keep it up! 👏",
-      },
-    ],
-    date: "2024-12-05T10:00:00Z",
-    profilePic:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-  },
-  {
-    id: "2",
-    name: "Alex Rodriguez",
-    message: [
-      {
-        type: "text",
-        value:
-          "Great projects! I especially liked the blog section. Would love to collaborate on something sometime.",
-      },
-    ],
-    date: "2024-12-06T14:30:00Z",
-    profilePic:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-  },
-  {
-    id: "3",
-    name: "Emma Wilson",
-    message: [
-      {
-        type: "text",
-        value:
-          "Your tech stack choices are spot on! Really enjoyed reading your blog posts about Next.js and React.",
-      },
-    ],
-    date: "2024-12-07T09:15:00Z",
-    profilePic:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-  },
-  {
-    id: "4",
-    name: "Mike Johnson",
-    message: [
-      {
-        type: "text",
-        value:
-          "Awesome portfolio! The dark mode toggle is a nice touch. Clean and professional design.",
-      },
-    ],
-    date: "2024-12-08T11:20:00Z",
-    profilePic:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-  },
-  {
-    id: "5",
-    name: "David Kim",
-    message: [
-      {
-        type: "text",
-        value:
-          "Really impressed with your work! The guestbook feature is amazing.",
-      },
-    ],
-    date: "2024-12-09T16:45:00Z",
-    profilePic:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
-  },
-  {
-    id: "6",
-    name: "Rian Mubarok",
-    message: [
-      {
-        type: "text",
-        value:
-          "Hello! This is a great portfolio. What do you think about the design?",
-      },
-    ],
-    date: "2024-12-10T13:00:00Z",
-    profilePic:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-  },
-];
-
 // Get all guestbook messages sorted by date
-export const getGuestbookMessages = (): GuestbookMessage[] => {
-  return guestbookMessages.sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-  );
+export const getGuestbookMessages = async (): Promise<GuestbookMessage[]> => {
+  try {
+    const res = await fetch("/api/guestbook", { cache: "no-store" });
+    if (!res.ok) throw new Error("Failed to fetch");
+    const items = (await res.json()) as GuestbookMessage[];
+    return items;
+  } catch (error) {
+    console.error("Error fetching guestbook messages:", error);
+    return [];
+  }
 };
 
 // Format date and time for display
@@ -135,21 +54,32 @@ export const formatDateTime = (
 export const addGuestbookMessage = async (
   message: Omit<GuestbookMessage, "id">
 ): Promise<GuestbookMessage> => {
-  const newMessage: GuestbookMessage = {
-    id: Date.now().toString(),
-    ...message,
-  };
-
-  // For now, just return the new message
-  // In the future, this will save to database and return the saved message
-  return newMessage;
+  try {
+    const res = await fetch("/api/guestbook", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(message),
+    });
+    if (!res.ok) throw new Error("Failed to insert");
+    const created = (await res.json()) as GuestbookMessage;
+    return created;
+  } catch (error) {
+    console.error("Error adding guestbook message:", error);
+    throw error;
+  }
 };
 
 // Delete a guestbook message
 export const deleteGuestbookMessage = async (
   messageId: string
 ): Promise<boolean> => {
-  // This will be replaced with actual database call in the future
-  // For now, just return true to simulate successful deletion
-  return true;
+  try {
+    const res = await fetch(`/api/guestbook/${messageId}`, {
+      method: "DELETE",
+    });
+    return res.ok;
+  } catch (error) {
+    console.error("Error deleting guestbook message:", error);
+    return false;
+  }
 };
