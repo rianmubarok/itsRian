@@ -1,4 +1,4 @@
-import notion, { databaseId } from "./notion";
+import notion from "./notion";
 import { Project } from "../types";
 
 const projectsDatabaseId = process.env.NOTION_PROJECTS_DATABASE_ID;
@@ -15,23 +15,30 @@ export async function getProjects(): Promise<Project[]> {
       ],
     });
 
-    return response.results.map((page: any, index: number) => {
-      const properties = page.properties;
+    return response.results.map(
+      (page: Record<string, unknown>, index: number) => {
+        const properties = page.properties;
 
-      return {
-        id: index + 1, // Generate ID based on index
-        title: properties.title?.title?.[0]?.plain_text || "Untitled",
-        slug: properties.slug?.rich_text?.[0]?.plain_text || page.id,
-        description: properties.description?.rich_text?.[0]?.plain_text || "",
-        detail: properties.detail?.rich_text?.[0]?.plain_text || "",
-        image:
-          properties.image?.url || "https://placehold.co/600x400?text=No+Image",
-        tags: properties.tags?.multi_select?.map((tag: any) => tag.name) || [],
-        createdAt: properties.createdAt?.date?.start || page.created_time || "",
-        sourceCode: properties.sourceCode?.url || undefined,
-        liveProject: properties.liveProject?.url || undefined,
-      };
-    });
+        return {
+          id: index + 1, // Generate ID based on index
+          title: properties.title?.title?.[0]?.plain_text || "Untitled",
+          slug: properties.slug?.rich_text?.[0]?.plain_text || page.id,
+          description: properties.description?.rich_text?.[0]?.plain_text || "",
+          detail: properties.detail?.rich_text?.[0]?.plain_text || "",
+          image:
+            properties.image?.url ||
+            "https://placehold.co/600x400?text=No+Image",
+          tags:
+            properties.tags?.multi_select?.map(
+              (tag: { name: string }) => tag.name
+            ) || [],
+          createdAt:
+            properties.createdAt?.date?.start || page.created_time || "",
+          sourceCode: properties.sourceCode?.url || undefined,
+          liveProject: properties.liveProject?.url || undefined,
+        };
+      }
+    );
   } catch (error) {
     console.error("Error fetching projects from Notion:", error);
     return [];
@@ -54,7 +61,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       return null;
     }
 
-    const page = response.results[0] as any;
+    const page = response.results[0] as Record<string, unknown>;
     const properties = page.properties;
 
     return {
@@ -64,7 +71,10 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       description: properties.description?.rich_text?.[0]?.plain_text || "",
       detail: properties.detail?.rich_text?.[0]?.plain_text || "",
       image: properties.image?.url || "",
-      tags: properties.tags?.multi_select?.map((tag: any) => tag.name) || [],
+      tags:
+        properties.tags?.multi_select?.map(
+          (tag: { name: string }) => tag.name
+        ) || [],
       createdAt: properties.createdAt?.date?.start || "",
       sourceCode: properties.sourceCode?.url || undefined,
       liveProject: properties.liveProject?.url || undefined,

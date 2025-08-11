@@ -23,7 +23,7 @@ export function formatDate(date: string | Date): string {
 /**
  * Get featured projects (first n projects)
  */
-export function getFeaturedProjects(count: number = 3) {
+export function getFeaturedProjects() {
   // This will be imported from projects data
   return [];
 }
@@ -34,4 +34,4 @@ export function getFeaturedProjects(count: number = 3) {
 export function truncateText(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength) + "...";
-} 
+}
