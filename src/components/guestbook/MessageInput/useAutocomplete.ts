@@ -2,7 +2,9 @@ import { useState, useCallback } from "react";
 import { AutocompleteUser } from "./types";
 import { GuestbookMessagePart } from "@/lib/guestbook";
 
-export function useAutocomplete(existingMessages: any[]) {
+export function useAutocomplete(
+  existingMessages: { id: string; name: string }[]
+) {
   const [showAutocomplete, setShowAutocomplete] = useState(false);
   const [autocompleteUsers, setAutocompleteUsers] = useState<
     AutocompleteUser[]

@@ -193,7 +193,7 @@ export function useMessageInput({
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (e.key === "Enter" && !e.shiftKey && !showAutocomplete) {
         e.preventDefault();
-        handleSubmit(e as any);
+        handleSubmit(e as React.FormEvent);
         return;
       }
 

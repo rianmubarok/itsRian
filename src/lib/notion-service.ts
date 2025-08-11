@@ -2,45 +2,69 @@ import notion, { databaseId } from "./notion";
 import { Blog } from "../types";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
-function getPlainTextFromTitle(property: any): string {
-  if (property && property.type === "title" && property.title.length > 0) {
-    return property.title[0].plain_text;
+// Notion property type (minimal, for type guards)
+type NotionProperty = { type: string; [key: string]: unknown };
+type MultiSelectTag = { name: string };
+
+type BlockWithChildren = Record<string, unknown> & { children?: unknown[] };
+
+function getPlainTextFromTitle(property: NotionProperty | undefined): string {
+  if (
+    property &&
+    property.type === "title" &&
+    Array.isArray(property.title) &&
+    property.title.length > 0
+  ) {
+    const title = property.title[0] as { plain_text?: string };
+    return title.plain_text || "";
   }
   return "";
 }
 
-function getPlainTextFromRichText(property: any): string {
+function getPlainTextFromRichText(
+  property: NotionProperty | undefined
+): string {
   if (
     property &&
     property.type === "rich_text" &&
+    Array.isArray(property.rich_text) &&
     property.rich_text.length > 0
   ) {
-    return property.rich_text[0].plain_text;
+    const text = property.rich_text[0] as { plain_text?: string };
+    return text.plain_text || "";
   }
   return "";
 }
 
-function getPlainTextFromDate(property: any): string {
-  if (property && property.type === "date" && property.date) {
-    return property.date.start;
+function getPlainTextFromDate(property: NotionProperty | undefined): string {
+  if (
+    property &&
+    property.type === "date" &&
+    property.date &&
+    typeof property.date === "object"
+  ) {
+    return (property.date as { start?: string }).start || "";
   }
   return "";
 }
 
-function getPlainTextFromUrl(property: any): string {
-  if (property && property.type === "url" && property.url) {
+function getPlainTextFromUrl(property: NotionProperty | undefined): string {
+  if (property && property.type === "url" && typeof property.url === "string") {
     return property.url;
   }
   return "";
 }
 
-function getPlainTextFromMultiSelect(property: any): string[] {
+function getPlainTextFromMultiSelect(
+  property: NotionProperty | undefined
+): string[] {
   if (
     property &&
     property.type === "multi_select" &&
+    Array.isArray(property.multi_select) &&
     property.multi_select.length > 0
   ) {
-    return property.multi_select.map((tag: any) => tag.name);
+    return (property.multi_select as MultiSelectTag[]).map((tag) => tag.name);
   }
   return [];
 }
@@ -58,7 +82,10 @@ export async function getBlogs(): Promise<Blog[]> {
     });
 
     return response.results.map((page) => {
-      const properties = (page as PageObjectResponse).properties;
+      const properties = (page as PageObjectResponse).properties as Record<
+        string,
+        NotionProperty
+      >;
       return {
         id:
           getPlainTextFromRichText(properties.slug) ||
@@ -94,8 +121,8 @@ export async function getBlogs(): Promise<Blog[]> {
 // Fungsi untuk mengambil seluruh block children dari Notion page, termasuk children-nya secara rekursif
 export async function getPageContentBlocks(pageId: string) {
   try {
-    const blocks = [];
-    let cursor;
+    const blocks: BlockWithChildren[] = [];
+    let cursor: string | undefined;
     do {
       const response = await notion.blocks.children.list({
         block_id: pageId,
@@ -103,12 +130,17 @@ export async function getPageContentBlocks(pageId: string) {
         page_size: 100,
       });
       for (const block of response.results) {
-        if ("has_children" in block && block.has_children) {
-          (block as any).children = await getPageContentBlocks(block.id);
+        if (
+          "has_children" in block &&
+          (block as { has_children: boolean }).has_children
+        ) {
+          (block as BlockWithChildren).children = await getPageContentBlocks(
+            (block as { id: string }).id
+          );
         }
-        blocks.push(block);
+        blocks.push(block as BlockWithChildren);
       }
-      cursor = response.has_more ? response.next_cursor : undefined;
+      cursor = response.has_more ? (response.next_cursor as string) : undefined;
     } while (cursor);
     return blocks;
   } catch (error) {
@@ -134,7 +166,7 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
     }
 
     const page = response.results[0] as PageObjectResponse;
-    const properties = page.properties;
+    const properties = page.properties as Record<string, NotionProperty>;
 
     // Ambil seluruh block children (konten penuh)
     const blocks = await getPageContentBlocks(page.id);

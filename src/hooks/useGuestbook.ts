@@ -11,13 +11,14 @@ import {
   addGuestbookMessage,
   deleteGuestbookMessage,
 } from "@/lib/guestbook";
-import { GuestbookMessage } from "@/lib/guestbook";
+import { GuestbookMessage, GuestbookMessagePart } from "@/lib/guestbook";
+import { User } from "firebase/auth";
 
 export function useGuestbook() {
   const [messages, setMessages] = useState<GuestbookMessage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [newMessage, setNewMessage] = useState<any[]>([]);
+  const [newMessage, setNewMessage] = useState<GuestbookMessagePart[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userEmail, setUserEmail] = useState("");
@@ -52,7 +53,7 @@ export function useGuestbook() {
   }, []);
 
   // Function untuk handle profile image processing
-  const handleProfileImage = async (user: any) => {
+  const handleProfileImage = async (user: User) => {
     if (!user.photoURL) {
       // Jika tidak ada photo URL, gunakan UI Avatars dengan resolusi tinggi
       const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(
@@ -150,21 +151,26 @@ export function useGuestbook() {
     try {
       if (provider === "github") await signInWithGithub();
       else await signInWithGoogle();
-    } catch (e: any) {
-      console.error("Sign-in failed", e);
-
-      // Handle specific authentication errors
-      if (e.code === "auth/account-exists-with-different-credential") {
-        setAuthError({
-          isOpen: true,
-          error: e.message,
-          errorCode: e.code,
-        });
+    } catch (e: unknown) {
+      if (typeof e === "object" && e && "code" in e && "message" in e) {
+        const err = e as { code: string; message: string };
+        if (err.code === "auth/account-exists-with-different-credential") {
+          setAuthError({
+            isOpen: true,
+            error: err.message,
+            errorCode: err.code,
+          });
+        } else {
+          setAuthError({
+            isOpen: true,
+            error: err.message || "Terjadi kesalahan saat login",
+            errorCode: err.code,
+          });
+        }
       } else {
         setAuthError({
           isOpen: true,
-          error: e.message || "Terjadi kesalahan saat login",
-          errorCode: e.code,
+          error: "Terjadi kesalahan saat login",
         });
       }
     }
@@ -190,7 +196,7 @@ export function useGuestbook() {
 
   const handleSubmitMessage = async (
     e: React.FormEvent,
-    mergedParts?: any[]
+    mergedParts?: GuestbookMessagePart[]
   ) => {
     e.preventDefault();
 

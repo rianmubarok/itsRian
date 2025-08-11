@@ -16,7 +16,7 @@ export async function GET() {
       .order("date", { ascending: true });
     if (error) throw error;
 
-    const items = (data ?? []).map((row: any) => ({
+    const items = (data ?? []).map((row: Record<string, unknown>) => ({
       id: row.id,
       name: row.name,
       message: row.message as GuestbookMessagePart[],
