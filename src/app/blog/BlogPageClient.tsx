@@ -1,17 +1,13 @@
 "use client";
 
 import FeaturedBlogRotator from "../../components/blog/FeaturedBlogRotator";
-import {
-  useInfiniteScroll,
-  useIntersectionObserver,
-  useInfiniteScrollAnimation,
-} from "../../hooks";
+import { useInfiniteScroll, useIntersectionObserver } from "../../hooks";
 import {
   BlogCardSkeleton,
   LoadingSpinner,
 } from "../../components/shared/ui/SkeletonLoader";
 import { useBlogs } from "../../hooks/useBlogs";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AnimatedBlogCard } from "../../components/blog/BlogCard";
 
 export default function BlogPageClient() {
@@ -31,9 +27,7 @@ export default function BlogPageClient() {
       rootMargin: "0px 0px -50px 0px",
     });
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
+  useEffect(() => {}, []);
 
   if (loading) {
     return (
