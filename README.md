@@ -106,8 +106,7 @@ yarn start
 ├── styles/             # Global styles and Tailwind configuration
 ├── lib/                # Utility functions and API configurations
 ├── types/              # TypeScript type definitions
-├── data/               # Static content and configuration
-└── docs/               # Documentation files
+└── data/               # Static content and configuration
 ```
 
 ---
@@ -324,10 +323,9 @@ If you find this project helpful, please consider:
 
 ## Contact Information
 
-**Maintainer**: Your Name  
 **Email**: [rianmubarok.13@gmail.com](mailto:rianmubarok.13@gmail.com)  
 **Project Repository**: [https://github.com/rianmubarok/itsRian](https://github.com/rianmubarok/itsRian)  
-**Live Demo**: [https://](https://)
+**Live Demo**: [https://itsrian.my.id/](https://itsrian.my.id/)
 
 ---
 
