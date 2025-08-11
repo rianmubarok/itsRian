@@ -151,20 +151,121 @@ This portfolio template is designed for professionals looking to establish a str
 
 ## Environment Configuration
 
-Create a `.env.local` file with the following variables:
+Create a `.env.local` file in the root of your project with the following variables:
 
 ```env
-# Database Configuration
-SUPABASE_URL=your_supabase_project_url
-SUPABASE_ANON_KEY=your_supabase_anon_key
+# Notion Configuration
+NOTION_TOKEN=your_notion_integration_token
+NOTION_DATABASE_ID=your_notion_blog_database_id
+NOTION_PROJECTS_DATABASE_ID=your_notion_projects_database_id
 
-# Email Service
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+
+# Firebase Web App
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+
+# Formspree
 NEXT_PUBLIC_FORMSPREE_FORM_ID=your_formspree_form_id
-
-# Content Management (Optional)
-NOTION_API_KEY=your_notion_integration_key
-NOTION_DATABASE_ID=your_notion_database_id
 ```
+
+### Notion Setup
+
+1. **Create a Notion integration** at [Notion Developers](https://www.notion.so/my-integrations) and copy the integration token (`NOTION_TOKEN`).
+2. **Share your Notion databases** (for blogs and projects) with your integration.
+3. Copy the database IDs from the Notion URL and set them as `NOTION_DATABASE_ID` (for blogs) and `NOTION_PROJECTS_DATABASE_ID` (for projects).
+
+### Notion Database Setup
+
+You need two Notion databases: one for blogs and one for projects. Each database should have the following properties:
+
+#### Blog Database (for `NOTION_DATABASE_ID`)
+
+- **Title** (type: Title)
+- **Slug** (type: Text)
+- **Date** (type: Date)
+- **Tags** (type: Multi-select)
+- **Excerpt** (type: Text)
+- **Thumbnail** (type: URL or Files)
+- **Content** (type: Text or use Notion's built-in content blocks)
+
+#### Projects Database (for `NOTION_PROJECTS_DATABASE_ID`)
+
+- **Title** (type: Title)
+- **Slug** (type: Text)
+- **Description** (type: Text)
+- **Stack** (type: Multi-select)
+- **Demo URL** (type: URL)
+- **Source URL** (type: URL)
+- **Thumbnail** (type: URL or Files)
+
+> **Note:** After creating the databases, share them with your Notion integration so your app can access them.
+
+---
+
+### Supabase Setup
+
+1. **Create a Supabase project** at [Supabase](https://app.supabase.com/).
+2. Go to your project settings > API and copy the `Project URL` and `anon public` key. Set them as `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+3. For server-side operations, copy the `service_role` key and set it as `SUPABASE_SERVICE_ROLE_KEY` (keep this key secret, do not expose it to the client).
+
+### Supabase Table Setup
+
+You need to create tables in Supabase for features like the guestbook, blog views, and profile images. Use the SQL Editor in the Supabase dashboard to run the following example SQL:
+
+#### Guestbook Table
+
+```sql
+create table guestbook (
+  id uuid primary key default uuid_generate_v4(),
+  name text not null,
+  message text not null,
+  created_at timestamp with time zone default timezone('utc'::text, now()),
+  profile_image_url text
+);
+```
+
+#### Blog Views Table
+
+```sql
+create table blog_views (
+  slug text primary key,
+  count integer not null default 0
+);
+```
+
+#### Profile Images Table
+
+```sql
+create table profile_images (
+  id uuid primary key default uuid_generate_v4(),
+  user_id text not null,
+  image_url text not null,
+  created_at timestamp with time zone default timezone('utc'::text, now())
+);
+```
+
+> **Note:**
+>
+> - You can adjust the table schemas as needed for your use case.
+> - Make sure to enable Row Level Security (RLS) and configure policies as needed for your app's security.
+
+---
+
+### Firebase Setup
+
+1. **Create a Firebase project** at [Firebase Console](https://console.firebase.google.com/).
+2. Register a web app and copy the API key, Auth domain, Project ID, and App ID. Set them in the corresponding variables above.
+
+### Formspree Setup
+
+1. **Create a form** at [Formspree](https://formspree.io/) and copy your form ID.
+2. Set it as `NEXT_PUBLIC_FORMSPREE_FORM_ID`.
 
 ---
 
