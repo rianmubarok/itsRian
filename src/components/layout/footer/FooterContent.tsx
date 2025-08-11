@@ -1,10 +1,20 @@
-import React from "react";
+import ThemeToggle from "../../shared/common/ThemeToggle";
+import SocialLinks from "./SocialLinks";
 
-const FooterContent = () => (
-  <div className="text-xs text-primary-gray font-light">
-    <p>© {new Date().getFullYear()} itsRian. All rights reserved.</p>
-    <p>Made with Next.js & Vercel</p>
-  </div>
-);
+export default function FooterContent() {
+  return (
+    <div className="flex flex-row items-center justify-between gap-4">
+      <p className="text-xs sm:text-sm font-medium text-primary-dark dark:text-primary-light">
+        Muhammad Fitrian Mubarok ⏤ 2025
+      </p>
+      <div className="flex items-center gap-4 sm:gap-6">
+        <SocialLinks />
 
-export default FooterContent;
+        {/* Theme Toggle - Desktop Only */}
+        <div className="hidden md:block">
+          <ThemeToggle />
+        </div>
+      </div>
+    </div>
+  );
+}
