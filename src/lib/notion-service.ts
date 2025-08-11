@@ -1,5 +1,49 @@
 import notion, { databaseId } from "./notion";
 import { Blog } from "../types";
+import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+
+function getPlainTextFromTitle(property: any): string {
+  if (property && property.type === "title" && property.title.length > 0) {
+    return property.title[0].plain_text;
+  }
+  return "";
+}
+
+function getPlainTextFromRichText(property: any): string {
+  if (
+    property &&
+    property.type === "rich_text" &&
+    property.rich_text.length > 0
+  ) {
+    return property.rich_text[0].plain_text;
+  }
+  return "";
+}
+
+function getPlainTextFromDate(property: any): string {
+  if (property && property.type === "date" && property.date) {
+    return property.date.start;
+  }
+  return "";
+}
+
+function getPlainTextFromUrl(property: any): string {
+  if (property && property.type === "url" && property.url) {
+    return property.url;
+  }
+  return "";
+}
+
+function getPlainTextFromMultiSelect(property: any): string[] {
+  if (
+    property &&
+    property.type === "multi_select" &&
+    property.multi_select.length > 0
+  ) {
+    return property.multi_select.map((tag: any) => tag.name);
+  }
+  return [];
+}
 
 export async function getBlogs(): Promise<Blog[]> {
   try {
@@ -13,26 +57,32 @@ export async function getBlogs(): Promise<Blog[]> {
       ],
     });
 
-    return response.results.map((page: any) => {
-      const properties = page.properties;
-
+    return response.results.map((page) => {
+      const properties = (page as PageObjectResponse).properties;
       return {
-        id: properties.slug?.rich_text?.[0]?.plain_text || page.id,
-        title: properties.title?.title?.[0]?.plain_text || "Untitled",
-        slug: properties.slug?.rich_text?.[0]?.plain_text || page.id,
-        description: properties.description?.rich_text?.[0]?.plain_text || "",
-        tags: properties.tags?.multi_select?.map((tag: any) => tag.name) || [],
+        id:
+          getPlainTextFromRichText(properties.slug) ||
+          (page as PageObjectResponse).id,
+        title: getPlainTextFromTitle(properties.title) || "Untitled",
+        slug:
+          getPlainTextFromRichText(properties.slug) ||
+          (page as PageObjectResponse).id,
+        description: getPlainTextFromRichText(properties.description) || "",
+        tags: getPlainTextFromMultiSelect(properties.tags),
         content: {
-          en: properties.contentEn?.rich_text?.[0]?.plain_text || "",
-          id: properties.contentId?.rich_text?.[0]?.plain_text || "",
+          en: getPlainTextFromRichText(properties.contentEn),
+          id: getPlainTextFromRichText(properties.contentId),
         },
         thumbnail:
-          properties.thumbnail?.url ||
+          getPlainTextFromUrl(properties.thumbnail) ||
           "https://placehold.co/600x400?text=No+Image",
-        createdAt: properties.date?.date?.start || page.created_time || "",
+        createdAt:
+          getPlainTextFromDate(properties.date) ||
+          (page as PageObjectResponse).created_time ||
+          "",
         viewCount: "0", // Will be updated from Supabase
         readingTime:
-          properties.readingTime?.rich_text?.[0]?.plain_text || "5 min",
+          getPlainTextFromRichText(properties.readingTime) || "5 min",
       };
     });
   } catch (error) {
@@ -54,7 +104,6 @@ export async function getPageContentBlocks(pageId: string) {
       });
       for (const block of response.results) {
         if ("has_children" in block && block.has_children) {
-          // Ambil children secara rekursif
           (block as any).children = await getPageContentBlocks(block.id);
         }
         blocks.push(block);
@@ -84,27 +133,26 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
       return null;
     }
 
-    const page = response.results[0] as any;
+    const page = response.results[0] as PageObjectResponse;
     const properties = page.properties;
 
     // Ambil seluruh block children (konten penuh)
     const blocks = await getPageContentBlocks(page.id);
 
     return {
-      id: properties.slug?.rich_text?.[0]?.plain_text || page.id,
-      title: properties.title?.title?.[0]?.plain_text || "",
-      slug: properties.slug?.rich_text?.[0]?.plain_text || "",
-      description: properties.description?.rich_text?.[0]?.plain_text || "",
-      tags: properties.tags?.multi_select?.map((tag: any) => tag.name) || [],
+      id: getPlainTextFromRichText(properties.slug) || page.id,
+      title: getPlainTextFromTitle(properties.title) || "",
+      slug: getPlainTextFromRichText(properties.slug) || "",
+      description: getPlainTextFromRichText(properties.description) || "",
+      tags: getPlainTextFromMultiSelect(properties.tags),
       content: {
-        en: properties.contentEn?.rich_text?.[0]?.plain_text || "",
-        id: properties.contentId?.rich_text?.[0]?.plain_text || "",
+        en: getPlainTextFromRichText(properties.contentEn),
+        id: getPlainTextFromRichText(properties.contentId),
       },
-      thumbnail: properties.thumbnail?.url || "",
-      createdAt: properties.date?.date?.start || "",
+      thumbnail: getPlainTextFromUrl(properties.thumbnail) || "",
+      createdAt: getPlainTextFromDate(properties.date) || "",
       viewCount: "0", // Will be updated from Supabase
-      readingTime:
-        properties.readingTime?.rich_text?.[0]?.plain_text || "5 min",
+      readingTime: getPlainTextFromRichText(properties.readingTime) || "5 min",
       blocks, // tambahkan blocks di sini
     };
   } catch (error) {

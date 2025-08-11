@@ -33,7 +33,7 @@ export interface BlogPost {
 }
 
 export interface Blog {
-  id: number;
+  id: string;
   title: string;
   slug: string;
   description: string;
