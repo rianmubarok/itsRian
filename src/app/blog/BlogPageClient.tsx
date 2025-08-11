@@ -31,12 +31,6 @@ export default function BlogPageClient() {
       rootMargin: "0px 0px -50px 0px",
     });
 
-  const { getItemAnimationProps } = useInfiniteScrollAnimation(
-    displayedItems,
-    gridIntersecting
-  );
-
-  const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {
     setHasMounted(true);
   }, []);

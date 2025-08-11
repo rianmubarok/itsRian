@@ -1,10 +1,4 @@
-import Link from "next/link";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
-import { Project } from "../../../types";
 import { getProjectBySlug } from "../../../data/projects";
-import { notFound } from "next/navigation";
-import { formatDate } from "../../../utils";
-import OtherProjects from "../../../components/project/OtherProjects";
 import { siteMetadata } from "../../../lib/metadata";
 
 interface ProjectDetailPageProps {

@@ -23,8 +23,7 @@ export default function ProjectDetailPageClient({
   const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { hasMounted, showContent, handleContentShow, refs } =
-    useProjectAnimation();
+  const { showContent, handleContentShow, refs } = useProjectAnimation();
 
   useEffect(() => {
     const fetchProject = async () => {

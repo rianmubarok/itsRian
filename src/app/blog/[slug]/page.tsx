@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { siteMetadata } from "../../../lib/metadata";
 import { getBlogBySlug } from "../../../lib/notion-service";
 

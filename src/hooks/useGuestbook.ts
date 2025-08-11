@@ -124,7 +124,7 @@ export function useGuestbook() {
         setUserName(user.displayName ?? user.email ?? "");
 
         // Process profile image
-        const photoUrl = await handleProfileImage(user);
+        await handleProfileImage(user);
 
         setIsAdmin(
           (user.email ?? "").toLowerCase() === "fitriyan606@gmail.com"

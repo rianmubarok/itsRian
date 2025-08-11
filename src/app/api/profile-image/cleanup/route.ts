@@ -6,7 +6,7 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     // Ambil semua data guestbook yang menggunakan Google profile images
     const { data: guestbookData, error: fetchError } = await supabaseAdmin

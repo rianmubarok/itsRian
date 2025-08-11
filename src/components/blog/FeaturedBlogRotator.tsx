@@ -13,14 +13,12 @@ export default function FeaturedBlogRotator({
 }: FeaturedBlogRotatorProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [direction, setDirection] = useState<"next" | "prev">("next");
 
   // Don't start rotation if no blogs or only one blog
   useEffect(() => {
     if (blogs.length <= 1) return;
 
     const interval = setInterval(() => {
-      setDirection("next");
       setIsTransitioning(true);
 
       setTimeout(() => {
@@ -37,18 +35,6 @@ export default function FeaturedBlogRotator({
 
     return () => clearInterval(interval);
   }, [blogs.length]);
-
-  const handleManualChange = (newIndex: number) => {
-    if (blogs.length <= 1) return;
-
-    setDirection(newIndex > currentIndex ? "next" : "prev");
-    setIsTransitioning(true);
-
-    setTimeout(() => {
-      setCurrentIndex(newIndex);
-      setIsTransitioning(false);
-    }, 400);
-  };
 
   // Don't render if no blogs
   if (!blogs || blogs.length === 0) {

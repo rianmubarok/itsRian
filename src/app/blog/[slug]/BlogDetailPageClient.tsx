@@ -33,8 +33,7 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
   const { blogs } = useBlogs();
   const [currentLanguage, setCurrentLanguage] = useState<"en" | "id">("en");
 
-  const { hasMounted, showContent, handleContentShow, refs } =
-    useBlogAnimation();
+  const { hasMounted, showContent, handleContentShow } = useBlogAnimation();
 
   useEffect(() => {
     handleContentShow(loading, blog);

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import BlogCard from "../blog/BlogCard";
-import { useIntersectionObserver } from "../../hooks";
 import { useBlogs } from "../../hooks/useBlogs";
 import { useEffect, useState } from "react";
 

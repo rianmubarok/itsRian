@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { AnimatedSection } from "../components/shared/ui";
 
 export default function NotFound() {

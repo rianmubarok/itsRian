@@ -4,14 +4,12 @@ import { motion } from "framer-motion";
 interface AuthErrorPopupActionsProps {
   onRetry?: () => void;
   onClose: () => void;
-  errorCode?: string;
   getGradientClass: () => string;
 }
 
 const AuthErrorPopupActions: React.FC<AuthErrorPopupActionsProps> = ({
   onRetry,
   onClose,
-  errorCode,
   getGradientClass,
 }) => (
   <motion.div
