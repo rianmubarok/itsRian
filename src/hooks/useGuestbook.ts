@@ -52,6 +52,33 @@ export function useGuestbook() {
     load();
   }, []);
 
+  // Prefer a human-friendly display name from auth user
+  function deriveDisplayName(user: User): string {
+    const isLikelyEmail = (value: string | null | undefined) =>
+      !!value && /@/.test(value);
+
+    if (user.displayName && !isLikelyEmail(user.displayName)) {
+      return user.displayName;
+    }
+
+    const providerName = user.providerData.find(
+      (p) => p.displayName && !isLikelyEmail(p.displayName)
+    )?.displayName;
+    if (providerName) return providerName;
+
+    const email = user.email || "";
+    if (email) {
+      const base = email.split("@")[0];
+      const pretty = base
+        .split(/[._-]+/)
+        .filter(Boolean)
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(" ");
+      return pretty || base;
+    }
+    return "User";
+  }
+
   // Function untuk handle profile image processing
   const handleProfileImage = async (user: User) => {
     if (!user.photoURL) {
@@ -121,7 +148,8 @@ export function useGuestbook() {
       if (user) {
         setIsSignedIn(true);
         setUserEmail(user.email ?? "");
-        setUserName(user.displayName ?? user.email ?? "");
+        const name = deriveDisplayName(user);
+        setUserName(name);
 
         // Process profile image
         await handleProfileImage(user);

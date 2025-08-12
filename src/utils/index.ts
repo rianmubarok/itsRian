@@ -1,1 +1,8 @@
-export { cn, formatDate, getFeaturedProjects, truncateText } from './helpers'; 
+export {
+  cn,
+  formatDate,
+  getFeaturedProjects,
+  truncateText,
+  calculateDuration,
+  calculateDurationFromPeriod,
+} from "./helpers";

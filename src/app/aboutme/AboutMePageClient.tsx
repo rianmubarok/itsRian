@@ -2,6 +2,7 @@
 
 import { experiences } from "../../data/experiences";
 import { useIntersectionObserver } from "../../hooks";
+import { calculateDurationFromPeriod } from "@/utils";
 
 export default function AboutMePageClient() {
   const { ref: headerRef, isIntersecting: headerIntersecting } =
@@ -116,8 +117,8 @@ export default function AboutMePageClient() {
               </h2>
               <div className="text-primary-gray text-base sm:text-lg space-y-3 sm:space-y-4">
                 <p className="text-xs sm:text-sm font-light">
-                  {experience.duration} • {experience.type} •{" "}
-                  {experience.location}
+                  {calculateDurationFromPeriod(experience.period)} •{" "}
+                  {experience.type} • {experience.location}
                 </p>
                 <p>{experience.description}</p>
               </div>
