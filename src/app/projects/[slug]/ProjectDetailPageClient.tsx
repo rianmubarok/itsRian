@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import { formatDate } from "../../../utils";
 import OtherProjects from "../../../components/project/OtherProjects";
+import ProjectContent from "@/components/project/ProjectContent";
 import { useProjectAnimation } from "../../../hooks";
 
 interface ProjectDetailPageProps {
@@ -120,12 +121,9 @@ export default function ProjectDetailPageClient({
               ))}
             </div>
 
-            <p
-              ref={refs.contentRef}
-              className="text-base sm:text-lg leading-relaxed text-primary-gray"
-            >
-              {project.detail}
-            </p>
+            <div ref={refs.contentRef}>
+              <ProjectContent project={project} hasMounted={showContent} />
+            </div>
 
             <div
               ref={refs.linksRef}

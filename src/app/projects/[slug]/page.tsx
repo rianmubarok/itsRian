@@ -1,4 +1,4 @@
-import { getProjectBySlug } from "../../../data/projects";
+import { getProjectBySlug } from "../../../lib/projects-service";
 import { siteMetadata } from "../../../lib/metadata";
 
 interface ProjectDetailPageProps {
