@@ -132,6 +132,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
       </head>
       <body
         className={`${dmSans.className} bg-primary-light dark:bg-primary-dark tracking-tight max-w-6xl mx-auto px-6 md:px-8`}
