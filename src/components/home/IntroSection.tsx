@@ -23,7 +23,7 @@ export default function IntroSection() {
             }`}
           >
             <Image
-              src="/rian.jpg"
+              src="/rian.png"
               alt="Rian - Visual Designer and Developer"
               width={60}
               height={60}
