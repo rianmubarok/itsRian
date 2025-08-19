@@ -14,6 +14,47 @@ function getPlainTextFromTitle(property: NotionProperty | undefined): string {
   return "";
 }
 
+function getMarkdownFromRichText(property: NotionProperty | undefined): string {
+  if (
+    property &&
+    property.type === "rich_text" &&
+    Array.isArray(property.rich_text)
+  ) {
+    return (property.rich_text as Array<Record<string, unknown>>)
+      .map((rt) => {
+        const text = rt as {
+          plain_text?: string;
+          text?: { content?: string; link?: { url?: string } };
+          annotations?: {
+            bold?: boolean;
+            italic?: boolean;
+            strikethrough?: boolean;
+            underline?: boolean;
+            code?: boolean;
+          };
+        };
+
+        let content = text.text?.content || text.plain_text || "";
+        if (!content) return "";
+
+        const anns = text.annotations || {};
+        if (anns.code) content = "`" + content + "`";
+        if (anns.bold) content = "**" + content + "**";
+        if (anns.italic) content = "*" + content + "*";
+        if (anns.strikethrough) content = "~~" + content + "~~";
+
+        const url = text.text?.link?.url;
+        if (url) {
+          content = "[" + content + "](" + url + ")";
+        }
+
+        return content;
+      })
+      .join("");
+  }
+  return "";
+}
+
 function getPlainTextFromRichText(
   property: NotionProperty | undefined
 ): string {
@@ -88,8 +129,8 @@ export async function getProjects(): Promise<Project[]> {
           slug:
             getPlainTextFromRichText(properties.slug) ||
             (page as { id: string }).id,
-          description: getPlainTextFromRichText(properties.description) || "",
-          detail: getPlainTextFromRichText(properties.detail) || "",
+          description: getMarkdownFromRichText(properties.description) || "",
+          detail: getMarkdownFromRichText(properties.detail) || "",
           image:
             getPlainTextFromUrl(properties.image) ||
             "https://placehold.co/600x400?text=No+Image",
@@ -132,8 +173,8 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       id: 1, // You might want to store this as a number property in Notion
       title: getPlainTextFromTitle(properties.title) || "",
       slug: getPlainTextFromRichText(properties.slug) || "",
-      description: getPlainTextFromRichText(properties.description) || "",
-      detail: getPlainTextFromRichText(properties.detail) || "",
+      description: getMarkdownFromRichText(properties.description) || "",
+      detail: getMarkdownFromRichText(properties.detail) || "",
       image: getPlainTextFromUrl(properties.image) || "",
       tags: getPlainTextFromMultiSelect(properties.tags),
       createdAt: getPlainTextFromDate(properties.createdAt) || "",

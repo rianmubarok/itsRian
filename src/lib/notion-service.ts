@@ -8,6 +8,21 @@ type MultiSelectTag = { name: string };
 
 type BlockWithChildren = Record<string, unknown> & { children?: unknown[] };
 
+function getPlainTextFromRichText(
+  property: NotionProperty | undefined
+): string {
+  if (
+    property &&
+    property.type === "rich_text" &&
+    Array.isArray(property.rich_text) &&
+    property.rich_text.length > 0
+  ) {
+    const text = property.rich_text[0] as { plain_text?: string };
+    return text.plain_text || "";
+  }
+  return "";
+}
+
 function getPlainTextFromTitle(property: NotionProperty | undefined): string {
   if (
     property &&
@@ -21,17 +36,47 @@ function getPlainTextFromTitle(property: NotionProperty | undefined): string {
   return "";
 }
 
-function getPlainTextFromRichText(
-  property: NotionProperty | undefined
-): string {
+function getMarkdownFromRichText(property: NotionProperty | undefined): string {
   if (
     property &&
     property.type === "rich_text" &&
-    Array.isArray(property.rich_text) &&
-    property.rich_text.length > 0
+    Array.isArray(property.rich_text)
   ) {
-    const text = property.rich_text[0] as { plain_text?: string };
-    return text.plain_text || "";
+    // Convert Notion rich_text array to Markdown, preserving basic annotations
+    return (property.rich_text as Array<Record<string, unknown>>)
+      .map((rt) => {
+        const text = rt as {
+          plain_text?: string;
+          text?: { content?: string; link?: { url?: string } };
+          annotations?: {
+            bold?: boolean;
+            italic?: boolean;
+            strikethrough?: boolean;
+            underline?: boolean;
+            code?: boolean;
+          };
+        };
+
+        let content = text.text?.content || text.plain_text || "";
+        if (!content) return "";
+
+        // Apply annotations
+        const anns = text.annotations || {};
+        if (anns.code) content = "`" + content + "`";
+        if (anns.bold) content = "**" + content + "**";
+        if (anns.italic) content = "*" + content + "*";
+        if (anns.strikethrough) content = "~~" + content + "~~";
+        // Underline has no standard Markdown; keep as-is
+
+        // Apply link if present (wrap formatted content)
+        const url = text.text?.link?.url;
+        if (url) {
+          content = "[" + content + "](" + url + ")";
+        }
+
+        return content;
+      })
+      .join("");
   }
   return "";
 }
@@ -97,8 +142,8 @@ export async function getBlogs(): Promise<Blog[]> {
         description: getPlainTextFromRichText(properties.description) || "",
         tags: getPlainTextFromMultiSelect(properties.tags),
         content: {
-          en: getPlainTextFromRichText(properties.contentEn),
-          id: getPlainTextFromRichText(properties.contentId),
+          en: getMarkdownFromRichText(properties.contentEn),
+          id: getMarkdownFromRichText(properties.contentId),
         },
         thumbnail:
           getPlainTextFromUrl(properties.thumbnail) ||
@@ -178,8 +223,8 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
       description: getPlainTextFromRichText(properties.description) || "",
       tags: getPlainTextFromMultiSelect(properties.tags),
       content: {
-        en: getPlainTextFromRichText(properties.contentEn),
-        id: getPlainTextFromRichText(properties.contentId),
+        en: getMarkdownFromRichText(properties.contentEn),
+        id: getMarkdownFromRichText(properties.contentId),
       },
       thumbnail: getPlainTextFromUrl(properties.thumbnail) || "",
       createdAt: getPlainTextFromDate(properties.date) || "",

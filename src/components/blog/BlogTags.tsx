@@ -27,7 +27,7 @@ export default function BlogTags({
           {blog.tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 sm:px-4 py-1 text-xs sm:text-sm font-light rounded-full border border-primary-dark dark:border-primary-light"
+              className="px-4 py-1 text-xs sm:text-sm font-light rounded-full border border-primary-dark dark:border-primary-light"
             >
               {tag}
             </span>

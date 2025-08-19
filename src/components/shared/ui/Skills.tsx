@@ -4,7 +4,7 @@ import { STACKS } from "../../../constants";
 
 const Tag = memo(
   ({ icon, title }: { icon: React.ReactElement; title: string }) => (
-    <div className="mr-2 sm:mr-3 flex w-max items-center gap-1 sm:gap-2 rounded-full border border-neutral-300 bg-neutral-50 px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-[15px] shadow-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-50">
+    <div className="mr-2 sm:mr-3 flex w-max items-center gap-1 sm:gap-2 rounded-full border border-neutral-300 bg-neutral-50 px-5 py-1.5 sm:py-2 text-xs sm:text-[15px] dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-50">
       {icon}
       <span>{title}</span>
     </div>

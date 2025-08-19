@@ -59,7 +59,7 @@ export default function ProjectCard({
     <div className="block transition-all duration-300 overflow-hidden group">
       {/* Image */}
       <Link href={`/projects/${project.slug}`}>
-        <div className="relative h-60 sm:h-72 md:h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
+        <div className="relative h-72 md:h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
           <img
             src={project.image}
             alt={project.title}
@@ -99,7 +99,7 @@ export default function ProjectCard({
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="px-2 sm:px-4 py-1 text-xs sm:text-sm font-light rounded-full border border-primary-dark dark:border-primary-light"
+            className="px-4 py-1 text-xs sm:text-sm font-light rounded-full border border-primary-dark dark:border-primary-light"
           >
             {tag}
           </span>

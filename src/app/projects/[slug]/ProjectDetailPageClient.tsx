@@ -97,7 +97,7 @@ export default function ProjectDetailPageClient({
             </div>
 
             <div ref={refs.imageRef} className="mb-8 sm:mb-12">
-              <div className="relative h-60 sm:h-80 md:h-180 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
+              <div className="relative h-auto bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -114,7 +114,7 @@ export default function ProjectDetailPageClient({
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2 sm:px-4 py-1 text-xs sm:text-sm font-light rounded-full border border-primary-dark dark:border-primary-light flex items-center"
+                  className="px-4 py-1 text-xs sm:text-sm font-light rounded-full border border-primary-dark dark:border-primary-light flex items-center"
                 >
                   {tag}
                 </span>
