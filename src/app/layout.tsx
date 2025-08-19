@@ -60,23 +60,14 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png?v=2", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png?v=2", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico?v=2", type: "image/x-icon" },
     ],
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-    other: [
-      {
-        rel: "mask-icon",
-        url: "/safari-pinned-tab.svg",
-        color: "#000000",
-      },
-    ],
+    shortcut: ["/favicon.ico?v=2"],
+    apple: ["/apple-touch-icon.png?v=2"],
   },
-  manifest: "/site.webmanifest",
-  other: {
-    "msapplication-config": "/browserconfig.xml",
-  },
+  manifest: "/site.webmanifest?v=2",
   verification: {
     google: "your-google-verification-code", // Replace with actual verification code
   },
@@ -132,8 +123,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="icon" href="/favicon.png" type="image/png" />
       </head>
       <body
         className={`${dmSans.className} bg-primary-light dark:bg-primary-dark tracking-tight max-w-6xl mx-auto px-6 md:px-8`}
