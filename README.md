@@ -91,11 +91,11 @@ NEXT_PUBLIC_FORMSPREE_FORM_ID=your_formspree_form_id
 
 **Blog Database Properties:**
 
-- Title (Title), Slug (Text), Date (Date), Tags (Multi-select), Excerpt (Text), Thumbnail (URL)
+- title (Title), slug (Text), description (Text), tags (Multi-select), date (Date), readingTime (Text), thumbnail (URL), contentEn (Text), contentIn (Text)
 
 **Projects Database Properties:**
 
-- Title (Title), Slug (Text), Description (Text), Stack (Multi-select), Demo URL (URL), Source URL (URL), Thumbnail (URL)
+- title (Title), slug (Text), description (Text), detail (Text), image (URL), tags (Multi-select), createdAt (Date), sourceCode (URL), liveProject (URL)
 
 ### 🗄️ Supabase Setup
 
@@ -149,12 +149,6 @@ create table blog_views (
 1. Connect GitHub repo to [Vercel](https://vercel.com/)
 2. Set environment variables
 3. Deploy automatically on push
-
-### Other Platforms
-
-- **Netlify** — Git-based deployment
-- **Railway** — Full-stack hosting
-- **Digital Ocean** — App platform
 
 ## 🎯 Perfect For
 
