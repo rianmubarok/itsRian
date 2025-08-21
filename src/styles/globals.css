@@ -22,6 +22,10 @@
     font-family: var(--font-sans);
   }
 
+  body.hide-footer footer {
+    display: none;
+  }
+
   .font-playfair-medium-italic {
     font-family: var(--font-playfair);
     font-weight: 500;

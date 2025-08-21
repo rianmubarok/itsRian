@@ -39,6 +39,17 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
     handleContentShow(loading, blog);
   }, [loading, blog, handleContentShow]);
 
+  useEffect(() => {
+    if (!showContent) {
+      document.body.classList.add("hide-footer");
+    } else {
+      document.body.classList.remove("hide-footer");
+    }
+    return () => {
+      document.body.classList.remove("hide-footer");
+    };
+  }, [showContent]);
+
   if (!loading && (error || !blog)) {
     notFound();
   }
