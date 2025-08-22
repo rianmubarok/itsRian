@@ -105,6 +105,7 @@ function getPlainTextFromMultiSelect(
 
 import notion from "./notion";
 import { Project } from "../types";
+import { getPageContentBlocks, blocksToMarkdown } from "./notion-service";
 
 const projectsDatabaseId = process.env.NOTION_PROJECTS_DATABASE_ID;
 
@@ -169,12 +170,16 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     const page = response.results[0] as Record<string, unknown>;
     const properties = page.properties as Record<string, NotionProperty>;
 
+    // Get blocks for detailed content
+    const blocks = await getPageContentBlocks((page as { id: string }).id);
+    const blockContent = blocksToMarkdown(blocks);
+
     return {
       id: 1, // You might want to store this as a number property in Notion
       title: getPlainTextFromTitle(properties.title) || "",
       slug: getPlainTextFromRichText(properties.slug) || "",
       description: getMarkdownFromRichText(properties.description) || "",
-      detail: getMarkdownFromRichText(properties.detail) || "",
+      detail: blockContent || getMarkdownFromRichText(properties.detail) || "",
       image: getPlainTextFromUrl(properties.image) || "",
       tags: getPlainTextFromMultiSelect(properties.tags),
       createdAt: getPlainTextFromDate(properties.createdAt) || "",

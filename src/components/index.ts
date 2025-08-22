@@ -11,6 +11,11 @@ export { default as ProgressBar } from "./ProgressBar";
 export {
   default as SkeletonLoader,
   ProjectCardSkeleton,
+  FeaturedBlogRotatorSkeleton,
+  ProjectsHeaderSkeleton,
+  FeaturedProjectCardSkeleton,
+  OtherProjectCardSkeleton,
+  FeaturedBlogCardSkeleton,
 } from "./shared/ui/SkeletonLoader";
 
 // Project Components

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { memo, useEffect, useState } from "react";
 import InfiniteLoopSlider from "./InfiniteLoopSlider";
 import { STACKS } from "../../../constants";

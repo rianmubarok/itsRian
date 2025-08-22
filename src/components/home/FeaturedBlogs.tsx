@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import BlogCard from "../blog/BlogCard";
 import { useBlogs } from "../../hooks/useBlogs";
 import { useEffect, useState } from "react";
+import { FeaturedBlogCardSkeleton } from "../shared/ui/SkeletonLoader";
 
 export default function FeaturedBlogs() {
   const { blogs, loading } = useBlogs();
@@ -37,10 +38,7 @@ export default function FeaturedBlogs() {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {[1, 2, 3, 4].map((item) => (
-            <div
-              key={item}
-              className="h-64 bg-gray-200 dark:bg-white/50 rounded-lg animate-pulse"
-            />
+            <FeaturedBlogCardSkeleton key={item} />
           ))}
         </div>
       </section>

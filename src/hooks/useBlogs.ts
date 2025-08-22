@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { Blog } from "../types";
 import { blogs as staticBlogs } from "../data/blogs";

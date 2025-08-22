@@ -64,7 +64,9 @@ export async function signInWithGithub(): Promise<User> {
             };
             preferredName = data.name || data.login || null;
           }
-        } catch (e) {}
+        } catch {
+          // Handle error silently
+        }
       }
     }
 

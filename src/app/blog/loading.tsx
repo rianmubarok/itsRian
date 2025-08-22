@@ -1,4 +1,7 @@
-import { BlogCardSkeleton } from "../../components/shared/ui/SkeletonLoader";
+import {
+  BlogCardSkeleton,
+  FeaturedBlogRotatorSkeleton,
+} from "../../components/shared/ui/SkeletonLoader";
 
 export default function BlogLoading() {
   return (
@@ -7,10 +10,7 @@ export default function BlogLoading() {
       role="main"
     >
       {/* Featured Blog Rotator Skeleton */}
-      <div className="mb-16">
-        <div className="h-16 w-64 bg-gray-200 dark:bg-white/50 rounded mb-6 animate-pulse"></div>
-        <div className="h-80 bg-gray-200 dark:bg-white/50 rounded-xl animate-pulse"></div>
-      </div>
+      <FeaturedBlogRotatorSkeleton />
 
       {/* Blog Grid Skeleton */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

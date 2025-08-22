@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ProjectCard from "./ProjectCard";
-import { useIntersectionObserver, useProjects } from "../../hooks";
+import { useProjects, useIntersectionObserver } from "../../hooks";
+import { OtherProjectCardSkeleton } from "../shared/ui/SkeletonLoader";
 
 interface OtherProjectsProps {
   currentProjectSlug: string;
@@ -80,10 +81,7 @@ export default function OtherProjects({
           {loading
             ? // Loading skeleton
               Array.from({ length: 4 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="min-w-[300px] h-64 bg-gray-200 dark:bg-white/50 rounded-lg animate-pulse"
-                />
+                <OtherProjectCardSkeleton key={index} />
               ))
             : otherProjects.map((project, index) => (
                 <div

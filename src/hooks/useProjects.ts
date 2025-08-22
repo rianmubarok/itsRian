@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { Project } from "../types";
 import { getProjectsFromAPI } from "../data/projects";

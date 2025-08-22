@@ -1,13 +1,12 @@
 "use client";
 
 import FeaturedBlogRotator from "../../components/blog/FeaturedBlogRotator";
-import { useInfiniteScroll, useIntersectionObserver } from "../../hooks";
+import { useInfiniteScroll } from "../../hooks";
 import {
   BlogCardSkeleton,
   LoadingSpinner,
 } from "../../components/shared/ui/SkeletonLoader";
 import { useBlogs } from "../../hooks/useBlogs";
-import { useEffect } from "react";
 import { AnimatedBlogCard } from "../../components/blog/BlogCard";
 
 export default function BlogPageClient() {
@@ -20,14 +19,6 @@ export default function BlogPageClient() {
       threshold: 200,
     }
   );
-
-  const { ref: gridRef, isIntersecting: gridIntersecting } =
-    useIntersectionObserver<HTMLDivElement>({
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    });
-
-  useEffect(() => {}, []);
 
   if (loading) {
     return (
@@ -58,10 +49,7 @@ export default function BlogPageClient() {
     >
       <FeaturedBlogRotator blogs={blogs} />
 
-      <div
-        ref={gridRef}
-        className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
-      >
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
         {displayedItems.map((blog, index) => {
           if (!blog) return null;
           return (

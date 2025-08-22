@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "./useIntersectionObserver";
 import { Project } from "../types";
@@ -62,4 +64,4 @@ export function useProjectAnimation() {
       linksRef,
     },
   };
-} 
+}

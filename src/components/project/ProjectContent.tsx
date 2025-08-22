@@ -1,9 +1,9 @@
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { Project } from "@/types";
+import { MarkdownRenderer } from "@/components/shared/ui";
 
 interface ProjectContentProps {
-  project: Project;
+  project: {
+    detail: string;
+  };
   hasMounted: boolean;
 }
 
@@ -18,9 +18,7 @@ export default function ProjectContent({
       }`}
     >
       <div className="text-base sm:text-lg leading-relaxed">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {project.detail}
-        </ReactMarkdown>
+        <MarkdownRenderer>{project.detail}</MarkdownRenderer>
       </div>
     </article>
   );

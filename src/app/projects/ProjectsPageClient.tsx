@@ -46,8 +46,17 @@ export default function ProjectsPageClient() {
 
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {[1, 2, 3, 4].map((item) => (
-            <ProjectCardSkeleton key={item} />
+          {[1, 2, 3, 4].map((item, index) => (
+            <div
+              key={item}
+              className="opacity-0 animate-fade-in-up"
+              style={{
+                animationDelay: `${index * 150}ms`,
+                animationFillMode: "forwards",
+              }}
+            >
+              <ProjectCardSkeleton />
+            </div>
           ))}
         </div>
       ) : error ? (
@@ -56,9 +65,16 @@ export default function ProjectsPageClient() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {displayedItems.map((project) => {
+          {displayedItems.map((project, index) => {
             return (
-              <div key={project.id}>
+              <div
+                key={project.id}
+                className="opacity-0 animate-fade-in-up"
+                style={{
+                  animationDelay: `${index * 150}ms`,
+                  animationFillMode: "forwards",
+                }}
+              >
                 <ProjectCard project={project} variant="grid" />
               </div>
             );
@@ -68,8 +84,17 @@ export default function ProjectsPageClient() {
 
       {isLoading && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-6 sm:mt-8">
-          {[1, 2, 3, 4].map((item) => (
-            <ProjectCardSkeleton key={item} />
+          {[1, 2, 3, 4].map((item, index) => (
+            <div
+              key={item}
+              className="opacity-0 animate-fade-in-up"
+              style={{
+                animationDelay: `${index * 100}ms`,
+                animationFillMode: "forwards",
+              }}
+            >
+              <ProjectCardSkeleton />
+            </div>
           ))}
         </div>
       )}

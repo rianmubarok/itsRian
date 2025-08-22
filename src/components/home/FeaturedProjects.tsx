@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ProjectCard from "../project/ProjectCard";
 import { useIntersectionObserver, useProjects } from "../../hooks";
+import { FeaturedProjectCardSkeleton } from "../shared/ui/SkeletonLoader";
 
 export default function FeaturedProjects() {
   const { projects, loading } = useProjects();
@@ -70,10 +71,7 @@ export default function FeaturedProjects() {
           {loading
             ? // Loading skeleton
               Array.from({ length: 4 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 w-[280px] sm:w-[350px] md:w-[400px] lg:w-[450px] h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px] bg-gray-200 dark:bg-white/50 rounded-xl animate-pulse"
-                />
+                <FeaturedProjectCardSkeleton key={index} />
               ))
             : featuredProjects.map((project, index) => (
                 <div

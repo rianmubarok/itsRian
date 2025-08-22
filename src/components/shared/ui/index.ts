@@ -1,7 +1,13 @@
 export { AnimatedSection } from "./AnimatedSection";
+export { default as AuthErrorPopup } from "./AuthErrorPopup";
+export { default as AuthErrorPopupActions } from "./AuthErrorPopupActions";
+export { default as AuthErrorPopupIcon } from "./AuthErrorPopupIcon";
+export { default as AuthErrorPopupMessage } from "./AuthErrorPopupMessage";
+export { default as AuthErrorPopupTitle } from "./AuthErrorPopupTitle";
+export { default as CodeBlock } from "./CodeBlock";
 export { default as FloatingContactButton } from "./FloatingContactButton";
 export { default as InfiniteLoopSlider } from "./InfiniteLoopSlider";
 export { default as LanguageSwitcher } from "./LanguageSwitcher";
+export { default as MarkdownRenderer } from "./MarkdownRenderer";
 export { default as SkeletonLoader } from "./SkeletonLoader";
 export { default as Skills } from "./Skills";
-export { default as AuthErrorPopup } from "./AuthErrorPopup";

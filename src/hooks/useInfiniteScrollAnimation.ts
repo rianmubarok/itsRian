@@ -16,11 +16,11 @@ export function useInfiniteScrollAnimation<T extends { id: number }>(
       newItems.forEach((item, index) => {
         setTimeout(() => {
           setAnimatedItems((prev) => new Set([...prev, item.id]));
-        }, index * 150); 
+        }, index * 150);
       });
     }
     setPrevItemCount(items.length);
-  }, [items, items.length, prevItemCount]);
+  }, [items, prevItemCount]);
 
   useEffect(() => {
     if (isIntersecting && items.length > 0) {

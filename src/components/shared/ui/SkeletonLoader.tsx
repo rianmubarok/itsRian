@@ -192,4 +192,41 @@ export const GuestbookSkeleton = () => {
   );
 };
 
+export const FeaturedBlogRotatorSkeleton = () => {
+  return (
+    <div className="mb-16">
+      <Skeleton className="h-16 w-64 mb-6" />
+      <Skeleton className="h-80 rounded-xl" />
+    </div>
+  );
+};
+
+export const ProjectsHeaderSkeleton = () => {
+  return <Skeleton className="h-16 w-64 mb-6" />;
+};
+
+export const FeaturedProjectCardSkeleton = () => {
+  return (
+    <div className="flex-shrink-0 w-[280px] sm:w-[350px] md:w-[400px] lg:w-[450px] h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px]">
+      <Skeleton className="w-full h-full rounded-xl" />
+    </div>
+  );
+};
+
+export const OtherProjectCardSkeleton = () => {
+  return (
+    <div className="min-w-[300px] h-64">
+      <Skeleton className="w-full h-full rounded-lg" />
+    </div>
+  );
+};
+
+export const FeaturedBlogCardSkeleton = () => {
+  return (
+    <div className="h-64">
+      <Skeleton className="w-full h-full rounded-lg" />
+    </div>
+  );
+};
+
 export default Skeleton;

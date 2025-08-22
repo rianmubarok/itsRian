@@ -193,6 +193,131 @@ export async function getPageContentBlocks(pageId: string) {
   }
 }
 
+// Convert Notion blocks to markdown with proper code block support
+export function blocksToMarkdown(blocks: BlockWithChildren[]): string {
+  return blocks
+    .map((block) => {
+      const blockType = (block as Record<string, unknown>).type;
+      const blockData = (block as Record<string, unknown>)[blockType as string];
+
+      switch (blockType) {
+        case "paragraph":
+          return richTextToMarkdown(
+            ((blockData as Record<string, unknown>)?.rich_text as Record<
+              string,
+              unknown
+            >[]) || []
+          );
+
+        case "heading_1":
+          return `# ${richTextToMarkdown(
+            ((blockData as Record<string, unknown>)?.rich_text as Record<
+              string,
+              unknown
+            >[]) || []
+          )}`;
+
+        case "heading_2":
+          return `## ${richTextToMarkdown(
+            ((blockData as Record<string, unknown>)?.rich_text as Record<
+              string,
+              unknown
+            >[]) || []
+          )}`;
+
+        case "heading_3":
+          return `### ${richTextToMarkdown(
+            ((blockData as Record<string, unknown>)?.rich_text as Record<
+              string,
+              unknown
+            >[]) || []
+          )}`;
+
+        case "bulleted_list_item":
+          return `- ${richTextToMarkdown(
+            ((blockData as Record<string, unknown>)?.rich_text as Record<
+              string,
+              unknown
+            >[]) || []
+          )}`;
+
+        case "numbered_list_item":
+          return `1. ${richTextToMarkdown(
+            ((blockData as Record<string, unknown>)?.rich_text as Record<
+              string,
+              unknown
+            >[]) || []
+          )}`;
+
+        case "code":
+          const blockDataTyped = blockData as Record<string, unknown>;
+          const language = blockDataTyped?.language || "text";
+          const code = richTextToMarkdown(
+            (blockDataTyped?.rich_text as Record<string, unknown>[]) || []
+          );
+          return `\`\`\`${language}\n${code}\n\`\`\``;
+
+        case "quote":
+          return `> ${richTextToMarkdown(
+            ((blockData as Record<string, unknown>)?.rich_text as Record<
+              string,
+              unknown
+            >[]) || []
+          )}`;
+
+        case "divider":
+          return "---";
+
+        case "image":
+          const blockDataImage = blockData as Record<string, unknown>;
+          const imageUrl =
+            (blockDataImage?.file as Record<string, unknown>)?.url ||
+            (blockDataImage?.external as Record<string, unknown>)?.url;
+          const caption = richTextToMarkdown(
+            (blockDataImage?.caption as Record<string, unknown>[]) || []
+          );
+          return `![${caption}](${imageUrl})`;
+
+        default:
+          // Try to handle any block with rich_text
+          const blockDataDefault = blockData as Record<string, unknown>;
+          if (blockDataDefault?.rich_text) {
+            return richTextToMarkdown(
+              blockDataDefault.rich_text as Record<string, unknown>[]
+            );
+          }
+          return "";
+      }
+    })
+    .filter((content) => content.trim() !== "")
+    .join("\n\n");
+}
+
+// Helper function to convert rich text to markdown
+function richTextToMarkdown(richText: Record<string, unknown>[]): string {
+  return richText
+    .map((rt) => {
+      let content = (rt.plain_text as string) || "";
+      if (!content) return "";
+
+      // Apply annotations
+      const anns = (rt.annotations as Record<string, boolean>) || {};
+      if (anns.code) content = `\`${content}\``;
+      if (anns.bold) content = `**${content}**`;
+      if (anns.italic) content = `*${content}*`;
+      if (anns.strikethrough) content = `~~${content}~~`;
+
+      // Apply link if present
+      const url = rt.href as string;
+      if (url) {
+        content = `[${content}](${url})`;
+      }
+
+      return content;
+    })
+    .join("");
+}
+
 export async function getBlogBySlug(slug: string): Promise<Blog | null> {
   try {
     const response = await notion.databases.query({
@@ -214,6 +339,13 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
 
     const blocks = await getPageContentBlocks(page.id);
 
+    // Use blocks for main content, fallback to properties if blocks are empty
+    const blockContent = blocksToMarkdown(blocks);
+    const fallbackContent = {
+      en: getMarkdownFromRichText(properties.contentEn),
+      id: getMarkdownFromRichText(properties.contentId),
+    };
+
     return {
       id: getPlainTextFromRichText(properties.slug) || page.id,
       title: getPlainTextFromTitle(properties.title) || "",
@@ -221,8 +353,8 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
       description: getPlainTextFromRichText(properties.description) || "",
       tags: getPlainTextFromMultiSelect(properties.tags),
       content: {
-        en: getMarkdownFromRichText(properties.contentEn),
-        id: getMarkdownFromRichText(properties.contentId),
+        en: blockContent || fallbackContent.en,
+        id: blockContent || fallbackContent.id,
       },
       thumbnail: getPlainTextFromUrl(properties.thumbnail) || "",
       createdAt: getPlainTextFromDate(properties.date) || "",

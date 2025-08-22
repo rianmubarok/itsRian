@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "./useIntersectionObserver";
 import { Blog } from "../types";
