@@ -1,0 +1,11 @@
+@theme {
+  /* COLOR */
+  --color-primary-light: #fafafa;
+  --color-primary-dark: #121212;
+  --color-primary-gray: #606060;
+
+  /* FONTS */
+  --font-sans: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+  --font-playfair: var(--font-playfair), "Playfair Display", serif;
+  --font-sacramento: var(--font-sacramento), "Sacramento", cursive;
+} 

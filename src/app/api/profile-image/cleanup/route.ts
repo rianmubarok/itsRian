@@ -8,7 +8,6 @@ const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
 
 export async function POST() {
   try {
-    // Ambil semua data guestbook yang menggunakan Google profile images
     const { data: guestbookData, error: fetchError } = await supabaseAdmin
       .from("guestbook")
       .select("id, name, email, profile_pic")
@@ -25,14 +24,11 @@ export async function POST() {
 
     for (const item of guestbookData || []) {
       try {
-        // Generate user ID dari email (atau gunakan ID yang ada)
         const userId =
           item.email?.replace(/[^a-zA-Z0-9]/g, "_") || `user_${item.id}`;
 
-        // Optimize Google image URL
         const optimizedUrl = item.profile_pic.replace(/=s\d+-c/, "=s400-c");
 
-        // Download dan simpan image baru
         const response = await fetch(optimizedUrl);
         if (!response.ok) {
           results.push({
@@ -46,7 +42,6 @@ export async function POST() {
         const blob = await response.blob();
         const fileName = `profiles/${userId}.jpg`;
 
-        // Upload ke Supabase Storage
         const { error: uploadError } = await supabaseAdmin.storage
           .from("profile-images")
           .upload(fileName, blob, {
@@ -64,12 +59,10 @@ export async function POST() {
           continue;
         }
 
-        // Ambil public URL
         const { data: urlData } = supabaseAdmin.storage
           .from("profile-images")
           .getPublicUrl(fileName);
 
-        // Update database
         const { error: updateError } = await supabaseAdmin
           .from("guestbook")
           .update({ profile_pic: urlData.publicUrl })

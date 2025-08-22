@@ -24,7 +24,6 @@ const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const githubProvider = new GithubAuthProvider();
-// Ensure we can read basic profile including username
 githubProvider.addScope("read:user");
 
 export async function signInWithGoogle(): Promise<User> {
@@ -36,7 +35,6 @@ export async function signInWithGithub(): Promise<User> {
   const result = await signInWithPopup(auth, githubProvider);
 
   try {
-    // Prefer username from additionalUserInfo when available
     const info = getAdditionalUserInfo(result as UserCredential);
     let preferredName: string | null = null;
     const maybeUsername =
@@ -49,8 +47,6 @@ export async function signInWithGithub(): Promise<User> {
     ) {
       preferredName = maybeUsername;
     }
-
-    // If username not present, try GitHub API via access token
     if (!preferredName) {
       const credential = GithubAuthProvider.credentialFromResult(
         result
@@ -72,7 +68,6 @@ export async function signInWithGithub(): Promise<User> {
       }
     }
 
-    // If we found a better name and current displayName is empty or looks like email, update profile
     if (preferredName) {
       const currentDisplayName = result.user.displayName;
       const looksLikeEmail =
@@ -81,9 +76,7 @@ export async function signInWithGithub(): Promise<User> {
         await updateProfile(result.user, { displayName: preferredName });
       }
     }
-  } catch {
-    // Non-fatal, continue with the user as-is
-  }
+  } catch {}
 
   return result.user;
 }

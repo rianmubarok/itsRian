@@ -16,7 +16,7 @@ export default function OtherProjects({
 
   const otherProjects = projects
     .filter((project) => project.slug !== currentProjectSlug)
-    .sort(() => Math.random() - 0.5) // Shuffle array
+    .sort(() => Math.random() - 0.5)
     .slice(0, 4);
 
   const { ref, isIntersecting } = useIntersectionObserver<HTMLElement>({

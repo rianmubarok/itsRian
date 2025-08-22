@@ -14,8 +14,8 @@ export function useMessageInput({
 }: MessageInputProps & { textareaRef: RefObject<HTMLTextAreaElement | null> }) {
   const [input, setInput] = useState("");
   const [localSubmitting, setLocalSubmitting] = useState(false);
-  const [savedInput, setSavedInput] = useState(""); // Save input when autocomplete is shown
-  const [lastFullInput, setLastFullInput] = useState(""); // Store the last full input before autocomplete
+  const [savedInput, setSavedInput] = useState(""); 
+  const [lastFullInput, setLastFullInput] = useState("");
 
   const { adjustHeight, resetHeight } = useTextareaResize(textareaRef);
   const {
@@ -32,23 +32,18 @@ export function useMessageInput({
 
   const selectUser = useCallback(
     (user: { id: string; name: string }) => {
-      // Use lastFullInput if available, otherwise use current input
       const inputToProcess = lastFullInput || savedInput || input;
 
-      // Find the @ symbol in the input
       const atIndex = inputToProcess.lastIndexOf("@");
       if (atIndex === -1) {
         return;
       }
 
-      // Split the input into parts
       const beforeAt = inputToProcess.slice(0, atIndex);
       const afterAt = inputToProcess.slice(atIndex + 1);
 
-      // Find where the mention ends in the afterAt part
       let mentionEndIndex = 0;
       if (currentMention && currentMention.trim() !== "") {
-        // Find the mention in the afterAt part
         const mentionIndex = afterAt
           .toLowerCase()
           .indexOf(currentMention.toLowerCase());
@@ -56,35 +51,26 @@ export function useMessageInput({
           mentionEndIndex = mentionIndex + currentMention.length;
         }
       } else {
-        // If there's no currentMention or it's empty, the mention ends at the beginning of afterAt
         mentionEndIndex = 0;
       }
 
-      // Get the text after the mention
       const afterMention = afterAt.slice(mentionEndIndex);
 
       const parts = [...newMessage];
 
-      // Add text before @ if there is any
       if (beforeAt) {
         parts.push({ type: "text", value: beforeAt });
       }
-
-      // Add the user mention
       parts.push({ type: "user", value: user.name });
-
-      // Add a space after the user mention
       parts.push({ type: "text", value: " " });
-
-      // Add text after the mention if there is any
       if (afterMention) {
         parts.push({ type: "text", value: afterMention });
       }
 
       setNewMessage(parts);
       setInput("");
-      setSavedInput(""); // Clear saved input
-      setLastFullInput(""); // Clear last full input
+      setSavedInput(""); 
+      setLastFullInput(""); 
       hideAutocomplete();
 
       setTimeout(() => {
@@ -139,15 +125,12 @@ export function useMessageInput({
       try {
         parts = mergeTextParts(parts);
 
-        // Set the new message immediately
         setNewMessage(parts);
 
-        // Clear input and hide autocomplete
         setInput("");
         hideAutocomplete();
         resetHeight();
 
-        // Pass the merged parts directly to onSubmit
         await onSubmit(e, parts);
       } finally {
         setLocalSubmitting(false);
@@ -172,16 +155,12 @@ export function useMessageInput({
       setInput(val);
       adjustHeight();
       showAutocompleteForInput(val, newMessage);
-
-      // Always save the full input
       setLastFullInput(val);
 
-      // Save input when autocomplete is shown
       if (val.includes("@")) {
         setSavedInput(val);
       }
 
-      // Also save input when autocomplete is active
       if (showAutocomplete) {
         setSavedInput(val);
       }

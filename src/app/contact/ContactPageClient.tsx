@@ -17,7 +17,6 @@ export default function ContactPageClient() {
       rootMargin: "0px 0px -50px 0px",
     });
 
-  // pastikan headerRef dan formRef bertipe React.RefObject<HTMLDivElement | null>
   return (
     <main
       className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"

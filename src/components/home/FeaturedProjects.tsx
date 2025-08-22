@@ -72,7 +72,7 @@ export default function FeaturedProjects() {
               Array.from({ length: 4 }).map((_, index) => (
                 <div
                   key={index}
-                  className="min-w-[300px] h-64 bg-gray-200 dark:bg-white/50 rounded-lg animate-pulse"
+                  className="flex-shrink-0 w-[280px] sm:w-[350px] md:w-[400px] lg:w-[450px] h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px] bg-gray-200 dark:bg-white/50 rounded-xl animate-pulse"
                 />
               ))
             : featuredProjects.map((project, index) => (

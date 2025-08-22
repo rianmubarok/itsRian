@@ -1,9 +1,7 @@
 import { Project } from "../types/index";
 
-// Fallback data jika API Notion tidak tersedia
 export const fallbackProjects: Project[] = [];
 
-// Function untuk mengambil projects dari API
 export async function getProjectsFromAPI(): Promise<Project[]> {
   try {
     const response = await fetch("/api/projects");
@@ -20,7 +18,6 @@ export async function getProjectsFromAPI(): Promise<Project[]> {
   }
 }
 
-// Function untuk mengambil project berdasarkan slug
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   try {
     const response = await fetch(`/api/projects/${slug}`);

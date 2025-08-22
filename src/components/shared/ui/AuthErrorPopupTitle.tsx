@@ -7,9 +7,9 @@ const AuthErrorPopupTitle: React.FC<AuthErrorPopupTitleProps> = ({
 }) => {
   switch (errorCode) {
     case "auth/account-exists-with-different-credential":
-      return <>Akun Sudah Ada</>;
+      return <>Account Already Exists</>;
     default:
-      return <>Terjadi Kesalahan</>;
+      return <>An Error Occurred</>;
   }
 };
 

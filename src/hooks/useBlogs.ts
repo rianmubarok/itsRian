@@ -19,7 +19,6 @@ export function useBlogs() {
 
         const data = await response.json();
 
-        // If API returns empty array or error, use static data
         if (data.length === 0) {
           console.warn("API returned empty blogs, using static data");
           setBlogs(staticBlogs);
@@ -28,9 +27,8 @@ export function useBlogs() {
         }
       } catch (err) {
         console.warn("Failed to fetch blogs from API, using static data:", err);
-        // Fallback to static data on error
         setBlogs(staticBlogs);
-        setError(null); // Don't show error to user since we have fallback
+        setError(null);
       } finally {
         setLoading(false);
       }
@@ -64,7 +62,6 @@ export function useBlog(slug: string) {
         setBlog(data);
       } catch (err) {
         console.warn("Failed to fetch blog from API, trying static data:", err);
-        // Fallback to static data
         const staticBlog = staticBlogs.find((b) => b.slug === slug);
         if (staticBlog) {
           setBlog(staticBlog);

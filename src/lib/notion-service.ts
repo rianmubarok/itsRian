@@ -163,7 +163,6 @@ export async function getBlogs(): Promise<Blog[]> {
   }
 }
 
-// Fungsi untuk mengambil seluruh block children dari Notion page, termasuk children-nya secara rekursif
 export async function getPageContentBlocks(pageId: string) {
   try {
     const blocks: BlockWithChildren[] = [];
@@ -213,7 +212,6 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
     const page = response.results[0] as PageObjectResponse;
     const properties = page.properties as Record<string, NotionProperty>;
 
-    // Ambil seluruh block children (konten penuh)
     const blocks = await getPageContentBlocks(page.id);
 
     return {
@@ -230,7 +228,7 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
       createdAt: getPlainTextFromDate(properties.date) || "",
       viewCount: "0", // Will be updated from Supabase
       readingTime: getPlainTextFromRichText(properties.readingTime) || "5 min",
-      blocks, // tambahkan blocks di sini
+      blocks,
     };
   } catch (error) {
     console.error("Error fetching blog by slug:", error);

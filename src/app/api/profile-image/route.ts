@@ -16,11 +16,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Cek apakah sudah ada image di storage
     const existingImage = await getExistingProfileImage(userId);
 
     if (existingImage) {
-      // Update database dengan URL yang sudah ada
       const updateSuccess = await updateGuestbookProfilePic(
         email,
         existingImage
@@ -35,7 +33,6 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Download dan simpan image baru
     const result = await saveProfileImageToStorage(userId, imageUrl);
 
     if (!result.success) {
@@ -45,7 +42,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Update database dengan URL baru
     const updateSuccess = await updateGuestbookProfilePic(email, result.url!);
 
     if (!updateSuccess) {

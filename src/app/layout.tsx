@@ -68,9 +68,6 @@ export const metadata = {
     apple: ["/apple-touch-icon.png?v=2"],
   },
   manifest: "/site.webmanifest?v=2",
-  verification: {
-    google: "your-google-verification-code", // Replace with actual verification code
-  },
 };
 
 export const viewport = {

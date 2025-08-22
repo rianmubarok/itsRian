@@ -19,13 +19,11 @@ export function useInfiniteScroll<T>(
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadingRef = useRef<HTMLDivElement>(null);
 
-  // Load more items
   const loadMore = useCallback(() => {
     if (isLoading || !hasMore) return;
 
     setIsLoading(true);
 
-    // Load next batch of items
     const nextPage = currentPage + 1;
     const startIndex = 0;
     const endIndex = nextPage * itemsPerPage;
@@ -37,7 +35,6 @@ export function useInfiniteScroll<T>(
     setIsLoading(false);
   }, [currentPage, items, itemsPerPage, isLoading, hasMore]);
 
-  // Initialize displayed items
   useEffect(() => {
     const initialItems = items.slice(0, itemsPerPage);
     setDisplayedItems(initialItems);
@@ -45,7 +42,6 @@ export function useInfiniteScroll<T>(
     setHasMore(items.length > itemsPerPage);
   }, [items, itemsPerPage]);
 
-  // Set up intersection observer
   useEffect(() => {
     if (!loadingRef.current) return;
 

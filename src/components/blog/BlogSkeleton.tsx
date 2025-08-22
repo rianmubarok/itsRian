@@ -11,9 +11,7 @@ export default function BlogSkeleton({ hasMounted }: BlogSkeletonProps) {
       {/* Back Button Skeleton */}
       <div
         className={`flex items-center gap-3 mb-8 transition-all duration-700 ease-out delay-100 ${
-          hasMounted
-            ? "translate-x-0 opacity-100"
-            : "-translate-x-4 opacity-0"
+          hasMounted ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
         }`}
       >
         <Skeleton className="w-8 h-8 rounded-full" />
@@ -86,4 +84,4 @@ export default function BlogSkeleton({ hasMounted }: BlogSkeletonProps) {
       </section>
     </div>
   );
-} 
+}

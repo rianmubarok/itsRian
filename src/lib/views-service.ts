@@ -22,7 +22,6 @@ export async function getViewCount(slug: string): Promise<number> {
 
 export async function incrementViewCount(slug: string): Promise<void> {
   try {
-    // Use the database function we created
     const { error } = await supabase.rpc("increment_view_count", {
       slug_param: slug
     });
@@ -30,7 +29,6 @@ export async function incrementViewCount(slug: string): Promise<void> {
     if (error) {
       console.error("Error incrementing view count:", error);
       
-      // Fallback: try manual insert/update if function fails
       const { error: fallbackError } = await supabase
         .from("views")
         .upsert(

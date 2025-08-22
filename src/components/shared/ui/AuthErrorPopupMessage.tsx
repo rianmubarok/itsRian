@@ -11,8 +11,8 @@ const AuthErrorPopupMessage: React.FC<AuthErrorPopupMessageProps> = ({
     case "auth/account-exists-with-different-credential":
       return (
         <>
-          Akun dengan email ini sudah terdaftar menggunakan provider yang
-          berbeda.
+          An account with this email is already registered using a different
+          provider.
         </>
       );
     default:

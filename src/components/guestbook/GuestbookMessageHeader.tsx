@@ -28,7 +28,7 @@ const GuestbookMessageHeader: React.FC<GuestbookMessageHeaderProps> = ({
       <div className="flex items-center space-x-1 sm:space-x-2">
         <h3 className="font-medium text-xs sm:text-sm">{name}</h3>
         {isAuthor && (
-          <span className="inline-flex items-center px-1 sm:px-[6px] py-[2px] text-[8px] sm:text-[10px] font-regular text-white bg-[#6B21A8] rounded-full gap-0.5 sm:gap-1">
+          <span className="inline-flex items-center px-[5px] pr-[7px] py-[2px] text-[8px] sm:text-[10px] font-regular text-white bg-[#6B21A8] rounded-full gap-0.5 sm:gap-1">
             <svg
               className="w-2 h-2 sm:w-3 sm:h-3"
               fill="currentColor"

@@ -3,7 +3,6 @@ import { createClient } from "@supabase/supabase-js";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
-// Client dengan service role untuk upload file
 const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
 
 export interface ProfileImageResult {
@@ -12,18 +11,13 @@ export interface ProfileImageResult {
   error?: string;
 }
 
-/**
- * Download dan simpan Google profile image ke Supabase Storage
- */
 export async function saveProfileImageToStorage(
   userId: string,
   imageUrl: string
 ): Promise<ProfileImageResult> {
   try {
-    // Optimize image URL berdasarkan provider
     const optimizedUrl = optimizeImageUrl(imageUrl);
 
-    // Download image dengan resolusi tinggi
     const response = await fetch(optimizedUrl);
 
     if (!response.ok) {
@@ -32,17 +26,15 @@ export async function saveProfileImageToStorage(
 
     const blob = await response.blob();
 
-    // Generate nama file yang unik
     const fileExtension = getFileExtension(imageUrl) || "jpg";
     const fileName = `profiles/${userId}.${fileExtension}`;
 
-    // Upload ke Supabase Storage dengan metadata yang lebih baik
     const { error: uploadError } = await supabaseAdmin.storage
       .from("profile-images")
       .upload(fileName, blob, {
-        upsert: true, // Overwrite jika sudah ada
+        upsert: true,
         contentType: blob.type || "image/jpeg",
-        cacheControl: "3600", // Cache selama 1 jam
+        cacheControl: "3600",
         metadata: {
           userId: userId,
           originalUrl: imageUrl,
@@ -55,7 +47,6 @@ export async function saveProfileImageToStorage(
       throw new Error(`Upload failed: ${uploadError.message}`);
     }
 
-    // Ambil public URL dengan parameter untuk kualitas tinggi
     const { data: urlData } = supabaseAdmin.storage
       .from("profile-images")
       .getPublicUrl(fileName);
@@ -73,9 +64,6 @@ export async function saveProfileImageToStorage(
   }
 }
 
-/**
- * Optimize image URL untuk resolusi tinggi berdasarkan provider
- */
 function optimizeImageUrl(url: string): string {
   if (url.includes("googleusercontent.com")) {
     return optimizeGoogleImageUrl(url);
@@ -85,21 +73,15 @@ function optimizeImageUrl(url: string): string {
   return url;
 }
 
-/**
- * Optimize Google image URL untuk resolusi tinggi
- */
 function optimizeGoogleImageUrl(url: string): string {
   if (!url.includes("googleusercontent.com")) {
     return url;
   }
 
-  // Hapus parameter size yang ada
   let optimizedUrl = url.replace(/=s\d+-c/, "");
 
-  // Tambahkan parameter untuk resolusi tinggi (400x400)
   optimizedUrl = optimizedUrl.replace(/=s\d+/, "=s400");
 
-  // Tambahkan parameter untuk kualitas tinggi
   if (!optimizedUrl.includes("=s400")) {
     optimizedUrl += "=s400-c";
   }
@@ -107,28 +89,18 @@ function optimizeGoogleImageUrl(url: string): string {
   return optimizedUrl;
 }
 
-/**
- * Optimize GitHub image URL untuk resolusi tinggi
- */
 function optimizeGitHubImageUrl(url: string): string {
   if (!url.includes("avatars.githubusercontent.com")) {
     return url;
   }
 
-  // GitHub avatar URLs bisa dioptimize dengan menambahkan parameter size
-  // Default GitHub avatar size adalah 40px, kita ubah ke 400px untuk kualitas lebih baik
   if (url.includes("?v=")) {
-    // Jika sudah ada parameter, tambahkan size
     return url.replace("?v=", "?size=400&v=");
   } else {
-    // Jika belum ada parameter, tambahkan size
     return `${url}?size=400`;
   }
 }
 
-/**
- * Update profile_pic di database guestbook
- */
 export async function updateGuestbookProfilePic(
   email: string,
   profilePicUrl: string
@@ -151,9 +123,6 @@ export async function updateGuestbookProfilePic(
   }
 }
 
-/**
- * Cek apakah user sudah punya profile image di storage
- */
 export async function getExistingProfileImage(
   userId: string
 ): Promise<string | null> {
@@ -168,7 +137,6 @@ export async function getExistingProfileImage(
       return null;
     }
 
-    // Ambil file pertama yang ditemukan
     const fileName = data[0].name;
     const { data: urlData } = supabaseAdmin.storage
       .from("profile-images")
@@ -181,16 +149,12 @@ export async function getExistingProfileImage(
   }
 }
 
-/**
- * Helper function untuk mendapatkan extension file
- */
 function getFileExtension(url: string): string | null {
   try {
     const urlObj = new URL(url);
     const pathname = urlObj.pathname;
     const extension = pathname.split(".").pop();
 
-    // Validasi extension
     const validExtensions = ["jpg", "jpeg", "png", "gif", "webp"];
     if (extension && validExtensions.includes(extension.toLowerCase())) {
       return extension.toLowerCase();

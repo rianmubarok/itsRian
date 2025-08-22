@@ -9,22 +9,19 @@ export function useInfiniteScrollAnimation<T extends { id: number }>(
   const [animatedItems, setAnimatedItems] = useState<Set<number>>(new Set());
   const [prevItemCount, setPrevItemCount] = useState(0);
 
-  // Handle animation for new items
   useEffect(() => {
     if (items.length > prevItemCount) {
       const newItems = items.slice(prevItemCount);
 
-      // Add new items to animated set with delay
       newItems.forEach((item, index) => {
         setTimeout(() => {
           setAnimatedItems((prev) => new Set([...prev, item.id]));
-        }, index * 150); // Stagger animation for new items
+        }, index * 150); 
       });
     }
     setPrevItemCount(items.length);
   }, [items, items.length, prevItemCount]);
 
-  // Reset animations when grid becomes visible
   useEffect(() => {
     if (isIntersecting && items.length > 0) {
       const allItemIds = items.map((item) => item.id);

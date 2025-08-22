@@ -67,7 +67,6 @@ export function generateSEO({
     },
   };
 
-  // Add article-specific metadata
   if (type === "article") {
     metadata.openGraph = {
       ...metadata.openGraph,
@@ -80,7 +79,6 @@ export function generateSEO({
   return metadata;
 }
 
-// Helper function for dynamic pages
 export async function generateDynamicSEO<T>(
   params: { slug: string },
   fetchData: (slug: string) => Promise<T | null>,

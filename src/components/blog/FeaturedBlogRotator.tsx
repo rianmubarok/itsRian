@@ -14,7 +14,6 @@ export default function FeaturedBlogRotator({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Don't start rotation if no blogs or only one blog
   useEffect(() => {
     if (blogs.length <= 1) return;
 
@@ -24,19 +23,17 @@ export default function FeaturedBlogRotator({
       setTimeout(() => {
         setCurrentIndex((prevIndex) => {
           const nextIndex = Math.floor(Math.random() * blogs.length);
-          // Ensure we don't show the same blog twice in a row
           return nextIndex === prevIndex
             ? (nextIndex + 1) % blogs.length
             : nextIndex;
         });
         setIsTransitioning(false);
-      }, 400); // Wait for fade out animation
+      }, 400);
     }, 10000);
 
     return () => clearInterval(interval);
   }, [blogs.length]);
 
-  // Don't render if no blogs
   if (!blogs || blogs.length === 0) {
     return null;
   }

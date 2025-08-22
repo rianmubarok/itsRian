@@ -4,10 +4,8 @@ import { getViewCount, formatViewCount } from "../../../lib/views-service";
 
 export async function GET() {
   try {
-    // Get all blogs from Notion
     const blogs = await getBlogs();
 
-    // Get view counts for all blogs
     const blogsWithViews = await Promise.all(
       blogs.map(async (blog) => {
         try {
@@ -26,7 +24,6 @@ export async function GET() {
       })
     );
 
-    // Add cache headers for better performance
     const response = NextResponse.json(blogsWithViews);
     response.headers.set(
       "Cache-Control",

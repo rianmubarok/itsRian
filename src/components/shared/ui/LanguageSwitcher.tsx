@@ -23,7 +23,6 @@ export default function LanguageSwitcher({
 
   const currentLang = languages.find((lang) => lang.code === currentLanguage);
 
-  // Click outside to close
   useEffect(() => {
     if (!isOpen) return;
     function handleClickOutside(event: MouseEvent) {

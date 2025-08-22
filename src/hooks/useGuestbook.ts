@@ -26,7 +26,6 @@ export function useGuestbook() {
   const [userPhoto, setUserPhoto] = useState("");
   const messageListRef = useRef<HTMLDivElement>(null);
 
-  // Error handling state
   const [authError, setAuthError] = useState<{
     isOpen: boolean;
     error: string;
@@ -52,7 +51,6 @@ export function useGuestbook() {
     load();
   }, []);
 
-  // Prefer a human-friendly display name from auth user
   function deriveDisplayName(user: User): string {
     const isLikelyEmail = (value: string | null | undefined) =>
       !!value && /@/.test(value);
@@ -79,10 +77,8 @@ export function useGuestbook() {
     return "User";
   }
 
-  // Function untuk handle profile image processing
   const handleProfileImage = async (user: User) => {
     if (!user.photoURL) {
-      // Jika tidak ada photo URL, gunakan UI Avatars dengan resolusi tinggi
       const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(
         user.displayName || user.email || "User"
       )}&background=random&color=fff&size=200&bold=true&format=webp`;
@@ -90,14 +86,12 @@ export function useGuestbook() {
       return fallbackUrl;
     }
 
-    // Cek apakah ini Google atau GitHub profile image
     const isGoogleImage = user.photoURL.includes("googleusercontent.com");
     const isGitHubImage = user.photoURL.includes(
       "avatars.githubusercontent.com"
     );
 
     if (isGoogleImage || isGitHubImage) {
-      // Untuk Google dan GitHub images, simpan ke Supabase untuk konsistensi
       try {
         const response = await fetch("/api/profile-image", {
           method: "POST",
@@ -118,7 +112,6 @@ export function useGuestbook() {
           setUserPhoto(result.url);
           return result.url;
         } else {
-          // Fallback ke UI Avatars dengan resolusi tinggi jika gagal
           console.error("Profile image processing failed:", result.error);
           const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(
             user.displayName || user.email || "User"
@@ -128,7 +121,6 @@ export function useGuestbook() {
         }
       } catch (error) {
         console.error("Error processing profile image:", error);
-        // Fallback ke UI Avatars dengan resolusi tinggi
         const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(
           user.displayName || user.email || "User"
         )}&background=random&color=fff&size=200&bold=true&format=webp`;
@@ -136,7 +128,6 @@ export function useGuestbook() {
         return fallbackUrl;
       }
     } else {
-      // Untuk image lain, gunakan langsung
       setUserPhoto(user.photoURL);
       return user.photoURL;
     }
@@ -151,7 +142,6 @@ export function useGuestbook() {
         const name = deriveDisplayName(user);
         setUserName(name);
 
-        // Process profile image
         await handleProfileImage(user);
 
         setIsAdmin(
@@ -219,7 +209,6 @@ export function useGuestbook() {
 
   const retryWithDifferentProvider = () => {
     closeAuthError();
-    // User can try signing in with a different provider
   };
 
   const handleSubmitMessage = async (
@@ -228,7 +217,6 @@ export function useGuestbook() {
   ) => {
     e.preventDefault();
 
-    // Use mergedParts parameter if available, otherwise use newMessage
     const messageToSubmit = mergedParts || newMessage;
 
     if (messageToSubmit.length === 0) return;

@@ -1,16 +1,10 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-/**
- * Utility function to merge Tailwind CSS classes
- */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-/**
- * Format date to readable string
- */
 export function formatDate(date: string | Date): string {
   const dateObj = typeof date === "string" ? new Date(date) : date;
   return dateObj.toLocaleDateString("en-US", {
@@ -20,25 +14,15 @@ export function formatDate(date: string | Date): string {
   });
 }
 
-/**
- * Get featured projects (first n projects)
- */
 export function getFeaturedProjects() {
-  // This will be imported from projects data
   return [];
 }
 
-/**
- * Truncate text to specified length
- */
 export function truncateText(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength) + "...";
 }
 
-/**
- * Parse month name (English or Indonesian) to 0-based month index
- */
 function parseMonthName(monthLike: string): number | null {
   const m = monthLike.trim().toLowerCase();
   const map: Record<string, number> = {
@@ -74,14 +58,10 @@ function parseMonthName(monthLike: string): number | null {
   return map[m] ?? null;
 }
 
-/**
- * Calculate human readable duration between two dates as "X Year(s), Y Month(s)"
- */
 export function calculateDuration(start: Date, end: Date = new Date()): string {
   let months =
     (end.getFullYear() - start.getFullYear()) * 12 +
     (end.getMonth() - start.getMonth());
-  // If end day is before start day, subtract one month for a closer approximation
   if (end.getDate() < start.getDate()) {
     months -= 1;
   }
@@ -98,10 +78,6 @@ export function calculateDuration(start: Date, end: Date = new Date()): string {
   return parts.join(", ");
 }
 
-/**
- * Given a period string like "Okt 2023 - Present" or "Jan 2020 - Mar 2021",
- * returns a dynamic duration string using current date when end is Present.
- */
 export function calculateDurationFromPeriod(period: string): string {
   // Expected formats:
   //  - "Okt 2023 - Present"
