@@ -8,10 +8,12 @@ import { OtherProjectCardSkeleton } from "../shared/ui/SkeletonLoader";
 
 interface OtherProjectsProps {
   currentProjectSlug: string;
+  isProjectDetailLoading?: boolean;
 }
 
 export default function OtherProjects({
   currentProjectSlug,
+  isProjectDetailLoading = false,
 }: OtherProjectsProps) {
   const { projects, loading } = useProjects();
 
@@ -78,8 +80,10 @@ export default function OtherProjects({
             window.addEventListener("mouseup", onMouseUp);
           }}
         >
-          {loading
-            ? // Loading skeleton
+          {isProjectDetailLoading
+            ? null // Don't show anything when project detail is loading
+            : otherProjects.length === 0
+            ? // Loading skeleton - only show when no other projects loaded yet
               Array.from({ length: 4 }).map((_, index) => (
                 <OtherProjectCardSkeleton key={index} />
               ))

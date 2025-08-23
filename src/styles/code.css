@@ -1,0 +1,123 @@
+/* Custom Code Block Styles */
+.prose pre {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+}
+
+.prose code {
+  font-family: "Fira Code", "Monaco", "Consolas", "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Inline code colors: theme-aware */
+.prose code:not(pre code) {
+  background: #1f29370f;
+  color: #111827;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+.dark .prose code:not(pre code) {
+  background: #9ca3af1f;
+  color: #e5e7eb;
+}
+
+/* Code block container styles */
+.prose .code-block-container {
+  margin: 1.5rem 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Custom CodeBlock component styles - more specific */
+.prose .relative.group.my-6 {
+  margin: 1.5rem 0;
+}
+
+/* Removed overrides to allow component Tailwind classes to apply */
+
+.prose .relative.group.my-6 .text-xs.font-medium {
+  color: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prose .relative.group.my-6 button {
+  /* Let component classes style the button */
+  background: unset !important;
+  color: inherit;
+}
+
+.prose .relative.group.my-6 button:hover,
+.prose .relative.group.my-6 button:active {
+  transform: none;
+}
+
+/* CodeBlock pre colors: theme-aware */
+.prose .relative.group.my-6 pre {
+  margin: 0;
+  padding: 1.25rem;
+  background-color: #f9fafb;
+  color: #111827;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  overflow-x: auto;
+}
+.dark .prose .relative.group.my-6 pre {
+  background-color: #111827;
+  color: #f3f4f6;
+}
+
+/* Remove always-white code color inside blocks; make theme-aware */
+.prose .relative.group.my-6 code {
+  font-family: "Fira Code", "Monaco", "Consolas", "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 0.75rem !important; /* Override to make text smaller */
+  line-height: 1.625;
+  color: #111827;
+}
+.dark .prose .relative.group.my-6 code {
+  color: #f3f4f6;
+}
+
+/* Dark mode overrides */
+/* Removed dark-mode header override to respect component classes */
+
+.dark .prose .relative.group.my-6 pre {
+  background-color: #111827;
+}
+
+/* Ensure width constraints */
+.prose .relative.group.my-6,
+.prose .relative.group.my-6 pre {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Force code content to have proper width for scrolling */
+.prose .relative.group.my-6 pre code {
+  display: block !important;
+  min-width: max-content !important;
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+/* Force container to respect boundaries */
+.prose .relative.group.my-6 {
+  overflow: hidden;
+}
+
+.prose .relative.group.my-6 pre {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  min-width: 0;
+}

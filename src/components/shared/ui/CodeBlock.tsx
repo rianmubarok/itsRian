@@ -118,11 +118,6 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
                       dark:bg-gray-900 dark:text-gray-100"
         style={{
           minWidth: 0,
-          scrollbarWidth: "thin",
-          scrollbarColor: "rgb(156 163 175) rgb(243 244 246)",
-          overflowX: "auto",
-          overflowY: "hidden",
-          WebkitOverflowScrolling: "touch",
         }}
       >
         <code

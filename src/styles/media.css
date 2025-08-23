@@ -1,0 +1,38 @@
+/* Media styling for markdown content */
+.prose img,
+.prose video,
+.prose iframe,
+.prose figure,
+.prose picture,
+.prose source,
+.prose embed,
+.prose object {
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+/* Responsive media sizing */
+.prose img,
+.prose video,
+.prose iframe,
+.prose picture,
+.prose embed,
+.prose object {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+}
+
+/* Figure caption styling */
+.prose figure figcaption {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.dark .prose figure figcaption {
+  color: #9ca3af;
+} 

@@ -9,6 +9,7 @@ import { use, useEffect, useState } from "react";
 import { formatDate } from "../../../utils";
 import OtherProjects from "../../../components/project/OtherProjects";
 import ProjectContent from "@/components/project/ProjectContent";
+import ProjectDetailSkeleton from "../../../components/project/ProjectDetailSkeleton";
 import { useProjectAnimation } from "../../../hooks";
 
 interface ProjectDetailPageProps {
@@ -24,7 +25,8 @@ export default function ProjectDetailPageClient({
   const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { showContent, handleContentShow, refs } = useProjectAnimation();
+  const { showContent, handleContentShow, refs, hasMounted } =
+    useProjectAnimation();
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -63,12 +65,7 @@ export default function ProjectDetailPageClient({
           showContent ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-white/50 rounded w-1/4 mb-8"></div>
-          <div className="h-12 bg-gray-200 dark:bg-white/50 rounded w-3/4 mb-6"></div>
-          <div className="h-6 bg-gray-200 dark:bg-white/50 rounded w-1/2 mb-12"></div>
-          <div className="h-80 bg-gray-200 dark:bg-white/50 rounded-xl mb-12"></div>
-        </div>
+        <ProjectDetailSkeleton hasMounted={hasMounted} />
       </div>
 
       <div
@@ -184,9 +181,15 @@ export default function ProjectDetailPageClient({
               </span>
             </div>
 
-            <hr className="border-t border-primary-gray/20 my-8 sm:my-12" />
-
-            <OtherProjects currentProjectSlug={project.slug} />
+            {!isLoading && (
+              <>
+                <hr className="border-t border-primary-gray/20 my-8 sm:my-12" />
+                <OtherProjects
+                  currentProjectSlug={project.slug}
+                  isProjectDetailLoading={isLoading}
+                />
+              </>
+            )}
           </>
         )}
       </div>
