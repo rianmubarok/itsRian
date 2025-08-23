@@ -27,7 +27,7 @@ export function useInfiniteScrollAnimation<T extends { id: number }>(
       const allItemIds = items.map((item) => item.id);
       setAnimatedItems(new Set(allItemIds));
     }
-  }, [isIntersecting, items.length]);
+  }, [isIntersecting, items.length, items]);
 
   const getItemAnimationProps = (item: T, index: number) => {
     const isAnimated = animatedItems.has(item.id);

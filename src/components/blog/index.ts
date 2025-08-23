@@ -6,5 +6,7 @@ export { default as BlogHeader } from "./BlogHeader";
 export { default as BlogThumbnail } from "./BlogThumbnail";
 export { default as BlogTags } from "./BlogTags";
 export { default as BlogContent } from "./BlogContent";
+export { default as MarkdownContentLoader } from "./MarkdownContentLoader";
+
 export { default as RelatedPosts } from "./RelatedPosts";
 export { default as BackButton } from "./BackButton";

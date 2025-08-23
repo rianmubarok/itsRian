@@ -5,6 +5,7 @@ export { useGuestbook } from "./useGuestbook";
 export { useInfiniteScroll } from "./useInfiniteScroll";
 export { useInfiniteScrollAnimation } from "./useInfiniteScrollAnimation";
 export { useIntersectionObserver } from "./useIntersectionObserver";
+export { useMarkdownContent } from "./useMarkdownContent";
 export { useProjectAnimation } from "./useProjectAnimation";
 export { useProjects } from "./useProjects";
 export { useScrollDirection } from "./useScrollDirection";

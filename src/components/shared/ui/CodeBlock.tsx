@@ -86,12 +86,8 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
   };
 
   return (
-    <div className="relative group my-6 w-full max-w-full">
-      <div
-        className="flex items-center justify-between px-3 py-2 rounded-t-lg border-b
-                      bg-gray-100 text-gray-700 border-gray-200
-                      dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700"
-      >
+    <div className="relative group my-6 w-full max-w-full bg-[#1f29370f] dark:bg-[#9ca3af1f] p-4 rounded-xl border border-[#7379841f] dark:border-primary-gray">
+      <div className="flex items-center justify-between rounded-t-lg">
         <span className="text-[11px] font-medium tracking-wide uppercase">
           {getLanguageLabel(language)}
         </span>

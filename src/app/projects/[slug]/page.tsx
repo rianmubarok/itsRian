@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
       images: [
         {
           url:
-            project.image ||
+            project.thumbnail ||
             `${siteMetadata.siteUrl}${siteMetadata.socialBanner}`,
           width: 1200,
           height: 630,
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
       description:
         project.description || `Explore the ${project.title} project`,
       images: [
-        project.image || `${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`,
+        project.thumbnail || `${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`,
       ],
     },
     robots: {

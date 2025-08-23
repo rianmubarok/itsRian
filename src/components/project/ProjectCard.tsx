@@ -18,7 +18,7 @@ export default function ProjectCard({
           <div className="relative h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px] bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
             {/* Project Image */}
             <img
-              src={project.image}
+              src={project.thumbnail}
               alt={project.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
@@ -56,12 +56,12 @@ export default function ProjectCard({
 
   // Grid variant for projects page
   return (
-    <div className="block transition-all duration-300 overflow-hidden group hover:transform">
+    <div className="block transition-all duration-300 overflow-hidden group">
       {/* Image */}
       <Link href={`/projects/${project.slug}`}>
         <div className="relative h-72 md:h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
           <img
-            src={project.image}
+            src={project.thumbnail}
             alt={project.title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />

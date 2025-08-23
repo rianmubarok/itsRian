@@ -14,10 +14,10 @@ export interface Project {
   title: string;
   slug: string;
   description: string;
-  image: string;
+  thumbnail: string;
   tags: string[];
   createdAt: string;
-  detail: string;
+  content: string;
   sourceCode?: string;
   liveProject?: string;
 }

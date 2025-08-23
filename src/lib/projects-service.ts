@@ -131,9 +131,9 @@ export async function getProjects(): Promise<Project[]> {
             getPlainTextFromRichText(properties.slug) ||
             (page as { id: string }).id,
           description: getMarkdownFromRichText(properties.description) || "",
-          detail: getMarkdownFromRichText(properties.detail) || "",
-          image:
-            getPlainTextFromUrl(properties.image) ||
+          content: getMarkdownFromRichText(properties.content) || "",
+          thumbnail:
+            getPlainTextFromUrl(properties.thumbnail) ||
             "https://placehold.co/600x400?text=No+Image",
           tags: getPlainTextFromMultiSelect(properties.tags),
           createdAt:
@@ -179,8 +179,9 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       title: getPlainTextFromTitle(properties.title) || "",
       slug: getPlainTextFromRichText(properties.slug) || "",
       description: getMarkdownFromRichText(properties.description) || "",
-      detail: blockContent || getMarkdownFromRichText(properties.detail) || "",
-      image: getPlainTextFromUrl(properties.image) || "",
+      content:
+        blockContent || getMarkdownFromRichText(properties.content) || "",
+      thumbnail: getPlainTextFromUrl(properties.thumbnail) || "",
       tags: getPlainTextFromMultiSelect(properties.tags),
       createdAt: getPlainTextFromDate(properties.createdAt) || "",
       sourceCode: getPlainTextFromUrl(properties.sourceCode) || undefined,

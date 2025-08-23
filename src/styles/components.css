@@ -141,14 +141,14 @@
 
 /* Inline code colors: theme-aware */
 .prose code:not(pre code) {
-  background: rgba(31, 41, 55, 0.06);
+  background: #1f29370f;
   color: #111827;
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
 }
 .dark .prose code:not(pre code) {
-  background: rgba(156, 163, 175, 0.12);
+  background: #9ca3af1f;
   color: #e5e7eb;
 }
 

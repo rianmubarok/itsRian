@@ -99,7 +99,7 @@ export default function ProjectDetailPageClient({
             <div ref={refs.imageRef} className="mb-8 sm:mb-12">
               <div className="relative h-auto bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
                 <img
-                  src={project.image}
+                  src={project.thumbnail}
                   alt={project.title}
                   className="w-full h-full object-cover"
                 />

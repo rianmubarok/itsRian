@@ -15,7 +15,8 @@
 📧 **Contact Forms** — Direct communication via Formspree integration  
 🚀 **Performance First** — Lightning-fast loading with Next.js optimizations  
 🌙 **Theme Support** — Dark/light mode with smooth transitions  
-🔍 **SEO Ready** — Optimized for search engines and social sharing
+🔍 **SEO Ready** — Optimized for search engines and social sharing  
+🎨 **Syntax Highlighting** — Beautiful code blocks with Prism.js support
 
 ## 🛠️ Tech Stack
 
@@ -29,6 +30,7 @@ This website is built using these technologies:
 - 🦫 **Supabase** — Database and storage for guestbook and profile images
 - 📜 **Notion API** — Headless CMS for managing blog and portfolio content
 - ➰ **Framer Motion** — Smooth and interactive animations
+- 🎨 **Prism.js** — Syntax highlighting for code blocks with 15+ language support
 
 ## 🚀 Quick Start
 
@@ -65,7 +67,7 @@ Create `.env.local` with your credentials:
 # Notion CMS
 NOTION_TOKEN=your_notion_integration_token
 NOTION_DATABASE_ID=your_blog_database_id
-NOTION_PROJECTS_DATABASE_ID=your_projects_database_id
+NOTION_PROJECTS_DATABASE_ID=your_portfolio_database_id
 
 # Supabase Database
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
@@ -84,18 +86,46 @@ NEXT_PUBLIC_FORMSPREE_FORM_ID=your_formspree_form_id
 
 ### 📝 Notion Setup
 
+**Important**: This project uses **two separate Notion databases**:
+
+- **Blog Database** for blog posts and articles
+- **Portfolio Database** for projects and portfolio items
+
 1. Create integration at [Notion Developers](https://www.notion.so/my-integrations)
-2. Create two databases: **Blog** and **Projects**
-3. Share databases with your integration
+2. Create **two separate databases**:
+   - **Blog Database** (for blog posts)
+   - **Portfolio Database** (for projects)
+3. Share both databases with your integration
 4. Copy database IDs from URLs
+5. Use separate database IDs in your `.env.local`:
+   - `NOTION_DATABASE_ID` = Blog database ID
+   - `NOTION_PROJECTS_DATABASE_ID` = Portfolio database ID
+
+**Database Properties Structure:**
 
 **Blog Database Properties:**
 
-- title (Title), slug (Text), description (Text), tags (Multi-select), date (Date), readingTime (Text), thumbnail (URL), contentEn (Text), contentIn (Text)
+- `title` (Title) - Blog post title
+- `slug` (Text) - URL-friendly identifier
+- `description` (Text) - Brief description
+- `tags` (Multi-select) - Categories/tags
+- `date` (Date) - Publication date
+- `readingTime` (Text) - Estimated reading time
+- `thumbnail` (URL) - Featured image
+- `contentEn` (Text) - English content (Markdown)
+- `contentId` (Text) - Indonesian content (Markdown)
 
-**Projects Database Properties:**
+**Portfolio Database Properties:**
 
-- title (Title), slug (Text), description (Text), detail (Text), image (URL), tags (Multi-select), createdAt (Date), sourceCode (URL), liveProject (URL)
+- `title` (Title) - Project name
+- `slug` (Text) - URL-friendly identifier
+- `description` (Text) - Project description
+- `content` (Text) - Detailed project information (supports external links)
+- `thumbnail` (URL) - Project screenshot
+- `tags` (Multi-select) - Technologies used
+- `createdAt` (Date) - Project creation date
+- `sourceCode` (URL) - GitHub/repository link
+- `liveProject` (URL) - Live demo link
 
 ### 🗄️ Supabase Setup
 
@@ -136,9 +166,15 @@ create table blog_views (
 ```
 ├── app/                # Next.js 15 App Router
 ├── components/         # Reusable UI components
+│   ├── shared/ui/     # Common UI components including CodeBlock
+│   └── blog/          # Blog-specific components
 ├── lib/               # Utilities & configurations
+│   ├── notion.ts      # Notion client configuration
+│   ├── notion-service.ts # Blog content service
+│   └── projects-service.ts # Project content service
 ├── public/            # Static assets
 ├── types/             # TypeScript definitions
+├── styles/            # CSS files including Prism.js themes
 └── data/              # Static content
 ```
 

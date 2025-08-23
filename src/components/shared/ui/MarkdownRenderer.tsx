@@ -10,13 +10,13 @@ interface MarkdownRendererProps {
 }
 
 interface CodeProps {
-  node?: any;
+  node?: unknown;
   className?: string;
   children?: React.ReactNode;
 }
 
 interface PProps {
-  node?: any;
+  node?: unknown;
   children?: React.ReactNode;
 }
 
@@ -48,9 +48,12 @@ export default function MarkdownRenderer({
         components={{
           // Upgrade a paragraph that only contains one inline code node like "bash npm i" to a proper CodeBlock
           p: ({ node, children }: PProps) => {
+            const nodeData = node as {
+              children?: Array<{ type?: string; value?: string }>;
+            };
             const onlyChild =
-              node?.children && node.children.length === 1
-                ? node.children[0]
+              nodeData?.children && nodeData.children.length === 1
+                ? nodeData.children[0]
                 : null;
             if (onlyChild && onlyChild.type === "inlineCode") {
               const upgraded = inlineToBlock(onlyChild.value as string);

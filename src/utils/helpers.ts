@@ -35,24 +35,24 @@ function parseMonthName(monthLike: string): number | null {
     apr: 3,
     april: 3,
     may: 4,
-    mei: 4, // Indonesian
+    mei: 4, // May in Indonesian
     jun: 5,
     june: 5,
     jul: 6,
     july: 6,
     aug: 7,
-    agu: 7, // Indonesian
+    agu: 7, // August in Indonesian
     august: 7,
     sep: 8,
     sept: 8,
     september: 8,
     oct: 9,
-    okt: 9, // Indonesian
+    okt: 9, // October in Indonesian
     october: 9,
     nov: 10,
     november: 10,
     dec: 11,
-    des: 11, // Indonesian
+    des: 11, // December in Indonesian
     december: 11,
   };
   return map[m] ?? null;
@@ -106,4 +106,76 @@ export function calculateDurationFromPeriod(period: string): string {
   }
 
   return calculateDuration(startDate, endDate);
+}
+
+/**
+ * Fetches markdown content from a URL (e.g., Supabase storage)
+ * @param url - The URL to fetch markdown content from
+ * @returns Promise<string> - The markdown content
+ */
+export async function fetchMarkdownFromUrl(url: string): Promise<string> {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch markdown: ${response.status} ${response.statusText}`
+      );
+    }
+    return await response.text();
+  } catch (error) {
+    // Error fetching markdown from URL - re-throwing for caller to handle
+    throw error;
+  }
+}
+
+/**
+ * Checks if a string is a valid URL
+ * @param str - The string to check
+ * @returns boolean - True if it's a valid URL
+ */
+export function isValidUrl(str: string): boolean {
+  try {
+    new URL(str);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Gets the filename from a URL
+ * @param url - The URL to extract filename from
+ * @returns string - The filename or empty string if not found
+ */
+export function getFilenameFromUrl(url: string): string {
+  try {
+    const urlObj = new URL(url);
+    const pathname = urlObj.pathname;
+    const filename = pathname.split("/").pop();
+    return filename || "";
+  } catch {
+    return "";
+  }
+}
+
+/**
+ * Determines if content should be fetched from URL or used as-is
+ * @param content - The content string
+ * @returns boolean - True if content should be fetched from URL
+ */
+export function shouldFetchFromUrl(content: string): boolean {
+  if (!content || typeof content !== "string") return false;
+
+  try {
+    const url = new URL(content);
+    // Check if it's a valid URL and contains markdown file or is from Supabase
+    return (
+      (url.protocol === "http:" || url.protocol === "https:") &&
+      (content.includes("supabase.co") ||
+        content.includes(".md") ||
+        content.includes("markdown-content"))
+    );
+  } catch {
+    return false;
+  }
 }
