@@ -59,7 +59,7 @@ export default function ProjectDetailPageClient({
       role="main"
     >
       <div
-        className={`absolute inset-0 w-full min-h-full z-10 bg-white/80 dark:bg-primary-dark/80 transition-opacity duration-500 ${
+        className={`absolute inset-0 w-full min-h-full z-10 bg-primary-light/80 dark:bg-primary-dark/80 transition-opacity duration-500 ${
           showContent ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >

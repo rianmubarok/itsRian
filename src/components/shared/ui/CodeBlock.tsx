@@ -86,7 +86,7 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
   };
 
   return (
-    <div className="relative group my-6 w-full max-w-full bg-[#1f29370f] dark:bg-[#9ca3af1f] p-4 rounded-xl border border-[#7379841f] dark:border-primary-gray">
+    <div className="relative group my-6 w-full max-w-full bg-[#1f29370f] dark:bg-[#9ca3af1f] p-4 rounded-xl border border-[#7379841f] dark:border-primary-gray overflow-hidden">
       <div className="flex items-center justify-between rounded-t-lg">
         <span className="text-[11px] font-medium tracking-wide uppercase">
           {getLanguageLabel(language)}
@@ -114,16 +114,26 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
       </div>
 
       <pre
-        className="m-0 p-4 bg-gray-50 text-gray-800 rounded-b-lg max-w-full overflow-hidden
+        className="m-0 p-4 bg-gray-50 text-gray-800 rounded-b-lg max-w-full overflow-x-auto overflow-y-hidden
                       dark:bg-gray-900 dark:text-gray-100"
+        style={{
+          minWidth: 0,
+          scrollbarWidth: "thin",
+          scrollbarColor: "rgb(156 163 175) rgb(243 244 246)",
+          overflowX: "auto",
+          overflowY: "hidden",
+          WebkitOverflowScrolling: "touch",
+        }}
       >
         <code
           ref={codeRef}
-          className={`text-sm leading-relaxed font-mono ${className ?? ""}`}
+          className={`text-xs leading-relaxed font-mono ${className ?? ""}`}
           style={{
-            whiteSpace: "pre-wrap",
-            wordBreak: "break-word",
-            overflowWrap: "anywhere",
+            whiteSpace: "pre",
+            wordBreak: "normal",
+            overflowWrap: "normal",
+            display: "block",
+            minWidth: "max-content",
           }}
         >
           {children}

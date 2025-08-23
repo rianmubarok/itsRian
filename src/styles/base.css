@@ -31,7 +31,12 @@ select:focus {
   box-shadow: none !important;
 }
 
-/* Hide default scrollbar */
+/* Hide default scrollbar except for code blocks */
 ::-webkit-scrollbar {
   display: none;
-} 
+}
+
+/* Show scrollbar for code blocks */
+pre::-webkit-scrollbar {
+  display: block !important;
+}

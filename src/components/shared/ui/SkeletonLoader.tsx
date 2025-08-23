@@ -14,7 +14,7 @@ const Skeleton: React.FC<SkeletonProps> = ({ className = "" }) => {
 
 export const BlogCardSkeleton = () => {
   return (
-    <div className="bg-white dark:bg-white/50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
+    <div className="bg-white dark:bg-white/50 rounded-lg overflow-hidden">
       <Skeleton className="h-48 w-full" />
       <div className="p-6">
         <Skeleton className="h-4 w-3/4 mb-2" />
@@ -36,7 +36,7 @@ export const BlogCardSkeleton = () => {
 
 export const ProjectCardSkeleton = () => {
   return (
-    <div className="bg-white dark:bg-white/50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden min-w-[300px]">
+    <div className="bg-white dark:bg-white/50 rounded-lg overflow-hidden min-w-[300px]">
       <Skeleton className="h-48 w-full" />
       <div className="p-6">
         <Skeleton className="h-5 w-3/4 mb-2" />
