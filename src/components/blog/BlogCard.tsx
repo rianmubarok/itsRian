@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Eye, Clock } from "lucide-react";
 import { Blog } from "../../types";
 import { useEffect, useState } from "react";
 
@@ -11,11 +11,23 @@ interface BlogCardProps {
 export default function BlogCard({ blog, variant = "list" }: BlogCardProps) {
   if (variant === "featured") {
     return (
-      <article className="group">
+      <article className="group border border-primary-gray/10 rounded-2xl p-4 sm:p-6 transition-colors">
         <Link href={`/blog/${blog.slug}`} className="block">
           <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
             {/* Content */}
             <div className="flex-1 flex flex-col justify-between">
+              {/* Meta info */}
+              <div className="flex items-center gap-3 text-xs sm:text-sm text-primary-gray mb-2 sm:mb-3 font-light">
+                <span className="inline-flex items-center gap-1.5">
+                  <Eye className="w-3.5 h-3.5" />
+                  {blog.viewCount}
+                </span>
+                <span className="w-1 h-1 bg-primary-gray rounded-full" />
+                <span className="inline-flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5" />
+                  {blog.readingTime}
+                </span>
+              </div>
               {/* Title */}
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-tight tracking-tight">
                 {blog.title}
@@ -46,7 +58,7 @@ export default function BlogCard({ blog, variant = "list" }: BlogCardProps) {
 
   // Default to list variant
   return (
-    <article className="group">
+    <article className="group border border-primary-gray/10 rounded-2xl p-4 sm:p-5 transition-colors">
       <Link href={`/blog/${blog.slug}`} className="block">
         <div className="flex flex-col md:flex-row gap-4 sm:gap-6 mb-4 sm:mb-5">
           {/* Thumbnail - moved to top on mobile */}
@@ -61,10 +73,16 @@ export default function BlogCard({ blog, variant = "list" }: BlogCardProps) {
           {/* Content */}
           <div className="flex-1">
             {/* Meta info */}
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-primary-gray mb-2 sm:mb-3 font-light">
-              <span>{blog.viewCount} views</span>
+            <div className="flex items-center gap-3 text-xs sm:text-sm text-primary-gray mb-2 sm:mb-3 font-light">
+              <span className="inline-flex items-center gap-1.5">
+                <Eye className="w-3.5 h-3.5" />
+                {blog.viewCount} views
+              </span>
               <span className="w-1 h-1 bg-primary-gray rounded-full"></span>
-              <span>{blog.readingTime} read</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5" />
+                {blog.readingTime} read
+              </span>
             </div>
 
             {/* Title */}

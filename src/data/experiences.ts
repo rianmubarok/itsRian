@@ -11,7 +11,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: "1",
-    period: "Okt 2023 - Present",
+    period: "Oct 2023 - Present",
     title: "Icon Designer",
     company: "Mangun Creative",
     type: "Part-time",

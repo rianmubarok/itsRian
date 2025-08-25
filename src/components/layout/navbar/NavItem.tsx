@@ -49,7 +49,7 @@ export default function NavItem({
     <li role="none">
       <Link
         href={item.href}
-        className="group relative inline-block text-lg sm:text-xl text-primary-dark dark:text-primary-light transition-colors duration-200 font-regular"
+        className="group relative inline-block text-lg text-primary-dark dark:text-primary-light transition-colors duration-200 font-regular"
         role="menuitem"
         aria-current={isActive ? "page" : undefined}
       >

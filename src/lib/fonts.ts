@@ -1,4 +1,4 @@
-import { DM_Sans, Playfair_Display, Sacramento } from "next/font/google";
+import { DM_Sans, Playfair_Display, Sacramento, Manrope, Noto_Serif_Display, Noto_Serif } from "next/font/google";
 
 export const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -19,4 +19,19 @@ export const sacramento = Sacramento({
   weight: ["400"],
   display: "swap",
   variable: "--font-sacramento",
+});
+
+export const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-manrope",
+});
+
+export const notoSerifDisplay = Noto_Serif_Display({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-noto-serif-display",
 });

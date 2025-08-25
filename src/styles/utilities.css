@@ -32,6 +32,12 @@
       overflow-y: auto;
     }
   }
+}
 
+@utility font-manrope {
+  font-family: var(--font-manrope);
+}
 
+@utility font-noto-serif-display {
+  font-family: var(--font-noto-serif-display);
 }

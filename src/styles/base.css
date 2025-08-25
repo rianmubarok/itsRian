@@ -2,7 +2,7 @@
   html,
   body {
     @apply transition-colors bg-primary-light dark:bg-primary-dark text-primary-light dark:text-primary-dark;
-    font-family: var(--font-sans);
+    font-family: var(--font-manrope);
   }
 
   body.hide-footer footer {

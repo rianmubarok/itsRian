@@ -1,6 +1,12 @@
 import "../styles/globals.css";
 import Layout from "../components/Layout";
-import { dmSans, playfairDisplay, sacramento } from "../lib/fonts";
+import {
+  dmSans,
+  playfairDisplay,
+  sacramento,
+  manrope,
+  notoSerifDisplay,
+} from "../lib/fonts";
 import { siteMetadata } from "../lib/metadata";
 
 export const metadata = {
@@ -113,7 +119,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${dmSans.variable} ${playfairDisplay.variable} ${sacramento.variable}`}
+      className={`${dmSans.variable} ${playfairDisplay.variable} ${sacramento.variable} ${manrope.variable} ${notoSerifDisplay.variable}`}
     >
       <head>
         <script

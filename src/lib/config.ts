@@ -48,9 +48,9 @@ export const THEME = {
 } as const;
 
 export const navItems: NavItem[] = [
-  { name: "Projects", href: "/projects" },
+  { name: "Cases", href: "/projects" },
   { name: "Blog", href: "/blog" },
-  { name: "About Me", href: "/aboutme" },
-  { name: "Contact", href: "/contact" },
+  { name: "About", href: "/aboutme" },
   { name: "Guestbook", href: "/guestbook" },
+  { name: "Contact", href: "/contact" },
 ];

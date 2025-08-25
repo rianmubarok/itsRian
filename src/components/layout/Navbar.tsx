@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import ThemeToggle from "../shared/common/ThemeToggle";
 import { useScrollDirection } from "../../hooks/useScrollDirection";
@@ -28,19 +29,25 @@ export default function Navbar() {
         isVisible ? "translate-y-0" : "-translate-y-full"
       } ${
         lastScrollY > 100
-          ? "bg-primary-light/80 dark:bg-primary-dark/80 backdrop-blur-md border-b border-primary-gray/20"
+          ? "bg-primary-light/80 dark:bg-primary-dark/80 backdrop-blur-md border-b border-primary-gray/20 md:border-b-0"
           : "md:bg-transparent bg-primary-light/80 dark:bg-primary-dark/80 backdrop-blur-md"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 md:px-8">
+      <div className="max-w-xl mx-auto px-4 pr-8 rounded-full md:border md:border-primary-gray/20 md:bg-primary-light/80 md:dark:bg-primary-dark/80 md:backdrop-blur-md">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          {/* Logo with Profile Image */}
           <Link
             href="/"
-            className="text-2xl sm:text-3xl md:text-[32px] font-playfair-medium-italic text-primary-dark dark:text-primary-light transition-opacity duration-200"
             aria-label="Home - itsRian Portfolio"
           >
-            itsRian
+            <Image
+              src="/rian.png"
+              alt="Rian profile"
+              width={40}
+              height={40}
+              className="w-10 h-10 rounded-full object-cover"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}

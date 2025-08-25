@@ -35,24 +35,20 @@ function parseMonthName(monthLike: string): number | null {
     apr: 3,
     april: 3,
     may: 4,
-    mei: 4, // May in Indonesian
     jun: 5,
     june: 5,
     jul: 6,
     july: 6,
     aug: 7,
-    agu: 7, // August in Indonesian
     august: 7,
     sep: 8,
     sept: 8,
     september: 8,
     oct: 9,
-    okt: 9, // October in Indonesian
     october: 9,
     nov: 10,
     november: 10,
     dec: 11,
-    des: 11, // December in Indonesian
     december: 11,
   };
   return map[m] ?? null;
@@ -80,7 +76,6 @@ export function calculateDuration(start: Date, end: Date = new Date()): string {
 
 export function calculateDurationFromPeriod(period: string): string {
   // Expected formats:
-  //  - "Okt 2023 - Present"
   //  - "Oct 2023 - Present"
   //  - "Jan 2020 - Mar 2021"
   const [rawStart, rawEnd] = period.split("-").map((s) => s.trim());
