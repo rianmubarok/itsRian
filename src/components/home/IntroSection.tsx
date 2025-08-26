@@ -15,7 +15,7 @@ export default function IntroSection() {
       ref={ref}
       className="flex flex-col gap-4 w-full mb-16 sm:mb-20 md:mb-24 border-b"
     >
-      <article className="text-primary-dark dark:text-primary-light sm:text-center sm:px-16">
+      <article className="text-primary-dark dark:text-primary-light sm:text-center sm:px-25 md:px-30">
         <header className="flex sm:items-center sm:justify-center gap-3 sm:gap-4">
           <p
             className={[
