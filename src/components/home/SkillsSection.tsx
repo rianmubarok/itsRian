@@ -14,15 +14,18 @@ const SkillsSection = () => {
       ref={ref}
       className="space-y-4 sm:space-y-5 text-primary-dark dark:text-primary-light"
     >
-      <div className="space-y-2 sm:space-y-3">
+      <div className="sm:text-center mb-10 text-primary-dark dark:text-primary-light">
+        <p className="text-base lg:text-lg font-noto-serif-display italic">
+          Tech Stack and tools
+        </p>
         <h2
-          className={`text-2xl sm:text-3xl md:text-[32px] font-regular transition-all duration-700 ease-out ${
+          className={`text-5xl font-semibold leading-tight tracking-tighter transition-all duration-700 ease-out ${
             isIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-4 opacity-0"
           }`}
         >
-          Tools that I have used
+          What I’ve Used
         </h2>
       </div>
       <div

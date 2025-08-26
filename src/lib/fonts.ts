@@ -1,4 +1,11 @@
-import { DM_Sans, Playfair_Display, Sacramento, Manrope, Noto_Serif_Display, Noto_Serif } from "next/font/google";
+import {
+  DM_Sans,
+  Playfair_Display,
+  Sacramento,
+  Manrope,
+  Noto_Serif_Display,
+  Noto_Serif,
+} from "next/font/google";
 
 export const dmSans = DM_Sans({
   subsets: ["latin"],

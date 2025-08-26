@@ -6,7 +6,7 @@ interface HamburgerButtonProps {
 export default function HamburgerButton({ isOpen, onClick }: HamburgerButtonProps) {
   return (
     <button
-      className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 text-primary-dark dark:text-primary-light"
+      className="cursor-pointer sm:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 text-primary-dark dark:text-primary-light"
       onClick={onClick}
       aria-label="Toggle navigation menu"
       aria-expanded={isOpen}

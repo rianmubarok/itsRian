@@ -23,22 +23,13 @@ export default function NavItem({
       <li role="none">
         <Link
           href={item.href}
-          className="block text-lg sm:text-xl text-primary-dark dark:text-primary-light transition-colors duration-200 font-regular py-2"
+          className={`block text-lg sm:text-xl transition-colors duration-200 font-regular py-2 text-primary-dark dark:text-primary-light hover:text-gray-800 dark:hover:text-gray-200`}
           role="menuitem"
           aria-current={isActive ? "page" : undefined}
           onClick={onClose}
         >
-          <span
-            className={`relative ${
-              isActive
-                ? "text-gray-800 dark:text-primary-light font-medium"
-                : ""
-            }`}
-          >
+          <span className={`${isActive ? "font-medium" : ""}`}>
             {item.name}
-            {isActive && (
-              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-current" />
-            )}
           </span>
         </Link>
       </li>
@@ -49,15 +40,15 @@ export default function NavItem({
     <li role="none">
       <Link
         href={item.href}
-        className="group relative inline-block text-lg text-primary-dark dark:text-primary-light transition-colors duration-200 font-regular"
+        className={`relative inline-flex items-center text-lg transition-colors duration-200 font-medium text-primary-dark dark:text-primary-light hover:text-gray-900 dark:hover:text-gray-100`}
         role="menuitem"
         aria-current={isActive ? "page" : undefined}
       >
         <span
-          className={`after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:transition-transform after:duration-300 after:bg-current ${
-            isActive
-              ? "after:scale-x-100"
-              : "after:scale-x-0 group-hover:after:scale-x-100"
+          className={`${
+            item.name === "Contact"
+              ? "inline-block py-1.5 px-4 bg-primary-dark text-primary-light rounded-full dark:bg-primary-light dark:text-primary-dark"
+              : "inline-block py-1.5 px-0"
           }`}
         >
           {item.name}

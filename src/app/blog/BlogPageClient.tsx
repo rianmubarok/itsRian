@@ -56,7 +56,7 @@ export default function BlogPageClient() {
             <AnimatedBlogCard
               key={blog.id || index}
               blog={blog}
-              variant="list"
+              variant="tile"
             />
           );
         })}

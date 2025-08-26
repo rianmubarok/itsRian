@@ -28,6 +28,10 @@ import {
   SiNotion,
   SiFlutter,
   SiDart,
+  SiAdobephotoshop,
+  SiAdobeillustrator,
+  SiAdobeaftereffects,
+  SiCanva,
 } from "react-icons/si";
 
 export type StackProps = {
@@ -72,4 +76,12 @@ export const STACKS: StackProps = {
   SQLite: <SiSqlite size={iconSize} className="text-blue-600" />,
   Dart: <SiDart size={iconSize} className="text-blue-600" />,
   Flutter: <SiFlutter size={iconSize} className="text-cyan-500" />,
+  Photoshop: <SiAdobephotoshop size={iconSize} className="text-sky-500" />,
+  Illustrator: (
+    <SiAdobeillustrator size={iconSize} className="text-orange-500" />
+  ),
+  "After Effects": (
+    <SiAdobeaftereffects size={iconSize} className="text-violet-600" />
+  ),
+  Canva: <SiCanva size={iconSize} className="text-cyan-500" />,
 };

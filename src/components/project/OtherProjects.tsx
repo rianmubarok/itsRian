@@ -52,57 +52,30 @@ export default function OtherProjects({
         </Link>
       </div>
 
-      {/* Scrollable Projects Container */}
-      <div className="relative">
-        <div
-          className={`flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide pb-4 cursor-pointer active:cursor-grabbing transition-all duration-700 ease-out delay-400 ${
-            isIntersecting
-              ? "translate-y-0 opacity-100"
-              : "translate-y-8 opacity-0"
-          }`}
-          onMouseDown={(e) => {
-            const container = e.currentTarget;
-            const startX = e.pageX - container.offsetLeft;
-            const scrollLeft = container.scrollLeft;
-
-            const onMouseMove = (eMove: MouseEvent) => {
-              const x = eMove.pageX - container.offsetLeft;
-              const walk = (x - startX) * 1;
-              container.scrollLeft = scrollLeft - walk;
-            };
-
-            const onMouseUp = () => {
-              window.removeEventListener("mousemove", onMouseMove);
-              window.removeEventListener("mouseup", onMouseUp);
-            };
-
-            window.addEventListener("mousemove", onMouseMove);
-            window.addEventListener("mouseup", onMouseUp);
-          }}
-        >
-          {isProjectDetailLoading
-            ? null // Don't show anything when project detail is loading
-            : otherProjects.length === 0
-            ? // Loading skeleton - only show when no other projects loaded yet
-              Array.from({ length: 4 }).map((_, index) => (
-                <OtherProjectCardSkeleton key={index} />
-              ))
-            : otherProjects.map((project, index) => (
-                <div
-                  key={project.id}
-                  className="transition-all duration-700 ease-out"
-                  style={{
-                    transitionDelay: `${600 + index * 100}ms`,
-                    transform: isIntersecting
-                      ? "translateY(0) scale(1)"
-                      : "translateY(20px) scale(0.95)",
-                    opacity: isIntersecting ? 1 : 0,
-                  }}
-                >
-                  <ProjectCard project={project} variant="featured" />
-                </div>
-              ))}
-        </div>
+      {/* Projects Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        {isProjectDetailLoading
+          ? null // Don't show anything when project detail is loading
+          : otherProjects.length === 0
+          ? // Loading skeleton - only show when no other projects loaded yet
+            Array.from({ length: 4 }).map((_, index) => (
+              <OtherProjectCardSkeleton key={index} />
+            ))
+          : otherProjects.map((project, index) => (
+              <div
+                key={project.id}
+                className="transition-all duration-700 ease-out"
+                style={{
+                  transitionDelay: `${600 + index * 100}ms`,
+                  transform: isIntersecting
+                    ? "translateY(0) scale(1)"
+                    : "translateY(20px) scale(0.95)",
+                  opacity: isIntersecting ? 1 : 0,
+                }}
+              >
+                <ProjectCard project={project} variant="featured" />
+              </div>
+            ))}
       </div>
     </section>
   );

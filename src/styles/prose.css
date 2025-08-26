@@ -1,6 +1,6 @@
 /* Custom Blog Content Styles */
 .prose {
-  font-family: var(--font-sans);
+  font-family: var(--font-monrope);
   line-height: 1.5;
 }
 

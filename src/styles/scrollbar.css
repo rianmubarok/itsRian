@@ -45,14 +45,7 @@ pre::-webkit-scrollbar-thumb:hover {
 }
 
 /* Utility classes for scrollbar */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
+/* scrollbar-hide class removed - no longer used */
 
 /* Custom thin scrollbar utility */
 .scrollbar-thin {

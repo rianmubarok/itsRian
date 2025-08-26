@@ -4,7 +4,7 @@ import NavItem from "./NavItem";
 export default function DesktopNavigation() {
   return (
     <ul
-      className="hidden md:flex space-x-6 lg:space-x-8 ml-auto"
+      className="hidden sm:flex space-x-6 lg:space-x-8 ml-auto"
       role="menubar"
     >
       {navItems.map((item) => (

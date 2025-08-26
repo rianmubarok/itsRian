@@ -119,7 +119,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${dmSans.variable} ${playfairDisplay.variable} ${sacramento.variable} ${manrope.variable} ${notoSerifDisplay.variable}`}
+      className={`${manrope.variable} ${dmSans.variable} ${playfairDisplay.variable} ${sacramento.variable} ${notoSerifDisplay.variable}`}
     >
       <head>
         <script
@@ -128,7 +128,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${dmSans.className} bg-primary-light dark:bg-primary-dark tracking-tight max-w-6xl mx-auto px-6 md:px-8`}
+        className={`${manrope.className} bg-primary-light dark:bg-primary-dark tracking-tight max-w-5xl mx-auto px-4 md:px-6 border-l border-r border-primary-gray/20`}
       >
         <Layout>{children}</Layout>
       </body>

@@ -24,7 +24,7 @@ export { default as OtherProjects } from "./project/OtherProjects";
 
 // Home Components
 export { default as IntroSection } from "./home/IntroSection";
-export { default as FeaturedProjects } from "./home/FeaturedProjects";
+export { default as LatestProjects } from "./home/LatestProjects";
 
 // Guestbook Components
 export { default as GuestbookMessage } from "./guestbook/GuestbookMessage";

@@ -21,7 +21,9 @@ export default function RelatedPosts({
       }`}
     >
       <div className="flex items-center justify-between mb-6 sm:mb-8 text-primary-dark dark:text-primary-light">
-        <h2 className="text-2xl sm:text-3xl md:text-[32px] font-regular">Related Articles</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-[32px] font-regular">
+          Related Articles
+        </h2>
         <Link
           href="/blog"
           className="group text-base sm:text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300"
@@ -33,7 +35,7 @@ export default function RelatedPosts({
       <div className="grid grid-cols-1 gap-4 sm:gap-6">
         {relatedPosts.slice(0, 3).map((relatedBlog) => (
           <div key={relatedBlog.id}>
-            <BlogCard blog={relatedBlog} variant="list" />
+            <BlogCard blog={relatedBlog} variant="tile" />
           </div>
         ))}
       </div>
