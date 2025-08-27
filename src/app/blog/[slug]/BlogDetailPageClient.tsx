@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { use, useEffect, useState } from "react";
 import { useBlog, useBlogs } from "../../../hooks/useBlogs";
 import { useBlogAnimation } from "../../../hooks/useBlogAnimation";
 import {
@@ -21,13 +21,7 @@ interface BlogDetailPageProps {
 }
 
 export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
-  const [slug, setSlug] = useState<string>("");
-  useEffect(() => {
-    (async () => {
-      const { slug } = await params;
-      setSlug(slug);
-    })();
-  }, [params]);
+  const { slug } = use(params);
 
   const { blog, loading, error } = useBlog(slug);
   const { blogs } = useBlogs();

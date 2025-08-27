@@ -35,7 +35,7 @@ export default function ProjectsPageClient() {
     >
       <h1
         ref={headerRef}
-        className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-snug tracking-tight mb-4 sm:mb-6 transition-all duration-700 ease-out ${
+        className={`sm:text-center text-5xl font-semibold leading-tight tracking-tighter mb-10 transition-all duration-700 ease-out ${
           headerIntersecting
             ? "translate-y-0 opacity-100"
             : "translate-y-8 opacity-0"

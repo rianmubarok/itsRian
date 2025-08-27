@@ -8,6 +8,7 @@ export { default as CodeBlock } from "./CodeBlock";
 export { default as InfiniteLoopSlider } from "./InfiniteLoopSlider";
 export { default as LanguageSwitcher } from "./LanguageSwitcher";
 export { default as MarkdownRenderer } from "./MarkdownRenderer";
+export { default as MarkdownContentLoader } from "./MarkdownContentLoader";
 export { default as SkeletonLoader } from "./SkeletonLoader";
 export { default as Skills } from "./Skills";
 export { default as WavingHandIcon } from "./WavingHandIcon";

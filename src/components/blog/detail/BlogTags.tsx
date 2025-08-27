@@ -1,5 +1,5 @@
-import { LanguageSwitcher } from "../shared/ui";
-import { Blog } from "../../types";
+import { LanguageSwitcher } from "../../shared/ui";
+import { Blog } from "../../../types";
 
 interface BlogTagsProps {
   blog: Blog;
@@ -8,18 +8,16 @@ interface BlogTagsProps {
   onLanguageChange: (language: "en" | "id") => void;
 }
 
-export default function BlogTags({ 
-  blog, 
-  hasMounted, 
-  currentLanguage, 
-  onLanguageChange 
+export default function BlogTags({
+  blog,
+  hasMounted,
+  currentLanguage,
+  onLanguageChange,
 }: BlogTagsProps) {
   return (
     <div
       className={`mb-6 sm:mb-8 transition-all duration-700 ease-out delay-400 ${
-        hasMounted
-          ? "translate-y-0 opacity-100"
-          : "translate-y-8 opacity-0"
+        hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
       }`}
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
@@ -27,7 +25,7 @@ export default function BlogTags({
           {blog.tags.map((tag) => (
             <span
               key={tag}
-              className="px-4 py-1 text-xs sm:text-sm font-light rounded-full border border-primary-dark dark:border-primary-light"
+              className="px-4 py-1 text-sm rounded-full border border-primary-gray/20 text-primary-gray dark:text-gray-300 bg-gray-100 dark:bg-primary-light/5 items-center"
             >
               {tag}
             </span>
@@ -40,4 +38,4 @@ export default function BlogTags({
       </div>
     </div>
   );
-} 
+}

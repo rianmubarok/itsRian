@@ -29,7 +29,7 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
             </h3>
           </Link>
 
-          <p className="text-base text-primary-gray dark:text-gray-300 mb-3 sm:mb-4 line-clamp-3">
+          <p className="text-base text-primary-gray dark:text-gray-300 mb-3 sm:mb-4 line-clamp-3 tracking-normal">
             {blog.description}
           </p>
 
@@ -50,7 +50,7 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
   }
   if (variant === "featured") {
     return (
-      <article className="group border border-primary-gray/10 rounded-2xl p-4 sm:p-6 transition-colors">
+      <article className="group border border-primary-gray/20 rounded-2xl p-4 sm:p-6 transition-colors">
         <Link href={`/blog/${blog.slug}`} className="block">
           <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
             {/* Content */}
@@ -59,16 +59,16 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
               <div className="flex items-center gap-3 text-xs sm:text-sm text-primary-gray mb-2 sm:mb-3 font-light">
                 <span className="inline-flex items-center gap-1.5">
                   <Eye className="w-3.5 h-3.5" />
-                  {blog.viewCount}
+                  {blog.viewCount} VIEWS
                 </span>
                 <span className="w-1 h-1 bg-primary-gray rounded-full" />
                 <span className="inline-flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5" />
-                  {blog.readingTime}
+                  {blog.readingTime} MINS READ
                 </span>
               </div>
               {/* Title */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-tight tracking-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tighter">
                 {blog.title}
               </h1>
 

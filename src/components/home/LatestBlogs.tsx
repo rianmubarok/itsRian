@@ -27,7 +27,7 @@ export default function LatestBlogs() {
   return (
     <section ref={ref} className="mb-16">
       <div className="sm:text-center mb-10 text-primary-dark dark:text-primary-light">
-        <p className="text-base sm:text-lg font-noto-serif-display italic">
+        <p className="text-base lg:text-lg font-noto-serif-display italic">
           Just writing
         </p>
         <h2
@@ -68,7 +68,7 @@ export default function LatestBlogs() {
       <div className="text-center">
         <Link
           href="/blog"
-          className={`group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 text-gray-900 dark:text-white ${
+          className={`group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300${
             isIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-4 opacity-0"

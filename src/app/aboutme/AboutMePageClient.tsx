@@ -36,10 +36,10 @@ export default function AboutMePageClient() {
             : "translate-y-8 opacity-0"
         }`}
       >
-        <h2 className="text-2xl sm:text-3xl md:text-[32px] leading-tight font-regular text-primary-dark dark:text-primary-light md:col-span-2">
+        <h2 className="text-2xl sm:text-3xl leading-tight font-regular text-primary-dark dark:text-primary-light md:col-span-2">
           Hello! Thank you for visiting my personal website.
         </h2>
-        <p className="text-primary-gray font-regular text-base sm:text-lg md:col-span-3">
+        <p className="text-primary-gray font-regular text-base sm:text-lg md:col-span-3 tracking-normal">
           I&apos;m Rian, a passionate web developer and UI/UX enthusiast who
           thrives on turning ideas into clean, functional, and engaging digital
           experiences. Over the years, I&apos;ve dedicated myself to
@@ -50,7 +50,7 @@ export default function AboutMePageClient() {
 
       <div
         ref={profileRef}
-        className={`text-primary-gray font-regular text-base sm:text-lg space-y-3 sm:space-y-4 transition-all duration-700 ease-out delay-300 ${
+        className={`tracking-normal text-primary-gray font-regular text-base sm:text-lg space-y-3 sm:space-y-4 transition-all duration-700 ease-out delay-300 ${
           profileIntersecting
             ? "translate-y-0 opacity-100"
             : "translate-y-8 opacity-0"
@@ -116,11 +116,11 @@ export default function AboutMePageClient() {
                 {experience.company}, {experience.title}
               </h2>
               <div className="text-primary-gray text-base sm:text-lg space-y-3 sm:space-y-4">
-                <p className="text-xs sm:text-sm font-light">
+                <p className="text-xs sm:text-sm font-light tracking-normal">
                   {calculateDurationFromPeriod(experience.period)} •{" "}
                   {experience.type} • {experience.location}
                 </p>
-                <p>{experience.description}</p>
+                <p className="tracking-normal">{experience.description}</p>
               </div>
             </div>
           </div>

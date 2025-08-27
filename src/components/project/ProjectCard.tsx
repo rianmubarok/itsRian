@@ -3,12 +3,10 @@ import { Project } from "../../types/index";
 
 interface ProjectCardProps {
   project: Project;
-  // variant is kept for backward compatibility but ignored; all cards use the featured style
   variant?: "featured" | "grid";
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  // Unified featured style used across Home and Projects pages
   return (
     <div className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
       <Link href={`/projects/${project.slug}`}>
@@ -28,7 +26,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </h3>
         </Link>
 
-        <p className="text-base text-primary-gray dark:text-gray-300 mb-3 sm:mb-4 overflow-hidden">
+        <p className="text-base text-primary-gray dark:text-gray-300 mb-3 sm:mb-4 overflow-hidden tracking-normal">
           {project.description}
         </p>
 

@@ -57,7 +57,7 @@ export default function LatestProjects() {
       <div className="text-center">
         <Link
           href="/projects"
-          className={`group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 text-gray-900 dark:text-white ${
+          className={`group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 ${
             isIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-4 opacity-0"

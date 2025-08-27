@@ -20,7 +20,7 @@ export default function OtherProjects({
   const otherProjects = projects
     .filter((project) => project.slug !== currentProjectSlug)
     .sort(() => Math.random() - 0.5)
-    .slice(0, 4);
+    .slice(0, 2);
 
   const { ref, isIntersecting } = useIntersectionObserver<HTMLElement>({
     threshold: 0.1,
@@ -29,36 +29,24 @@ export default function OtherProjects({
 
   return (
     <section ref={ref}>
-      <div className="flex items-center justify-between mb-4 sm:mb-6 text-primary-dark dark:text-primary-light">
+      <div className="sm:text-center mb-10 text-primary-dark dark:text-primary-light">
         <h2
-          className={`text-2xl sm:text-3xl md:text-[32px] font-regular transition-all duration-700 ease-out ${
+          className={`text-5xl font-semibold leading-tight tracking-tighter transition-all duration-700 ease-out ${
             isIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-4 opacity-0"
           }`}
         >
-          View Other Projects
+          Other Projects
         </h2>
-        <Link
-          href="/projects"
-          className={`group text-base sm:text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 ${
-            isIntersecting
-              ? "translate-y-0 opacity-100"
-              : "translate-y-4 opacity-0"
-          }`}
-        >
-          View all projects
-          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
-        </Link>
       </div>
 
       {/* Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {isProjectDetailLoading
-          ? null // Don't show anything when project detail is loading
+          ? null
           : otherProjects.length === 0
-          ? // Loading skeleton - only show when no other projects loaded yet
-            Array.from({ length: 4 }).map((_, index) => (
+          ? Array.from({ length: 2 }).map((_, index) => (
               <OtherProjectCardSkeleton key={index} />
             ))
           : otherProjects.map((project, index) => (

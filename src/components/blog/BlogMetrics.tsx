@@ -10,15 +10,16 @@ export default function BlogMetrics({
   readingTime,
 }: BlogMetricsProps) {
   return (
-    <div className="flex items-center gap-4 sm:gap-6 text-sm text-primary-gray">
-      <div className="flex items-center gap-2">
-        <Eye className="w-4 h-4" />
-        <span>{viewCount} views</span>
-      </div>
-      <div className="flex items-center gap-2">
-        <Clock className="w-4 h-4" />
-        <span>{readingTime} read</span>
-      </div>
+    <div className="flex items-center gap-3 text-sm text-primary-gray">
+      <span className="inline-flex items-center gap-1.5">
+        <Eye className="w-3.5 h-3.5" />
+        {viewCount} VIEWS
+      </span>
+      <span className="w-1 h-1 bg-primary-gray rounded-full" />
+      <span className="inline-flex items-center gap-1.5">
+        <Clock className="w-3.5 h-3.5" />
+        {readingTime} MINS READ
+      </span>
     </div>
   );
 }
