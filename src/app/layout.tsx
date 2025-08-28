@@ -128,7 +128,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${manrope.className} bg-primary-light dark:bg-primary-dark tracking-tight max-w-[425px] xs:max-w-[450px] sm:max-w-xl md:max-w-3xl lg:max-w-5xl mx-auto px-4 border-l border-r border-primary-gray/20`}
+        className={`${manrope.className} bg-primary-light dark:bg-primary-dark tracking-tight`}
       >
         <Layout>{children}</Layout>
       </body>

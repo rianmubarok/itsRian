@@ -14,7 +14,7 @@ export default function BlogHeader({ blog, hasMounted }: BlogHeaderProps) {
         hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
       }`}
     >
-      <h1 className="text-5xl font-semibold leading-tight tracking-tighter mb-4">
+      <h1 className="text-5xl font-semibold leading-tighter tracking-tighter mb-4">
         {blog.title}
       </h1>
       <p className="text-base text-primary-dark dark:text-gray-300 mb-4 sm:mb-6 tracking-normal">

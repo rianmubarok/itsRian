@@ -14,42 +14,42 @@ const Skeleton: React.FC<SkeletonProps> = ({ className = "" }) => {
 
 export const BlogCardSkeleton = () => {
   return (
-    <div className="bg-white dark:bg-white/50 rounded-lg overflow-hidden">
-      <Skeleton className="h-48 w-full" />
-      <div className="p-6">
-        <Skeleton className="h-4 w-3/4 mb-2" />
-        <Skeleton className="h-3 w-full mb-2" />
-        <Skeleton className="h-3 w-2/3 mb-4" />
-        <div className="flex gap-2 mb-4">
-          <Skeleton className="h-6 w-16 rounded-full" />
-          <Skeleton className="h-6 w-20 rounded-full" />
-          <Skeleton className="h-6 w-14 rounded-full" />
-        </div>
-        <div className="flex items-center justify-between">
-          <Skeleton className="h-3 w-20" />
-          <Skeleton className="h-3 w-16" />
+    <article className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
+      <div className="relative h-[200px] sm:h-[250px] overflow-hidden rounded-xl">
+        <Skeleton className="w-full h-full rounded-xl" />
+      </div>
+
+      <div className="-mt-4 pt-10 p-6 bg-primary-light dark:bg-primary-dark rounded-b-xl">
+        <Skeleton className="h-6 w-3/4 mb-3" />
+        <Skeleton className="h-4 w-full mb-2" />
+        <Skeleton className="h-4 w-5/6 mb-4" />
+
+        <div className="flex items-center gap-3 text-xs sm:text-sm">
+          <Skeleton className="h-4 w-24" />
+          <span className="w-1 h-1 bg-primary-gray rounded-full" />
+          <Skeleton className="h-4 w-28" />
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
 export const ProjectCardSkeleton = () => {
   return (
-    <div className="bg-white dark:bg-white/50 rounded-lg overflow-hidden min-w-[300px]">
-      <Skeleton className="h-48 w-full" />
-      <div className="p-6">
-        <Skeleton className="h-5 w-3/4 mb-2" />
+    <div className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
+      <div className="relative h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px] overflow-hidden rounded-xl">
+        <Skeleton className="w-full h-full rounded-xl" />
+      </div>
+
+      <div className="-mt-4 pt-10 p-6 bg-primary-light dark:bg-primary-dark rounded-b-xl">
+        <Skeleton className="h-6 w-3/4 mb-3" />
         <Skeleton className="h-4 w-full mb-2" />
-        <Skeleton className="h-4 w-2/3 mb-4" />
-        <div className="flex gap-2 mb-4">
-          <Skeleton className="h-6 w-16 rounded-full" />
-          <Skeleton className="h-6 w-20 rounded-full" />
-          <Skeleton className="h-6 w-14 rounded-full" />
-        </div>
-        <div className="flex items-center justify-between">
-          <Skeleton className="h-3 w-20" />
-          <Skeleton className="h-3 w-16" />
+        <Skeleton className="h-4 w-5/6 mb-4" />
+
+        <div className="flex flex-wrap gap-1 sm:gap-2">
+          <Skeleton className="h-7 w-20 rounded-full" />
+          <Skeleton className="h-7 w-16 rounded-full" />
+          <Skeleton className="h-7 w-24 rounded-full" />
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@ export const LoadingSpinner = () => {
 export const AboutMeSkeleton = () => {
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
       role="main"
     >
       {/* Header */}
@@ -110,7 +110,7 @@ export const AboutMeSkeleton = () => {
 export const ContactSkeleton = () => {
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
       role="main"
     >
       <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
@@ -154,7 +154,7 @@ export const ContactSkeleton = () => {
 export const GuestbookSkeleton = () => {
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
       role="main"
     >
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 mb-6">
@@ -205,25 +205,9 @@ export const ProjectsHeaderSkeleton = () => {
   return <Skeleton className="h-16 w-64 mb-6" />;
 };
 
-export const FeaturedProjectCardSkeleton = () => {
-  return (
-    <div className="flex-shrink-0 w-[280px] sm:w-[350px] md:w-[400px] lg:w-[450px] h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px]">
-      <Skeleton className="w-full h-full rounded-xl" />
-    </div>
-  );
-};
-
 export const OtherProjectCardSkeleton = () => {
   return (
     <div className="min-w-[300px] h-64">
-      <Skeleton className="w-full h-full rounded-lg" />
-    </div>
-  );
-};
-
-export const FeaturedBlogCardSkeleton = () => {
-  return (
-    <div className="h-64">
       <Skeleton className="w-full h-full rounded-lg" />
     </div>
   );

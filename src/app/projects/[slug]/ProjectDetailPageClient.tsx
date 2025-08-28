@@ -85,7 +85,7 @@ export default function ProjectDetailPageClient({
             </Link>
 
             <div ref={refs.headerRef} className="mb-8 sm:mb-12">
-              <h1 className="text-5xl font-semibold leading-tight tracking-tighter mb-4">
+              <h1 className="text-5xl font-semibold leading-tighter tracking-tighter mb-4">
                 {project.title}
               </h1>
               <p className="text-base text-primary-dark dark:text-gray-300 mb-4 sm:mb-6 tracking-normal">

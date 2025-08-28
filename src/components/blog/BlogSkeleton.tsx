@@ -61,7 +61,7 @@ export default function BlogSkeleton({ hasMounted }: BlogSkeletonProps) {
         ))}
       </div>
 
-      <hr className="border-t border-primary-gray my-12" />
+      <Skeleton className="h-px w-full my-12" />
 
       {/* Related Posts Skeleton */}
       <section

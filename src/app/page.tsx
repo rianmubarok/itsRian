@@ -21,7 +21,7 @@ export const metadata = {
     siteName: siteMetadata.title,
     images: [
       {
-        url: `${siteMetadata.siteUrl}${siteMetadata.socialBanner}`,
+        url: `${siteMetadata.siteUrl}/og/home.png`,
         width: 1200,
         height: 630,
         alt: `${siteMetadata.author} - Portfolio`,
@@ -35,7 +35,7 @@ export const metadata = {
     title: `${siteMetadata.author} - Web Developer & UI/UX Designer`,
     description:
       "Passionate web developer and UI/UX enthusiast creating clean, functional, and engaging digital experiences.",
-    images: [`${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`],
+    images: [`${siteMetadata.siteUrl}/og/home.png`],
   },
   robots: {
     index: true,

@@ -38,12 +38,12 @@ export default function GuestbookPageClient() {
       >
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 sm:gap-6 mb-4 sm:mb-6 transition-all duration-700 ease-out opacity-0 animate-fadein">
           <div className="lg:col-span-3 space-y-6 sm:space-y-8 mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-[32px] leading-tight font-regular text-primary-dark dark:text-primary-light ">
+            <h2 className="text-2xl sm:text-3xl leading-tight font-regular text-primary-dark dark:text-primary-light ">
               Leave whatever you like to say, suggestions, questions or
               anything!
             </h2>
 
-            <div className="text-primary-gray text-xs sm:text-sm font-light space-y-2 sm:space-y-3">
+            <div className="text-primary-gray text-xs sm:text-sm font-light space-y-2 sm:space-y-3 tracking-normal">
               <p>
                 Please sign in to start. Don&apos;t worry, your data is safe.
               </p>

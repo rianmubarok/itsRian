@@ -87,7 +87,7 @@ export default function ProjectDetailSkeleton({
         </div>
       </div>
 
-      <hr className="border-t border-primary-gray/20 my-8" />
+      <Skeleton className="h-px w-full my-8" />
 
       {/* Other Projects Skeleton */}
       <section

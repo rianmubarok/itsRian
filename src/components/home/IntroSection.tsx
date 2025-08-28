@@ -33,7 +33,7 @@ export default function IntroSection() {
           </p>
         </header>
         <h1
-          className={`text-5xl lg:text-6xl font-semibold leading-tight tracking-tighter transition-all duration-700 ease-out delay-400 ${
+          className={`text-5xl lg:text-6xl font-semibold leading-tighter tracking-tighter transition-all duration-700 ease-out delay-400 ${
             isIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"

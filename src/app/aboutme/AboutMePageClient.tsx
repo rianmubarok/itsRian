@@ -39,7 +39,7 @@ export default function AboutMePageClient() {
         <h2 className="text-2xl sm:text-3xl leading-tight font-regular text-primary-dark dark:text-primary-light md:col-span-2">
           Hello! Thank you for visiting my personal website.
         </h2>
-        <p className="text-primary-gray font-regular text-base sm:text-lg md:col-span-3 tracking-normal">
+        <p className="font-regular text-base md:col-span-3 tracking-normal">
           I&apos;m Rian, a passionate web developer and UI/UX enthusiast who
           thrives on turning ideas into clean, functional, and engaging digital
           experiences. Over the years, I&apos;ve dedicated myself to
@@ -50,7 +50,7 @@ export default function AboutMePageClient() {
 
       <div
         ref={profileRef}
-        className={`tracking-normal text-primary-gray font-regular text-base sm:text-lg space-y-3 sm:space-y-4 transition-all duration-700 ease-out delay-300 ${
+        className={`tracking-normal font-regular text-base space-y-3 sm:space-y-4 transition-all duration-700 ease-out delay-300 ${
           profileIntersecting
             ? "translate-y-0 opacity-100"
             : "translate-y-8 opacity-0"
@@ -115,8 +115,8 @@ export default function AboutMePageClient() {
               <h2 className="text-xl sm:text-2xl mb-3 sm:mb-4">
                 {experience.company}, {experience.title}
               </h2>
-              <div className="text-primary-gray text-base sm:text-lg space-y-3 sm:space-y-4">
-                <p className="text-xs sm:text-sm font-light tracking-normal">
+              <div className="text-base space-y-3 sm:space-y-4">
+                <p className="text-primary-gray text-xs sm:text-sm font-light tracking-normal">
                   {calculateDurationFromPeriod(experience.period)} •{" "}
                   {experience.type} • {experience.location}
                 </p>

@@ -40,9 +40,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
       siteName: siteMetadata.title,
       images: [
         {
-          url:
-            project.thumbnail ||
-            `${siteMetadata.siteUrl}${siteMetadata.socialBanner}`,
+          url: project.thumbnail || `${siteMetadata.siteUrl}/og/project.png`,
           width: 1200,
           height: 630,
           alt: project.title,
@@ -56,9 +54,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
       title: `${project.title}`,
       description:
         project.description || `Explore the ${project.title} project`,
-      images: [
-        project.thumbnail || `${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`,
-      ],
+      images: [project.thumbnail || `${siteMetadata.siteUrl}/og/project.png`],
     },
     robots: {
       index: true,

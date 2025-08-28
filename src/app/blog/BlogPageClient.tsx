@@ -23,7 +23,7 @@ export default function BlogPageClient() {
   if (loading) {
     return (
       <main className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {[1, 2, 3, 4].map((item) => (
             <BlogCardSkeleton key={item} />
           ))}
@@ -49,7 +49,7 @@ export default function BlogPageClient() {
     >
       <FeaturedBlogRotator blogs={blogs} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {displayedItems.map((blog, index) => {
           if (!blog) return null;
           return (
@@ -63,7 +63,7 @@ export default function BlogPageClient() {
       </div>
 
       {isLoading && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mt-6 sm:mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6 sm:mt-8">
           {[1, 2, 3, 4].map((item) => (
             <BlogCardSkeleton key={item} />
           ))}

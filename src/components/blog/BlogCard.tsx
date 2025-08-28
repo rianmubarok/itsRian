@@ -50,11 +50,16 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
   }
   if (variant === "featured") {
     return (
-      <article className="group border border-primary-gray/20 rounded-2xl p-4 sm:p-6 transition-colors">
+      <article className="group border border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
         <Link href={`/blog/${blog.slug}`} className="block">
-          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
+          <div className="flex flex-col lg:flex-row gap-4 bg-primary-light dark:bg-primary-dark rounded-l-xl">
             {/* Content */}
-            <div className="flex-1 flex flex-col justify-between">
+            <div className="flex-1 flex flex-col justify-between p-6 py-8">
+              {/* Title */}
+              <h1 className="text-5xl font-semibold leading-tight tracking-tighter">
+                {blog.title}
+              </h1>
+
               {/* Meta info */}
               <div className="flex items-center gap-3 text-xs sm:text-sm text-primary-gray mb-2 sm:mb-3 font-light">
                 <span className="inline-flex items-center gap-1.5">
@@ -67,22 +72,10 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
                   {blog.readingTime} MINS READ
                 </span>
               </div>
-              {/* Title */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tighter">
-                {blog.title}
-              </h1>
-
-              {/* Read more button */}
-              <div className="mt-auto flex items-center gap-2 text-sm sm:text-base font-medium text-primary-dark dark:text-primary-light">
-                <span className="relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:transition-transform after:duration-300 after:scale-x-0 group-hover:after:scale-x-100 after:bg-current">
-                  Read more
-                </span>
-                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-1" />
-              </div>
             </div>
 
             {/* Thumbnail */}
-            <div className="flex-shrink-0 w-full lg:w-110 h-60 sm:h-72 md:h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
+            <div className="flex-shrink-0 w-full lg:w-120 h-60 sm:h-72 md:h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
               <img
                 src={blog.thumbnail}
                 alt={blog.title}

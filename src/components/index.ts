@@ -13,9 +13,7 @@ export {
   ProjectCardSkeleton,
   FeaturedBlogRotatorSkeleton,
   ProjectsHeaderSkeleton,
-  FeaturedProjectCardSkeleton,
   OtherProjectCardSkeleton,
-  FeaturedBlogCardSkeleton,
 } from "./shared/ui/SkeletonLoader";
 
 // Project Components

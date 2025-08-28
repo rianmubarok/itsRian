@@ -1,3 +1,1 @@
-export default function BlogDetailLoading() {
-  return null;
-}
+export { default } from "../../../components/blog/BlogSkeleton";

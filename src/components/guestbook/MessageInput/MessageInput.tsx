@@ -53,7 +53,7 @@ export function MessageInput({
   return (
     <form onSubmit={handleFormSubmit} className="my-4 sm:my-6 relative">
       <div
-        className="flex gap-2 items-start flex-wrap min-h-[32px] p-2 sm:p-3 border border-gray-300 dark:border-primary-gray rounded-xl bg-white dark:bg-white/10 text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 cursor-text relative"
+        className="flex gap-2 items-start flex-wrap min-h-[32px] p-2 sm:p-3 border border-gray-300 dark:border-primary-gray rounded-xl bg-white dark:bg-white/10 text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 cursor-text relative tracking-normal"
         onClick={handleWrapperClick}
         ref={wrapperRef}
         tabIndex={-1}

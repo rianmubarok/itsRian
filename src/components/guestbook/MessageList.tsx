@@ -13,7 +13,7 @@ const MessageList = forwardRef<HTMLDivElement, MessageListProps>(
     return (
       <div
         ref={ref}
-        className="h-[20rem] sm:h-[25rem] md:h-[30rem] overflow-y-auto space-y-3 sm:space-y-4 scrollbar-thin pr-3 sm:pr-5 tracking-normal"
+        className="sm:h-[25rem] md:h-[30rem] overflow-y-auto space-y-3 sm:space-y-4 scrollbar-thin pr-3 sm:pr-5 tracking-normal"
       >
         {messages.slice().map((message) => (
           <GuestbookMessage

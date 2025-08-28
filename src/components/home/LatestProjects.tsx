@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ProjectCard from "../project/ProjectCard";
 import { useIntersectionObserver, useProjects } from "../../hooks";
-import { FeaturedProjectCardSkeleton } from "../shared/ui/SkeletonLoader";
+import { ProjectCardSkeleton } from "../shared/ui/SkeletonLoader";
 
 export default function LatestProjects() {
   const { projects, loading } = useProjects();
@@ -35,7 +35,7 @@ export default function LatestProjects() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         {loading
           ? Array.from({ length: 2 }).map((_, index) => (
-              <FeaturedProjectCardSkeleton key={index} />
+              <ProjectCardSkeleton key={index} />
             ))
           : latestProjects.map((project, index) => (
               <div

@@ -45,7 +45,7 @@ export default function ProjectsPageClient() {
       </h1>
 
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[1, 2, 3, 4].map((item, index) => (
             <div
               key={item}
@@ -64,7 +64,7 @@ export default function ProjectsPageClient() {
           <p className="text-red-500">Error loading projects: {error}</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {displayedItems.map((project, index) => {
             return (
               <div

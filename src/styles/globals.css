@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "nprogress/nprogress.css";
+@import "./nprogress.css";
 
 /* Import separated CSS files */
 @import "./variables.css";

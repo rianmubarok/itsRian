@@ -34,7 +34,7 @@ export default function AuthButtons({
           <div className="flex items-center gap-2 px-3 py-2t">
             <User className="w-4 h-4 text-gray-500 dark:text-gray-400" />
             <div className="flex flex-col">
-              <span className="text-xs text-gray-600 dark:text-gray-300">
+              <span className="text-xs text-gray-600 dark:text-gray-300 tracking-normal">
                 You are signed in as
               </span>
               <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
