@@ -6,7 +6,7 @@ import {
 export default function BlogLoading() {
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
       role="main"
     >
       {/* Featured Blog Rotator Skeleton */}
