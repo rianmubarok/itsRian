@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Project } from "../../types/index";
+import CollageRotator from "../shared/ui/CollageRotator";
 
 interface ProjectCardProps {
   project: Project;
@@ -18,17 +19,41 @@ export default function ProjectCard({
     >
       <Link href={`/projects/${project.slug}`}>
         <div
-          className={`relative overflow-hidden rounded-xl ${
+          className={`relative overflow-hidden rounded-xl bg-primary-light dark:bg-primary-dark ${
             variant === "grid"
-              ? "h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px]"
+              ? "h-[280px] sm:h-[320px]"
               : "h-[280px] sm:h-[320px]"
           }`}
         >
-          <img
-            src={project.thumbnail}
-            alt={project.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
+          {project.resources1 &&
+          project.resources2 &&
+          project.resources1.length > 0 &&
+          project.resources2.length > 0 ? (
+            <div className="w-full h-full transition-transform duration-300 flex justify-center items-center gap-0">
+              <CollageRotator
+                images={project.resources1.map((src) => ({ src }))}
+                direction="vertical"
+                columns={1}
+                imageSize={160}
+                gap={6}
+                containerClassName=""
+              />
+              <CollageRotator
+                images={project.resources2.map((src) => ({ src }))}
+                direction="vertical"
+                columns={1}
+                imageSize={160}
+                gap={6}
+                containerClassName=""
+              />
+            </div>
+          ) : (
+            <img
+              src={project.thumbnail}
+              alt={project.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          )}
         </div>
       </Link>
 

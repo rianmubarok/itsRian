@@ -34,15 +34,30 @@
 /* Infinite loop animation for skills */
 @keyframes looping-tag {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 .animate-looping-tag {
   animation: looping-tag 150s linear infinite;
+  will-change: transform;
+}
+
+/* Vertical infinite loop for collage */
+@keyframes looping-vertical {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+.animate-looping-vertical {
+  animation: looping-vertical 120s linear infinite;
   will-change: transform;
 }
 

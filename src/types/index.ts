@@ -20,6 +20,8 @@ export interface Project {
   content: string;
   sourceCode?: string;
   liveProject?: string;
+  resources1?: string[];
+  resources2?: string[];
 }
 
 export interface BlogPost {
