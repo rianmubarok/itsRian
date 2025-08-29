@@ -1,20 +1,35 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Blog } from "../types";
 import { blogs as staticBlogs } from "../data/blogs";
+
+// Simple in-memory cache with TTL to reduce refetching
+const BLOGS_CACHE_KEY = "__blogs_cache__";
+const BLOGS_CACHE_TTL_MS = 1000 * 60 * 5; // 5 minutes
+type BlogsCache = { data: Blog[]; expiresAt: number } | null;
+let blogsCache: BlogsCache = null;
 
 export function useBlogs() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const isMountedRef = useRef(true);
 
   useEffect(() => {
     async function fetchBlogs() {
       try {
         setLoading(true);
-        const url = `/api/blogs?ts=${Date.now()}`;
-        const response = await fetch(url, { cache: "no-store" });
+        // Try cache first
+        const now = Date.now();
+        if (blogsCache && blogsCache.expiresAt > now) {
+          setBlogs(blogsCache.data);
+          setLoading(false);
+          return;
+        }
+
+        const url = `/api/blogs`;
+        const response = await fetch(url, { cache: "force-cache" });
 
         if (!response.ok) {
           throw new Error("Failed to fetch blogs");
@@ -25,12 +40,21 @@ export function useBlogs() {
         if (data.length === 0) {
           console.warn("API returned empty blogs, using static data");
           setBlogs(staticBlogs);
+          blogsCache = {
+            data: staticBlogs,
+            expiresAt: now + BLOGS_CACHE_TTL_MS,
+          };
         } else {
           setBlogs(data);
+          blogsCache = { data, expiresAt: now + BLOGS_CACHE_TTL_MS };
         }
       } catch (err) {
         console.warn("Failed to fetch blogs from API, using static data:", err);
         setBlogs(staticBlogs);
+        blogsCache = {
+          data: staticBlogs,
+          expiresAt: Date.now() + BLOGS_CACHE_TTL_MS,
+        };
         setError(null);
       } finally {
         setLoading(false);
@@ -39,28 +63,8 @@ export function useBlogs() {
 
     fetchBlogs();
 
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        fetchBlogs();
-      }
-    };
-
-    const handleFocus = () => {
-      fetchBlogs();
-    };
-
-    const handlePageShow = () => {
-      fetchBlogs();
-    };
-
-    window.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("focus", handleFocus);
-    window.addEventListener("pageshow", handlePageShow);
-
     return () => {
-      window.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("focus", handleFocus);
-      window.removeEventListener("pageshow", handlePageShow);
+      isMountedRef.current = false;
     };
   }, []);
 

@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { Eye, Clock } from "lucide-react";
 import { Blog } from "../../types";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 
 interface BlogCardProps {
   blog: Blog;
   variant?: "featured" | "tile";
 }
 
-export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
+function BlogCardBase({ blog, variant = "tile" }: BlogCardProps) {
   if (variant === "tile") {
     return (
       <article className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
@@ -174,3 +174,14 @@ export function AnimatedBlogCard({
     </div>
   );
 }
+
+const BlogCard = memo(BlogCardBase, (prev, next) => {
+  return (
+    prev.variant === next.variant &&
+    prev.blog.id === next.blog.id &&
+    prev.blog.updatedAt === next.blog.updatedAt &&
+    prev.blog.viewCount === next.blog.viewCount
+  );
+});
+
+export default BlogCard;

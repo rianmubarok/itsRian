@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useCallback } from "react";
 import InfiniteLoopSlider from "./InfiniteLoopSlider";
 import VerticalLoopSlider from "./VerticalLoopSlider";
 
@@ -28,6 +28,11 @@ export default function CollageRotator({
   containerClassName = "",
   columnGap = 6,
 }: CollageRotatorProps) {
+  const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({});
+  const markLoaded = useCallback((key: string) => {
+    setLoadedMap((prev) => (prev[key] ? prev : { ...prev, [key]: true }));
+  }, []);
+
   const groups = useMemo(() => {
     if (!images || images.length === 0) return [] as Array<typeof images>;
     const cloned = [...images];
@@ -63,8 +68,14 @@ export default function CollageRotator({
                     <img
                       src={img.src}
                       alt={img.alt || "Collage image"}
-                      className="w-full h-full object-cover"
+                      className={`w-full h-full object-cover transition-opacity duration-300 ${
+                        loadedMap[`${img.src}-${idx}`]
+                          ? "opacity-100"
+                          : "opacity-0"
+                      }`}
                       loading="lazy"
+                      onLoad={() => markLoaded(`${img.src}-${idx}`)}
+                      onError={() => markLoaded(`${img.src}-${idx}`)}
                     />
                   </div>
                 ))}
@@ -97,8 +108,12 @@ export default function CollageRotator({
                 <img
                   src={img.src}
                   alt={img.alt || "Collage image"}
-                  className="w-full h-auto object-cover"
+                  className={`w-full h-auto object-cover transition-opacity duration-300 ${
+                    loadedMap[`${img.src}-${idx}`] ? "opacity-100" : "opacity-0"
+                  }`}
                   loading="lazy"
+                  onLoad={() => markLoaded(`${img.src}-${idx}`)}
+                  onError={() => markLoaded(`${img.src}-${idx}`)}
                 />
               </div>
             ))}
