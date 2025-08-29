@@ -1,69 +1,55 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { useProjects } from "../../hooks";
 import ProjectCard from "./ProjectCard";
-import { useProjects, useIntersectionObserver } from "../../hooks";
-import { OtherProjectCardSkeleton } from "../shared/ui/SkeletonLoader";
+import { Project } from "../../types";
 
 interface OtherProjectsProps {
   currentProjectSlug: string;
-  isProjectDetailLoading?: boolean;
+  isProjectDetailLoading: boolean;
 }
 
 export default function OtherProjects({
   currentProjectSlug,
-  isProjectDetailLoading = false,
+  isProjectDetailLoading,
 }: OtherProjectsProps) {
-  const { projects, loading } = useProjects();
+  const { projects } = useProjects();
 
   const otherProjects = projects
-    .filter((project) => project.slug !== currentProjectSlug)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 2);
+    .filter((project: Project) => project.slug !== currentProjectSlug)
+    .slice(0, 4);
 
-  const { ref, isIntersecting } = useIntersectionObserver<HTMLElement>({
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  });
+  if (otherProjects.length === 0) return null;
 
   return (
-    <section ref={ref}>
-      <div className="sm:text-center mb-10 text-primary-dark dark:text-primary-light">
-        <h2
-          className={`text-5xl font-semibold leading-tight tracking-tighter transition-all duration-700 ease-out ${
-            isIntersecting
-              ? "translate-y-0 opacity-100"
-              : "translate-y-4 opacity-0"
-          }`}
-        >
+    <section className="mb-16">
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-2xl sm:text-3xl font-semibold leading-tight tracking-tighter">
           Other Projects
         </h2>
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-primary-gray">View all</span>
+          <div className="w-8 h-8 rounded-full bg-primary-gray/20 flex items-center justify-center">
+            <svg
+              className="w-4 h-4 text-primary-gray"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
-
-      {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-        {isProjectDetailLoading
-          ? null
-          : otherProjects.length === 0
-          ? Array.from({ length: 2 }).map((_, index) => (
-              <OtherProjectCardSkeleton key={index} />
-            ))
-          : otherProjects.map((project, index) => (
-              <div
-                key={project.id}
-                className="transition-all duration-700 ease-out"
-                style={{
-                  transitionDelay: `${600 + index * 100}ms`,
-                  transform: isIntersecting
-                    ? "translateY(0) scale(1)"
-                    : "translateY(20px) scale(0.95)",
-                  opacity: isIntersecting ? 1 : 0,
-                }}
-              >
-                <ProjectCard project={project} variant="featured" />
-              </div>
-            ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {otherProjects.map((project: Project) => (
+          <ProjectCard key={project.id} project={project} variant="grid" />
+        ))}
       </div>
     </section>
   );

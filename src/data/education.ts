@@ -10,18 +10,11 @@ export interface Education {
 export const education: Education[] = [
   {
     id: "1",
-    period: "2020 - 2024",
+    period: "2023 - present",
     degree: "Bachelor of Computer Science",
-    institution: "University of Technology",
-    location: "Jakarta",
-    description: "Studied computer science with focus on software engineering, algorithms, and data structures. Completed final year project on web application development using modern technologies.",
+    institution: "Universitas Islam Nahdlatul Ulama Jepara",
+    location: "Jepara",
+    description:
+      "Currently pursuing a degree in Computer Science with focus on programming, software development, and UI/UX design. Balancing academic studies with professional work as an icon designer and personal projects in web development and motion graphics.",
   },
-  {
-    id: "2",
-    period: "2018 - 2020",
-    degree: "High School Diploma",
-    institution: "Science High School",
-    location: "Bandung",
-    description: "Completed high school with focus on mathematics and natural sciences. Participated in various academic competitions and coding clubs.",
-  },
-]; 
+];

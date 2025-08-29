@@ -93,14 +93,88 @@ export const AboutMeSkeleton = () => {
 
       <Skeleton className="h-px w-full my-12" />
 
-      {/* Experience */}
-      <div className="grid grid-cols-1 md:grid-cols-6">
-        <Skeleton className="h-8 w-48 md:col-span-2" />
-        <div className="md:col-span-4 space-y-4">
-          <Skeleton className="h-8 w-64" />
-          <Skeleton className="h-4 w-32" />
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-6 w-5/6" />
+      {/* Experience Accordion Skeleton */}
+      <div className="mb-4">
+        <div className="border border-primary-gray/20 rounded-xl overflow-hidden bg-gray-50 dark:bg-primary-light/5">
+          {/* Accordion Header */}
+          <div className="px-6 py-4 flex items-center justify-between">
+            <Skeleton className="h-8 w-48" />
+            <Skeleton className="w-6 h-6 rounded" />
+          </div>
+          {/* Accordion Content (Closed by default) */}
+          <div className="px-6 pb-6">
+            <div className="pt-4 border-t border-primary-gray/10">
+              <div className="space-y-8 sm:space-y-12">
+                {[1, 2].map((item) => (
+                  <div
+                    key={item}
+                    className="grid grid-cols-1 md:grid-cols-6 gap-4 items-start"
+                  >
+                    <Skeleton className="h-12 w-32 rounded-full" />
+                    <div className="md:col-span-4 space-y-3">
+                      <Skeleton className="h-6 w-3/4" />
+                      <Skeleton className="h-5 w-1/2" />
+                      <Skeleton className="h-4 w-2/3" />
+                      <Skeleton className="h-5 w-full" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Education Accordion Skeleton */}
+      <div className="mb-4">
+        <div className="border border-primary-gray/20 rounded-xl overflow-hidden bg-gray-50 dark:bg-primary-light/5">
+          {/* Accordion Header */}
+          <div className="px-6 py-4 flex items-center justify-between">
+            <Skeleton className="h-8 w-40" />
+            <Skeleton className="w-6 h-6 rounded" />
+          </div>
+          {/* Accordion Content (Closed by default) */}
+          <div className="px-6 pb-6">
+            <div className="pt-4 border-t border-primary-gray/10">
+              <div className="space-y-8 sm:space-y-12">
+                {[1, 2].map((item) => (
+                  <div
+                    key={item}
+                    className="grid grid-cols-1 md:grid-cols-6 gap-4 items-start"
+                  >
+                    <Skeleton className="h-12 w-32 rounded-full" />
+                    <div className="md:col-span-4 space-y-3">
+                      <Skeleton className="h-6 w-3/4" />
+                      <Skeleton className="h-5 w-1/2" />
+                      <Skeleton className="h-4 w-1/3" />
+                      <Skeleton className="h-5 w-full" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* License Accordion Skeleton */}
+      <div className="mb-4">
+        <div className="border border-primary-gray/20 rounded-xl overflow-hidden bg-gray-50 dark:bg-primary-light/5">
+          {/* Accordion Header */}
+          <div className="px-6 py-4 flex items-center justify-between">
+            <Skeleton className="h-8 w-64" />
+            <Skeleton className="w-6 h-6 rounded" />
+          </div>
+          {/* Accordion Content (Closed by default) */}
+          <div className="px-6 pb-6">
+            <div className="pt-4 border-t border-primary-gray/10">
+              <div className="text-center py-6">
+                <Skeleton className="w-16 h-16 mx-auto mb-4 rounded-full" />
+                <Skeleton className="h-6 w-32 mx-auto mb-2" />
+                <Skeleton className="h-5 w-64 mx-auto" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

@@ -41,3 +41,87 @@
 @utility font-noto-serif-display {
   font-family: var(--font-noto-serif-display);
 }
+
+@keyframes MoveUpInitial {
+  to {
+    transform: translate3d(0, -105%, 0);
+  }
+}
+
+@keyframes MoveUpEnd {
+  from {
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Connect button: same effect with clearer defaults for visibility */
+.connect-button {
+  --btn-bg-color: var(--color-primary-dark);
+  --btn-bg-color-hover: transparent;
+  --font-color-dark: var(--color-primary-dark);
+  --font-color-light: var(--color-primary-light);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+  padding: 1rem 1.5rem;
+  border: 1px solid #000;
+  overflow: hidden;
+  background-color: var(--btn-bg-color-hover);
+  border-radius: 9999px;
+}
+
+/* Keep content layout horizontal; do not force spans to block */
+
+.connect-button > span,
+.connect-button > span > span {
+  color: var(--font-color-light);
+  overflow: hidden;
+}
+
+/* Icon inherits color and transitions like text */
+.connect-button svg {
+  color: var(--font-color-light);
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.connect-button:hover > span > span {
+  color: var(--font-color-dark);
+  animation: MoveUpInitial 0.2s forwards, MoveUpEnd 0.2s forwards 0.2s;
+}
+
+.connect-button:hover svg {
+  color: var(--font-color-dark);
+}
+
+.connect-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--btn-bg-color);
+  transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+  transform-origin: 100% 50%;
+  transform: scale3d(1, 1, 1);
+  z-index: 0;
+}
+
+.connect-button:hover::before {
+  transform: scale3d(0, 1, 1);
+  transform-origin: 0% 50%;
+}
+
+/* Dark theme override: invert overlay/text for contrast */
+.dark .connect-button {
+  --btn-bg-color: var(--color-primary-light);
+  --btn-bg-color-hover: transparent;
+  --font-color-dark: var(--color-primary-light);
+  --font-color-light: var(--color-primary-dark);
+  border-color: #fff;
+}

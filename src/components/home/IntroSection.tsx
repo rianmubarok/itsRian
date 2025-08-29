@@ -39,7 +39,9 @@ export default function IntroSection() {
               : "translate-y-8 opacity-0"
           }`}
         >
-          Bridging design with development
+          <span className="inline-flex items-center gap-2">
+            Bridging design with development
+          </span>
         </h1>
       </article>
     </section>

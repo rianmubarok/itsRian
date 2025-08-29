@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Eye, Clock } from "lucide-react";
+import { Eye, Clock } from "lucide-react";
 import { Blog } from "../../types";
 import { useEffect, useState } from "react";
 
