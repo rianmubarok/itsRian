@@ -84,6 +84,7 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
           showContent ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
+        {/* Hide list skeleton if we are navigating from the blog list */}
         <BlogSkeleton hasMounted={hasMounted} />
       </div>
 

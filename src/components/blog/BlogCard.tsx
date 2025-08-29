@@ -12,7 +12,14 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
   if (variant === "tile") {
     return (
       <article className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
-        <Link href={`/blog/${blog.slug}`}>
+        <Link
+          href={`/blog/${blog.slug}`}
+          onClick={() => {
+            try {
+              sessionStorage.setItem("navigatingToBlogDetail", "1");
+            } catch {}
+          }}
+        >
           <div className="relative h-[200px] sm:h-[250px] overflow-hidden rounded-xl">
             <img
               src={blog.thumbnail}
@@ -23,7 +30,14 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
         </Link>
 
         <div className="-mt-4 pt-10 p-6 bg-primary-light dark:bg-primary-dark rounded-b-xl">
-          <Link href={`/blog/${blog.slug}`}>
+          <Link
+            href={`/blog/${blog.slug}`}
+            onClick={() => {
+              try {
+                sessionStorage.setItem("navigatingToBlogDetail", "1");
+              } catch {}
+            }}
+          >
             <h3 className="text-2xl font-semibold mb-2 sm:mb-3 text-primary-dark dark:text-primary-light">
               {blog.title}
             </h3>
@@ -51,7 +65,15 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
   if (variant === "featured") {
     return (
       <article className="group border border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
-        <Link href={`/blog/${blog.slug}`} className="block">
+        <Link
+          href={`/blog/${blog.slug}`}
+          className="block"
+          onClick={() => {
+            try {
+              sessionStorage.setItem("navigatingToBlogDetail", "1");
+            } catch {}
+          }}
+        >
           <div className="flex flex-col lg:flex-row gap-4 bg-primary-light dark:bg-primary-dark rounded-xl">
             {/* Content */}
             <div className="flex-1 flex flex-col justify-between p-6">

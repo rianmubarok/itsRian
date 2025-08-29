@@ -58,10 +58,15 @@ export default function BlogPageClient() {
     );
   }
 
-  // Tampilkan skeleton loader saat data sedang dimuat
+  // Tampilkan skeleton loader saat data sedang dimuat,
+  // kecuali ketika sedang menavigasi ke halaman detail untuk mencegah flash
+  const navigatingToDetail =
+    typeof window !== "undefined" &&
+    sessionStorage.getItem("navigatingToBlogDetail") === "1";
+
   if (
-    (loading && showSkeleton) ||
-    (displayedItems.length === 0 && showSkeleton)
+    !navigatingToDetail &&
+    ((loading && showSkeleton) || (displayedItems.length === 0 && showSkeleton))
   ) {
     return (
       <main
@@ -86,6 +91,18 @@ export default function BlogPageClient() {
       className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
       role="main"
     >
+      {/* Clear navigation flag on render */}
+      <span
+        className="hidden"
+        aria-hidden
+        ref={() => {
+          try {
+            if (typeof window !== "undefined") {
+              sessionStorage.removeItem("navigatingToBlogDetail");
+            }
+          } catch {}
+        }}
+      />
       <FeaturedBlogRotator blogs={blogs} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
