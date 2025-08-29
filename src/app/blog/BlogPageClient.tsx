@@ -8,10 +8,25 @@ import {
   FeaturedBlogRotatorSkeleton,
 } from "../../components/shared/ui/SkeletonLoader";
 import { useBlogs } from "../../hooks/useBlogs";
+import { useEffect as useEffectReact, useState } from "react";
 import { AnimatedBlogCard } from "../../components/blog/BlogCard";
 
 export default function BlogPageClient() {
   const { blogs, loading, error } = useBlogs();
+  const [showSkeleton, setShowSkeleton] = useState(false);
+
+  // Debounce skeleton to avoid brief flashes on fast route transitions
+  useEffectReact(() => {
+    let timeoutId: number | undefined;
+    if (loading) {
+      timeoutId = window.setTimeout(() => setShowSkeleton(true), 200);
+    } else {
+      setShowSkeleton(false);
+    }
+    return () => {
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
+  }, [loading]);
 
   useEffect(() => {
     const refetchOnSignal = () => {
@@ -44,7 +59,10 @@ export default function BlogPageClient() {
   }
 
   // Tampilkan skeleton loader saat data sedang dimuat
-  if (loading || displayedItems.length === 0) {
+  if (
+    (loading && showSkeleton) ||
+    (displayedItems.length === 0 && showSkeleton)
+  ) {
     return (
       <main
         className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"

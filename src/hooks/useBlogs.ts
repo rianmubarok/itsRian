@@ -71,18 +71,24 @@ export function useBlog(slug: string) {
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const inflightPrefix = "viewing:";
 
   useEffect(() => {
     async function fetchBlog() {
       try {
         setLoading(true);
+        const normalized = (slug || "").trim().toLowerCase();
         let shouldInc = true;
+        const viewedKey = `viewed:${normalized}`;
+        const viewingKey = `${inflightPrefix}${normalized}`;
         try {
-          const key = `viewed:${slug}`;
-          if (sessionStorage.getItem(key)) {
+          if (
+            sessionStorage.getItem(viewedKey) ||
+            sessionStorage.getItem(viewingKey)
+          ) {
             shouldInc = false;
           } else {
-            sessionStorage.setItem(key, "1");
+            sessionStorage.setItem(viewingKey, "1");
           }
         } catch {}
 
@@ -102,6 +108,11 @@ export function useBlog(slug: string) {
 
         const data = await response.json();
         setBlog(data);
+        // Only mark as viewed after a successful response, and clear inflight
+        try {
+          if (shouldInc) sessionStorage.setItem(viewedKey, "1");
+          sessionStorage.removeItem(viewingKey);
+        } catch {}
       } catch (err) {
         console.warn("Failed to fetch blog from API, trying static data:", err);
         const staticBlog = staticBlogs.find((b) => b.slug === slug);
