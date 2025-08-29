@@ -179,7 +179,8 @@ const BlogCard = memo(BlogCardBase, (prev, next) => {
   return (
     prev.variant === next.variant &&
     prev.blog.id === next.blog.id &&
-    prev.blog.updatedAt === next.blog.updatedAt &&
+    prev.blog.slug === next.blog.slug &&
+    prev.blog.createdAt === next.blog.createdAt &&
     prev.blog.viewCount === next.blog.viewCount
   );
 });
