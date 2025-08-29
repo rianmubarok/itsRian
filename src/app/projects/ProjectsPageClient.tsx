@@ -35,7 +35,6 @@ export default function ProjectsPageClient() {
     );
   }
 
-  // Tampilkan skeleton loader saat data sedang dimuat
   if (loading || displayedItems.length === 0) {
     return (
       <main
@@ -104,7 +103,6 @@ export default function ProjectsPageClient() {
         })}
       </div>
 
-      {/* Loading untuk infinite scroll - menggunakan skeleton card yang sama */}
       {isLoading && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-6 sm:mt-8">
           {[1, 2, 3, 4].map((item, index) => (
@@ -122,7 +120,6 @@ export default function ProjectsPageClient() {
         </div>
       )}
 
-      {/* Hidden div untuk infinite scroll trigger */}
       {hasMore && <div ref={loadingRef} className="h-20" />}
     </main>
   );

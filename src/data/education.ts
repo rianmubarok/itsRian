@@ -15,6 +15,6 @@ export const education: Education[] = [
     institution: "Universitas Islam Nahdlatul Ulama Jepara",
     location: "Jepara",
     description:
-      "Currently pursuing a degree in Computer Science with focus on programming, software development, and UI/UX design. Balancing academic studies with professional work as an icon designer and personal projects in web development and motion graphics.",
+      "Currently pursuing a degree in Computer Science with a focus on programming, software development, and problem-solving. Actively involved in academic projects including web and mobile application development, learning new frameworks, and applying algorithms and data structures in practical scenarios.",
   },
 ];

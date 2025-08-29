@@ -58,8 +58,6 @@ export default function BlogPageClient() {
     );
   }
 
-  // Tampilkan skeleton loader saat data sedang dimuat,
-  // kecuali ketika sedang menavigasi ke halaman detail untuk mencegah flash
   const navigatingToDetail =
     typeof window !== "undefined" &&
     sessionStorage.getItem("navigatingToBlogDetail") === "1";
@@ -118,7 +116,6 @@ export default function BlogPageClient() {
         })}
       </div>
 
-      {/* Loading untuk infinite scroll - menggunakan skeleton card yang sama */}
       {isLoading && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6 sm:mt-8">
           {[1, 2, 3, 4].map((item) => (
@@ -127,7 +124,6 @@ export default function BlogPageClient() {
         </div>
       )}
 
-      {/* Hidden div untuk infinite scroll trigger */}
       {hasMore && <div ref={loadingRef} className="h-20" />}
     </main>
   );
