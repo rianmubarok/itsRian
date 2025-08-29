@@ -52,9 +52,9 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
     return (
       <article className="group border border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
         <Link href={`/blog/${blog.slug}`} className="block">
-          <div className="flex flex-col lg:flex-row gap-4 bg-primary-light dark:bg-primary-dark rounded-l-xl">
+          <div className="flex flex-col lg:flex-row gap-4 bg-primary-light dark:bg-primary-dark rounded-xl">
             {/* Content */}
-            <div className="flex-1 flex flex-col justify-between p-6 py-8">
+            <div className="flex-1 flex flex-col justify-between p-6">
               {/* Title */}
               <h1 className="text-5xl font-semibold leading-tight tracking-tighter">
                 {blog.title}

@@ -194,9 +194,31 @@ export const GuestbookSkeleton = () => {
 
 export const FeaturedBlogRotatorSkeleton = () => {
   return (
-    <div className="mb-16">
-      <Skeleton className="h-16 w-64 mb-6" />
-      <Skeleton className="h-80 rounded-xl" />
+    <div className="mb-16 hidden lg:block">
+      <div className="group border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5">
+        <div className="flex flex-col lg:flex-row gap-4 bg-primary-light dark:bg-primary-dark rounded-xl">
+          {/* Content Skeleton */}
+          <div className="flex-1 flex flex-col justify-between p-6">
+            {/* Title Skeleton */}
+            <div className="space-y-4">
+              <Skeleton className="h-16 w-3/4" />
+              <Skeleton className="h-12 w-1/2" />
+            </div>
+
+            {/* Meta info Skeleton */}
+            <div className="flex items-center gap-3 mt-4">
+              <Skeleton className="h-4 w-20" />
+              <span className="w-1 h-1 bg-primary-gray rounded-full" />
+              <Skeleton className="h-4 w-24" />
+            </div>
+          </div>
+
+          {/* Thumbnail Skeleton */}
+          <div className="flex-shrink-0 w-full lg:w-120 h-60 sm:h-72 md:h-80 overflow-hidden rounded-xl">
+            <Skeleton className="w-full h-full rounded-xl" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

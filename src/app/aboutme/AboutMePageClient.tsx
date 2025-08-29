@@ -2,7 +2,10 @@
 
 import { experiences } from "../../data/experiences";
 import { useIntersectionObserver } from "../../hooks";
-import { calculateDurationFromPeriod } from "@/utils";
+import SectionAccordion from "../../components/aboutme/SectionAccordion";
+import ExperienceList from "../../components/aboutme/ExperienceList";
+import EducationList from "../../components/aboutme/EducationList";
+import LicenseList from "../../components/aboutme/LicenseList";
 
 export default function AboutMePageClient() {
   const { ref: headerRef, isIntersecting: headerIntersecting } =
@@ -12,12 +15,6 @@ export default function AboutMePageClient() {
     });
 
   const { ref: profileRef, isIntersecting: profileIntersecting } =
-    useIntersectionObserver<HTMLDivElement>({
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    });
-
-  const { ref: experienceRef, isIntersecting: experienceIntersecting } =
     useIntersectionObserver<HTMLDivElement>({
       threshold: 0.1,
       rootMargin: "0px 0px -50px 0px",
@@ -59,7 +56,7 @@ export default function AboutMePageClient() {
         <p>
           I specialize in building responsive websites and interactive user
           interfaces using technologies like JavaScript, TypeScript, React, and
-          Tailwind CSS. On the backend, I’ve explored Node.js and Firebase for
+          Tailwind CSS. On the backend, I've explored Node.js and Firebase for
           creating scalable, real-time applications. I also enjoy learning about
           full-stack workflows and staying updated with modern development tools
           and best practices.
@@ -71,7 +68,7 @@ export default function AboutMePageClient() {
           interfaces should work well for everyone.
         </p>
         <p>
-          In collaborative environments, I’m a good listener, proactive
+          In collaborative environments, I'm a good listener, proactive
           problem-solver, and open to feedback. Whether working in a team or
           independently, I always aim to deliver thoughtful, reliable solutions
           that align with project goals.
@@ -88,43 +85,25 @@ export default function AboutMePageClient() {
 
       <hr className="border-t border-primary-gray/20 my-8 sm:my-12" />
 
-      <div
-        ref={experienceRef}
-        className={`space-y-8 sm:space-y-12 transition-all duration-700 ease-out delay-600 ${
-          experienceIntersecting
-            ? "translate-y-0 opacity-100"
-            : "translate-y-8 opacity-0"
-        }`}
-      >
-        {experiences.map((experience, index) => (
-          <div
-            key={experience.id}
-            className="text-primary-dark font-regular dark:text-primary-light grid grid-cols-1 md:grid-cols-6 transition-all duration-700 ease-out"
-            style={{
-              transitionDelay: `${900 + index * 200}ms`,
-              transform: experienceIntersecting
-                ? "translateY(0)"
-                : "translateY(20px)",
-              opacity: experienceIntersecting ? 1 : 0,
-            }}
-          >
-            <h2 className="text-xl sm:text-2xl md:col-span-2">
-              {experience.period}
-            </h2>
-            <div className="md:col-span-4">
-              <h2 className="text-xl sm:text-2xl mb-3 sm:mb-4">
-                {experience.company}, {experience.title}
-              </h2>
-              <div className="text-base space-y-3 sm:space-y-4">
-                <p className="text-primary-gray text-xs sm:text-sm font-light tracking-normal">
-                  {calculateDurationFromPeriod(experience.period)} •{" "}
-                  {experience.type} • {experience.location}
-                </p>
-                <p className="tracking-normal">{experience.description}</p>
-              </div>
-            </div>
-          </div>
-        ))}
+      {/* Experience Section dengan Accordion */}
+      <div className="mb-4">
+        <SectionAccordion title="Experience" defaultOpen={true}>
+          <ExperienceList />
+        </SectionAccordion>
+      </div>
+
+      {/* Education Section dengan Accordion */}
+      <div className="mb-4">
+        <SectionAccordion title="Education">
+          <EducationList />
+        </SectionAccordion>
+      </div>
+
+      {/* License & Certification Section dengan Accordion */}
+      <div className="mb-4">
+        <SectionAccordion title="Licenses & Certifications">
+          <LicenseList />
+        </SectionAccordion>
       </div>
     </main>
   );

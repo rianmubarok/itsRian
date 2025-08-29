@@ -51,6 +51,17 @@ export default function ProjectDetailPageClient({
     handleContentShow(isLoading, project);
   }, [isLoading, project, handleContentShow]);
 
+  useEffect(() => {
+    if (!showContent) {
+      document.body.classList.add("hide-footer");
+    } else {
+      document.body.classList.remove("hide-footer");
+    }
+    return () => {
+      document.body.classList.remove("hide-footer");
+    };
+  }, [showContent]);
+
   if (!isLoading && !project) {
     notFound();
   }
