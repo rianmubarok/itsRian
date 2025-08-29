@@ -20,16 +20,28 @@ export function useBlogs() {
     async function fetchBlogs() {
       try {
         setLoading(true);
-        // Try cache first
+        // Determine if we should bypass cache (e.g., returning from detail page)
+        let shouldBypassCache = false;
+        try {
+          shouldBypassCache =
+            sessionStorage.getItem("navigatingToBlogDetail") === "1";
+          if (shouldBypassCache) {
+            sessionStorage.removeItem("navigatingToBlogDetail");
+          }
+        } catch {}
+
+        // Try cache first unless bypassing
         const now = Date.now();
-        if (blogsCache && blogsCache.expiresAt > now) {
+        if (!shouldBypassCache && blogsCache && blogsCache.expiresAt > now) {
           setBlogs(blogsCache.data);
           setLoading(false);
           return;
         }
 
         const url = `/api/blogs`;
-        const response = await fetch(url, { cache: "force-cache" });
+        const response = await fetch(url, {
+          cache: shouldBypassCache ? "no-store" : "force-cache",
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch blogs");
