@@ -45,13 +45,13 @@ const LetConnectSection = () => {
           }`}
         >
           {/* Text */}
-          <p className="text-center sm:text-left sm:text-lg sm:text-xl text-primary-gray dark:text-gray-300 leading-relaxed">
+          <p className="text-lg text-primary-gray dark:text-gray-300 leading-relaxed">
             Ready to collaborate on your next project? <br />
             Let&apos;s discuss how we can bring your ideas to life.
           </p>
 
-          {/* Right side: Animated Button */}
-          <div className="flex items-center gap-4 justify-center md:justify-end">
+          {/* Button */}
+          <div className="flex items-center gap-4 justify-start sm:justify-end">
             <button
               onClick={handleConnect}
               className="cursor-pointer connect-button relative"
