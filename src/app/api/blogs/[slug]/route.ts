@@ -15,6 +15,8 @@ export async function GET(
 
     const userAgent = request.headers.get("user-agent") || "";
     const isBot = /bot|crawler|spider|crawling/i.test(userAgent);
+    const url = new URL(request.url);
+    const shouldIncrement = url.searchParams.get("inc") !== "0";
 
     const blog = await getBlogBySlug(slug);
 
@@ -22,7 +24,7 @@ export async function GET(
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
 
-    if (!isBot) {
+    if (!isBot && shouldIncrement) {
       await incrementViewCount(slug);
     }
 

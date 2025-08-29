@@ -13,7 +13,8 @@ export function useBlogs() {
     async function fetchBlogs() {
       try {
         setLoading(true);
-        const response = await fetch("/api/blogs");
+        const url = `/api/blogs?ts=${Date.now()}`;
+        const response = await fetch(url, { cache: "no-store" });
 
         if (!response.ok) {
           throw new Error("Failed to fetch blogs");
@@ -37,6 +38,30 @@ export function useBlogs() {
     }
 
     fetchBlogs();
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        fetchBlogs();
+      }
+    };
+
+    const handleFocus = () => {
+      fetchBlogs();
+    };
+
+    const handlePageShow = () => {
+      fetchBlogs();
+    };
+
+    window.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", handleFocus);
+    window.addEventListener("pageshow", handlePageShow);
+
+    return () => {
+      window.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("pageshow", handlePageShow);
+    };
   }, []);
 
   return { blogs, loading, error };
@@ -51,7 +76,22 @@ export function useBlog(slug: string) {
     async function fetchBlog() {
       try {
         setLoading(true);
-        const response = await fetch(`/api/blogs/${slug}`);
+        let shouldInc = true;
+        try {
+          const key = `viewed:${slug}`;
+          if (sessionStorage.getItem(key)) {
+            shouldInc = false;
+          } else {
+            sessionStorage.setItem(key, "1");
+          }
+        } catch {}
+
+        const response = await fetch(
+          `/api/blogs/${slug}?inc=${shouldInc ? "1" : "0"}`,
+          {
+            cache: "no-store",
+          }
+        );
 
         if (!response.ok) {
           if (response.status === 404) {

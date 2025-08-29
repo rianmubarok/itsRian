@@ -79,6 +79,7 @@ function AnimatedSunMoon({ isDarkMode }: AnimatedSunMoonProps) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      initial={{ rotate: target.rotate as number }}
       animate={{ rotate: target.rotate }}
       transition={properties.transition}
       style={{ display: "block" }}
@@ -86,24 +87,27 @@ function AnimatedSunMoon({ isDarkMode }: AnimatedSunMoonProps) {
       <mask id={maskId}>
         <rect x="0" y="0" width="100%" height="100%" fill="white" />
         <motion.circle
-          r="9"
+          r={9}
           fill="black"
+          initial={{ cx: target.cx as number, cy: target.cy as number }}
           animate={{ cx: target.cx as number, cy: target.cy as number }}
           transition={properties.transition}
         />
       </mask>
 
       <motion.circle
-        cx="12"
-        cy="12"
+        cx={12}
+        cy={12}
         fill="currentColor"
         mask={`url(#${maskId})`}
+        initial={{ r: target.r as number }}
         animate={{ r: target.r as number }}
         transition={properties.transition}
       />
 
       <motion.g
         stroke="currentColor"
+        initial={{ opacity: target.raysOpacity as number }}
         animate={{ opacity: target.raysOpacity as number }}
         transition={properties.transition}
       >

@@ -1,6 +1,7 @@
 "use client";
 
 import FeaturedBlogRotator from "../../components/blog/FeaturedBlogRotator";
+import { useEffect } from "react";
 import { useInfiniteScroll } from "../../hooks";
 import {
   BlogCardSkeleton,
@@ -11,6 +12,18 @@ import { AnimatedBlogCard } from "../../components/blog/BlogCard";
 
 export default function BlogPageClient() {
   const { blogs, loading, error } = useBlogs();
+
+  useEffect(() => {
+    const refetchOnSignal = () => {
+      // No-op here; useBlogs already refetches on visibility/focus/page show.
+      // Triggering state by dispatching a visibility event in case browsers suppress it.
+      try {
+        document.dispatchEvent(new Event("visibilitychange"));
+      } catch {}
+    };
+    window.addEventListener("blogViewUpdated", refetchOnSignal);
+    return () => window.removeEventListener("blogViewUpdated", refetchOnSignal);
+  }, []);
 
   const { displayedItems, isLoading, hasMore, loadingRef } = useInfiniteScroll(
     blogs,
@@ -41,7 +54,7 @@ export default function BlogPageClient() {
         <FeaturedBlogRotatorSkeleton />
 
         {/* Blog Grid Skeleton */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
             <BlogCardSkeleton key={item} />
           ))}

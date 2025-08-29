@@ -25,11 +25,7 @@ export async function GET() {
     );
 
     const response = NextResponse.json(blogsWithViews);
-    response.headers.set(
-      "Cache-Control",
-      "public, s-maxage=300, stale-while-revalidate=600"
-    );
-
+    response.headers.set("Cache-Control", "no-store");
     return response;
   } catch (error) {
     console.error("Error fetching blogs:", error);

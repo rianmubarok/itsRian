@@ -41,6 +41,23 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
     }
     return () => {
       document.body.classList.remove("hide-footer");
+      try {
+        if (slug) {
+          const marker = `${slug}:${Date.now()}`;
+          sessionStorage.setItem("blogViewUpdated", marker);
+          if (typeof window !== "undefined") {
+            window.dispatchEvent(new Event("blogViewUpdated"));
+          }
+          setTimeout(() => {
+            try {
+              const current = sessionStorage.getItem("blogViewUpdated");
+              if (current === marker) {
+                sessionStorage.removeItem("blogViewUpdated");
+              }
+            } catch {}
+          }, 3000);
+        }
+      } catch {}
     };
   }, [showContent]);
 

@@ -268,7 +268,7 @@ export const GuestbookSkeleton = () => {
 
 export const FeaturedBlogRotatorSkeleton = () => {
   return (
-    <div className="mb-16 hidden lg:block">
+    <div className="mb-4 hidden lg:block">
       <div className="group border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5">
         <div className="flex flex-col lg:flex-row gap-4 bg-primary-light dark:bg-primary-dark rounded-xl">
           {/* Content Skeleton */}
