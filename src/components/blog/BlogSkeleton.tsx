@@ -95,7 +95,7 @@ export default function BlogSkeleton({ hasMounted }: BlogSkeletonProps) {
             <Skeleton className="w-8 h-8 rounded-full" />
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[1, 2].map((item) => (
             <BlogCardSkeleton key={item} />
           ))}

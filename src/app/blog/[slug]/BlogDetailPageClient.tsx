@@ -48,7 +48,14 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
     notFound();
   }
 
-  const relatedPosts = blogs.filter((b) => b.slug !== slug).slice(0, 4);
+  const relatedPosts = (() => {
+    const pool = blogs.filter((b) => b.slug !== slug);
+    for (let i = pool.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    return pool.slice(0, 2);
+  })();
 
   return (
     <main

@@ -6,11 +6,24 @@ interface ProjectCardProps {
   variant?: "featured" | "grid";
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({
+  project,
+  variant = "grid",
+}: ProjectCardProps) {
   return (
-    <div className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
+    <div
+      className={`group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300 ${
+        variant === "grid" ? "hover:shadow-md hover:border-primary-gray/30" : ""
+      }`}
+    >
       <Link href={`/projects/${project.slug}`}>
-        <div className="relative h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px] overflow-hidden rounded-xl">
+        <div
+          className={`relative overflow-hidden rounded-xl ${
+            variant === "grid"
+              ? "h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px]"
+              : "h-[280px] sm:h-[320px]"
+          }`}
+        >
           <img
             src={project.thumbnail}
             alt={project.title}

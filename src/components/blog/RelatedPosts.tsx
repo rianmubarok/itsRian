@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Blog } from "../../types";
 import BlogCard from "./BlogCard";
 
@@ -20,26 +22,16 @@ export default function RelatedPosts({
         <h2 className="text-2xl sm:text-3xl font-semibold leading-tight tracking-tighter">
           Related Posts
         </h2>
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-primary-gray">View all</span>
-          <div className="w-8 h-8 rounded-full bg-primary-gray/20 flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-primary-gray"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </div>
-        </div>
+        <Link
+          href="/blog"
+          className="group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300"
+          aria-label="View all blog posts"
+        >
+          <span>View all</span>
+          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
+        </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {relatedPosts.map((blog) => (
           <BlogCard key={blog.id} blog={blog} variant="tile" />
         ))}

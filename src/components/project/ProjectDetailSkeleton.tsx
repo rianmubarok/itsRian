@@ -54,7 +54,7 @@ export default function ProjectDetailSkeleton({
           <Skeleton className="h-8 w-24 rounded-full" />
           <Skeleton className="h-8 w-16 rounded-full" />
           <Skeleton className="h-8 w-28 rounded-full" />
-          <Skeleton className="h-8 w-22 rounded-full" />
+          <Skeleton className="h-8 w-24 rounded-full" />
         </div>
       </div>
 
@@ -99,8 +99,8 @@ export default function ProjectDetailSkeleton({
           <Skeleton className="h-8 w-48 rounded" />
           <Skeleton className="h-6 w-32 rounded" />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((item) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+          {[1, 2].map((item) => (
             <Skeleton key={item} className="h-64 w-full rounded-xl" />
           ))}
         </div>

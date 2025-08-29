@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { useProjects } from "../../hooks";
 import ProjectCard from "./ProjectCard";
 import { Project } from "../../types";
@@ -15,9 +17,16 @@ export default function OtherProjects({
 }: OtherProjectsProps) {
   const { projects } = useProjects();
 
-  const otherProjects = projects
-    .filter((project: Project) => project.slug !== currentProjectSlug)
-    .slice(0, 4);
+  const otherProjects = (() => {
+    const pool = projects.filter(
+      (project: Project) => project.slug !== currentProjectSlug
+    );
+    for (let i = pool.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    return pool.slice(0, 2);
+  })();
 
   if (otherProjects.length === 0) return null;
 
@@ -27,26 +36,16 @@ export default function OtherProjects({
         <h2 className="text-2xl sm:text-3xl font-semibold leading-tight tracking-tighter">
           Other Projects
         </h2>
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-primary-gray">View all</span>
-          <div className="w-8 h-8 rounded-full bg-primary-gray/20 flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-primary-gray"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </div>
-        </div>
+        <Link
+          href="/projects"
+          className="group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300"
+          aria-label="View all projects"
+        >
+          <span>View all</span>
+          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
+        </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
         {otherProjects.map((project: Project) => (
           <ProjectCard key={project.id} project={project} variant="grid" />
         ))}
