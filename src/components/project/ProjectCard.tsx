@@ -13,9 +13,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <div
-      className={`group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300 ${
-        variant === "grid" ? "hover:shadow-md hover:border-primary-gray/30" : ""
-      }`}
+      className={`group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300`}
     >
       <Link href={`/projects/${project.slug}`}>
         <div
