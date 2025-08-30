@@ -11,12 +11,12 @@ export function MessageParts({ parts }: MessagePartsProps) {
         part.type === "user" ? (
           <span
             key={i}
-            className="inline-flex items-center bg-yellow-100 dark:bg-yellow-900/60 text-yellow-600 dark:text-yellow-400 px-2 sm:px-3 py-0.5 rounded-full text-xs sm:text-sm font-medium"
+            className="inline-flex items-center text-yellow-600 dark:text-yellow-400 rounded-full text-sm font-medium py-1"
           >
             @{part.value}
           </span>
         ) : (
-          <span key={i} className="whitespace-pre-line">
+          <span key={i} className="whitespace-pre-line text-sm py-1">
             {part.value}
           </span>
         )

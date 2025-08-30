@@ -20,7 +20,7 @@ export function AutocompleteDropdown({
       {users.map((user, i) => (
         <li
           key={user.id}
-          className={`rounded px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-white/50 text-xs sm:text-sm ${
+          className={`rounded px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-white/50 text-sm ${
             i === cursor ? "bg-gray-100 dark:bg-white/50" : ""
           }`}
           onClick={() => onSelectUser(user)}

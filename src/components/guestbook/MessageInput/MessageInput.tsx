@@ -71,7 +71,7 @@ export function MessageInput({
               : ""
           }
           disabled={isSubmitting}
-          className="flex-1 min-w-[80px] px-0 py-1 border-none outline-none bg-transparent text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 text-xs sm:text-sm resize-none overflow-hidden"
+          className="flex-1 min-w-[80px] px-0 py-1 border-none outline-none bg-transparent text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 text-sm resize-none overflow-hidden"
           style={{ minWidth: 60, minHeight: 20 }}
           rows={1}
         />
@@ -83,7 +83,7 @@ export function MessageInput({
             isSubmitting ||
             localSubmitting
           }
-          className="ml-2 px-3 sm:px-4 bg-blue-500 text-white rounded-lg font-medium text-xs sm:text-sm hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 h-7 sm:h-8 flex-shrink-0 cursor-pointer"
+          className="ml-2 px-3 sm:px-4 bg-blue-500 text-white rounded-lg font-medium text-sm hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 h-7 sm:h-8 flex-shrink-0 cursor-pointer"
         >
           {isSubmitting || localSubmitting ? "Sending..." : "Send"}
         </button>

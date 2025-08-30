@@ -43,7 +43,7 @@ export default function GuestbookPageClient() {
               anything!
             </h2>
 
-            <div className="text-primary-gray text-xs sm:text-sm font-light space-y-2 sm:space-y-3 tracking-normal">
+            <div className="text-xs sm:text-sm font-light space-y-2 sm:space-y-3 tracking-normal">
               <p>
                 Please sign in to start. Don&apos;t worry, your data is safe.
               </p>

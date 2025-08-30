@@ -111,7 +111,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formRef, intersecting }) => {
         />
         <button
           type="submit"
-          className="px-4 sm:px-6 py-2 sm:py-3 hover:px-6 sm:hover:px-8 transition-all duration-300 bg-primary-dark dark:bg-primary-light text-primary-light dark:text-primary-dark rounded-full text-sm sm:text-base font-medium cursor-pointer transition-all duration-300 disabled:opacity-60"
+          className="px-4 sm:px-6 py-2 sm:py-3 hover:px-5 sm:hover:px-7 transition-all duration-300 bg-primary-dark dark:bg-primary-light text-primary-light dark:text-primary-dark rounded-full text-sm sm:text-base font-medium cursor-pointer transition-all duration-300 disabled:opacity-60"
           disabled={status === "loading"}
         >
           {status === "loading" ? "Sending..." : "Send Message"}

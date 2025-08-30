@@ -33,7 +33,7 @@ export default function OtherProjects({
   return (
     <section className="mb-16">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl sm:text-3xl font-semibold leading-tight tracking-tighter">
+        <h2 className="text-3xl font-semibold leading-tight tracking-tighter">
           Other Projects
         </h2>
         <Link

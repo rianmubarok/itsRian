@@ -18,7 +18,7 @@ const ContactHeader: React.FC<ContactHeaderProps> = ({
     <h2 className="text-2xl sm:text-3xl leading-tight font-regular text-primary-dark dark:text-primary-light ">
       Feel free to reach out — always open for creative discussions
     </h2>
-    <div className="text-primary-gray text-xs sm:text-sm font-light tracking-normal">
+    <div className="text-xs sm:text-sm font-light tracking-normal">
       <p>Avg. Response: Within 1–2 hours (Working Hours, GMT+7).</p>
       <p>For urgent matters, reach out via social media.</p>
     </div>

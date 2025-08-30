@@ -19,7 +19,7 @@ export default function RelatedPosts({
       }`}
     >
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl sm:text-3xl font-semibold leading-tight tracking-tighter">
+        <h2 className="text-3xl font-semibold leading-tight tracking-tighter">
           Related Posts
         </h2>
         <Link
