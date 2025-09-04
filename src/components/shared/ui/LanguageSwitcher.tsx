@@ -43,7 +43,7 @@ export default function LanguageSwitcher({
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 border border-primary-dark dark:border-primary-light rounded-lg hover:bg-primary-dark/10 dark:hover:bg-primary-light/10 hover:border-primary-dark/50 dark:hover:border-primary-light/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-dark/20 dark:focus:ring-primary-light/20 cursor-pointer"
+        className="flex items-center gap-2 px-4 py-2 border border-primary-gray/20 text-primary-gray dark:text-gray-300 bg-gray-100 dark:bg-primary-light/5 rounded-lg hover:bg-primary-dark/10 dark:hover:bg-primary-light/10 hover:border-primary-dark/50 dark:hover:border-primary-light/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-dark/20 dark:focus:ring-primary-light/20 cursor-pointer"
         aria-label="Change language"
       >
         <Globe className="w-4 h-4" />

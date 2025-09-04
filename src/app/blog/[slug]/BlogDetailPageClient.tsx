@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { use, useEffect, useState, useCallback } from "react";
 import { useBlog, useBlogs } from "../../../hooks/useBlogs";
 import { useBlogAnimation } from "../../../hooks/useBlogAnimation";
 import {
@@ -21,13 +21,7 @@ interface BlogDetailPageProps {
 }
 
 export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
-  const [slug, setSlug] = useState<string>("");
-  useEffect(() => {
-    (async () => {
-      const { slug } = await params;
-      setSlug(slug);
-    })();
-  }, [params]);
+  const { slug } = use(params);
 
   const { blog, loading, error } = useBlog(slug);
   const { blogs } = useBlogs();
@@ -35,9 +29,14 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
 
   const { hasMounted, showContent, handleContentShow } = useBlogAnimation();
 
-  useEffect(() => {
+  // Memoize the handleContentShow callback to prevent unnecessary re-renders
+  const memoizedHandleContentShow = useCallback(() => {
     handleContentShow(loading, blog);
   }, [loading, blog, handleContentShow]);
+
+  useEffect(() => {
+    memoizedHandleContentShow();
+  }, [memoizedHandleContentShow]);
 
   useEffect(() => {
     if (!showContent) {
@@ -54,11 +53,18 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
     notFound();
   }
 
-  const relatedPosts = blogs.filter((b) => b.slug !== slug).slice(0, 4);
+  const relatedPosts = (() => {
+    const pool = blogs.filter((b) => b.slug !== slug);
+    for (let i = pool.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    return pool.slice(0, 2);
+  })();
 
   return (
     <main
-      className="relative max-w-2xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48 min-h-screen text-primary-dark dark:text-primary-light"
+      className="relative max-w-2xl mx-auto mt-24 sm:mt-32 md:mt-40 min-h-screen text-primary-dark dark:text-primary-light"
       role="main"
     >
       <div
@@ -66,6 +72,7 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
           showContent ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
+        {/* Hide list skeleton if we are navigating from the blog list */}
         <BlogSkeleton hasMounted={hasMounted} />
       </div>
 

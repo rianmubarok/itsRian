@@ -4,7 +4,6 @@ import {
   Sacramento,
   Manrope,
   Noto_Serif_Display,
-  Noto_Serif,
 } from "next/font/google";
 
 export const dmSans = DM_Sans({

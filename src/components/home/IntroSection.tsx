@@ -15,7 +15,7 @@ export default function IntroSection() {
       ref={ref}
       className="flex flex-col gap-4 w-full mb-16 sm:mb-20 md:mb-24 border-b"
     >
-      <article className="text-primary-dark dark:text-primary-light sm:text-center sm:px-16">
+      <article className="text-primary-dark dark:text-primary-light sm:text-center sm:px-20 md:px-30">
         <header className="flex sm:items-center sm:justify-center gap-3 sm:gap-4">
           <p
             className={[
@@ -33,14 +33,29 @@ export default function IntroSection() {
           </p>
         </header>
         <h1
-          className={`text-5xl lg:text-6xl font-semibold leading-tight tracking-tighter transition-all duration-700 ease-out delay-400 ${
+          className={`text-5xl lg:text-6xl font-semibold leading-tighter tracking-tighter transition-all duration-700 ease-out delay-400 ${
             isIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"
           }`}
         >
-          Bridging design with development
+          <span className="inline-flex items-center gap-2">
+            Bridging design with development
+          </span>
         </h1>
+        <div className="mt-6 lg:px-20">
+          <p
+            className={`text-base text-primary-gray transition-all duration-700 ease-out delay-600 tracking-normal ${
+              isIntersecting
+                ? "translate-y-0 opacity-100"
+                : "translate-y-8 opacity-0"
+            }`}
+          >
+            A Visual Designer and Developer based in Jepara. Blending design
+            systems with modern web technologies to create seamless digital
+            experiences.
+          </p>
+        </div>
       </article>
     </section>
   );

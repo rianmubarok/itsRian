@@ -6,10 +6,7 @@ import {
   useIntersectionObserver,
   useProjects,
 } from "../../hooks";
-import {
-  ProjectCardSkeleton,
-  LoadingSpinner,
-} from "../../components/shared/ui/SkeletonLoader";
+import { ProjectCardSkeleton } from "../../components/shared/ui/SkeletonLoader";
 
 export default function ProjectsPageClient() {
   const { projects, loading, error } = useProjects();
@@ -28,24 +25,34 @@ export default function ProjectsPageClient() {
       rootMargin: "0px 0px -50px 0px",
     });
 
-  return (
-    <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
-      role="main"
-    >
-      <h1
-        ref={headerRef}
-        className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-snug tracking-tight mb-4 sm:mb-6 transition-all duration-700 ease-out ${
-          headerIntersecting
-            ? "translate-y-0 opacity-100"
-            : "translate-y-8 opacity-0"
-        }`}
-      >
-        All Projects
-      </h1>
+  if (error) {
+    return (
+      <main className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40">
+        <div className="text-center">
+          <p className="text-red-500">Error loading projects: {error}</p>
+        </div>
+      </main>
+    );
+  }
 
-      {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+  if (loading || displayedItems.length === 0) {
+    return (
+      <main
+        className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40"
+        role="main"
+      >
+        <h1
+          ref={headerRef}
+          className={`sm:text-center text-5xl font-semibold leading-tight tracking-tighter mb-10 transition-all duration-700 ease-out ${
+            headerIntersecting
+              ? "translate-y-0 opacity-100"
+              : "translate-y-8 opacity-0"
+          }`}
+        >
+          All Projects
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[1, 2, 3, 4].map((item, index) => (
             <div
               key={item}
@@ -59,28 +66,42 @@ export default function ProjectsPageClient() {
             </div>
           ))}
         </div>
-      ) : error ? (
-        <div className="text-center">
-          <p className="text-red-500">Error loading projects: {error}</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {displayedItems.map((project, index) => {
-            return (
-              <div
-                key={project.id}
-                className="opacity-0 animate-fade-in-up"
-                style={{
-                  animationDelay: `${index * 150}ms`,
-                  animationFillMode: "forwards",
-                }}
-              >
-                <ProjectCard project={project} variant="grid" />
-              </div>
-            );
-          })}
-        </div>
-      )}
+      </main>
+    );
+  }
+
+  return (
+    <main
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40"
+      role="main"
+    >
+      <h1
+        ref={headerRef}
+        className={`sm:text-center text-5xl font-semibold leading-tight tracking-tighter mb-10 transition-all duration-700 ease-out ${
+          headerIntersecting
+            ? "translate-y-0 opacity-100"
+            : "translate-y-8 opacity-0"
+        }`}
+      >
+        All Projects
+      </h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {displayedItems.map((project, index) => {
+          return (
+            <div
+              key={project.id}
+              className="opacity-0 animate-fade-in-up"
+              style={{
+                animationDelay: `${index * 150}ms`,
+                animationFillMode: "forwards",
+              }}
+            >
+              <ProjectCard project={project} variant="grid" />
+            </div>
+          );
+        })}
+      </div>
 
       {isLoading && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-6 sm:mt-8">
@@ -99,17 +120,7 @@ export default function ProjectsPageClient() {
         </div>
       )}
 
-      {hasMore && (
-        <div
-          ref={loadingRef}
-          className="h-20 flex items-center justify-center mt-8"
-        >
-          <div className="flex items-center gap-3 text-primary-gray text-sm">
-            <LoadingSpinner />
-            <span>Loading more projects...</span>
-          </div>
-        </div>
-      )}
+      {hasMore && <div ref={loadingRef} className="h-20" />}
     </main>
   );
 }

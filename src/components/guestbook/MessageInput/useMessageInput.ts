@@ -14,8 +14,6 @@ export function useMessageInput({
 }: MessageInputProps & { textareaRef: RefObject<HTMLTextAreaElement | null> }) {
   const [input, setInput] = useState("");
   const [localSubmitting, setLocalSubmitting] = useState(false);
-  const [savedInput, setSavedInput] = useState(""); 
-  const [lastFullInput, setLastFullInput] = useState("");
 
   const { adjustHeight, resetHeight } = useTextareaResize(textareaRef);
   const {
@@ -32,16 +30,15 @@ export function useMessageInput({
 
   const selectUser = useCallback(
     (user: { id: string; name: string }) => {
-      const inputToProcess = lastFullInput || savedInput || input;
-
-      const atIndex = inputToProcess.lastIndexOf("@");
+      const atIndex = input.lastIndexOf("@");
       if (atIndex === -1) {
         return;
       }
 
-      const beforeAt = inputToProcess.slice(0, atIndex);
-      const afterAt = inputToProcess.slice(atIndex + 1);
+      const beforeAt = input.slice(0, atIndex);
+      const afterAt = input.slice(atIndex + 1);
 
+      // Find where the current mention ends
       let mentionEndIndex = 0;
       if (currentMention && currentMention.trim() !== "") {
         const mentionIndex = afterAt
@@ -50,37 +47,39 @@ export function useMessageInput({
         if (mentionIndex !== -1) {
           mentionEndIndex = mentionIndex + currentMention.length;
         }
-      } else {
-        mentionEndIndex = 0;
       }
 
       const afterMention = afterAt.slice(mentionEndIndex);
 
       const parts = [...newMessage];
 
+      // Add text before @
       if (beforeAt) {
         parts.push({ type: "text", value: beforeAt });
       }
+
+      // Add the mention
       parts.push({ type: "user", value: user.name });
+
+      // Add space after mention
       parts.push({ type: "text", value: " " });
+
+      // Add remaining text
       if (afterMention) {
         parts.push({ type: "text", value: afterMention });
       }
 
       setNewMessage(parts);
       setInput("");
-      setSavedInput(""); 
-      setLastFullInput(""); 
       hideAutocomplete();
 
+      // Focus back to textarea
       setTimeout(() => {
         textareaRef.current?.focus();
       }, 0);
     },
     [
       input,
-      savedInput,
-      lastFullInput,
       newMessage,
       setNewMessage,
       hideAutocomplete,
@@ -124,9 +123,7 @@ export function useMessageInput({
 
       try {
         parts = mergeTextParts(parts);
-
         setNewMessage(parts);
-
         setInput("");
         hideAutocomplete();
         resetHeight();
@@ -155,17 +152,8 @@ export function useMessageInput({
       setInput(val);
       adjustHeight();
       showAutocompleteForInput(val, newMessage);
-      setLastFullInput(val);
-
-      if (val.includes("@")) {
-        setSavedInput(val);
-      }
-
-      if (showAutocomplete) {
-        setSavedInput(val);
-      }
     },
-    [adjustHeight, showAutocompleteForInput, showAutocomplete, newMessage]
+    [adjustHeight, showAutocompleteForInput, newMessage]
   );
 
   const handleKeyDown = useCallback(
@@ -240,8 +228,6 @@ export function useMessageInput({
   const resetInput = useCallback(() => {
     if (!isSubmitting) {
       setInput("");
-      setSavedInput("");
-      setLastFullInput("");
       resetHeight();
     }
   }, [isSubmitting, resetHeight]);

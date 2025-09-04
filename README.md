@@ -210,7 +210,7 @@ Found this helpful?
 ---
 
 **Live Demo**: [https://itsrian.my.id/](https://itsrian.my.id/)  
-**Contact**: [rianmubarok.13@gmail.com](mailto:rianmubarok.13@gmail.com)
+**Contact**: [muhammadfitrianmubarok@gmail.com](mailto:muhammadfitrianmubarok@gmail.com)
 
 <div align="center">
   <strong>🚀 Ready to build your digital presence? Let's get started!</strong>

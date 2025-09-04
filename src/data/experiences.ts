@@ -19,5 +19,4 @@ export const experiences: Experience[] = [
     description:
       "Started my creative journey in the world of design, focusing on consistent and scalable icon systems. This experience sharpened my visual precision and built a strong foundation for crafting functional and intuitive UI/UX as a developer.",
   },
-  // Add more experiences here as needed
 ];

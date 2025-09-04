@@ -18,13 +18,18 @@ export default function MobileNavigation({
       } transition-all duration-300 ease-in-out overflow-hidden`}
     >
       <ul className="flex flex-col space-y-4 pb-4">
-        {navItems.map((item) => (
-          <NavItem
+        {navItems.map((item, index) => (
+          <li
             key={item.name}
-            item={item}
-            isMobile={true}
-            onClose={onClose}
-          />
+            className={`transition-all duration-500 ease-out ${
+              isOpen ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"
+            }`}
+            style={{
+              transitionDelay: isOpen ? `${index * 100}ms` : "0ms",
+            }}
+          >
+            <NavItem item={item} isMobile={true} onClose={onClose} />
+          </li>
         ))}
       </ul>
     </div>

@@ -16,20 +16,18 @@ export async function GET() {
           };
         } catch (error) {
           console.error(`Error getting view count for ${blog.slug}:`, error);
+          // Return a more user-friendly fallback instead of "0"
           return {
             ...blog,
-            viewCount: "0",
+            viewCount: "—", // Use dash instead of 0 to indicate no data
           };
         }
       })
     );
 
     const response = NextResponse.json(blogsWithViews);
-    response.headers.set(
-      "Cache-Control",
-      "public, s-maxage=300, stale-while-revalidate=600"
-    );
-
+    // No cache to ensure fresh data
+    response.headers.set("Cache-Control", "no-store");
     return response;
   } catch (error) {
     console.error("Error fetching blogs:", error);

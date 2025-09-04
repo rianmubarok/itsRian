@@ -1,12 +1,12 @@
 import {
   BlogCardSkeleton,
   FeaturedBlogRotatorSkeleton,
-} from "../../components/shared/ui/SkeletonLoader";
+} from "../../../components/shared/ui/SkeletonLoader";
 
 export default function BlogLoading() {
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40"
       role="main"
     >
       {/* Featured Blog Rotator Skeleton */}

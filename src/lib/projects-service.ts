@@ -89,6 +89,17 @@ function getPlainTextFromUrl(property: NotionProperty | undefined): string {
   return "";
 }
 
+function getSpaceSeparatedFromRichText(
+  property: NotionProperty | undefined
+): string[] {
+  const text = getPlainTextFromRichText(property);
+  if (!text) return [];
+  return text
+    .split(/\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
 function getPlainTextFromMultiSelect(
   property: NotionProperty | undefined
 ): string[] {
@@ -142,6 +153,12 @@ export async function getProjects(): Promise<Project[]> {
             "",
           sourceCode: getPlainTextFromUrl(properties.sourceCode) || undefined,
           liveProject: getPlainTextFromUrl(properties.liveProject) || undefined,
+          resources1: getSpaceSeparatedFromRichText(
+            (properties as Record<string, NotionProperty>)["resources-1"]
+          ),
+          resources2: getSpaceSeparatedFromRichText(
+            (properties as Record<string, NotionProperty>)["resources-2"]
+          ),
         };
       }
     );
@@ -186,6 +203,12 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       createdAt: getPlainTextFromDate(properties.createdAt) || "",
       sourceCode: getPlainTextFromUrl(properties.sourceCode) || undefined,
       liveProject: getPlainTextFromUrl(properties.liveProject) || undefined,
+      resources1: getSpaceSeparatedFromRichText(
+        (properties as Record<string, NotionProperty>)["resources-1"]
+      ),
+      resources2: getSpaceSeparatedFromRichText(
+        (properties as Record<string, NotionProperty>)["resources-2"]
+      ),
     };
   } catch (error) {
     console.error("Error fetching project by slug:", error);

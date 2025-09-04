@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { ArrowUpRight, Eye, Clock } from "lucide-react";
+import { Eye, Clock } from "lucide-react";
 import { Blog } from "../../types";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 
 interface BlogCardProps {
   blog: Blog;
   variant?: "featured" | "tile";
 }
 
-export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
+function BlogCardBase({ blog, variant = "tile" }: BlogCardProps) {
   if (variant === "tile") {
     return (
       <article className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
@@ -29,14 +29,16 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
             </h3>
           </Link>
 
-          <p className="text-base text-primary-gray dark:text-gray-300 mb-3 sm:mb-4 line-clamp-3">
+          <p className="text-base text-primary-gray dark:text-gray-300 mb-3 sm:mb-4 line-clamp-3 tracking-normal">
             {blog.description}
           </p>
 
           <div className="flex items-center gap-3 text-xs sm:text-sm text-primary-gray">
             <span className="inline-flex items-center gap-1.5">
               <Eye className="w-3.5 h-3.5" />
-              {blog.viewCount} VIEWS
+              {blog.viewCount === "—"
+                ? "Loading..."
+                : `${blog.viewCount} VIEWS`}
             </span>
             <span className="w-1 h-1 bg-primary-gray rounded-full" />
             <span className="inline-flex items-center gap-1.5">
@@ -50,39 +52,40 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
   }
   if (variant === "featured") {
     return (
-      <article className="group border border-primary-gray/10 rounded-2xl p-4 sm:p-6 transition-colors">
-        <Link href={`/blog/${blog.slug}`} className="block">
-          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
+      <article className="group border border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
+        <Link
+          href={`/blog/${blog.slug}`}
+          className="block"
+          onClick={() => {
+            try {
+              sessionStorage.setItem("navigatingToBlogDetail", "1");
+            } catch {}
+          }}
+        >
+          <div className="flex flex-col lg:flex-row gap-4 bg-primary-light dark:bg-primary-dark rounded-xl">
             {/* Content */}
-            <div className="flex-1 flex flex-col justify-between">
+            <div className="flex-1 flex flex-col justify-between p-6">
+              {/* Title */}
+              <h1 className="text-5xl font-semibold leading-tight tracking-tighter">
+                {blog.title}
+              </h1>
+
               {/* Meta info */}
               <div className="flex items-center gap-3 text-xs sm:text-sm text-primary-gray mb-2 sm:mb-3 font-light">
                 <span className="inline-flex items-center gap-1.5">
                   <Eye className="w-3.5 h-3.5" />
-                  {blog.viewCount}
+                  {blog.viewCount} VIEWS
                 </span>
                 <span className="w-1 h-1 bg-primary-gray rounded-full" />
                 <span className="inline-flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5" />
-                  {blog.readingTime}
+                  {blog.readingTime} MINS READ
                 </span>
-              </div>
-              {/* Title */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-tight tracking-tight">
-                {blog.title}
-              </h1>
-
-              {/* Read more button */}
-              <div className="mt-auto flex items-center gap-2 text-sm sm:text-base font-medium text-primary-dark dark:text-primary-light">
-                <span className="relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:transition-transform after:duration-300 after:scale-x-0 group-hover:after:scale-x-100 after:bg-current">
-                  Read more
-                </span>
-                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-1" />
               </div>
             </div>
 
             {/* Thumbnail */}
-            <div className="flex-shrink-0 w-full lg:w-110 h-60 sm:h-72 md:h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
+            <div className="flex-shrink-0 w-full lg:w-120 h-60 sm:h-72 md:h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
               <img
                 src={blog.thumbnail}
                 alt={blog.title}
@@ -122,7 +125,7 @@ export default function BlogCard({ blog, variant = "tile" }: BlogCardProps) {
         <div className="flex items-center gap-3 text-xs sm:text-sm text-primary-gray">
           <span className="inline-flex items-center gap-1.5">
             <Eye className="w-3.5 h-3.5" />
-            {blog.viewCount}
+            {blog.viewCount === "—" ? "Loading..." : blog.viewCount}
           </span>
           <span className="w-1 h-1 bg-primary-gray rounded-full" />
           <span className="inline-flex items-center gap-1.5">
@@ -159,3 +162,15 @@ export function AnimatedBlogCard({
     </div>
   );
 }
+
+const BlogCard = memo(BlogCardBase, (prev, next) => {
+  return (
+    prev.variant === next.variant &&
+    prev.blog.id === next.blog.id &&
+    prev.blog.slug === next.blog.slug &&
+    prev.blog.createdAt === next.blog.createdAt &&
+    prev.blog.viewCount === next.blog.viewCount
+  );
+});
+
+export default BlogCard;

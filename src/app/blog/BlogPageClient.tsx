@@ -1,16 +1,48 @@
 "use client";
 
 import FeaturedBlogRotator from "../../components/blog/FeaturedBlogRotator";
+import { useEffect } from "react";
 import { useInfiniteScroll } from "../../hooks";
 import {
   BlogCardSkeleton,
-  LoadingSpinner,
+  FeaturedBlogRotatorSkeleton,
 } from "../../components/shared/ui/SkeletonLoader";
 import { useBlogs } from "../../hooks/useBlogs";
+import { useEffect as useEffectReact, useState } from "react";
 import { AnimatedBlogCard } from "../../components/blog/BlogCard";
 
 export default function BlogPageClient() {
   const { blogs, loading, error } = useBlogs();
+  const [showSkeleton, setShowSkeleton] = useState(false);
+
+  // Refresh blogs when returning from detail page
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        // Refresh data when page becomes visible (returning from detail)
+        // Use a more efficient approach than full page reload
+        const event = new Event("refreshBlogs");
+        window.dispatchEvent(event);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
+
+  // Debounce skeleton to avoid brief flashes on fast route transitions
+  useEffectReact(() => {
+    let timeoutId: number | undefined;
+    if (loading) {
+      timeoutId = window.setTimeout(() => setShowSkeleton(true), 200);
+    } else {
+      setShowSkeleton(false);
+    }
+    return () => {
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
+  }, [loading]);
 
   const { displayedItems, isLoading, hasMore, loadingRef } = useInfiniteScroll(
     blogs,
@@ -20,21 +52,9 @@ export default function BlogPageClient() {
     }
   );
 
-  if (loading) {
-    return (
-      <main className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          {[1, 2, 3, 4].map((item) => (
-            <BlogCardSkeleton key={item} />
-          ))}
-        </div>
-      </main>
-    );
-  }
-
   if (error) {
     return (
-      <main className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48">
+      <main className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40">
         <div className="text-center">
           <p className="text-red-500">Error loading blogs: {error}</p>
         </div>
@@ -42,14 +62,52 @@ export default function BlogPageClient() {
     );
   }
 
+  const navigatingToDetail =
+    typeof window !== "undefined" &&
+    sessionStorage.getItem("navigatingToBlogDetail") === "1";
+
+  if (
+    !navigatingToDetail &&
+    ((loading && showSkeleton) || (displayedItems.length === 0 && showSkeleton))
+  ) {
+    return (
+      <main
+        className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40"
+        role="main"
+      >
+        {/* Featured Blog Rotator Skeleton */}
+        <FeaturedBlogRotatorSkeleton />
+
+        {/* Blog Grid Skeleton */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+            <BlogCardSkeleton key={item} />
+          ))}
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40"
       role="main"
     >
+      {/* Clear navigation flag on render */}
+      <span
+        className="hidden"
+        aria-hidden
+        ref={() => {
+          try {
+            if (typeof window !== "undefined") {
+              sessionStorage.removeItem("navigatingToBlogDetail");
+            }
+          } catch {}
+        }}
+      />
       <FeaturedBlogRotator blogs={blogs} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {displayedItems.map((blog, index) => {
           if (!blog) return null;
           return (
@@ -63,24 +121,14 @@ export default function BlogPageClient() {
       </div>
 
       {isLoading && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mt-6 sm:mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6 sm:mt-8">
           {[1, 2, 3, 4].map((item) => (
             <BlogCardSkeleton key={item} />
           ))}
         </div>
       )}
 
-      {hasMore && (
-        <div
-          ref={loadingRef}
-          className="h-20 flex items-center justify-center mt-8"
-        >
-          <div className="flex items-center gap-3 text-primary-gray text-sm">
-            <LoadingSpinner />
-            <span>Loading more articles...</span>
-          </div>
-        </div>
-      )}
+      {hasMore && <div ref={loadingRef} className="h-20" />}
     </main>
   );
 }

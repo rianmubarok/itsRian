@@ -14,42 +14,42 @@ const Skeleton: React.FC<SkeletonProps> = ({ className = "" }) => {
 
 export const BlogCardSkeleton = () => {
   return (
-    <div className="bg-white dark:bg-white/50 rounded-lg overflow-hidden">
-      <Skeleton className="h-48 w-full" />
-      <div className="p-6">
-        <Skeleton className="h-4 w-3/4 mb-2" />
-        <Skeleton className="h-3 w-full mb-2" />
-        <Skeleton className="h-3 w-2/3 mb-4" />
-        <div className="flex gap-2 mb-4">
-          <Skeleton className="h-6 w-16 rounded-full" />
-          <Skeleton className="h-6 w-20 rounded-full" />
-          <Skeleton className="h-6 w-14 rounded-full" />
-        </div>
-        <div className="flex items-center justify-between">
-          <Skeleton className="h-3 w-20" />
-          <Skeleton className="h-3 w-16" />
+    <article className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
+      <div className="relative h-[200px] sm:h-[250px] overflow-hidden rounded-xl">
+        <Skeleton className="w-full h-full rounded-xl" />
+      </div>
+
+      <div className="-mt-4 pt-10 p-6 bg-primary-light dark:bg-primary-dark rounded-b-xl">
+        <Skeleton className="h-6 w-3/4 mb-3" />
+        <Skeleton className="h-4 w-full mb-2" />
+        <Skeleton className="h-4 w-5/6 mb-4" />
+
+        <div className="flex items-center gap-3 text-xs sm:text-sm">
+          <Skeleton className="h-4 w-24" />
+          <span className="w-1 h-1 bg-primary-gray rounded-full" />
+          <Skeleton className="h-4 w-28" />
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
 export const ProjectCardSkeleton = () => {
   return (
-    <div className="bg-white dark:bg-white/50 rounded-lg overflow-hidden min-w-[300px]">
-      <Skeleton className="h-48 w-full" />
-      <div className="p-6">
-        <Skeleton className="h-5 w-3/4 mb-2" />
+    <div className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
+      <div className="relative h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px] overflow-hidden rounded-xl">
+        <Skeleton className="w-full h-full rounded-xl" />
+      </div>
+
+      <div className="-mt-4 pt-10 p-6 bg-primary-light dark:bg-primary-dark rounded-b-xl">
+        <Skeleton className="h-6 w-3/4 mb-3" />
         <Skeleton className="h-4 w-full mb-2" />
-        <Skeleton className="h-4 w-2/3 mb-4" />
-        <div className="flex gap-2 mb-4">
-          <Skeleton className="h-6 w-16 rounded-full" />
-          <Skeleton className="h-6 w-20 rounded-full" />
-          <Skeleton className="h-6 w-14 rounded-full" />
-        </div>
-        <div className="flex items-center justify-between">
-          <Skeleton className="h-3 w-20" />
-          <Skeleton className="h-3 w-16" />
+        <Skeleton className="h-4 w-5/6 mb-4" />
+
+        <div className="flex flex-wrap gap-1 sm:gap-2">
+          <Skeleton className="h-7 w-20 rounded-full" />
+          <Skeleton className="h-7 w-16 rounded-full" />
+          <Skeleton className="h-7 w-24 rounded-full" />
         </div>
       </div>
     </div>
@@ -67,40 +67,119 @@ export const LoadingSpinner = () => {
 export const AboutMeSkeleton = () => {
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40"
       role="main"
     >
-      {/* Header */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
-        <Skeleton className="h-12 w-full md:col-span-2" />
-        <Skeleton className="h-24 w-full md:col-span-3" />
+      {/* Profile Article Section */}
+      <article className="border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-6 bg-gray-100 dark:bg-primary-light/5">
+        <div className="tracking-normal font-regular text-base space-y-3 sm:space-y-4">
+          {/* Paragraph skeletons */}
+          <Skeleton className="h-5 w-full" />
+          <Skeleton className="h-5 w-full" />
+          <Skeleton className="h-5 w-3/4" />
+          <Skeleton className="h-5 w-full" />
+          <Skeleton className="h-5 w-5/6" />
+          <Skeleton className="h-5 w-full" />
+          <Skeleton className="h-5 w-4/5" />
+          <Skeleton className="h-5 w-full" />
+          <Skeleton className="h-5 w-2/3" />
+          <Skeleton className="h-5 w-full" />
+          <Skeleton className="h-5 w-3/4" />
+          <Skeleton className="h-5 w-full" />
+          <Skeleton className="h-5 w-5/6" />
+          <Skeleton className="h-5 w-full" />
+          <Skeleton className="h-5 w-1/2" />
+          <Skeleton className="h-5 w-1/4" />
+          {/* Signature skeleton */}
+          <Skeleton className="h-12 w-24 mt-10 sm:mt-15" />
+        </div>
+      </article>
+
+      {/* Divider */}
+      <Skeleton className="h-px w-full my-8 sm:my-12" />
+
+      {/* Experience Accordion Skeleton */}
+      <div className="mb-4">
+        <div className="border border-primary-gray/20 rounded-xl overflow-hidden bg-gray-50 dark:bg-primary-light/5">
+          {/* Accordion Header */}
+          <div className="px-6 py-4 flex items-center justify-between">
+            <Skeleton className="h-8 w-32" />
+            <Skeleton className="w-6 h-6 rounded" />
+          </div>
+          {/* Accordion Content (Closed by default) */}
+          <div className="px-6 pb-6">
+            <div className="pt-4 border-t border-primary-gray/10">
+              <div className="space-y-8 sm:space-y-12">
+                {[1, 2].map((item) => (
+                  <div
+                    key={item}
+                    className="grid grid-cols-1 md:grid-cols-6 gap-4 items-start"
+                  >
+                    <Skeleton className="h-12 w-32 rounded-full" />
+                    <div className="md:col-span-4 space-y-3">
+                      <Skeleton className="h-6 w-3/4" />
+                      <Skeleton className="h-5 w-1/2" />
+                      <Skeleton className="h-4 w-2/3" />
+                      <Skeleton className="h-5 w-full" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Profile Section */}
-      <div className="space-y-4">
-        <Skeleton className="h-6 w-full" />
-        <Skeleton className="h-6 w-full" />
-        <Skeleton className="h-6 w-3/4" />
-        <Skeleton className="h-6 w-full" />
-        <Skeleton className="h-6 w-5/6" />
-        <Skeleton className="h-6 w-full" />
-        <Skeleton className="h-6 w-4/5" />
-        <Skeleton className="h-6 w-full" />
-        <Skeleton className="h-6 w-2/3" />
-        <Skeleton className="h-6 w-1/4" />
-        <Skeleton className="h-16 w-32" />
+      {/* Education Accordion Skeleton */}
+      <div className="mb-4">
+        <div className="border border-primary-gray/20 rounded-xl overflow-hidden bg-gray-50 dark:bg-primary-light/5">
+          {/* Accordion Header */}
+          <div className="px-6 py-4 flex items-center justify-between">
+            <Skeleton className="h-8 w-28" />
+            <Skeleton className="w-6 h-6 rounded" />
+          </div>
+          {/* Accordion Content (Closed by default) */}
+          <div className="px-6 pb-6">
+            <div className="pt-4 border-t border-primary-gray/10">
+              <div className="space-y-8 sm:space-y-12">
+                {[1, 2].map((item) => (
+                  <div
+                    key={item}
+                    className="grid grid-cols-1 md:grid-cols-6 gap-4 items-start"
+                  >
+                    <Skeleton className="h-12 w-32 rounded-full" />
+                    <div className="md:col-span-4 space-y-3">
+                      <Skeleton className="h-6 w-3/4" />
+                      <Skeleton className="h-5 w-1/2" />
+                      <Skeleton className="h-4 w-1/3" />
+                      <Skeleton className="h-5 w-full" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <Skeleton className="h-px w-full my-12" />
-
-      {/* Experience */}
-      <div className="grid grid-cols-1 md:grid-cols-6">
-        <Skeleton className="h-8 w-48 md:col-span-2" />
-        <div className="md:col-span-4 space-y-4">
-          <Skeleton className="h-8 w-64" />
-          <Skeleton className="h-4 w-32" />
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-6 w-5/6" />
+      {/* License & Certification Accordion Skeleton */}
+      <div className="mb-4">
+        <div className="border border-primary-gray/20 rounded-xl overflow-hidden bg-gray-50 dark:bg-primary-light/5">
+          {/* Accordion Header */}
+          <div className="px-6 py-4 flex items-center justify-between">
+            <Skeleton className="h-8 w-48" />
+            <Skeleton className="w-6 h-6 rounded" />
+          </div>
+          {/* Accordion Content (Closed by default) */}
+          <div className="px-6 pb-6">
+            <div className="pt-4 border-t border-primary-gray/10">
+              <div className="text-center py-6">
+                <Skeleton className="w-16 h-16 mx-auto mb-4 rounded-full" />
+                <Skeleton className="h-6 w-32 mx-auto mb-2" />
+                <Skeleton className="h-5 w-64 mx-auto" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -110,10 +189,10 @@ export const AboutMeSkeleton = () => {
 export const ContactSkeleton = () => {
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-4"
       role="main"
     >
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
         {/* Header */}
         <div className="md:col-span-2 space-y-8 mb-12">
           <Skeleton className="h-12 w-full" />
@@ -154,7 +233,7 @@ export const ContactSkeleton = () => {
 export const GuestbookSkeleton = () => {
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-4"
       role="main"
     >
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 mb-6">
@@ -194,9 +273,31 @@ export const GuestbookSkeleton = () => {
 
 export const FeaturedBlogRotatorSkeleton = () => {
   return (
-    <div className="mb-16">
-      <Skeleton className="h-16 w-64 mb-6" />
-      <Skeleton className="h-80 rounded-xl" />
+    <div className="mb-4 hidden lg:block">
+      <div className="group border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5">
+        <div className="flex flex-col lg:flex-row gap-4 bg-primary-light dark:bg-primary-dark rounded-xl">
+          {/* Content Skeleton */}
+          <div className="flex-1 flex flex-col justify-between p-6">
+            {/* Title Skeleton */}
+            <div className="space-y-4">
+              <Skeleton className="h-16 w-3/4" />
+              <Skeleton className="h-12 w-1/2" />
+            </div>
+
+            {/* Meta info Skeleton */}
+            <div className="flex items-center gap-3 mt-4">
+              <Skeleton className="h-4 w-20" />
+              <span className="w-1 h-1 bg-primary-gray rounded-full" />
+              <Skeleton className="h-4 w-24" />
+            </div>
+          </div>
+
+          {/* Thumbnail Skeleton */}
+          <div className="flex-shrink-0 w-full lg:w-120 h-60 sm:h-72 md:h-80 overflow-hidden rounded-xl">
+            <Skeleton className="w-full h-full rounded-xl" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -205,25 +306,9 @@ export const ProjectsHeaderSkeleton = () => {
   return <Skeleton className="h-16 w-64 mb-6" />;
 };
 
-export const FeaturedProjectCardSkeleton = () => {
-  return (
-    <div className="flex-shrink-0 w-[280px] sm:w-[350px] md:w-[400px] lg:w-[450px] h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px]">
-      <Skeleton className="w-full h-full rounded-xl" />
-    </div>
-  );
-};
-
 export const OtherProjectCardSkeleton = () => {
   return (
     <div className="min-w-[300px] h-64">
-      <Skeleton className="w-full h-full rounded-lg" />
-    </div>
-  );
-};
-
-export const FeaturedBlogCardSkeleton = () => {
-  return (
-    <div className="h-64">
       <Skeleton className="w-full h-full rounded-lg" />
     </div>
   );

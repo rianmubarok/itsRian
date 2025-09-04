@@ -15,10 +15,10 @@ const ContactHeader: React.FC<ContactHeaderProps> = ({
       intersecting ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
     }`}
   >
-    <h2 className="text-2xl sm:text-3xl md:text-[32px] leading-tight font-regular text-primary-dark dark:text-primary-light ">
+    <h2 className="text-2xl sm:text-3xl leading-tight font-regular text-primary-dark dark:text-primary-light ">
       Feel free to reach out — always open for creative discussions
     </h2>
-    <div className="text-primary-gray text-xs sm:text-sm font-light">
+    <div className="text-xs sm:text-sm font-light tracking-normal">
       <p>Avg. Response: Within 1–2 hours (Working Hours, GMT+7).</p>
       <p>For urgent matters, reach out via social media.</p>
     </div>

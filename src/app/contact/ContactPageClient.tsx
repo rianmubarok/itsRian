@@ -19,10 +19,10 @@ export default function ContactPageClient() {
 
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40"
       role="main"
     >
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 mb-4 sm:mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 mb-4 sm:mb-6">
         <ContactHeader
           headerRef={headerRef as React.RefObject<HTMLDivElement | null>}
           intersecting={headerIntersecting}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Blog } from "../types";
 import { blogs as staticBlogs } from "../data/blogs";
 
@@ -8,12 +8,15 @@ export function useBlogs() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const isMountedRef = useRef(true);
 
   useEffect(() => {
     async function fetchBlogs() {
       try {
         setLoading(true);
-        const response = await fetch("/api/blogs");
+        const response = await fetch("/api/blogs", {
+          cache: "no-store", // Always fetch fresh data
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch blogs");
@@ -37,6 +40,18 @@ export function useBlogs() {
     }
 
     fetchBlogs();
+
+    // Listen for refresh events
+    const handleRefresh = () => {
+      fetchBlogs();
+    };
+
+    window.addEventListener("refreshBlogs", handleRefresh);
+
+    return () => {
+      isMountedRef.current = false;
+      window.removeEventListener("refreshBlogs", handleRefresh);
+    };
   }, []);
 
   return { blogs, loading, error };
@@ -46,12 +61,22 @@ export function useBlog(slug: string) {
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const hasIncrementedRef = useRef(false);
 
   useEffect(() => {
     async function fetchBlog() {
       try {
         setLoading(true);
-        const response = await fetch(`/api/blogs/${slug}`);
+
+        // Only increment view count if we haven't done it yet for this slug
+        const shouldIncrement = !hasIncrementedRef.current;
+        const url = shouldIncrement
+          ? `/api/blogs/${slug}?inc=1`
+          : `/api/blogs/${slug}?inc=0`;
+
+        const response = await fetch(url, {
+          cache: "no-store",
+        });
 
         if (!response.ok) {
           if (response.status === 404) {
@@ -62,6 +87,11 @@ export function useBlog(slug: string) {
 
         const data = await response.json();
         setBlog(data);
+
+        // Mark as incremented after successful fetch
+        if (shouldIncrement) {
+          hasIncrementedRef.current = true;
+        }
       } catch (err) {
         console.warn("Failed to fetch blog from API, trying static data:", err);
         const staticBlog = staticBlogs.find((b) => b.slug === slug);
@@ -77,6 +107,8 @@ export function useBlog(slug: string) {
     }
 
     if (slug) {
+      // Reset the increment flag when slug changes
+      hasIncrementedRef.current = false;
       fetchBlog();
     }
   }, [slug]);

@@ -41,7 +41,7 @@ export default function FeaturedBlogRotator({
   const safeBlog = blogs[currentIndex] || blogs[0];
 
   return (
-    <div className="mb-16 hidden lg:block">
+    <div className="mb-4 hidden lg:block">
       {/* Featured Blog with Animation - Hidden on Mobile */}
       <div
         className={`transition-all duration-500 ease-in-out ${

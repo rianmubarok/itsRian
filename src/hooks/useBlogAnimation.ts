@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useIntersectionObserver } from "./useIntersectionObserver";
 import { Blog } from "../types";
 
@@ -42,14 +42,17 @@ export function useBlogAnimation() {
     rootMargin: "0px 0px -50px 0px",
   });
 
-  const handleContentShow = (loading: boolean, blog: Blog | null) => {
-    if (!loading && blog) {
-      const timeout = setTimeout(() => setShowContent(true), 50);
-      return () => clearTimeout(timeout);
-    } else {
-      setShowContent(false);
-    }
-  };
+  const handleContentShow = useCallback(
+    (loading: boolean, blog: Blog | null) => {
+      if (!loading && blog) {
+        const timeout = setTimeout(() => setShowContent(true), 50);
+        return () => clearTimeout(timeout);
+      } else {
+        setShowContent(false);
+      }
+    },
+    []
+  );
 
   return {
     hasMounted,

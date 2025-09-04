@@ -1,8 +1,11 @@
 "use client";
 
-import { experiences } from "../../data/experiences";
 import { useIntersectionObserver } from "../../hooks";
-import { calculateDurationFromPeriod } from "@/utils";
+import { AnimatedSection } from "../../components/shared/ui";
+import SectionAccordion from "../../components/aboutme/SectionAccordion";
+import ExperienceList from "../../components/aboutme/ExperienceList";
+import EducationList from "../../components/aboutme/EducationList";
+import LicenseList from "../../components/aboutme/LicenseList";
 
 export default function AboutMePageClient() {
   const { ref: headerRef, isIntersecting: headerIntersecting } =
@@ -17,115 +20,86 @@ export default function AboutMePageClient() {
       rootMargin: "0px 0px -50px 0px",
     });
 
-  const { ref: experienceRef, isIntersecting: experienceIntersecting } =
-    useIntersectionObserver<HTMLDivElement>({
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    });
-
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40"
       role="main"
     >
-      <div
-        ref={headerRef}
-        className={`grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 mb-4 sm:mb-6 transition-all duration-700 ease-out ${
-          headerIntersecting
-            ? "translate-y-0 opacity-100"
-            : "translate-y-8 opacity-0"
-        }`}
-      >
-        <h2 className="text-2xl sm:text-3xl md:text-[32px] leading-tight font-regular text-primary-dark dark:text-primary-light md:col-span-2">
-          Hello! Thank you for visiting my personal website.
-        </h2>
-        <p className="text-primary-gray font-regular text-base sm:text-lg md:col-span-3">
-          I&apos;m Rian, a passionate web developer and UI/UX enthusiast who
-          thrives on turning ideas into clean, functional, and engaging digital
-          experiences. Over the years, I&apos;ve dedicated myself to
-          understanding both the visual side of design and the logical side of
-          development — bridging creativity and code.
-        </p>
-      </div>
-
-      <div
-        ref={profileRef}
-        className={`text-primary-gray font-regular text-base sm:text-lg space-y-3 sm:space-y-4 transition-all duration-700 ease-out delay-300 ${
-          profileIntersecting
-            ? "translate-y-0 opacity-100"
-            : "translate-y-8 opacity-0"
-        }`}
-      >
-        <p>
-          I specialize in building responsive websites and interactive user
-          interfaces using technologies like JavaScript, TypeScript, React, and
-          Tailwind CSS. On the backend, I’ve explored Node.js and Firebase for
-          creating scalable, real-time applications. I also enjoy learning about
-          full-stack workflows and staying updated with modern development tools
-          and best practices.
-        </p>
-        <p>
-          What drives me most is creating intuitive user experiences that not
-          only look good but also solve real problems. I pay close attention to
-          accessibility, performance, and maintainable code — because great
-          interfaces should work well for everyone.
-        </p>
-        <p>
-          In collaborative environments, I’m a good listener, proactive
-          problem-solver, and open to feedback. Whether working in a team or
-          independently, I always aim to deliver thoughtful, reliable solutions
-          that align with project goals.
-        </p>
-        <p>
-          I&apos;m excited about future opportunities to collaborate and build
-          purposeful, user-centered digital products.
-        </p>
-        <p>Best regards,</p>
-        <h2 className="tracking-normal mt-10 sm:mt-15 font-sacramento-signature font-regular text-3xl sm:text-4xl md:text-5xl text-primary-dark dark:text-primary-light">
-          Rian
-        </h2>
-      </div>
+      <article className="border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-6 bg-gray-100 dark:bg-primary-light/5">
+        <AnimatedSection direction="up" duration={700}>
+          <div className="tracking-normal font-regular text-base space-y-3 sm:space-y-4">
+            <p>Hello! Thank you for visiting my personal website.</p>
+            <p>
+              I&apos;m Rian, a passionate web developer and UI/UX enthusiast who
+              thrives on turning ideas into clean, functional, and engaging
+              digital experiences. Over the years, I&apos;ve dedicated myself to
+              understanding both the visual side of design and the logical side
+              of development — bridging creativity and code.
+            </p>
+            <p>
+              I specialize in building responsive websites and interactive user
+              interfaces using technologies like JavaScript, TypeScript, React,
+              and Tailwind CSS. On the backend, I&apos;ve explored Node.js and
+              Firebase for creating scalable, real-time applications. I also
+              enjoy learning about full-stack workflows and staying updated with
+              modern development tools and best practices.
+            </p>
+            <p>
+              What drives me most is creating intuitive user experiences that
+              not only look good but also solve real problems. I pay close
+              attention to accessibility, performance, and maintainable code —
+              because great interfaces should work well for everyone.
+            </p>
+            <p>
+              In collaborative environments, I&apos;m a good listener, proactive
+              problem-solver, and open to feedback. Whether working in a team or
+              independently, I always aim to deliver thoughtful, reliable
+              solutions that align with project goals.
+            </p>
+            <p>
+              I&apos;m excited about future opportunities to collaborate and
+              build purposeful, user-centered digital products.
+            </p>
+            <p>Best regards,</p>
+            <h2 className="tracking-normal mt-10 sm:mt-15 font-sacramento-signature font-regular text-3xl sm:text-4xl md:text-5xl text-primary-dark dark:text-primary-light">
+              Rian
+            </h2>
+          </div>
+        </AnimatedSection>
+      </article>
 
       <hr className="border-t border-primary-gray/20 my-8 sm:my-12" />
 
-      <div
-        ref={experienceRef}
-        className={`space-y-8 sm:space-y-12 transition-all duration-700 ease-out delay-600 ${
-          experienceIntersecting
-            ? "translate-y-0 opacity-100"
-            : "translate-y-8 opacity-0"
-        }`}
+      {/* Experience Section dengan Accordion */}
+      <AnimatedSection direction="up" duration={700} delay={0} className="mb-4">
+        <SectionAccordion title="Experience">
+          <ExperienceList />
+        </SectionAccordion>
+      </AnimatedSection>
+
+      {/* Education Section dengan Accordion */}
+      <AnimatedSection
+        direction="up"
+        duration={700}
+        delay={200}
+        className="mb-4"
       >
-        {experiences.map((experience, index) => (
-          <div
-            key={experience.id}
-            className="text-primary-dark font-regular dark:text-primary-light grid grid-cols-1 md:grid-cols-6 transition-all duration-700 ease-out"
-            style={{
-              transitionDelay: `${900 + index * 200}ms`,
-              transform: experienceIntersecting
-                ? "translateY(0)"
-                : "translateY(20px)",
-              opacity: experienceIntersecting ? 1 : 0,
-            }}
-          >
-            <h2 className="text-xl sm:text-2xl md:col-span-2">
-              {experience.period}
-            </h2>
-            <div className="md:col-span-4">
-              <h2 className="text-xl sm:text-2xl mb-3 sm:mb-4">
-                {experience.company}, {experience.title}
-              </h2>
-              <div className="text-primary-gray text-base sm:text-lg space-y-3 sm:space-y-4">
-                <p className="text-xs sm:text-sm font-light">
-                  {calculateDurationFromPeriod(experience.period)} •{" "}
-                  {experience.type} • {experience.location}
-                </p>
-                <p>{experience.description}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+        <SectionAccordion title="Education">
+          <EducationList />
+        </SectionAccordion>
+      </AnimatedSection>
+
+      {/* License & Certification Section dengan Accordion */}
+      <AnimatedSection
+        direction="up"
+        duration={700}
+        delay={400}
+        className="mb-4"
+      >
+        <SectionAccordion title="Licenses & Certifications">
+          <LicenseList />
+        </SectionAccordion>
+      </AnimatedSection>
     </main>
   );
 }

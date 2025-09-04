@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import { formatDate } from "../../../utils";
 import OtherProjects from "../../../components/project/OtherProjects";
-import ProjectContent from "@/components/project/ProjectContent";
+import ProjectContent from "@/components/project/detail/ProjectContent";
 import ProjectDetailSkeleton from "../../../components/project/ProjectDetailSkeleton";
 import { useProjectAnimation } from "../../../hooks";
 
@@ -51,13 +51,24 @@ export default function ProjectDetailPageClient({
     handleContentShow(isLoading, project);
   }, [isLoading, project, handleContentShow]);
 
+  useEffect(() => {
+    if (!showContent) {
+      document.body.classList.add("hide-footer");
+    } else {
+      document.body.classList.remove("hide-footer");
+    }
+    return () => {
+      document.body.classList.remove("hide-footer");
+    };
+  }, [showContent]);
+
   if (!isLoading && !project) {
     notFound();
   }
 
   return (
     <main
-      className="relative max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 lg:mt-48 min-h-screen text-primary-dark dark:text-primary-light"
+      className="relative max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 min-h-screen text-primary-dark dark:text-primary-light"
       role="main"
     >
       <div
@@ -78,17 +89,17 @@ export default function ProjectDetailPageClient({
             <Link
               ref={refs.backButtonRef}
               href="/projects"
-              className="group text-base sm:text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 mb-6 sm:mb-8"
+              className="group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 mb-6 sm:mb-8"
             >
               <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
               Back to projects
             </Link>
 
             <div ref={refs.headerRef} className="mb-8 sm:mb-12">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-medium leading-tight tracking-tight mb-4 sm:mb-6">
+              <h1 className="text-5xl font-semibold leading-tighter tracking-tighter mb-4">
                 {project.title}
               </h1>
-              <p className="text-lg sm:text-xl text-primary-gray mb-4 sm:mb-6 leading-relaxed">
+              <p className="text-base text-primary-dark dark:text-gray-300 mb-4 sm:mb-6 tracking-normal">
                 {project.description}
               </p>
             </div>
@@ -107,11 +118,13 @@ export default function ProjectDetailPageClient({
               ref={refs.tagsRef}
               className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8"
             >
-              <h2 className="text-xl sm:text-2xl font-regular">Tech Stack :</h2>
+              <h2 className="text-base sm:text-lg font-noto-serif-display italic">
+                Tech Stack :
+              </h2>
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-4 py-1 text-xs sm:text-sm font-light rounded-full border border-primary-dark dark:border-primary-light flex items-center"
+                  className="px-4 py-1 text-sm rounded-full border border-primary-gray/20 text-primary-gray dark:text-gray-300 bg-gray-100 dark:bg-primary-light/5 items-center"
                 >
                   {tag}
                 </span>
@@ -124,20 +137,18 @@ export default function ProjectDetailPageClient({
 
             <div
               ref={refs.linksRef}
-              className="mt-20 sm:mt-24 md:mt-32 mb-12 sm:mb-16 flex flex-col items-start md:flex-row md:items-center md:justify-between gap-4 sm:gap-2 w-full"
+              className="mt-20 sm:mt-24 md:mt-32 mb-12 sm:mb-16 flex flex-col items-start md:flex-row md:items-center md:justify-between gap-4 sm:gap-2 w-full "
             >
-              <div className="text-base sm:text-lg text-primary-dark dark:text-primary-light font-light flex flex-wrap items-center gap-4 sm:gap-8">
+              <div className="px-5 py-3 rounded-full border border-primary-gray/20 text-primary-gray dark:text-gray-300 bg-gray-100 dark:bg-primary-light/5 flex flex-wrap items-center gap-4 sm:gap-8">
                 {project.sourceCode && (
                   <Link
                     href={project.sourceCode}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 sm:gap-3 transition-all duration-300"
+                    className="flex items-center gap-2 sm:gap-3"
                   >
                     <Github className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
-                    <span className="relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:transition-transform after:duration-300 after:scale-x-0 group-hover:after:scale-x-100 after:bg-current">
-                      Source Code
-                    </span>
+                    <span>Source Code</span>
                   </Link>
                 )}
 
@@ -150,12 +161,10 @@ export default function ProjectDetailPageClient({
                     href={project.liveProject}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 sm:gap-3 transition-all duration-300"
+                    className="flex items-center gap-2 sm:gap-3"
                   >
                     <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
-                    <span className="relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:transition-transform after:duration-300 after:scale-x-0 group-hover:after:scale-x-100 after:bg-current">
-                      Live Project
-                    </span>
+                    <span>Live Project</span>
                   </Link>
                 )}
 
@@ -165,18 +174,16 @@ export default function ProjectDetailPageClient({
                     private or in progress.{" "}
                     <Link
                       href="/contact"
-                      className="group inline-flex items-center transition-all duration-300"
+                      className="inline-flex items-center hover:text-primary-dark dark:hover:text-primary-light transition-colors duration-200"
                     >
-                      <span className="relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:transition-transform after:duration-300 after:scale-x-0 group-hover:after:scale-x-100 after:bg-current">
-                        Contact me if you&apos;re interested
-                      </span>
+                      <span>Contact me if you&apos;re interested</span>
                     </Link>
                     .
                   </p>
                 )}
               </div>
 
-              <span className="text-sm sm:text-base text-primary-gray mt-6 sm:mt-10 md:mt-0 md:text-right">
+              <span className="text-xs text-primary-gray mt-6 sm:mt-10 md:mt-0 md:text-right tracking-normal">
                 Created: {formatDate(project.createdAt)}
               </span>
             </div>

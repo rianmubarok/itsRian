@@ -31,7 +31,7 @@ export default function FloatingContactButton() {
     >
       <Link
         href="/contact"
-        className="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-1.5 sm:py-2 bg-white/80 dark:bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-primary-dark dark:text-primary-light hover:bg-white/90 dark:hover:bg-white/20 hover:border-white/30 transition-all duration-300 group shadow-lg hover:shadow-xl"
+        className="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-1.5 sm:py-2 bg-white/80 dark:bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-primary-dark dark:text-primary-light hover:bg-white/90 dark:hover:bg-white/20 hover:border-white/30 transition-all duration-300 group"
       >
         <span className="font-regular text-sm sm:text-base md:text-lg">
           Let&apos;s talk

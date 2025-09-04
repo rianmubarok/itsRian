@@ -25,7 +25,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-0 sm:pt-5 translate-y-0`}
     >
-      <div className="mx-auto px-4 sm:max-w-xl bg-primary-light/80 dark:bg-primary-dark/80 backdrop-blur-md border-b border-primary-gray/20 md:rounded-full md:border md:border-primary-gray/20">
+      <div className="mx-auto px-6 sm:px-4 sm:max-w-xl bg-primary-light/80 dark:bg-primary-dark/80 backdrop-blur-md border-b border-primary-gray/20 md:rounded-full md:border md:border-primary-gray/20">
         <div className="flex items-center justify-between h-16">
           {/* Logo with Profile Image */}
           <Link href="/" aria-label="Home - itsRian Portfolio">

@@ -4,15 +4,13 @@ import IntroSection from "./home/IntroSection";
 import LatestProjects from "./home/LatestProjects";
 import LatestBlogs from "./home/LatestBlogs";
 import SkillsSection from "./home/SkillsSection";
+import LetConnectSection from "./home/LetConnectSection";
 import SectionDivider from "./home/SectionDivider";
 import { AnimatedSection } from "./shared/ui";
 
 export default function Home() {
   return (
-    <main
-      className="max-w-6xl mx-auto my-32 md:my-40 lg:my-48"
-      role="main"
-    >
+    <main className="max-w-6xl mx-auto my-32 md:my-40 lg:my-48" role="main">
       <AnimatedSection direction="none" delay={0}>
         <IntroSection />
       </AnimatedSection>
@@ -42,6 +40,15 @@ export default function Home() {
 
       <AnimatedSection direction="up" delay={1200}>
         <SkillsSection />
+      </AnimatedSection>
+
+      <AnimatedSection direction="none" delay={1400}>
+        <SectionDivider />
+        <br />
+      </AnimatedSection>
+
+      <AnimatedSection direction="up" delay={1600}>
+        <LetConnectSection />
       </AnimatedSection>
     </main>
   );

@@ -71,7 +71,7 @@ const GuestbookMessageHeader: React.FC<GuestbookMessageHeaderProps> = ({
           <span className="hidden sm:inline">Delete</span>
         </button>
         {showDeleteConfirm && (
-          <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 flex gap-2 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-lg shadow-lg px-3 py-2 animate-popup z-10">
+          <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 flex gap-2 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-lg px-3 py-2 animate-popup z-10">
             <button
               onClick={onConfirmDelete}
               className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition-colors text-xs font-semibold"

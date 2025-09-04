@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import BlogCard from "../blog/BlogCard";
 import { useBlogs, useIntersectionObserver } from "../../hooks";
 import { useMemo } from "react";
-import { FeaturedBlogCardSkeleton } from "../shared/ui/SkeletonLoader";
+import { BlogCardSkeleton } from "../shared/ui/SkeletonLoader";
 
 export default function LatestBlogs() {
   const { blogs, loading } = useBlogs();
@@ -27,7 +27,7 @@ export default function LatestBlogs() {
   return (
     <section ref={ref} className="mb-16">
       <div className="sm:text-center mb-10 text-primary-dark dark:text-primary-light">
-        <p className="text-base sm:text-lg font-noto-serif-display italic">
+        <p className="text-base lg:text-lg font-noto-serif-display italic">
           Just writing
         </p>
         <h2
@@ -46,7 +46,7 @@ export default function LatestBlogs() {
       >
         {loading
           ? Array.from({ length: 3 }).map((_, index) => (
-              <FeaturedBlogCardSkeleton key={index} />
+              <BlogCardSkeleton key={index} />
             ))
           : latestBlogs.map((blog, index) => (
               <div
@@ -68,7 +68,7 @@ export default function LatestBlogs() {
       <div className="text-center">
         <Link
           href="/blog"
-          className={`group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 text-gray-900 dark:text-white ${
+          className={`group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 text-primary-dark dark:text-primary-light ${
             isIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-4 opacity-0"

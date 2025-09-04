@@ -2,80 +2,53 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useProjects } from "../../hooks";
 import ProjectCard from "./ProjectCard";
-import { useProjects, useIntersectionObserver } from "../../hooks";
-import { OtherProjectCardSkeleton } from "../shared/ui/SkeletonLoader";
+import { Project } from "../../types";
 
 interface OtherProjectsProps {
   currentProjectSlug: string;
-  isProjectDetailLoading?: boolean;
+  isProjectDetailLoading: boolean;
 }
 
 export default function OtherProjects({
   currentProjectSlug,
-  isProjectDetailLoading = false,
+  isProjectDetailLoading,
 }: OtherProjectsProps) {
-  const { projects, loading } = useProjects();
+  const { projects } = useProjects();
 
-  const otherProjects = projects
-    .filter((project) => project.slug !== currentProjectSlug)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 4);
+  const otherProjects = (() => {
+    const pool = projects.filter(
+      (project: Project) => project.slug !== currentProjectSlug
+    );
+    for (let i = pool.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    return pool.slice(0, 2);
+  })();
 
-  const { ref, isIntersecting } = useIntersectionObserver<HTMLElement>({
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  });
+  if (otherProjects.length === 0) return null;
 
   return (
-    <section ref={ref}>
-      <div className="flex items-center justify-between mb-4 sm:mb-6 text-primary-dark dark:text-primary-light">
-        <h2
-          className={`text-2xl sm:text-3xl md:text-[32px] font-regular transition-all duration-700 ease-out ${
-            isIntersecting
-              ? "translate-y-0 opacity-100"
-              : "translate-y-4 opacity-0"
-          }`}
-        >
-          View Other Projects
+    <section className="mb-16">
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-3xl font-semibold leading-tight tracking-tighter">
+          Other Projects
         </h2>
         <Link
           href="/projects"
-          className={`group text-base sm:text-lg font-light inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 ${
-            isIntersecting
-              ? "translate-y-0 opacity-100"
-              : "translate-y-4 opacity-0"
-          }`}
+          className="group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300"
+          aria-label="View all projects"
         >
-          View all projects
+          <span>View all</span>
           <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
         </Link>
       </div>
-
-      {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-        {isProjectDetailLoading
-          ? null // Don't show anything when project detail is loading
-          : otherProjects.length === 0
-          ? // Loading skeleton - only show when no other projects loaded yet
-            Array.from({ length: 4 }).map((_, index) => (
-              <OtherProjectCardSkeleton key={index} />
-            ))
-          : otherProjects.map((project, index) => (
-              <div
-                key={project.id}
-                className="transition-all duration-700 ease-out"
-                style={{
-                  transitionDelay: `${600 + index * 100}ms`,
-                  transform: isIntersecting
-                    ? "translateY(0) scale(1)"
-                    : "translateY(20px) scale(0.95)",
-                  opacity: isIntersecting ? 1 : 0,
-                }}
-              >
-                <ProjectCard project={project} variant="featured" />
-              </div>
-            ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+        {otherProjects.map((project: Project) => (
+          <ProjectCard key={project.id} project={project} variant="grid" />
+        ))}
       </div>
     </section>
   );

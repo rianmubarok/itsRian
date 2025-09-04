@@ -20,19 +20,15 @@ export default function NavItem({
 
   if (isMobile) {
     return (
-      <li role="none">
-        <Link
-          href={item.href}
-          className={`block text-lg sm:text-xl transition-colors duration-200 font-regular py-2 text-primary-dark dark:text-primary-light hover:text-gray-800 dark:hover:text-gray-200`}
-          role="menuitem"
-          aria-current={isActive ? "page" : undefined}
-          onClick={onClose}
-        >
-          <span className={`${isActive ? "font-medium" : ""}`}>
-            {item.name}
-          </span>
-        </Link>
-      </li>
+      <Link
+        href={item.href}
+        className={`block text-lg sm:text-xl transition-colors duration-200 font-regular py-2 text-primary-dark dark:text-primary-light hover:text-gray-800 dark:hover:text-gray-200`}
+        role="menuitem"
+        aria-current={isActive ? "page" : undefined}
+        onClick={onClose}
+      >
+        <span className={`${isActive ? "font-medium" : ""}`}>{item.name}</span>
+      </Link>
     );
   }
 

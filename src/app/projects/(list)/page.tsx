@@ -1,4 +1,4 @@
-import { siteMetadata } from "../../lib/metadata";
+import { siteMetadata } from "../../../lib/metadata";
 
 export const metadata = {
   title: `Projects`,
@@ -22,7 +22,7 @@ export const metadata = {
     siteName: siteMetadata.title,
     images: [
       {
-        url: `${siteMetadata.siteUrl}${siteMetadata.socialBanner}`,
+        url: `${siteMetadata.siteUrl}/og/projects.png`,
         width: 1200,
         height: 630,
         alt: "Projects Portfolio",
@@ -36,7 +36,7 @@ export const metadata = {
     title: `Projects`,
     description:
       "Explore my portfolio of web development projects, featuring modern React applications and UI/UX designs.",
-    images: [`${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`],
+    images: [`${siteMetadata.siteUrl}/og/projects.png`],
   },
   robots: {
     index: true,
@@ -47,7 +47,7 @@ export const metadata = {
   },
 };
 
-import ProjectsPageClient from "./ProjectsPageClient";
+import ProjectsPageClient from "../ProjectsPageClient";
 
 export default function ProjectsPage() {
   return <ProjectsPageClient />;

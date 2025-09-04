@@ -1,4 +1,4 @@
-import { siteMetadata } from "../../lib/metadata";
+import { siteMetadata } from "../../../lib/metadata";
 
 export const metadata = {
   title: `Blog`,
@@ -22,7 +22,7 @@ export const metadata = {
     siteName: siteMetadata.title,
     images: [
       {
-        url: `${siteMetadata.siteUrl}${siteMetadata.socialBanner}`,
+        url: `${siteMetadata.siteUrl}/og/blog.png`,
         width: 1200,
         height: 630,
         alt: "Blog Articles",
@@ -36,7 +36,7 @@ export const metadata = {
     title: `Blog`,
     description:
       "Read my latest thoughts on web development, design, and technology.",
-    images: [`${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`],
+    images: [`${siteMetadata.siteUrl}/og/blog.png`],
   },
   robots: {
     index: true,
@@ -47,7 +47,7 @@ export const metadata = {
   },
 };
 
-import BlogPageClient from "./BlogPageClient";
+import BlogPageClient from "../BlogPageClient";
 
 export default function BlogPage() {
   return <BlogPageClient />;
