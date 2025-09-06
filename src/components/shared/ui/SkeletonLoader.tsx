@@ -233,15 +233,15 @@ export const ContactSkeleton = () => {
 export const GuestbookSkeleton = () => {
   return (
     <main
-      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-4"
+      className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40"
       role="main"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 sm:gap-6 mb-4 sm:mb-6 transition-all duration-700 ease-out opacity-0 animate-fadein">
         {/* Header */}
-        <div className="lg:col-span-3 space-y-8 mb-12">
-          <Skeleton className="h-10 w-3/4 mb-4" />
-          <div className="space-y-3">
-            <Skeleton className="h-4 w-1/2" />
+        <div className="lg:col-span-3 space-y-6 sm:space-y-8 mb-8 sm:mb-12">
+          <Skeleton className="h-8 sm:h-10 w-3/4" />
+          <div className="space-y-2 sm:space-y-3">
+            <Skeleton className="h-3 sm:h-4 w-1/2" />
           </div>
           <div className="flex gap-4">
             <Skeleton className="h-10 w-24 rounded-lg" />
@@ -249,8 +249,8 @@ export const GuestbookSkeleton = () => {
           </div>
         </div>
         {/* Message List */}
-        <div className="lg:col-span-3">
-          <div className="space-y-4">
+        <div className="lg:col-span-3 max-w">
+          <div className="sm:h-[25rem] md:h-[30rem] overflow-y-auto space-y-3 sm:space-y-4 pr-3 sm:pr-5">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="flex gap-3 items-start">
                 <Skeleton className="w-10 h-10 rounded-full flex-shrink-0" />
@@ -262,8 +262,12 @@ export const GuestbookSkeleton = () => {
               </div>
             ))}
           </div>
-          <div className="mt-6">
-            <Skeleton className="h-12 w-full rounded-xl" />
+          {/* Message Input Skeleton */}
+          <div className="my-4 sm:my-6">
+            <div className="flex gap-2 items-start flex-wrap min-h-[32px] p-2 sm:p-3 border border-gray-300 dark:border-primary-gray rounded-xl bg-white dark:bg-white/10">
+              <Skeleton className="flex-1 min-w-[80px] h-5" />
+              <Skeleton className="ml-2 h-7 sm:h-8 w-16 rounded-lg flex-shrink-0" />
+            </div>
           </div>
         </div>
       </div>
