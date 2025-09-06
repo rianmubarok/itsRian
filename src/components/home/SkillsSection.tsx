@@ -25,7 +25,7 @@ const SkillsSection = () => {
               : "translate-y-4 opacity-0"
           }`}
         >
-          What I've Used
+          What I&apos;ve Used
         </h2>
       </div>
       <div
