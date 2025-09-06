@@ -7,18 +7,20 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-## ✨ Features
+![Thumbnail](public/img/thumbnail.png)
 
-🎨 **Modern Design** — Clean, responsive interface optimized for all devices  
-📝 **Blog & Portfolio** — Dynamic content management with Notion CMS  
-💬 **Interactive Guestbook** — Visitor engagement with social authentication  
-📧 **Contact Forms** — Direct communication via Formspree integration  
-🚀 **Performance First** — Lightning-fast loading with Next.js optimizations  
-🌙 **Theme Support** — Dark/light mode with smooth transitions  
-🔍 **SEO Ready** — Optimized for search engines and social sharing  
-🎨 **Syntax Highlighting** — Beautiful code blocks with Prism.js support
+## Features
 
-## 🛠️ Tech Stack
+**Modern Design** — Clean, responsive interface optimized for all devices  
+**Blog & Portfolio** — Dynamic content management with Notion CMS  
+**Interactive Guestbook** — Visitor engagement with social authentication  
+**Contact Forms** — Direct communication via Formspree integration  
+**Performance First** — Lightning-fast loading with Next.js optimizations  
+**Theme Support** — Dark/light mode with smooth transitions  
+**SEO Ready** — Optimized for search engines and social sharing  
+**Syntax Highlighting** — Beautiful code blocks with Prism.js support
+
+## Tech Stack
 
 This website is built using these technologies:
 
@@ -32,7 +34,7 @@ This website is built using these technologies:
 - ➰ **Framer Motion** — Smooth and interactive animations
 - 🎨 **Prism.js** — Syntax highlighting for code blocks with 15+ language support
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -59,7 +61,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to see your portfolio!
 
-## ⚙️ Configuration
+## Configuration
 
 Create `.env.local` with your credentials:
 
@@ -161,7 +163,7 @@ create table blog_views (
 1. Create form at [Formspree](https://formspree.io/)
 2. Copy form ID for contact integration
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── app/                # Next.js 15 App Router
@@ -178,7 +180,7 @@ create table blog_views (
 └── data/              # Static content
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Vercel (Recommended)
 
@@ -186,19 +188,15 @@ create table blog_views (
 2. Set environment variables
 3. Deploy automatically on push
 
-## 🎯 Perfect For
+## Perfect For
 
-- 👨‍💻 **Developers** showcasing technical projects
-- 🎨 **Designers** presenting portfolios
-- 🎓 **Students** building professional presence
-- 💼 **Freelancers** attracting clients
-- 🚀 **Professionals** establishing online brand
+- **Developers** showcasing technical projects
+- **Designers** presenting portfolios
+- **Students** building professional presence
+- **Freelancers** attracting clients
+- **Professionals** establishing online brand
 
-## 📄 License
-
-MIT License — feel free to use for personal or commercial projects.
-
-## 🤝 Support
+## Support
 
 Found this helpful?
 
@@ -207,11 +205,6 @@ Found this helpful?
 - 🔧 Contribute improvements
 - 📢 Share with others
 
----
+## License
 
-**Live Demo**: [https://itsrian.my.id/](https://itsrian.my.id/)  
-**Contact**: [muhammadfitrianmubarok@gmail.com](mailto:muhammadfitrianmubarok@gmail.com)
-
-<div align="center">
-  <strong>🚀 Ready to build your digital presence? Let's get started!</strong>
-</div>
+MIT License — feel free to use for personal or commercial projects, see [LICENSE](LICENSE) file for details.
