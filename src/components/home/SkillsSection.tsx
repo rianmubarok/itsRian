@@ -19,13 +19,13 @@ const SkillsSection = () => {
           Tech Stack and tools
         </p>
         <h2
-          className={`text-5xl font-semibold leading-tight tracking-tighter transition-all duration-700 ease-out ${
+          className={`text-5xl font-semibold leading-tight tracking-tighter transition-all duration-700 ease-out font-onest ${
             isIntersecting
               ? "translate-y-0 opacity-100"
               : "translate-y-4 opacity-0"
           }`}
         >
-          What I’ve Used
+          What I've Used
         </h2>
       </div>
       <div

@@ -4,6 +4,7 @@ import {
   Sacramento,
   Manrope,
   Noto_Serif_Display,
+  Onest,
 } from "next/font/google";
 
 export const dmSans = DM_Sans({
@@ -40,4 +41,11 @@ export const notoSerifDisplay = Noto_Serif_Display({
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-noto-serif-display",
+});
+
+export const onest = Onest({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+  variable: "--font-onest",
 });

@@ -42,6 +42,10 @@
   font-family: var(--font-noto-serif-display);
 }
 
+@utility font-onest {
+  font-family: var(--font-onest);
+}
+
 @keyframes MoveUpInitial {
   to {
     transform: translate3d(0, -105%, 0);

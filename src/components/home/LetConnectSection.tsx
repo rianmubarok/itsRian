@@ -45,7 +45,7 @@ const LetConnectSection = () => {
           }`}
         >
           {/* Text */}
-          <p className="text-lg text-primary-gray dark:text-gray-300 leading-relaxed">
+          <p className="text-base sm:text-lg text-primary-gray dark:text-gray-300 leading-relaxed">
             Ready to collaborate on your next project? <br />
             Let&apos;s discuss how we can bring your ideas to life.
           </p>

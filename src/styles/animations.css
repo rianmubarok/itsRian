@@ -42,7 +42,7 @@
 }
 
 .animate-looping-tag {
-  animation: looping-tag 150s linear infinite;
+  animation: looping-tag 300s linear infinite;
   will-change: transform;
 }
 
