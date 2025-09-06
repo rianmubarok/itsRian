@@ -5,9 +5,9 @@
   --color-primary-gray: #606060;
 
   /* FONTS */
-  --font-sans: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
   --font-playfair: var(--font-playfair), "Playfair Display", serif;
   --font-sacramento: var(--font-sacramento), "Sacramento", cursive;
   --font-manrope: var(--font-manrope), "Manrope", system-ui, sans-serif;
-  --font-noto-serif-display: var(--font-noto-serif-display), "Noto Serif Display", Georgia, serif;
+  --font-noto-serif-display: var(--font-noto-serif-display),
+    "Noto Serif Display", Georgia, serif;
 }
