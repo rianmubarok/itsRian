@@ -65,11 +65,7 @@ export function MessageInput({
           value={input}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          placeholder={
-            newMessage.length === 0
-              ? "Type @ to mention user or write your message..."
-              : ""
-          }
+          placeholder={newMessage.length === 0 ? "Type your message..." : ""}
           disabled={isSubmitting}
           className="flex-1 min-w-[80px] px-0 py-1 border-none outline-none bg-transparent text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 text-sm resize-none overflow-hidden"
           style={{ minWidth: 60, minHeight: 20 }}
