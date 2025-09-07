@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
   }
 
   return {
-    title: `${project.title}`,
+    title: `${project.title} - ${siteMetadata.author}`,
     description:
       project.description ||
       `Explore the ${project.title} project - a showcase of modern web development and design.`,
@@ -31,9 +31,11 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
       "web development",
       "React",
       "TypeScript",
+      siteMetadata.author,
     ],
+    authors: [{ name: siteMetadata.author }],
     openGraph: {
-      title: `${project.title}`,
+      title: `${project.title} - ${siteMetadata.author}`,
       description:
         project.description || `Explore the ${project.title} project`,
       url: `${siteMetadata.siteUrl}/projects/${slug}`,
@@ -43,7 +45,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
           url:
             project.ogImage ||
             project.thumbnail ||
-            `${siteMetadata.siteUrl}/og/project.png`,
+            `${siteMetadata.siteUrl}/og/projects.png`,
           width: 1200,
           height: 630,
           alt: project.title,
@@ -51,16 +53,19 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
       ],
       locale: siteMetadata.locale,
       type: "article",
+      publishedTime: project.createdAt,
+      authors: [siteMetadata.author],
+      section: "Projects",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title}`,
+      title: `${project.title} - ${siteMetadata.author}`,
       description:
         project.description || `Explore the ${project.title} project`,
       images: [
         project.ogImage ||
           project.thumbnail ||
-          `${siteMetadata.siteUrl}/og/project.png`,
+          `${siteMetadata.siteUrl}/og/projects.png`,
       ],
     },
     robots: {

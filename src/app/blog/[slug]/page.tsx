@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
   }
 
   return {
-    title: `${blog.title}`,
+    title: `${blog.title} - ${siteMetadata.author}`,
     description:
       blog.description ||
       `Read ${blog.title} - insights and thoughts on web development, design, and technology.`,
@@ -31,9 +31,11 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
       "web development",
       "technology",
       "programming",
+      siteMetadata.author,
     ],
+    authors: [{ name: siteMetadata.author }],
     openGraph: {
-      title: `${blog.title}`,
+      title: `${blog.title} - ${siteMetadata.author}`,
       description: blog.description || `Read ${blog.title}`,
       url: `${siteMetadata.siteUrl}/blog/${slug}`,
       siteName: siteMetadata.title,
@@ -42,7 +44,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
           url:
             blog.ogImage ||
             blog.thumbnail ||
-            `${siteMetadata.siteUrl}/og/blog-post.png`,
+            `${siteMetadata.siteUrl}/og/blog.png`,
           width: 1200,
           height: 630,
           alt: blog.title,
@@ -52,15 +54,14 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
       type: "article",
       publishedTime: blog.createdAt,
       authors: [siteMetadata.author],
+      section: "Blog",
     },
     twitter: {
       card: "summary_large_image",
-      title: ` ${blog.title}`,
+      title: `${blog.title} - ${siteMetadata.author}`,
       description: blog.description || `Read ${blog.title}`,
       images: [
-        blog.ogImage ||
-          blog.thumbnail ||
-          `${siteMetadata.siteUrl}/og/blog-post.png`,
+        blog.ogImage || blog.thumbnail || `${siteMetadata.siteUrl}/og/blog.png`,
       ],
     },
     robots: {
