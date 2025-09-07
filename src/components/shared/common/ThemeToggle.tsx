@@ -17,7 +17,13 @@ export default function ThemeToggle() {
   if (!mounted) {
     return (
       <button className="cursor-pointer p-2 text-primary-dark hover:text-primary-dark dark:hover:text-primary-light transition-colors duration-200">
-        <Sun className="w-5 h-5" />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        >
+          <Sun className="w-5 h-5" />
+        </motion.div>
       </button>
     );
   }
@@ -28,7 +34,13 @@ export default function ThemeToggle() {
       className="cursor-pointer p-2 text-primary-dark dark:text-primary-light transition-colors duration-200"
       aria-label="Toggle theme"
     >
-      <AnimatedSunMoon isDarkMode={isDark} />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3, ease: "easeOut", delay: 0.1 }}
+      >
+        <AnimatedSunMoon isDarkMode={isDark} />
+      </motion.div>
     </button>
   );
 }
