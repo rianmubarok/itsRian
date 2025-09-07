@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Eye, Clock } from "lucide-react";
 import { Blog } from "../../types";
 import { useEffect, useState, memo } from "react";
+import Skeleton from "../shared/ui/SkeletonLoader";
 
 interface BlogCardProps {
   blog: Blog;
@@ -14,11 +15,7 @@ function BlogCardBase({ blog, variant = "tile" }: BlogCardProps) {
       <article className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
         <Link href={`/blog/${blog.slug}`}>
           <div className="relative h-[200px] sm:h-[250px] overflow-hidden rounded-xl">
-            <img
-              src={blog.thumbnail}
-              alt={blog.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
+            <ThumbnailWithSkeleton src={blog.thumbnail} alt={blog.title} />
           </div>
         </Link>
 
@@ -85,12 +82,8 @@ function BlogCardBase({ blog, variant = "tile" }: BlogCardProps) {
             </div>
 
             {/* Thumbnail */}
-            <div className="flex-shrink-0 w-full lg:w-120 h-60 sm:h-72 md:h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
-              <img
-                src={blog.thumbnail}
-                alt={blog.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
+            <div className="flex-shrink-0 w-full lg:w-120 h-60 sm:h-72 md:h-80 bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl relative">
+              <ThumbnailWithSkeleton src={blog.thumbnail} alt={blog.title} />
             </div>
           </div>
         </Link>
@@ -103,11 +96,7 @@ function BlogCardBase({ blog, variant = "tile" }: BlogCardProps) {
     <article className="group w-full border border-primary-gray/20 rounded-3xl p-3 bg-gray-100 dark:bg-primary-light/5 duration-300">
       <Link href={`/blog/${blog.slug}`}>
         <div className="relative h-[200px] sm:h-[250px] md:h-[280px] overflow-hidden rounded-xl">
-          <img
-            src={blog.thumbnail}
-            alt={blog.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
+          <ThumbnailWithSkeleton src={blog.thumbnail} alt={blog.title} />
         </div>
       </Link>
 
@@ -174,3 +163,33 @@ const BlogCard = memo(BlogCardBase, (prev, next) => {
 });
 
 export default BlogCard;
+
+interface ThumbnailWithSkeletonProps {
+  src: string;
+  alt: string;
+}
+
+function ThumbnailWithSkeleton({ src, alt }: ThumbnailWithSkeletonProps) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className="w-full h-full">
+      <img
+        src={src}
+        alt={alt}
+        onLoad={() => setIsLoaded(true)}
+        className={`w-full h-full object-cover transition-all duration-300 ${
+          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
+        } group-hover:scale-105`}
+      />
+      <div
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          isLoaded ? "opacity-0" : "opacity-100"
+        }`}
+        aria-hidden="true"
+      >
+        <Skeleton className="w-full h-full rounded-xl" />
+      </div>
+    </div>
+  );
+}

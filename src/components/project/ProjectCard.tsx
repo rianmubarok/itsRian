@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { useState } from "react";
 import { Project } from "../../types/index";
 import CollageRotator from "../shared/ui/CollageRotator";
+import Skeleton from "../shared/ui/SkeletonLoader";
 
 interface ProjectCardProps {
   project: Project;
@@ -46,11 +48,13 @@ export default function ProjectCard({
               />
             </div>
           ) : (
-            <img
-              src={project.thumbnail}
-              alt={project.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
+            <>
+              {/* Thumbnail with loading skeleton */}
+              <ThumbnailWithSkeleton
+                src={project.thumbnail}
+                alt={project.title}
+              />
+            </>
           )}
         </div>
       </Link>
@@ -76,6 +80,37 @@ export default function ProjectCard({
             </span>
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+interface ThumbnailWithSkeletonProps {
+  src: string;
+  alt: string;
+}
+
+function ThumbnailWithSkeleton({ src, alt }: ThumbnailWithSkeletonProps) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className="w-full h-full">
+      <img
+        src={src}
+        alt={alt}
+        onLoad={() => setIsLoaded(true)}
+        className={`w-full h-full object-cover transition-all duration-300 ${
+          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
+        } group-hover:scale-105`}
+      />
+      {/* Skeleton overlay */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          isLoaded ? "opacity-0" : "opacity-100"
+        }`}
+        aria-hidden="true"
+      >
+        <Skeleton className="w-full h-full rounded-xl" />
       </div>
     </div>
   );
