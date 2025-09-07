@@ -9,7 +9,7 @@ export const siteMetadata = {
   favicon: "/favicon.ico",
   siteLogo: "/logo.png",
   image: "/og-image.png",
-  email: "rian@example.com",
+  email: "muhammadfitrianmubarok@gmail.com",
   github: "https://github.com/rianmubarok",
   twitter: "https://twitter.com/itsrian",
   facebook: "https://web.facebook.com/m.fitrian.37",
