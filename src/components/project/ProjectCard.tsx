@@ -61,7 +61,7 @@ export default function ProjectCard({
 
       <div className="-mt-4 pt-10 p-6 bg-primary-light dark:bg-primary-dark rounded-b-xl">
         <Link href={`/projects/${project.slug}`}>
-          <h3 className="text-2xl font-semibold mb-2 sm:mb-3 text-primary-dark dark:text-primary-light">
+          <h3 className="tracking-tight text-2xl font-semibold mb-2 sm:mb-3 text-primary-dark dark:text-primary-light">
             {project.title}
           </h3>
         </Link>

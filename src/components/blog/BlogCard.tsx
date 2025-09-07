@@ -21,7 +21,7 @@ function BlogCardBase({ blog, variant = "tile" }: BlogCardProps) {
 
         <div className="-mt-4 pt-10 p-6 bg-primary-light dark:bg-primary-dark rounded-b-xl">
           <Link href={`/blog/${blog.slug}`}>
-            <h3 className="text-2xl font-semibold mb-2 sm:mb-3 text-primary-dark dark:text-primary-light">
+            <h3 className="tracking-tight text-2xl font-semibold mb-2 sm:mb-3 text-primary-dark dark:text-primary-light">
               {blog.title}
             </h3>
           </Link>
@@ -102,7 +102,7 @@ function BlogCardBase({ blog, variant = "tile" }: BlogCardProps) {
 
       <div className="-mt-4 pt-10 p-6 bg-primary-light dark:bg-primary-dark rounded-b-xl">
         <Link href={`/blog/${blog.slug}`}>
-          <h3 className="text-2xl font-semibold mb-2 sm:mb-3 text-primary-dark dark:text-primary-light">
+          <h3 className="tracking-tight text-2xl font-semibold mb-2 sm:mb-3 text-primary-dark dark:text-primary-light">
             {blog.title}
           </h3>
         </Link>
