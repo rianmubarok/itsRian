@@ -15,6 +15,7 @@ export interface Project {
   slug: string;
   description: string;
   thumbnail: string;
+  ogImage?: string;
   tags: string[];
   createdAt: string;
   content: string;
@@ -45,6 +46,7 @@ export interface Blog {
     id: string;
   };
   thumbnail: string;
+  ogImage?: string;
   createdAt: string;
   viewCount: string;
   readingTime: string;

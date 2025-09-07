@@ -39,7 +39,10 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
       siteName: siteMetadata.title,
       images: [
         {
-          url: blog.thumbnail || `${siteMetadata.siteUrl}/og/blog-post.png`,
+          url:
+            blog.ogImage ||
+            blog.thumbnail ||
+            `${siteMetadata.siteUrl}/og/blog-post.png`,
           width: 1200,
           height: 630,
           alt: blog.title,
@@ -54,7 +57,11 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
       card: "summary_large_image",
       title: ` ${blog.title}`,
       description: blog.description || `Read ${blog.title}`,
-      images: [blog.thumbnail || `${siteMetadata.siteUrl}/og/blog-post.png`],
+      images: [
+        blog.ogImage ||
+          blog.thumbnail ||
+          `${siteMetadata.siteUrl}/og/blog-post.png`,
+      ],
     },
     robots: {
       index: true,

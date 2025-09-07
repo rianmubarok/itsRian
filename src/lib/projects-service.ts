@@ -146,6 +146,10 @@ export async function getProjects(): Promise<Project[]> {
           thumbnail:
             getPlainTextFromUrl(properties.thumbnail) ||
             "https://placehold.co/600x400?text=No+Image",
+          ogImage:
+            getPlainTextFromUrl(
+              (properties as Record<string, NotionProperty>)["ogImage"]
+            ) || undefined,
           tags: getPlainTextFromMultiSelect(properties.tags),
           createdAt:
             getPlainTextFromDate(properties.createdAt) ||
@@ -199,6 +203,10 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       content:
         blockContent || getMarkdownFromRichText(properties.content) || "",
       thumbnail: getPlainTextFromUrl(properties.thumbnail) || "",
+      ogImage:
+        getPlainTextFromUrl(
+          (properties as Record<string, NotionProperty>)["ogImage"]
+        ) || undefined,
       tags: getPlainTextFromMultiSelect(properties.tags),
       createdAt: getPlainTextFromDate(properties.createdAt) || "",
       sourceCode: getPlainTextFromUrl(properties.sourceCode) || undefined,

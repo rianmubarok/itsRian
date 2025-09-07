@@ -148,6 +148,10 @@ export async function getBlogs(): Promise<Blog[]> {
         thumbnail:
           getPlainTextFromUrl(properties.thumbnail) ||
           "https://placehold.co/600x400?text=No+Image",
+        ogImage:
+          getPlainTextFromUrl(
+            (properties as Record<string, NotionProperty>)["ogImage"]
+          ) || undefined,
         createdAt:
           getPlainTextFromDate(properties.date) ||
           (page as PageObjectResponse).created_time ||
@@ -357,6 +361,10 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
         id: blockContent || fallbackContent.id,
       },
       thumbnail: getPlainTextFromUrl(properties.thumbnail) || "",
+      ogImage:
+        getPlainTextFromUrl(
+          (properties as Record<string, NotionProperty>)["ogImage"]
+        ) || undefined,
       createdAt: getPlainTextFromDate(properties.date) || "",
       viewCount: "0", // Will be updated from Supabase
       readingTime: getPlainTextFromRichText(properties.readingTime) || "5 min",
