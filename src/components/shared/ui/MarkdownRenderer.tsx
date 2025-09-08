@@ -112,9 +112,9 @@ export default function MarkdownRenderer({
 
             return (
               <img
-                src={src as any}
-                className={mergedClassName || undefined}
                 {...rest}
+                src={src}
+                className={mergedClassName || undefined}
               />
             );
           },
