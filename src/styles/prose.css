@@ -84,3 +84,22 @@
   background-color: rgb(163, 213, 161);
   transform: scaleX(1.05);
 }
+
+/* Inline external SVG icons coming from Markdown images */
+.prose img.md-inline-icon {
+  display: inline-block;
+  vertical-align: text-bottom;
+  width: 1.1em;
+  height: 1.1em;
+  margin: 0 0.25em 0 0.15em;
+  object-fit: contain;
+  aspect-ratio: 1 / 1;
+}
+
+/* Ensure inline icons also work in headings and list items */
+.prose h1 img.md-inline-icon,
+.prose h2 img.md-inline-icon,
+.prose h3 img.md-inline-icon,
+.prose li img.md-inline-icon {
+  vertical-align: baseline;
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import ReactMarkdown from "react-markdown";
+import type { DetailedHTMLProps, ImgHTMLAttributes } from "react";
 import remarkGfm from "remark-gfm";
 import CodeBlock from "./CodeBlock";
 
@@ -23,6 +24,11 @@ interface PProps {
 interface PreProps {
   children?: React.ReactNode;
 }
+
+type ImgProps = DetailedHTMLProps<
+  ImgHTMLAttributes<HTMLImageElement>,
+  HTMLImageElement
+>;
 
 export default function MarkdownRenderer({
   children,
@@ -88,6 +94,29 @@ export default function MarkdownRenderer({
           },
           pre: ({ children }: PreProps) => {
             return <>{children}</>;
+          },
+          img: (props: ImgProps) => {
+            const { src, className, ...rest } = props;
+            const srcString = typeof src === "string" ? src : undefined;
+            const isExternal = !!srcString && /^https?:\/\//i.test(srcString);
+            const looksSvg =
+              !!srcString &&
+              (srcString.endsWith(".svg") || srcString.includes("/svg/"));
+
+            const mergedClassName = [
+              className,
+              isExternal && looksSvg ? "md-inline-icon" : undefined,
+            ]
+              .filter(Boolean)
+              .join(" ");
+
+            return (
+              <img
+                src={src as any}
+                className={mergedClassName || undefined}
+                {...rest}
+              />
+            );
           },
         }}
       >
