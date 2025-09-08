@@ -9,7 +9,7 @@ import {
 } from "../../components/shared/ui/SkeletonLoader";
 import { useBlogs } from "../../hooks/useBlogs";
 import { useEffect as useEffectReact, useState } from "react";
-import { AnimatedBlogCard } from "../../components/blog/BlogCard";
+import BlogCard from "../../components/blog/BlogCard";
 
 export default function BlogPageClient() {
   const { blogs, loading, error } = useBlogs();
@@ -78,10 +78,19 @@ export default function BlogPageClient() {
         {/* Featured Blog Rotator Skeleton */}
         <FeaturedBlogRotatorSkeleton />
 
-        {/* Blog Grid Skeleton */}
+        {/* Blog Grid Skeleton with animation */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <BlogCardSkeleton key={item} />
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+            <div
+              key={item}
+              className="opacity-0 animate-fade-in-up"
+              style={{
+                animationDelay: `${index * 100}ms`,
+                animationFillMode: "forwards",
+              }}
+            >
+              <BlogCardSkeleton />
+            </div>
           ))}
         </div>
       </main>
@@ -111,19 +120,33 @@ export default function BlogPageClient() {
         {displayedItems.map((blog, index) => {
           if (!blog) return null;
           return (
-            <AnimatedBlogCard
+            <div
               key={blog.id || index}
-              blog={blog}
-              variant="tile"
-            />
+              className="opacity-0 animate-fade-in-up"
+              style={{
+                animationDelay: `${index * 150}ms`,
+                animationFillMode: "forwards",
+              }}
+            >
+              <BlogCard blog={blog} variant="tile" />
+            </div>
           );
         })}
       </div>
 
       {isLoading && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6 sm:mt-8">
-          {[1, 2, 3, 4].map((item) => (
-            <BlogCardSkeleton key={item} />
+          {[1, 2, 3, 4].map((item, index) => (
+            <div
+              key={item}
+              className="opacity-0 animate-fade-in-up"
+              style={{
+                animationDelay: `${index * 100}ms`,
+                animationFillMode: "forwards",
+              }}
+            >
+              <BlogCardSkeleton />
+            </div>
           ))}
         </div>
       )}
