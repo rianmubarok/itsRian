@@ -9,4 +9,4 @@ export {
   BlogContent,
 } from "./detail";
 export { default as MarkdownContentLoader } from "@/components/shared/ui/MarkdownContentLoader";
-export { default as RelatedPosts } from "./RelatedPosts";
+export { default as OtherPosts } from "./OtherPosts";

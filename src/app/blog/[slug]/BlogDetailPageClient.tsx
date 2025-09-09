@@ -9,7 +9,7 @@ import {
   BlogThumbnail,
   BlogTags,
   BlogContent,
-  RelatedPosts,
+  OtherPosts,
   BlogSkeleton,
 } from "../../../components/blog";
 import { notFound } from "next/navigation";
@@ -98,7 +98,7 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
               currentLanguage={currentLanguage}
             />
             <hr className="border-t border-primary-gray/20 my-12" />
-            <RelatedPosts relatedPosts={relatedPosts} hasMounted={hasMounted} />
+            <OtherPosts relatedPosts={relatedPosts} hasMounted={hasMounted} />
           </>
         )}
       </div>

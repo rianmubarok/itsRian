@@ -3,15 +3,15 @@ import { ArrowRight } from "lucide-react";
 import { Blog } from "../../types";
 import BlogCard from "./BlogCard";
 
-interface RelatedPostsProps {
+interface OtherPostsProps {
   relatedPosts: Blog[];
   hasMounted: boolean;
 }
 
-export default function RelatedPosts({
+export default function OtherPosts({
   relatedPosts,
   hasMounted,
-}: RelatedPostsProps) {
+}: OtherPostsProps) {
   return (
     <section
       className={`mb-16 transition-all duration-700 ease-out delay-600 ${
@@ -20,7 +20,7 @@ export default function RelatedPosts({
     >
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-3xl font-semibold leading-tight tracking-tighter">
-          Related Posts
+          Other Posts
         </h2>
         <Link
           href="/blog"

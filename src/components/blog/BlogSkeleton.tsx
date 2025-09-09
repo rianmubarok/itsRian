@@ -82,7 +82,7 @@ export default function BlogSkeleton({ hasMounted }: BlogSkeletonProps) {
 
       <Skeleton className="h-px w-full my-12" />
 
-      {/* Related Posts Skeleton */}
+      {/* Other Posts Skeleton */}
       <section
         className={`mb-16 transition-all duration-700 ease-out delay-600 ${
           hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
