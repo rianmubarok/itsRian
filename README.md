@@ -109,25 +109,29 @@ NEXT_PUBLIC_FORMSPREE_FORM_ID=your_formspree_form_id
 
 - `title` (Title) - Blog post title
 - `slug` (Text) - URL-friendly identifier
-- `description` (Text) - Brief description
-- `tags` (Multi-select) - Categories/tags
+- `description` (Text) - Brief description (Optional)
+- `tags` (Multi-select) - Categories/tags (Optional)
 - `date` (Date) - Publication date
-- `readingTime` (Text) - Estimated reading time
-- `thumbnail` (URL) - Featured image
+- `readingTime` (Text) - Estimated reading time (Optional)
+- `thumbnail` (URL) - Featured image (Optional)
+- `ogImage` (URL) - Open Graph image for social sharing (Optional)
 - `contentEn` (Text) - English content (Markdown)
-- `contentId` (Text) - Indonesian content (Markdown)
+- `contentId` (Text) - Indonesian content (Markdown) (Optional)
 
 **Portfolio Database Properties:**
 
 - `title` (Title) - Project name
 - `slug` (Text) - URL-friendly identifier
-- `description` (Text) - Project description
-- `content` (Text) - Detailed project information (supports external links)
-- `thumbnail` (URL) - Project screenshot
+- `description` (Text) - Project description (Optional)
+- `content` (Text) - Detailed project information (Markdown) (Optional)
+- `thumbnail` (URL) - Project screenshot (Optional)
+- `ogImage` (URL) - Open Graph image for social sharing (Optional)
 - `tags` (Multi-select) - Technologies used
 - `createdAt` (Date) - Project creation date
-- `sourceCode` (URL) - GitHub/repository link
-- `liveProject` (URL) - Live demo link
+- `sourceCode` (URL) - GitHub/repository link (Optional)
+- `liveProject` (URL) - Live demo link (Optional)
+
+Tip. Markdown content can also use external links with the `.md` extension.
 
 ### 🗄️ Supabase Setup
 
@@ -140,9 +144,11 @@ NEXT_PUBLIC_FORMSPREE_FORM_ID=your_formspree_form_id
 create table guestbook (
   id uuid primary key default uuid_generate_v4(),
   name text not null,
-  message text not null,
-  created_at timestamp with time zone default now(),
-  profile_image_url text
+  message jsonb not null,
+  date timestamp with time zone not null default now(),
+  profile_pic text,
+  email text,
+  is_author boolean not null default false
 );
 
 -- Blog views tracking
@@ -151,6 +157,11 @@ create table blog_views (
   count integer not null default 0
 );
 ```
+
+Notes:
+
+- Optional fields: `profile_pic`, `email`
+- Defaults: `date` defaults to now, `is_author` defaults to false
 
 ### 🔥 Firebase Setup
 
