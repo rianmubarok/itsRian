@@ -58,7 +58,7 @@ export default function ProjectsPageClient() {
               key={item}
               className="opacity-0 animate-fade-in-up"
               style={{
-                animationDelay: `${index * 150}ms`,
+                animationDelay: `${index * 100}ms`,
                 animationFillMode: "forwards",
               }}
             >
