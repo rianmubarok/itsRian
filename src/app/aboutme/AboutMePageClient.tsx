@@ -30,35 +30,37 @@ export default function AboutMePageClient() {
           <div className="tracking-normal font-regular text-base space-y-3 sm:space-y-4">
             <p>Hello! Thank you for visiting my personal website.</p>
             <p>
-              I&apos;m Rian, a passionate web developer and UI/UX enthusiast who
-              thrives on turning ideas into clean, functional, and engaging
-              digital experiences. Over the years, I&apos;ve dedicated myself to
-              understanding both the visual side of design and the logical side
-              of development — bridging creativity and code.
+              I&apos;m Rian, a dedicated web developer and UI/UX enthusiast with
+              a strong passion for transforming ideas into clean, functional,
+              and engaging digital experiences. I continuously strive to balance
+              the visual side of design with the logical side of development,
+              bridging creativity and code effectively.
             </p>
             <p>
-              I specialize in building responsive websites and interactive user
-              interfaces using technologies like JavaScript, TypeScript, React,
-              and Tailwind CSS. On the backend, I&apos;ve explored Node.js and
-              Firebase for creating scalable, real-time applications. I also
-              enjoy learning about full-stack workflows and staying updated with
-              modern development tools and best practices.
+              On the frontend, I focus on building responsive and interactive
+              user interfaces using Next.js, React, TypeScript, and Tailwind
+              CSS. On the backend, I have explored Node.js, Firebase, and
+              Supabase to create scalable and real-time applications. I also
+              enjoy exploring full-stack workflows and staying up to date with
+              modern development practices and tools.
             </p>
             <p>
-              What drives me most is creating intuitive user experiences that
-              not only look good but also solve real problems. I pay close
-              attention to accessibility, performance, and maintainable code —
-              because great interfaces should work well for everyone.
+              My main drive is to craft intuitive user experiences that not only
+              look great but also solve real problems. I prioritize
+              accessibility, performance, and maintainable code, ensuring that
+              digital products work seamlessly for everyone.
             </p>
             <p>
-              In collaborative environments, I&apos;m a good listener, proactive
-              problem-solver, and open to feedback. Whether working in a team or
-              independently, I always aim to deliver thoughtful, reliable
-              solutions that align with project goals.
+              In collaborative settings, I am an active listener, a proactive
+              problem-solver, and open to constructive feedback. Whether working
+              independently or as part of a team, I always aim to deliver
+              thoughtful and reliable solutions that align with project
+              objectives.
             </p>
             <p>
-              I&apos;m excited about future opportunities to collaborate and
-              build purposeful, user-centered digital products.
+              I am excited about future opportunities to collaborate and
+              contribute to the development of purposeful, user-centered digital
+              products.
             </p>
             <p>Best regards,</p>
             <h2 className="tracking-normal mt-10 sm:mt-15 font-sacramento-signature font-regular text-3xl sm:text-4xl md:text-5xl text-primary-dark dark:text-primary-light">
