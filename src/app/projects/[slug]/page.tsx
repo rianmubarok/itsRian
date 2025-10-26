@@ -19,7 +19,9 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
   }
 
   return {
-    title: `${project.title} - ${siteMetadata.author}`,
+    title: {
+      absolute: project.title,
+    },
     description:
       project.description ||
       `Explore the ${project.title} project - a showcase of modern web development and design.`,
@@ -35,7 +37,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
     ],
     authors: [{ name: siteMetadata.author }],
     openGraph: {
-      title: `${project.title} - ${siteMetadata.author}`,
+      title: project.title,
       description:
         project.description || `Explore the ${project.title} project`,
       url: `${siteMetadata.siteUrl}/projects/${slug}`,
@@ -59,7 +61,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} - ${siteMetadata.author}`,
+      title: project.title,
       description:
         project.description || `Explore the ${project.title} project`,
       images: [
