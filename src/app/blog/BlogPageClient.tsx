@@ -111,7 +111,7 @@ export default function BlogPageClient() {
             if (typeof window !== "undefined") {
               sessionStorage.removeItem("navigatingToBlogDetail");
             }
-          } catch {}
+          } catch { }
         }}
       />
       <FeaturedBlogRotator blogs={blogs} />
@@ -122,11 +122,7 @@ export default function BlogPageClient() {
           return (
             <div
               key={blog.id || index}
-              className="opacity-0 animate-fade-in-up"
-              style={{
-                animationDelay: `${index * 150}ms`,
-                animationFillMode: "forwards",
-              }}
+              className=""
             >
               <BlogCard blog={blog} variant="tile" />
             </div>

@@ -56,7 +56,7 @@ function BlogCardBase({ blog, variant = "tile" }: BlogCardProps) {
           onClick={() => {
             try {
               sessionStorage.setItem("navigatingToBlogDetail", "1");
-            } catch {}
+            } catch { }
           }}
         >
           <div className="flex flex-col lg:flex-row gap-4 bg-primary-light dark:bg-primary-dark rounded-xl">
@@ -143,9 +143,8 @@ export function AnimatedBlogCard({
 
   return (
     <div
-      className={`transition-all duration-700 ease-out delay-200 ${
-        hasMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
+      className={`transition-all duration-700 ease-out delay-200 ${hasMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}
     >
       <BlogCard blog={blog} variant={variant} />
     </div>
@@ -178,14 +177,12 @@ function ThumbnailWithSkeleton({ src, alt }: ThumbnailWithSkeletonProps) {
         src={src}
         alt={alt}
         onLoad={() => setIsLoaded(true)}
-        className={`w-full h-full object-cover transition-all duration-300 ${
-          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
-        } group-hover:scale-105`}
+        className={`w-full h-full object-cover transition-transform duration-300 ${isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
+          } group-hover:scale-105`}
       />
       <div
-        className={`absolute inset-0 transition-opacity duration-300 ${
-          isLoaded ? "opacity-0" : "opacity-100"
-        }`}
+        className={`absolute inset-0 transition-opacity duration-300 ${isLoaded ? "opacity-0" : "opacity-100"
+          }`}
         aria-hidden="true"
       >
         <Skeleton className="w-full h-full rounded-xl" />

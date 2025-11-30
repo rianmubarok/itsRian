@@ -42,16 +42,14 @@ export default function FeaturedBlogRotator({
 
   return (
     <div
-      className="mb-4 hidden lg:block opacity-0 animate-fade-in-up"
-      style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
+      className="mb-4 hidden lg:block"
     >
       {/* Featured Blog with Animation - Hidden on Mobile */}
       <div
-        className={`transition-all duration-500 ease-in-out ${
-          isTransitioning
+        className={`transition-all duration-500 ease-in-out ${isTransitioning
             ? "opacity-0 transform scale-95"
             : "opacity-100 transform scale-100"
-        }`}
+          }`}
       >
         <BlogCard blog={safeBlog} variant="featured" />
       </div>

@@ -19,16 +19,15 @@ export default function ProjectCard({
     >
       <Link href={`/projects/${project.slug}`}>
         <div
-          className={`relative overflow-hidden rounded-xl bg-primary-light dark:bg-primary-dark ${
-            variant === "grid"
+          className={`relative overflow-hidden rounded-xl bg-primary-light dark:bg-primary-dark ${variant === "grid"
               ? "h-[280px] sm:h-[320px]"
               : "h-[280px] sm:h-[320px]"
-          }`}
+            }`}
         >
           {project.resources1 &&
-          project.resources2 &&
-          project.resources1.length > 0 &&
-          project.resources2.length > 0 ? (
+            project.resources2 &&
+            project.resources1.length > 0 &&
+            project.resources2.length > 0 ? (
             <div className="w-full h-full transition-transform duration-300 flex justify-center items-center gap-0">
               <CollageRotator
                 images={project.resources1.map((src) => ({ src }))}
@@ -99,15 +98,13 @@ function ThumbnailWithSkeleton({ src, alt }: ThumbnailWithSkeletonProps) {
         src={src}
         alt={alt}
         onLoad={() => setIsLoaded(true)}
-        className={`w-full h-full object-cover transition-all duration-300 ${
-          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
-        } group-hover:scale-105`}
+        className={`w-full h-full object-cover transition-transform duration-300 ${isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
+          } group-hover:scale-105`}
       />
       {/* Skeleton overlay */}
       <div
-        className={`absolute inset-0 transition-opacity duration-300 ${
-          isLoaded ? "opacity-0" : "opacity-100"
-        }`}
+        className={`absolute inset-0 transition-opacity duration-300 ${isLoaded ? "opacity-0" : "opacity-100"
+          }`}
         aria-hidden="true"
       >
         <Skeleton className="w-full h-full rounded-xl" />
