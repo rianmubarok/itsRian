@@ -111,7 +111,7 @@ export default function BlogPageClient() {
             if (typeof window !== "undefined") {
               sessionStorage.removeItem("navigatingToBlogDetail");
             }
-          } catch { }
+          } catch {}
         }}
       />
       <FeaturedBlogRotator blogs={blogs} />
@@ -120,10 +120,7 @@ export default function BlogPageClient() {
         {displayedItems.map((blog, index) => {
           if (!blog) return null;
           return (
-            <div
-              key={blog.id || index}
-              className=""
-            >
+            <div key={blog.id || index} className="">
               <BlogCard blog={blog} variant="tile" />
             </div>
           );

@@ -1,22 +1,22 @@
 import { NavItem } from "../types";
 
 export const siteConfig = {
-  name: "itsRian",
+  name: "Muhammad Fitrian Mubarok",
   description: "Personal Portfolio",
-  url: "https://itsrian.com",
-  ogImage: "https://itsrian.com/og.jpg",
+  url: "https://itsrian.my.id",
+  ogImage: "/og/og-image.png",
   links: {
-    github: "https://github.com/itsrian",
-    linkedin: "https://linkedin.com/in/itsrian",
-    email: "rian@example.com",
+    github: "https://github.com/rianmubarok",
+    linkedin: "https://www.linkedin.com/in/rianmubarok/",
+    email: "muhammadfitrianmubarok@gmail.com",
   },
   location: {
     city: "Jepara",
     country: "Indonesia",
   },
   social: {
-    twitter: "https://twitter.com/itsrian",
-    instagram: "https://instagram.com/itsrian",
+    twitter: "https://twitter.com/mub92253",
+    instagram: "https://instagram.com/m.fitrianm_",
   },
 } as const;
 

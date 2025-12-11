@@ -29,7 +29,7 @@ export default function Navbar() {
       <div className="mx-auto px-6 sm:px-4 sm:max-w-xl bg-primary-light/80 dark:bg-primary-dark/80 backdrop-blur-md border-b border-primary-gray/20 md:rounded-full md:border md:border-primary-gray/20">
         <div className="flex items-center justify-between h-16">
           {/* Logo with Profile Image */}
-          <Link href="/" aria-label="Home - itsRian Portfolio">
+          <Link href="/" aria-label="Home - Muhammad Fitrian Mubarok Portfolio">
             <div
               className="relative w-8 h-8 sm:w-10 sm:h-10 cursor-pointer"
               onMouseEnter={() => setIsHovered(true)}
