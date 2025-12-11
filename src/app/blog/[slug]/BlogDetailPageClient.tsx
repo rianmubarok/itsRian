@@ -1,6 +1,7 @@
 "use client";
 
 import { use, useEffect, useState, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import { useBlog, useBlogs } from "../../../hooks/useBlogs";
 import { useBlogAnimation } from "../../../hooks/useBlogAnimation";
 import {
@@ -22,6 +23,10 @@ interface BlogDetailPageProps {
 
 export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
   const { slug } = use(params);
+  const searchParams = useSearchParams();
+  const fromHome = searchParams.get("from") === "home";
+  const backHref = fromHome ? "/" : "/blog";
+  const backLabel = fromHome ? "Back to home" : "Back to blog";
 
   const { blog, loading, error } = useBlog(slug);
   const { blogs } = useBlogs();
@@ -83,7 +88,11 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
       >
         {!blog ? null : (
           <>
-            <BackButton hasMounted={hasMounted} />
+            <BackButton
+              hasMounted={hasMounted}
+              href={backHref}
+              label={backLabel}
+            />
             <BlogHeader blog={blog} hasMounted={hasMounted} />
             <BlogThumbnail blog={blog} hasMounted={hasMounted} />
             <BlogTags

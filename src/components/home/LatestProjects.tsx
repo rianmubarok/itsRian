@@ -49,7 +49,7 @@ export default function LatestProjects() {
                   opacity: isIntersecting ? 1 : 0,
                 }}
               >
-                <ProjectCard project={project} variant="featured" />
+                <ProjectCard project={project} variant="featured" fromHome />
               </div>
             ))}
       </div>

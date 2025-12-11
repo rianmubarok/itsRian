@@ -60,7 +60,7 @@ export default function LatestBlogs() {
                   opacity: isIntersecting ? 1 : 0,
                 }}
               >
-                <BlogCard blog={blog} variant="tile" />
+                <BlogCard blog={blog} variant="tile" fromHome />
               </div>
             ))}
       </div>

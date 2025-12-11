@@ -7,20 +7,27 @@ import Skeleton from "../shared/ui/SkeletonLoader";
 interface BlogCardProps {
   blog: Blog;
   variant?: "featured" | "tile";
+  fromHome?: boolean;
 }
 
-function BlogCardBase({ blog, variant = "tile" }: BlogCardProps) {
+function BlogCardBase({
+  blog,
+  variant = "tile",
+  fromHome = false,
+}: BlogCardProps) {
+  const href = `/blog/${blog.slug}${fromHome ? "?from=home" : ""}`;
+
   if (variant === "tile") {
     return (
       <article className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
-        <Link href={`/blog/${blog.slug}`}>
+        <Link href={href}>
           <div className="relative h-[200px] sm:h-[250px] overflow-hidden rounded-xl">
             <ThumbnailWithSkeleton src={blog.thumbnail} alt={blog.title} />
           </div>
         </Link>
 
         <div className="-mt-4 pt-10 p-6 bg-primary-light dark:bg-primary-dark rounded-b-xl">
-          <Link href={`/blog/${blog.slug}`}>
+          <Link href={href}>
             <h3 className="tracking-tight text-2xl font-semibold mb-2 sm:mb-3 text-primary-dark dark:text-primary-light">
               {blog.title}
             </h3>
@@ -51,12 +58,12 @@ function BlogCardBase({ blog, variant = "tile" }: BlogCardProps) {
     return (
       <article className="group border border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
         <Link
-          href={`/blog/${blog.slug}`}
+          href={href}
           className="block"
           onClick={() => {
             try {
               sessionStorage.setItem("navigatingToBlogDetail", "1");
-            } catch { }
+            } catch {}
           }}
         >
           <div className="flex flex-col lg:flex-row gap-4 bg-primary-light dark:bg-primary-dark rounded-xl">
@@ -143,8 +150,9 @@ export function AnimatedBlogCard({
 
   return (
     <div
-      className={`transition-all duration-700 ease-out delay-200 ${hasMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}
+      className={`transition-all duration-700 ease-out delay-200 ${
+        hasMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}
     >
       <BlogCard blog={blog} variant={variant} />
     </div>
@@ -154,6 +162,7 @@ export function AnimatedBlogCard({
 const BlogCard = memo(BlogCardBase, (prev, next) => {
   return (
     prev.variant === next.variant &&
+    prev.fromHome === next.fromHome &&
     prev.blog.id === next.blog.id &&
     prev.blog.slug === next.blog.slug &&
     prev.blog.createdAt === next.blog.createdAt &&
@@ -177,12 +186,14 @@ function ThumbnailWithSkeleton({ src, alt }: ThumbnailWithSkeletonProps) {
         src={src}
         alt={alt}
         onLoad={() => setIsLoaded(true)}
-        className={`w-full h-full object-cover transition-transform duration-300 ${isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
-          } group-hover:scale-105`}
+        className={`w-full h-full object-cover transition-transform duration-300 ${
+          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
+        } group-hover:scale-105`}
       />
       <div
-        className={`absolute inset-0 transition-opacity duration-300 ${isLoaded ? "opacity-0" : "opacity-100"
-          }`}
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          isLoaded ? "opacity-0" : "opacity-100"
+        }`}
         aria-hidden="true"
       >
         <Skeleton className="w-full h-full rounded-xl" />

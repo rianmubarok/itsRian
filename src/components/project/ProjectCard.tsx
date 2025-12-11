@@ -7,27 +7,32 @@ import Skeleton from "../shared/ui/SkeletonLoader";
 interface ProjectCardProps {
   project: Project;
   variant?: "featured" | "grid";
+  fromHome?: boolean;
 }
 
 export default function ProjectCard({
   project,
   variant = "grid",
+  fromHome = false,
 }: ProjectCardProps) {
+  const href = `/projects/${project.slug}${fromHome ? "?from=home" : ""}`;
+
   return (
     <div
       className={`group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300`}
     >
-      <Link href={`/projects/${project.slug}`}>
+      <Link href={href}>
         <div
-          className={`relative overflow-hidden rounded-xl bg-primary-light dark:bg-primary-dark ${variant === "grid"
+          className={`relative overflow-hidden rounded-xl bg-primary-light dark:bg-primary-dark ${
+            variant === "grid"
               ? "h-[280px] sm:h-[320px]"
               : "h-[280px] sm:h-[320px]"
-            }`}
+          }`}
         >
           {project.resources1 &&
-            project.resources2 &&
-            project.resources1.length > 0 &&
-            project.resources2.length > 0 ? (
+          project.resources2 &&
+          project.resources1.length > 0 &&
+          project.resources2.length > 0 ? (
             <div className="w-full h-full transition-transform duration-300 flex justify-center items-center gap-0">
               <CollageRotator
                 images={project.resources1.map((src) => ({ src }))}
@@ -59,7 +64,7 @@ export default function ProjectCard({
       </Link>
 
       <div className="-mt-4 pt-10 p-6 bg-primary-light dark:bg-primary-dark rounded-b-xl">
-        <Link href={`/projects/${project.slug}`}>
+        <Link href={href}>
           <h3 className="tracking-tight text-2xl font-semibold mb-2 sm:mb-3 text-primary-dark dark:text-primary-light">
             {project.title}
           </h3>
@@ -98,13 +103,15 @@ function ThumbnailWithSkeleton({ src, alt }: ThumbnailWithSkeletonProps) {
         src={src}
         alt={alt}
         onLoad={() => setIsLoaded(true)}
-        className={`w-full h-full object-cover transition-transform duration-300 ${isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
-          } group-hover:scale-105`}
+        className={`w-full h-full object-cover transition-transform duration-300 ${
+          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
+        } group-hover:scale-105`}
       />
       {/* Skeleton overlay */}
       <div
-        className={`absolute inset-0 transition-opacity duration-300 ${isLoaded ? "opacity-0" : "opacity-100"
-          }`}
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          isLoaded ? "opacity-0" : "opacity-100"
+        }`}
         aria-hidden="true"
       >
         <Skeleton className="w-full h-full rounded-xl" />

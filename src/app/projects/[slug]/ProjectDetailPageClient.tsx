@@ -6,6 +6,7 @@ import { Project } from "../../../types";
 import { getProjectBySlug } from "../../../data/projects";
 import { notFound } from "next/navigation";
 import { use, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { formatDate } from "../../../utils";
 import OtherProjects from "../../../components/project/OtherProjects";
 import ProjectContent from "@/components/project/detail/ProjectContent";
@@ -22,6 +23,10 @@ export default function ProjectDetailPageClient({
   params,
 }: ProjectDetailPageProps) {
   const { slug } = use(params);
+  const searchParams = useSearchParams();
+  const fromHome = searchParams.get("from") === "home";
+  const backHref = fromHome ? "/" : "/projects";
+  const backLabel = fromHome ? "Back to home" : "Back to projects";
   const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -88,11 +93,11 @@ export default function ProjectDetailPageClient({
           <>
             <Link
               ref={refs.backButtonRef}
-              href="/projects"
+              href={backHref}
               className="group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 mb-6 sm:mb-8"
             >
               <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
-              Back to projects
+              {backLabel}
             </Link>
 
             <div ref={refs.headerRef} className="mb-8 sm:mb-12">
