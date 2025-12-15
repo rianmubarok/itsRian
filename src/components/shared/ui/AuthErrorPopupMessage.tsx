@@ -16,7 +16,7 @@ const AuthErrorPopupMessage: React.FC<AuthErrorPopupMessageProps> = ({
         </>
       );
     default:
-      return <>{error || "Terjadi kesalahan saat login. Silakan coba lagi."}</>;
+      return <>{error || "An error occurred during sign in. Please try again."}</>;
   }
 };
 

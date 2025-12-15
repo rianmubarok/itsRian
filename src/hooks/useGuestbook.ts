@@ -6,6 +6,9 @@ import {
   auth,
   signInWithGoogle,
   signInWithGithub,
+  signInWithGoogleRedirect,
+  signInWithGithubRedirect,
+  handleRedirectResult,
   signOut,
 } from "@/lib/firebase";
 import {
@@ -51,6 +54,10 @@ export function useGuestbook() {
 
   useEffect(() => {
     load();
+    // Check for redirect result on mount (for mobile auth flow)
+    handleRedirectResult().catch((e) =>
+      console.error("Error handling redirect result:", e)
+    );
   }, []);
 
   function deriveDisplayName(user: User): string {
@@ -174,6 +181,22 @@ export function useGuestbook() {
     } catch (e: unknown) {
       if (typeof e === "object" && e && "code" in e && "message" in e) {
         const err = e as { code: string; message: string };
+
+        // Fallback to redirect if popup is closed or blocked (common on mobile)
+        if (
+          err.code === "auth/popup-closed-by-user" ||
+          err.code === "auth/popup-blocked" ||
+          err.code === "auth/cancelled-popup-request"
+        ) {
+          try {
+            if (provider === "github") await signInWithGithubRedirect();
+            else await signInWithGoogleRedirect();
+            return;
+          } catch (redirectErr) {
+            console.error("Redirect login failed:", redirectErr);
+          }
+        }
+
         if (err.code === "auth/account-exists-with-different-credential") {
           setAuthError({
             isOpen: true,
@@ -183,14 +206,14 @@ export function useGuestbook() {
         } else {
           setAuthError({
             isOpen: true,
-            error: err.message || "Terjadi kesalahan saat login",
+            error: err.message || "An error occurred during sign in",
             errorCode: err.code,
           });
         }
       } else {
         setAuthError({
           isOpen: true,
-          error: "Terjadi kesalahan saat login",
+          error: "An error occurred during sign in",
         });
       }
     }

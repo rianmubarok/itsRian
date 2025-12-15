@@ -4,6 +4,8 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signOut as firebaseSignOut,
   getAdditionalUserInfo,
   updateProfile,
@@ -26,16 +28,9 @@ export const googleProvider = new GoogleAuthProvider();
 export const githubProvider = new GithubAuthProvider();
 githubProvider.addScope("read:user");
 
-export async function signInWithGoogle(): Promise<User> {
-  const result = await signInWithPopup(auth, googleProvider);
-  return result.user;
-}
-
-export async function signInWithGithub(): Promise<User> {
-  const result = await signInWithPopup(auth, githubProvider);
-
+async function handleGithubCurrent(result: UserCredential) {
   try {
-    const info = getAdditionalUserInfo(result as UserCredential);
+    const info = getAdditionalUserInfo(result);
     let preferredName: string | null = null;
     const maybeUsername =
       (info && (info as unknown as { username?: string }).username) ||
@@ -78,9 +73,37 @@ export async function signInWithGithub(): Promise<User> {
         await updateProfile(result.user, { displayName: preferredName });
       }
     }
-  } catch {}
+  } catch { }
+}
 
+export async function signInWithGoogle(): Promise<User> {
+  const result = await signInWithPopup(auth, googleProvider);
   return result.user;
+}
+
+export async function signInWithGoogleRedirect(): Promise<void> {
+  await signInWithRedirect(auth, googleProvider);
+}
+
+export async function signInWithGithub(): Promise<User> {
+  const result = await signInWithPopup(auth, githubProvider);
+  await handleGithubCurrent(result);
+  return result.user;
+}
+
+export async function signInWithGithubRedirect(): Promise<void> {
+  await signInWithRedirect(auth, githubProvider);
+}
+
+export async function handleRedirectResult(): Promise<User | null> {
+  const result = await getRedirectResult(auth);
+  if (result) {
+    if (result.providerId === "github.com") {
+      await handleGithubCurrent(result);
+    }
+    return result.user;
+  }
+  return null;
 }
 
 export async function signOut(): Promise<void> {

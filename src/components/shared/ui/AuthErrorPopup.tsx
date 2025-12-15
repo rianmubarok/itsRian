@@ -86,7 +86,7 @@ export default function AuthErrorPopup({
             }}
             className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-[calc(100vw-1rem)] max-w-xs sm:max-w-sm md:max-w-md mx-2 sm:mx-4 perspective-1000 popup-container"
           >
-            <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl  border border-gray-200 dark:border-gray-700 overflow-hidden relative popup-scroll">
+            <div className="bg-primary-light dark:bg-primary-dark rounded-xl sm:rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden relative popup-scroll shadow-2xl">
               {/* Gradient border effect */}
               <div
                 className={`absolute inset-0 bg-gradient-to-r ${getGradientClass()} opacity-5 rounded-xl sm:rounded-2xl`}
@@ -98,7 +98,7 @@ export default function AuthErrorPopup({
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={handleClose}
-                  className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 p-1.5 sm:p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors bg-white dark:bg-gray-800 rounded-full z-10 cursor-pointer"
+                  className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 p-1.5 sm:p-2 text-primary-dark dark:text-primary-light hover:bg-black/5 dark:hover:bg-white/10 transition-colors rounded-full z-10 cursor-pointer"
                 >
                   <X className="w-4 h-4 sm:w-5 sm:h-5" />
                 </motion.button>
@@ -127,7 +127,7 @@ export default function AuthErrorPopup({
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.4 }}
-                  className="text-base sm:text-lg md:text-xl font-bold text-center text-gray-900 dark:text-white mb-2 sm:mb-3"
+                  className="text-base sm:text-lg md:text-xl font-bold text-center text-primary-dark dark:text-primary-light mb-2 sm:mb-3"
                 >
                   <AuthErrorPopupTitle errorCode={errorCode} />
                 </motion.h3>
@@ -137,7 +137,7 @@ export default function AuthErrorPopup({
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.4 }}
-                  className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 text-center leading-relaxed mb-4 sm:mb-5 md:mb-6 px-1"
+                  className="text-xs sm:text-sm text-primary-gray dark:text-gray-400 text-center leading-relaxed mb-4 sm:mb-5 md:mb-6 px-1"
                 >
                   <AuthErrorPopupMessage errorCode={errorCode} error={error} />
                 </motion.p>
