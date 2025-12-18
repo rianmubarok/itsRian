@@ -111,7 +111,7 @@ export default function BlogPageClient() {
             if (typeof window !== "undefined") {
               sessionStorage.removeItem("navigatingToBlogDetail");
             }
-          } catch {}
+          } catch { }
         }}
       />
       <FeaturedBlogRotator blogs={blogs} />
@@ -120,7 +120,14 @@ export default function BlogPageClient() {
         {displayedItems.map((blog, index) => {
           if (!blog) return null;
           return (
-            <div key={blog.id || index} className="">
+            <div
+              key={blog.id || index}
+              className="opacity-0 animate-fade-in-up"
+              style={{
+                animationDelay: `${(index % 4) * 100}ms`, // Stagger based on position in current page/view mostly
+                animationFillMode: "forwards",
+              }}
+            >
               <BlogCard blog={blog} variant="tile" />
             </div>
           );

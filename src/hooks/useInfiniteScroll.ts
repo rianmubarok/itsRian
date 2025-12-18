@@ -36,11 +36,10 @@ export function useInfiniteScroll<T>(
   }, [currentPage, items, itemsPerPage, isLoading, hasMore]);
 
   useEffect(() => {
-    const initialItems = items.slice(0, itemsPerPage);
-    setDisplayedItems(initialItems);
-    setCurrentPage(1);
-    setHasMore(items.length > itemsPerPage);
-  }, [items, itemsPerPage]);
+    const endIndex = currentPage * itemsPerPage;
+    setDisplayedItems(items.slice(0, endIndex));
+    setHasMore(items.length > endIndex);
+  }, [items, itemsPerPage, currentPage]);
 
   useEffect(() => {
     if (!loadingRef.current) return;

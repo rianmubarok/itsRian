@@ -4,19 +4,30 @@ import { useState, useEffect, useRef } from "react";
 import { Blog } from "../types";
 import { blogs as staticBlogs } from "../data/blogs";
 
+
+// Simple in-memory cache
+let globalCache: Blog[] = [];
+
 export function useBlogs() {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Initialize with cache if available
+  const [blogs, setBlogs] = useState<Blog[]>(globalCache);
+  const [loading, setLoading] = useState(globalCache.length === 0);
   const [error, setError] = useState<string | null>(null);
   const isMountedRef = useRef(true);
 
   useEffect(() => {
-    async function fetchBlogs() {
+    async function fetchBlogs(isRefresh = false) {
       try {
-        setLoading(true);
+        // Only set loading if we don't have cache and it's not a refresh
+        if (!isRefresh && globalCache.length === 0) {
+          setLoading(true);
+        }
+
         const response = await fetch("/api/blogs", {
           cache: "no-store", // Always fetch fresh data
         });
+
+        if (!isMountedRef.current) return;
 
         if (!response.ok) {
           throw new Error("Failed to fetch blogs");
@@ -27,15 +38,24 @@ export function useBlogs() {
         if (data.length === 0) {
           console.warn("API returned empty blogs, using static data");
           setBlogs(staticBlogs);
+          globalCache = staticBlogs;
         } else {
           setBlogs(data);
+          globalCache = data;
         }
       } catch (err) {
+        if (!isMountedRef.current) return;
         console.warn("Failed to fetch blogs from API, using static data:", err);
-        setBlogs(staticBlogs);
+        // Only fallback to static if we absolutely have nothing
+        if (blogs.length === 0) {
+          setBlogs(staticBlogs);
+          globalCache = staticBlogs;
+        }
         setError(null);
       } finally {
-        setLoading(false);
+        if (isMountedRef.current) {
+          setLoading(false);
+        }
       }
     }
 
@@ -43,7 +63,7 @@ export function useBlogs() {
 
     // Listen for refresh events
     const handleRefresh = () => {
-      fetchBlogs();
+      fetchBlogs(true);
     };
 
     window.addEventListener("refreshBlogs", handleRefresh);
@@ -52,7 +72,7 @@ export function useBlogs() {
       isMountedRef.current = false;
       window.removeEventListener("refreshBlogs", handleRefresh);
     };
-  }, []);
+  }, []); // Remove dependency on blogs length to avoid infinite loops if referential equality fails
 
   return { blogs, loading, error };
 }
@@ -64,9 +84,11 @@ export function useBlog(slug: string) {
   const hasIncrementedRef = useRef(false);
 
   useEffect(() => {
-    async function fetchBlog() {
+    async function fetchBlog(isRefresh = false) {
       try {
-        setLoading(true);
+        if (!isRefresh) {
+          setLoading(true);
+        }
 
         // Only increment view count if we haven't done it yet for this slug
         const shouldIncrement = !hasIncrementedRef.current;
@@ -107,7 +129,6 @@ export function useBlog(slug: string) {
     }
 
     if (slug) {
-      // Reset the increment flag when slug changes
       hasIncrementedRef.current = false;
       fetchBlog();
     }
