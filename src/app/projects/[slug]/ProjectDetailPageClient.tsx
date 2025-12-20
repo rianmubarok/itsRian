@@ -12,6 +12,7 @@ import OtherProjects from "../../../components/project/OtherProjects";
 import ProjectContent from "@/components/project/detail/ProjectContent";
 import ProjectDetailSkeleton from "../../../components/project/ProjectDetailSkeleton";
 import { useProjectAnimation } from "../../../hooks";
+import LottieDisplay from "@/components/project/detail/LottieDisplay";
 
 interface ProjectDetailPageProps {
   params: Promise<{
@@ -77,17 +78,15 @@ export default function ProjectDetailPageClient({
       role="main"
     >
       <div
-        className={`absolute inset-0 w-full min-h-full z-10 bg-primary-light/80 dark:bg-primary-dark/80 transition-opacity duration-500 ${
-          showContent ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
+        className={`absolute inset-0 w-full min-h-full z-10 bg-primary-light/80 dark:bg-primary-dark/80 transition-opacity duration-500 ${showContent ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
       >
         <ProjectDetailSkeleton hasMounted={hasMounted} />
       </div>
 
       <div
-        className={`transition-opacity duration-500 ${
-          showContent ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`transition-opacity duration-500 ${showContent ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
       >
         {!project ? null : (
           <>
@@ -139,6 +138,13 @@ export default function ProjectDetailPageClient({
             <div ref={refs.contentRef}>
               <ProjectContent project={project} hasMounted={showContent} />
             </div>
+
+            {project.lottie && (
+              <div className={`transition-all duration-1000 delay-500 ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}>
+                <LottieDisplay url={project.lottie} />
+              </div>
+            )}
 
             <div
               ref={refs.linksRef}

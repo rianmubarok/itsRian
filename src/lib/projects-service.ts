@@ -1,4 +1,4 @@
-type NotionProperty = { type: string; [key: string]: unknown };
+type NotionProperty = { type: string;[key: string]: unknown };
 type MultiSelectTag = { name: string };
 
 function getPlainTextFromTitle(property: NotionProperty | undefined): string {
@@ -163,6 +163,7 @@ export async function getProjects(): Promise<Project[]> {
           resources2: getSpaceSeparatedFromRichText(
             (properties as Record<string, NotionProperty>)["resources-2"]
           ),
+          lottie: getPlainTextFromUrl((properties as Record<string, NotionProperty>)["lottie"]) || undefined,
         };
       }
     );
@@ -217,6 +218,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       resources2: getSpaceSeparatedFromRichText(
         (properties as Record<string, NotionProperty>)["resources-2"]
       ),
+      lottie: getPlainTextFromUrl((properties as Record<string, NotionProperty>)["lottie"]) || undefined,
     };
   } catch (error) {
     console.error("Error fetching project by slug:", error);

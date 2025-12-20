@@ -23,6 +23,7 @@ export interface Project {
   liveProject?: string;
   resources1?: string[];
   resources2?: string[];
+  lottie?: string;
 }
 
 export interface BlogPost {
