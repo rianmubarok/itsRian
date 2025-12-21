@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import Layout from "../components/Layout";
+import SmoothScroller from "../components/shared/common/SmoothScroller";
 import {
   playfairDisplay,
   sacramento,
@@ -129,7 +130,10 @@ export default function RootLayout({
       <body
         className={`${manrope.className} bg-primary-light dark:bg-primary-dark tracking-tight`}
       >
-        <Layout>{children}</Layout>
+        <Layout>
+          <SmoothScroller />
+          {children}
+        </Layout>
       </body>
     </html>
   );

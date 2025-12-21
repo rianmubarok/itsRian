@@ -1,4 +1,5 @@
 @layer base {
+
   html,
   body {
     @apply transition-colors bg-primary-light dark:bg-primary-dark text-primary-light dark:text-primary-dark;
