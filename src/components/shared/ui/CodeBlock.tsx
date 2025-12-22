@@ -46,7 +46,7 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
         if (!cancelled && codeRef.current) {
           Prism.highlightElement(codeRef.current);
         }
-      } catch {}
+      } catch { }
     };
     highlight();
     return () => {
@@ -86,7 +86,7 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
   };
 
   return (
-    <div className="relative group my-6 w-full max-w-full bg-[#1f29370f] dark:bg-[#9ca3af1f] p-4 rounded-xl border border-[#7379841f] dark:border-primary-gray overflow-hidden">
+    <div className="relative group my-6 w-full max-w-full bg-gray-100 dark:bg-primary-light/5 p-4 rounded-xl border-primary-gray/20 overflow-hidden">
       <div className="flex items-center justify-between rounded-t-lg">
         <span className="text-[11px] font-medium tracking-wide uppercase">
           {getLanguageLabel(language)}
@@ -114,7 +114,7 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
       </div>
 
       <pre
-        className="m-0 p-4 bg-gray-50 text-gray-800 rounded-b-lg max-w-full overflow-x-auto overflow-y-hidden
+        className="scrollbar-hide m-0 p-4 bg-gray-50 text-gray-800 rounded-b-lg max-w-full overflow-x-auto overflow-y-hidden
                       dark:bg-gray-900 dark:text-gray-100"
         style={{
           minWidth: 0,

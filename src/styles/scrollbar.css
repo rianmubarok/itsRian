@@ -45,7 +45,17 @@ pre::-webkit-scrollbar-thumb:hover {
 }
 
 /* Utility classes for scrollbar */
-/* scrollbar-hide class removed - no longer used */
+/* scrollbar-hide class to hide visual scrollbar while keeping functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important;
+}
 
 /* Custom thin scrollbar utility */
 .scrollbar-thin {
