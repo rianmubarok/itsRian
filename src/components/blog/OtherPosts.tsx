@@ -14,9 +14,8 @@ export default function OtherPosts({
 }: OtherPostsProps) {
   return (
     <section
-      className={`mb-16 transition-all duration-700 ease-out delay-600 ${
-        hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-      }`}
+      className={`mb-16 transition-all duration-700 ease-out delay-600 ${hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        }`}
     >
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-3xl font-semibold leading-tight tracking-tighter">
@@ -31,7 +30,7 @@ export default function OtherPosts({
           <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
         {relatedPosts.map((blog) => (
           <BlogCard key={blog.id} blog={blog} variant="tile" />
         ))}

@@ -131,7 +131,6 @@ export default function RootLayout({
         className={`${manrope.className} bg-primary-light dark:bg-primary-dark tracking-tight`}
       >
         <Layout>
-
           {children}
         </Layout>
       </body>

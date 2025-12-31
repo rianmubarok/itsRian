@@ -8,12 +8,14 @@ interface BlogCardProps {
   blog: Blog;
   variant?: "featured" | "tile";
   fromHome?: boolean;
+  imageHeight?: string;
 }
 
 function BlogCardBase({
   blog,
   variant = "tile",
   fromHome = false,
+  imageHeight = "h-[200px] sm:h-[250px]",
 }: BlogCardProps) {
   const href = `/blog/${blog.slug}${fromHome ? "?from=home" : ""}`;
 
@@ -21,7 +23,7 @@ function BlogCardBase({
     return (
       <article className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
         <Link href={href}>
-          <div className="relative h-[200px] sm:h-[250px] overflow-hidden rounded-xl">
+          <div className={`relative ${imageHeight} overflow-hidden rounded-xl`}>
             <ThumbnailWithSkeleton src={blog.thumbnail} alt={blog.title} />
           </div>
         </Link>
@@ -63,7 +65,7 @@ function BlogCardBase({
           onClick={() => {
             try {
               sessionStorage.setItem("navigatingToBlogDetail", "1");
-            } catch {}
+            } catch { }
           }}
         >
           <div className="flex flex-col lg:flex-row gap-4 bg-primary-light dark:bg-primary-dark rounded-xl">
@@ -102,7 +104,7 @@ function BlogCardBase({
   return (
     <article className="group w-full border border-primary-gray/20 rounded-3xl p-3 bg-gray-100 dark:bg-primary-light/5 duration-300">
       <Link href={`/blog/${blog.slug}`}>
-        <div className="relative h-[200px] sm:h-[250px] md:h-[280px] overflow-hidden rounded-xl">
+        <div className={`relative ${imageHeight} overflow-hidden rounded-xl`}>
           <ThumbnailWithSkeleton src={blog.thumbnail} alt={blog.title} />
         </div>
       </Link>
@@ -150,9 +152,8 @@ export function AnimatedBlogCard({
 
   return (
     <div
-      className={`transition-all duration-700 ease-out delay-200 ${
-        hasMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
+      className={`transition-all duration-700 ease-out delay-200 ${hasMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}
     >
       <BlogCard blog={blog} variant={variant} />
     </div>
@@ -166,7 +167,8 @@ const BlogCard = memo(BlogCardBase, (prev, next) => {
     prev.blog.id === next.blog.id &&
     prev.blog.slug === next.blog.slug &&
     prev.blog.createdAt === next.blog.createdAt &&
-    prev.blog.viewCount === next.blog.viewCount
+    prev.blog.viewCount === next.blog.viewCount &&
+    prev.imageHeight === next.imageHeight
   );
 });
 
@@ -186,14 +188,12 @@ function ThumbnailWithSkeleton({ src, alt }: ThumbnailWithSkeletonProps) {
         src={src}
         alt={alt}
         onLoad={() => setIsLoaded(true)}
-        className={`w-full h-full object-cover transition-transform duration-300 ${
-          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
-        } group-hover:scale-105`}
+        className={`w-full h-full object-cover transition-transform duration-300 ${isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.02]"
+          } group-hover:scale-105`}
       />
       <div
-        className={`absolute inset-0 transition-opacity duration-300 ${
-          isLoaded ? "opacity-0" : "opacity-100"
-        }`}
+        className={`absolute inset-0 transition-opacity duration-300 ${isLoaded ? "opacity-0" : "opacity-100"
+          }`}
         aria-hidden="true"
       >
         <Skeleton className="w-full h-full rounded-xl" />
