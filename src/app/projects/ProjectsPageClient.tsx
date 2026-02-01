@@ -128,9 +128,9 @@ export default function ProjectsPageClient() {
                 );
               })}
             </div>
-          ) : (
-            <p className="text-primary-gray dark:text-gray-400 italic">No {activeTab} found.</p>
-          )}
+          ) : activeTab === "experiment" ? (
+            <p className="text-primary-gray dark:text-gray-400 italic">Soon</p>
+          ) : null}
 
           {isLoading && displayedItems.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-6 sm:mt-8">
