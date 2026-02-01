@@ -17,11 +17,10 @@ const LetConnectSection = () => {
     <section ref={ref} className="mb-16">
       <div className="sm:text-center mb-10 text-primary-dark dark:text-primary-light">
         <div
-          className={`inline-flex items-center justify-center gap-3 transition-all duration-700 ease-out ${
-            isIntersecting
-              ? "translate-y-0 opacity-100"
-              : "translate-y-4 opacity-0"
-          }`}
+          className={`inline-flex items-center justify-center gap-3 transition-all duration-700 ease-out ${isIntersecting
+            ? "translate-y-0 opacity-100"
+            : "translate-y-4 opacity-0"
+            }`}
         >
           <h2 className="text-5xl font-semibold leading-tight tracking-tighter">
             Let&apos;s Connect
@@ -38,11 +37,10 @@ const LetConnectSection = () => {
         className={`border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-6 bg-gray-100 dark:bg-primary-light/5 transition-all duration-700 ease-out delay-300 max-w-3xl mx-auto`}
       >
         <div
-          className={`grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-6 ${
-            isIntersecting
-              ? "translate-y-0 opacity-100"
-              : "translate-y-8 opacity-0"
-          }`}
+          className={`grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-6 ${isIntersecting
+            ? "translate-y-0 opacity-100"
+            : "translate-y-8 opacity-0"
+            }`}
         >
           {/* Text */}
           <p className="text-base sm:text-lg text-primary-gray dark:text-gray-300 leading-relaxed">

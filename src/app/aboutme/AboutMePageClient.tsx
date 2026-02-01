@@ -25,7 +25,7 @@ export default function AboutMePageClient() {
       className="text-primary-dark dark:text-primary-light max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40"
       role="main"
     >
-      <article className="border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-6 bg-gray-100 dark:bg-primary-light/5">
+      <article className="border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-6 bg-gray-100 dark:bg-primary-light/5 mb-4">
         <AnimatedSection direction="up" duration={700}>
           <div className="tracking-normal font-regular text-base space-y-3 sm:space-y-4">
             <p>Hello! Thank you for visiting my personal website.</p>
@@ -69,8 +69,6 @@ export default function AboutMePageClient() {
           </div>
         </AnimatedSection>
       </article>
-
-      <hr className="border-t border-primary-gray/20 my-8 sm:my-12" />
 
       {/* Experience Section dengan Accordion */}
       <AnimatedSection direction="up" duration={700} delay={0} className="mb-4">
