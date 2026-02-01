@@ -37,19 +37,16 @@ export const BlogCardSkeleton = () => {
 export const ProjectCardSkeleton = () => {
   return (
     <div className="group w-full border border-primary-gray/20 rounded-[18px] md:rounded-[20px] p-2 bg-gray-100 dark:bg-primary-light/5 duration-300">
-      <div className="relative h-[200px] sm:h-[250px] md:h-[280px] lg:h-[300px] overflow-hidden rounded-xl">
+      <div className="relative h-[280px] overflow-hidden rounded-xl">
         <Skeleton className="w-full h-full rounded-xl" />
       </div>
 
       <div className="-mt-4 pt-10 p-6 bg-primary-light dark:bg-primary-dark rounded-b-xl">
-        <Skeleton className="h-6 w-3/4 mb-3" />
-        <Skeleton className="h-4 w-full mb-2" />
-        <Skeleton className="h-4 w-5/6 mb-4" />
-
-        <div className="flex flex-wrap gap-1 sm:gap-2">
-          <Skeleton className="h-7 w-20 rounded-full" />
-          <Skeleton className="h-7 w-16 rounded-full" />
-          <Skeleton className="h-7 w-24 rounded-full" />
+        <Skeleton className="h-8 w-3/4 mb-2" />
+        <Skeleton className="h-5 w-full mb-3" />
+        <div className="flex flex-wrap gap-2">
+          <Skeleton className="h-6 w-16 rounded-full" />
+          <Skeleton className="h-6 w-20 rounded-full" />
         </div>
       </div>
     </div>
@@ -100,13 +97,13 @@ export const AboutMeSkeleton = () => {
 
       {/* Experience Accordion Skeleton */}
       <div className="mb-4">
-        <div className="border border-primary-gray/20 rounded-xl overflow-hidden bg-gray-50 dark:bg-primary-light/5">
+        <div className="border border-primary-gray/20 rounded-[18px] md:rounded-[20px] overflow-hidden bg-gray-100 dark:bg-primary-light/5">
           {/* Accordion Header */}
           <div className="px-6 py-4 flex items-center justify-between">
             <Skeleton className="h-8 w-32" />
             <Skeleton className="w-6 h-6 rounded" />
           </div>
-          {/* Accordion Content (Closed by default) */}
+          {/* Accordion Content */}
           <div className="px-6 pb-6">
             <div className="pt-4 border-t border-primary-gray/10">
               <div className="space-y-8 sm:space-y-12">
@@ -115,7 +112,9 @@ export const AboutMeSkeleton = () => {
                     key={item}
                     className="grid grid-cols-1 md:grid-cols-6 gap-4 items-start"
                   >
-                    <Skeleton className="h-12 w-32 rounded-full" />
+                    <div className="md:col-span-2">
+                      <Skeleton className="h-10 w-32 rounded-full" />
+                    </div>
                     <div className="md:col-span-4 space-y-3">
                       <Skeleton className="h-6 w-3/4" />
                       <Skeleton className="h-5 w-1/2" />
@@ -132,13 +131,13 @@ export const AboutMeSkeleton = () => {
 
       {/* Education Accordion Skeleton */}
       <div className="mb-4">
-        <div className="border border-primary-gray/20 rounded-xl overflow-hidden bg-gray-50 dark:bg-primary-light/5">
+        <div className="border border-primary-gray/20 rounded-[18px] md:rounded-[20px] overflow-hidden bg-gray-100 dark:bg-primary-light/5">
           {/* Accordion Header */}
           <div className="px-6 py-4 flex items-center justify-between">
             <Skeleton className="h-8 w-28" />
             <Skeleton className="w-6 h-6 rounded" />
           </div>
-          {/* Accordion Content (Closed by default) */}
+          {/* Accordion Content */}
           <div className="px-6 pb-6">
             <div className="pt-4 border-t border-primary-gray/10">
               <div className="space-y-8 sm:space-y-12">
@@ -147,7 +146,9 @@ export const AboutMeSkeleton = () => {
                     key={item}
                     className="grid grid-cols-1 md:grid-cols-6 gap-4 items-start"
                   >
-                    <Skeleton className="h-12 w-32 rounded-full" />
+                    <div className="md:col-span-2">
+                      <Skeleton className="h-10 w-32 rounded-full" />
+                    </div>
                     <div className="md:col-span-4 space-y-3">
                       <Skeleton className="h-6 w-3/4" />
                       <Skeleton className="h-5 w-1/2" />
@@ -164,19 +165,31 @@ export const AboutMeSkeleton = () => {
 
       {/* License & Certification Accordion Skeleton */}
       <div className="mb-4">
-        <div className="border border-primary-gray/20 rounded-xl overflow-hidden bg-gray-50 dark:bg-primary-light/5">
+        <div className="border border-primary-gray/20 rounded-[18px] md:rounded-[20px] overflow-hidden bg-gray-100 dark:bg-primary-light/5">
           {/* Accordion Header */}
           <div className="px-6 py-4 flex items-center justify-between">
             <Skeleton className="h-8 w-48" />
             <Skeleton className="w-6 h-6 rounded" />
           </div>
-          {/* Accordion Content (Closed by default) */}
+          {/* Accordion Content */}
           <div className="px-6 pb-6">
             <div className="pt-4 border-t border-primary-gray/10">
-              <div className="text-center py-6">
-                <Skeleton className="w-16 h-16 mx-auto mb-4 rounded-full" />
-                <Skeleton className="h-6 w-32 mx-auto mb-2" />
-                <Skeleton className="h-5 w-64 mx-auto" />
+              <div className="space-y-8 sm:space-y-12">
+                {[1, 2].map((item) => (
+                  <div
+                    key={item}
+                    className="grid grid-cols-1 md:grid-cols-6 gap-4 items-start"
+                  >
+                    <div className="md:col-span-2">
+                      <Skeleton className="h-6 w-32" />
+                    </div>
+                    <div className="md:col-span-4 space-y-4">
+                      <Skeleton className="h-7 w-3/4" />
+                      <Skeleton className="h-7 w-1/2" />
+                      <Skeleton className="h-7 w-2/3" />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
