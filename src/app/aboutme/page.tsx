@@ -3,12 +3,12 @@ import { siteMetadata } from "../../lib/metadata";
 export const metadata = {
   title: `About Me`,
   description:
-    "Learn about my journey as a web developer and UI/UX designer. Discover my experience, skills, and passion for creating digital solutions.",
+    "Learn about my journey as a Visual Designer and Developer. Discover my experience, skills, and passion for creating digital solutions.",
   keywords: [
     "about",
     "experience",
     "skills",
-    "web developer",
+    "Visual Designer",
     "UI/UX designer",
     "biography",
     "career",
@@ -17,7 +17,7 @@ export const metadata = {
   openGraph: {
     title: `About Me`,
     description:
-      "Learn about my journey as a web developer and UI/UX designer. Discover my experience, skills, and passion for creating digital solutions.",
+      "Learn about my journey as a Visual Designer and Developer. Discover my experience, skills, and passion for creating digital solutions.",
     url: `${siteMetadata.siteUrl}/aboutme`,
     siteName: siteMetadata.title,
     images: [
@@ -35,7 +35,7 @@ export const metadata = {
     card: "summary_large_image",
     title: `About Me`,
     description:
-      "Learn about my journey as a web developer and UI/UX designer.",
+      "Learn about my journey as a Visual Designer and Developer.",
     images: [`${siteMetadata.siteUrl}${siteMetadata.twitterBanner}`],
   },
   robots: {

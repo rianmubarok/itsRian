@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
     },
     description:
       project.description ||
-      `Explore the ${project.title} project - a showcase of modern web development and design.`,
+      `Explore the ${project.title} project - a showcase of modern Visual Design and development.`,
     keywords: [
       "project",
       "portfolio",
@@ -66,8 +66,8 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
         project.description || `Explore the ${project.title} project`,
       images: [
         project.ogImage ||
-          project.thumbnail ||
-          `${siteMetadata.siteUrl}/og/projects.png`,
+        project.thumbnail ||
+        `${siteMetadata.siteUrl}/og/projects.png`,
       ],
     },
     robots: {

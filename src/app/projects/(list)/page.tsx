@@ -3,11 +3,11 @@ import { siteMetadata } from "../../../lib/metadata";
 export const metadata = {
   title: `Projects`,
   description:
-    "Explore my portfolio of web development projects, featuring modern React applications, UI/UX designs, and full-stack solutions built with cutting-edge technologies.",
+    "Explore my portfolio of Visual Design projects, featuring modern React applications, UI/UX designs, and full-stack solutions built with cutting-edge technologies.",
   keywords: [
     "projects",
     "portfolio",
-    "web development",
+    "Visual Design",
     "React",
     "TypeScript",
     "UI/UX",
@@ -17,7 +17,7 @@ export const metadata = {
   openGraph: {
     title: `Projects`,
     description:
-      "Explore my portfolio of web development projects, featuring modern React applications, UI/UX designs, and full-stack solutions.",
+      "Explore my portfolio of Visual Design projects, featuring modern React applications, UI/UX designs, and full-stack solutions.",
     url: `${siteMetadata.siteUrl}/projects`,
     siteName: siteMetadata.title,
     images: [
@@ -35,7 +35,7 @@ export const metadata = {
     card: "summary_large_image",
     title: `Projects`,
     description:
-      "Explore my portfolio of web development projects, featuring modern React applications and UI/UX designs.",
+      "Explore my portfolio of Visual Design projects, featuring modern React applications and UI/UX designs.",
     images: [`${siteMetadata.siteUrl}/og/projects.png`],
   },
   robots: {

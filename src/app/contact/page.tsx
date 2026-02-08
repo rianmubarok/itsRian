@@ -9,8 +9,8 @@ export const metadata = {
     "hire",
     "collaboration",
     "freelance",
-    "web developer",
-    "UI/UX designer",
+    "Visual Designer",
+    "Developer",
     "project inquiry",
   ],
   openGraph: {

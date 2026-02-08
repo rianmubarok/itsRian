@@ -16,8 +16,8 @@ export const metadata = {
   },
   description: siteMetadata.description,
   keywords: [
-    "web developer",
-    "UI/UX designer",
+    "Visual Designer",
+    "Developer",
     "React",
     "TypeScript",
     "portfolio",
@@ -94,7 +94,7 @@ export default function RootLayout({
     url: siteMetadata.siteUrl,
     image: `${siteMetadata.siteUrl}${siteMetadata.image}`,
     description: siteMetadata.description,
-    jobTitle: "Web Developer & UI/UX Designer",
+    jobTitle: "Visual Designer and Developer",
     worksFor: {
       "@type": "Organization",
       name: "Freelance",
@@ -106,7 +106,7 @@ export default function RootLayout({
       siteMetadata.instagram,
     ].filter(Boolean),
     knowsAbout: [
-      "Web Development",
+      "Visual Design",
       "React",
       "TypeScript",
       "UI/UX Design",

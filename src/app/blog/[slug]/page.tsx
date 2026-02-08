@@ -24,13 +24,13 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
     },
     description:
       blog.description ||
-      `Read ${blog.title} - insights and thoughts on web development, design, and technology.`,
+      `Read ${blog.title} - insights and thoughts on Visual Design, development, technology, and programming.`,
     keywords: [
       "blog",
       "article",
       blog.title,
       ...(blog.tags || []),
-      "web development",
+      "Visual Design",
       "technology",
       "programming",
       siteMetadata.author,

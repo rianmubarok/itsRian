@@ -2,21 +2,21 @@ import Home from "../components/Home";
 import { siteMetadata } from "../lib/metadata";
 
 export const metadata = {
-  title: `${siteMetadata.author} - Web Developer & UI/UX Designer`,
+  title: `${siteMetadata.author} - Visual Designer & Developer`,
   description:
-    "Passionate web developer and UI/UX enthusiast creating clean, functional, and engaging digital experiences. Specializing in React, TypeScript, and modern web technologies.",
+    "Passionate Visual Designer and Developer creating clean, functional, and engaging digital experiences. Specializing in React, TypeScript, and modern web technologies.",
   keywords: [
-    "web developer",
-    "UI/UX designer",
+    "Visual Designer",
+    "Developer",
     "React",
     "TypeScript",
     "portfolio",
     "frontend developer",
   ],
   openGraph: {
-    title: `${siteMetadata.author} - Web Developer & UI/UX Designer`,
+    title: `${siteMetadata.author} - Visual Designer & Developer`,
     description:
-      "Passionate web developer and UI/UX enthusiast creating clean, functional, and engaging digital experiences.",
+      "Passionate Visual Designer and Developer creating clean, functional, and engaging digital experiences.",
     url: siteMetadata.siteUrl,
     siteName: siteMetadata.title,
     images: [
@@ -32,9 +32,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteMetadata.author} - Web Developer & UI/UX Designer`,
+    title: `${siteMetadata.author} - Visual Designer & Developer`,
     description:
-      "Passionate web developer and UI/UX enthusiast creating clean, functional, and engaging digital experiences.",
+      "Passionate Visual Designer and Developer creating clean, functional, and engaging digital experiences.",
     images: [`${siteMetadata.siteUrl}/og/home.png`],
   },
   robots: {

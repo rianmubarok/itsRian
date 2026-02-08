@@ -30,7 +30,7 @@ export default function AboutMePageClient() {
           <div className="tracking-normal font-regular text-base space-y-3 sm:space-y-4">
             <p>Hello! Thank you for visiting my personal website.</p>
             <p>
-              I&apos;m Rian, a dedicated web developer and UI/UX enthusiast with
+              I&apos;m Rian, a dedicated Visual Designer and Developer with
               a strong passion for transforming ideas into clean, functional,
               and engaging digital experiences. I continuously strive to balance
               the visual side of design with the logical side of development,

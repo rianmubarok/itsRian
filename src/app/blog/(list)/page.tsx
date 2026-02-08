@@ -3,11 +3,11 @@ import { siteMetadata } from "../../../lib/metadata";
 export const metadata = {
   title: `Blog`,
   description:
-    "Read my latest thoughts on web development, design, technology, and programming. Insights, tutorials, and experiences from a passionate developer.",
+    "Read my latest thoughts on Visual Design, development, technology, and programming. Insights, tutorials, and experiences from a passionate developer.",
   keywords: [
     "blog",
     "articles",
-    "web development",
+    "Visual Design",
     "programming",
     "technology",
     "design",
@@ -17,7 +17,7 @@ export const metadata = {
   openGraph: {
     title: `Blog`,
     description:
-      "Read my latest thoughts on web development, design, technology, and programming.",
+      "Read my latest thoughts on Visual Design, development, technology, and programming.",
     url: `${siteMetadata.siteUrl}/blog`,
     siteName: siteMetadata.title,
     images: [
@@ -35,7 +35,7 @@ export const metadata = {
     card: "summary_large_image",
     title: `Blog`,
     description:
-      "Read my latest thoughts on web development, design, and technology.",
+      "Read my latest thoughts on Visual Design, development, technology, and programming.",
     images: [`${siteMetadata.siteUrl}/og/blog.png`],
   },
   robots: {
