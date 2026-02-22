@@ -18,7 +18,7 @@ export const metadata = {
     title: `About`,
     description:
       "Learn about my journey as a Visual Designer and Developer. Discover my experience, skills, and passion for creating digital solutions.",
-    url: `${siteMetadata.siteUrl}/about`,
+    url: `${siteMetadata.siteUrl}/aboutme`,
     siteName: siteMetadata.title,
     images: [
       {
@@ -43,7 +43,7 @@ export const metadata = {
     follow: true,
   },
   alternates: {
-    canonical: `${siteMetadata.siteUrl}/about`,
+    canonical: `${siteMetadata.siteUrl}/aboutme`,
   },
 };
 

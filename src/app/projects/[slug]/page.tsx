@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
       "portfolio",
       project.title,
       ...(project.tags || []),
-      "web development",
+      "Visual Design",
       "React",
       "TypeScript",
       siteMetadata.author,

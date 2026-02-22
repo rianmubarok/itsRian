@@ -36,7 +36,7 @@ export const NAVIGATION = {
   home: "/",
   projects: "/projects",
   blog: "/blog",
-  about: "/aboutme",
+  about: "/about",
   contact: "/contact",
   guestbook: "/guestbook",
 } as const;
@@ -50,7 +50,7 @@ export const THEME = {
 export const navItems: NavItem[] = [
   { name: "Projects", href: "/projects" },
   { name: "Blog", href: "/blog" },
-  { name: "About", href: "/aboutme" },
+  { name: "About", href: "/about" },
   { name: "Guestbook", href: "/guestbook" },
   { name: "Contact", href: "/contact" },
 ];
