@@ -36,9 +36,8 @@ export default function Navbar() {
               onMouseLeave={() => setIsHovered(false)}
             >
               <div
-                className={`relative w-full h-full transition-transform duration-700 ease-in-out transform-gpu ${
-                  isHovered ? "rotate-y-180" : "rotate-y-0"
-                }`}
+                className={`relative w-full h-full transition-transform duration-700 ease-in-out transform-gpu ${isHovered ? "rotate-y-180" : "rotate-y-0"
+                  }`}
               >
                 {/* Front side - profile.png */}
                 <div className="absolute inset-0 w-full h-full backface-hidden">

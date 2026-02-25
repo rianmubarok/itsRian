@@ -10,7 +10,6 @@ import {
   SiNodedotjs,
   SiPhp,
   SiReact,
-  SiStyledcomponents,
   SiTailwindcss,
   SiTypescript,
   SiVite,
@@ -32,6 +31,10 @@ import {
   SiAdobeillustrator,
   SiAdobeaftereffects,
   SiCanva,
+  SiSupabase,
+  SiExpress,
+  SiEjs,
+  SiPm2,
 } from "react-icons/si";
 
 export type StackProps = {
@@ -59,9 +62,6 @@ export const STACKS: StackProps = {
   ),
   "Vue.js": <SiVuedotjs size={iconSize} className="text-green-500" />,
   "Node.js": <SiNodedotjs size={iconSize} className="text-green-600" />,
-  "Styled Components": (
-    <SiStyledcomponents size={iconSize} className="text-pink-500" />
-  ),
   CSS: <SiCss3 size={iconSize} className="text-blue-300" />,
   Jquery: <SiJquery size={iconSize} />,
   MongoDB: <SiMongodb size={iconSize} className="text-green-500" />,
@@ -84,4 +84,8 @@ export const STACKS: StackProps = {
     <SiAdobeaftereffects size={iconSize} className="text-violet-600" />
   ),
   Canva: <SiCanva size={iconSize} className="text-cyan-500" />,
+  Supabase: <SiSupabase size={iconSize} className="text-emerald-500" />,
+  Express: <SiExpress size={iconSize} />,
+  EJS: <SiEjs size={iconSize} className="text-yellow-400" />,
+  PM2: <SiPm2 size={iconSize} className="text-green-500" />,
 };
