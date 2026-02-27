@@ -276,10 +276,14 @@ export const GuestbookSkeleton = () => {
             ))}
           </div>
           {/* Message Input Skeleton */}
-          <div className="my-4 sm:my-6">
-            <div className="flex gap-2 items-start flex-wrap min-h-[32px] p-2 sm:p-3 border border-gray-300 dark:border-primary-gray rounded-xl bg-white dark:bg-white/10">
-              <Skeleton className="flex-1 min-w-[80px] h-5" />
-              <Skeleton className="ml-2 h-7 sm:h-8 w-16 rounded-lg flex-shrink-0" />
+          <div className="relative flex flex-col gap-6 mt-4 sm:mt-6">
+            <div className="transition-all duration-700 ease-out">
+              <div className="py-1 border-b-1 border-primary-gray">
+                <Skeleton className="h-7 sm:h-8 w-full" />
+              </div>
+            </div>
+            <div className="flex justify-start">
+              <Skeleton className="h-10 sm:h-12 w-40 rounded-full" />
             </div>
           </div>
         </div>
