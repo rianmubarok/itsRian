@@ -51,38 +51,36 @@ export function MessageInput({
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className="my-4 sm:my-6 relative">
-      <div
-        className="flex gap-2 items-start flex-wrap min-h-[32px] p-2 sm:p-3 border border-gray-300 dark:border-primary-gray rounded-xl bg-white dark:bg-white/10 text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 cursor-text relative tracking-normal"
-        onClick={handleWrapperClick}
-        ref={wrapperRef}
-        tabIndex={-1}
-      >
-        <MessageParts parts={newMessage} />
-
-        <textarea
-          ref={textareaRef}
-          value={input}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-          placeholder={newMessage.length === 0 ? "Type your message..." : ""}
-          disabled={isSubmitting}
-          className="flex-1 min-w-[80px] px-0 py-1 border-none outline-none bg-transparent text-primary-dark dark:text-primary-light placeholder-gray-500 dark:placeholder-gray-400 text-sm resize-none overflow-hidden"
-          style={{ minWidth: 60, minHeight: 20 }}
-          rows={1}
-        />
-
-        <button
-          type="submit"
-          disabled={
-            (!input.trim() && newMessage.length === 0) ||
-            isSubmitting ||
-            localSubmitting
-          }
-          className="ml-2 px-3 sm:px-4 bg-blue-500 text-white rounded-lg font-medium text-sm hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 h-7 sm:h-8 flex-shrink-0 cursor-pointer"
+    <form
+      onSubmit={handleFormSubmit}
+      className="relative flex flex-col gap-6"
+    >
+      <div className="transition-all duration-700 ease-out">
+        <div
+          className="flex gap-2 items-start flex-wrap min-h-[32px] py-1 w-full text-xl sm:text-2xl font-regular text-primary-dark dark:text-primary-light bg-transparent border-b-1 border-primary-gray focus-within:border-primary-dark dark:focus-within:border-primary-light transition-colors duration-300 cursor-text relative tracking-normal"
+          onClick={handleWrapperClick}
+          ref={wrapperRef}
+          tabIndex={-1}
         >
-          {isSubmitting || localSubmitting ? "Sending..." : "Send"}
-        </button>
+          <MessageParts parts={newMessage} />
+
+          <textarea
+            id="guestbook-message"
+            ref={textareaRef}
+            value={input}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            placeholder={
+              newMessage.length === 0
+                ? "Type your message..."
+                : ""
+            }
+            disabled={isSubmitting}
+            className="flex-1 min-w-[80px] px-0 py-0 border-none outline-none bg-transparent text-xl sm:text-2xl font-regular text-primary-dark dark:text-primary-light placeholder-primary-gray resize-none overflow-hidden"
+            style={{ minWidth: 60, minHeight: 28 }}
+            rows={1}
+          />
+        </div>
 
         <AutocompleteDropdown
           show={showAutocomplete}
@@ -90,6 +88,20 @@ export function MessageInput({
           cursor={cursor}
           onSelectUser={selectUser}
         />
+      </div>
+
+      <div className="flex justify-start">
+        <button
+          type="submit"
+          disabled={
+            (!input.trim() && newMessage.length === 0) ||
+            isSubmitting ||
+            localSubmitting
+          }
+          className="px-4 sm:px-6 py-2 sm:py-3 hover:px-5 sm:hover:px-7 transition-all duration-300 bg-primary-dark dark:bg-primary-light text-primary-light dark:text-primary-dark rounded-full text-sm sm:text-base font-medium cursor-pointer disabled:opacity-60"
+        >
+          {isSubmitting || localSubmitting ? "Sending..." : "Send Message"}
+        </button>
       </div>
     </form>
   );
