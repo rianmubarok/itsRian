@@ -3,7 +3,7 @@ import { Blog } from "../types";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 // Notion property type (minimal, for type guards)
-type NotionProperty = { type: string; [key: string]: unknown };
+type NotionProperty = { type: string;[key: string]: unknown };
 type MultiSelectTag = { name: string };
 
 type BlockWithChildren = Record<string, unknown> & { children?: unknown[] };
@@ -206,12 +206,13 @@ export function blocksToMarkdown(blocks: BlockWithChildren[]): string {
 
       switch (blockType) {
         case "paragraph":
-          return richTextToMarkdown(
+          const pContent = richTextToMarkdown(
             ((blockData as Record<string, unknown>)?.rich_text as Record<
               string,
               unknown
             >[]) || []
           );
+          return pContent.trim() === "" ? "&nbsp;" : pContent;
 
         case "heading_1":
           return `# ${richTextToMarkdown(

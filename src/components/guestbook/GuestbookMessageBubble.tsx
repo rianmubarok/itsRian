@@ -24,7 +24,7 @@ const renderParts = (arr: GuestbookMessagePart[]) =>
 const GuestbookMessageBubble: React.FC<GuestbookMessageBubbleProps> = ({
   message,
 }) => (
-  <p className="inline-block mt-1 p-2 px-3 bg-neutral-200 dark:bg-neutral-800 rounded-xl rounded-tl-none font-regular text-sm tracking-normal">
+  <p className="inline-block mt-1 p-2 px-3 bg-neutral-200 dark:bg-neutral-800 rounded-xl rounded-tl-none font-regular text-sm tracking-normal whitespace-pre-wrap">
     {renderParts(message)}
   </p>
 );
