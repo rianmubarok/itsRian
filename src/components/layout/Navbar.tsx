@@ -13,6 +13,7 @@ import {
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -41,10 +42,35 @@ export default function Navbar() {
     };
   }, [isMenuOpen]);
 
+  // Handle scroll behavior (hide on scroll down, show on scroll up)
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Prevent hiding when menu is open or mobile menu could be abruptly closed/hidden
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setIsVisible(false);
+        setIsMenuOpen(false); // Close mobile menu if open
+      } else {
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-0 sm:pt-5 translate-y-0`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-0 sm:pt-5 ${isVisible ? "translate-y-0" : "-translate-y-[120%]"
+        }`}
     >
       <div className="mx-auto px-6 sm:px-4 sm:max-w-xl bg-primary-light/80 dark:bg-primary-dark/80 backdrop-blur-md border-b border-primary-gray/20 md:rounded-full md:border md:border-primary-gray/20">
         <div className="flex items-center justify-between h-16">
