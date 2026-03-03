@@ -73,18 +73,16 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
       role="main"
     >
       <div
-        className={`absolute inset-0 w-full min-h-full z-10 bg-primary-light/80 dark:bg-primary-dark/80 transition-opacity duration-500 ${
-          showContent ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
+        className={`absolute inset-0 w-full min-h-full z-10 bg-primary-light/80 dark:bg-primary-dark/80 transition-opacity duration-500 ${showContent ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
       >
         {/* Hide list skeleton if we are navigating from the blog list */}
         <BlogSkeleton hasMounted={hasMounted} />
       </div>
 
       <div
-        className={`transition-opacity duration-500 ${
-          showContent ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`transition-opacity duration-500 ${showContent ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
       >
         {!blog ? null : (
           <>
