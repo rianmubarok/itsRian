@@ -19,7 +19,6 @@ export default function Layout({ children }: LayoutProps) {
       attribute="class"
       defaultTheme="system"
       enableSystem
-      disableTransitionOnChange
     >
       <ProgressBar />
       <div

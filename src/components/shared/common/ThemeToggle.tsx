@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useId, useMemo, useState } from "react";
+import { flushSync } from "react-dom";
 import { motion } from "framer-motion";
 import { Sun } from "lucide-react";
 
@@ -39,7 +40,20 @@ export default function ThemeToggle() {
     document.documentElement.classList.add("theme-transition-swipe");
 
     const transition = document.startViewTransition(() => {
-      setTheme(nextTheme);
+      const root = document.documentElement;
+      if (nextTheme === "dark") {
+        root.classList.add("dark");
+        root.classList.remove("light");
+        root.style.colorScheme = "dark";
+      } else {
+        root.classList.add("light");
+        root.classList.remove("dark");
+        root.style.colorScheme = "light";
+      }
+
+      flushSync(() => {
+        setTheme(nextTheme);
+      });
     });
 
     transition.finished.finally(() => {
