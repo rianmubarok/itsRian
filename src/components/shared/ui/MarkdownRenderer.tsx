@@ -134,13 +134,12 @@ export default function MarkdownRenderer({
               return '';
             };
 
-            const firstChildStr = extractText(childrenArray[0]);
+            const listElements = childrenArray.filter((child: any) => typeof child === 'object' && child !== null);
+            const firstChildStr = listElements.length > 0 ? extractText(listElements[0]) : '';
             const isStack = firstChildStr.includes('[STACK]');
 
             if (isStack) {
-              const listElements = childrenArray.filter((child: any) => typeof child === 'object');
-              const firstChildText = (listElements[0] as any)?.props?.children?.[0] || '';
-              const stackTitle = firstChildText.replace('[STACK]', '').trim();
+              const stackTitle = firstChildStr.replace('[STACK]', '').trim();
               const stackItems = listElements.slice(1); // Remove the [STACK] marker
               return (
                 <div className="flex flex-col gap-8 my-16 clear-both relative">
