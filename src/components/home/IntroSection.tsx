@@ -38,7 +38,7 @@ export default function IntroSection() {
             : "translate-y-8 opacity-0"
             }`}
         >
-          <span className="inline-block text-center">
+          <span className="inline-block text-left sm:text-center">
             Turning ideas <br /> into digital products
           </span>
         </h1>
