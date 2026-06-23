@@ -141,13 +141,13 @@ export default function MarkdownRenderer({
             const isCards = !!cardsMatch;
 
             if (isStack || isCards) {
-              const marker = isStack ? '[STACK]' : cardsMatch[0];
+              const marker = isStack ? '[STACK]' : (cardsMatch?.[0] || '');
               const groupTitle = firstChildStr.replace(marker, '').trim();
               const groupItems = listElements.slice(1); // Remove the marker item
 
               let gridClass = "grid-cols-1";
               if (isCards) {
-                const cols = cardsMatch[1] ? parseInt(cardsMatch[1], 10) : 1;
+                const cols = cardsMatch?.[1] ? parseInt(cardsMatch[1], 10) : 1;
                 if (cols === 2) gridClass = "grid-cols-1 md:grid-cols-2";
                 else if (cols === 3) gridClass = "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
                 else if (cols >= 4) gridClass = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
