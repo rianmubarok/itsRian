@@ -28,9 +28,28 @@ export default function ThemeToggle() {
     );
   }
 
+  const toggleTheme = () => {
+    const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
+
+    if (!document.startViewTransition) {
+      setTheme(nextTheme);
+      return;
+    }
+
+    document.documentElement.classList.add("theme-transition-swipe");
+
+    const transition = document.startViewTransition(() => {
+      setTheme(nextTheme);
+    });
+
+    transition.finished.finally(() => {
+      document.documentElement.classList.remove("theme-transition-swipe");
+    });
+  };
+
   return (
     <button
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      onClick={toggleTheme}
       className="cursor-pointer p-2 text-primary-dark dark:text-primary-light transition-colors duration-200"
       aria-label="Toggle theme"
     >

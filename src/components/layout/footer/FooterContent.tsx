@@ -5,7 +5,7 @@ export default function FooterContent() {
   return (
     <div className="flex flex-row items-center justify-between gap-4">
       <p className="text-xs sm:text-sm font-medium text-primary-dark dark:text-primary-light">
-        Muhammad Fitrian Mubarok ⏤ 2025
+        Muhammad Fitrian Mubarok ⏤ 2026
       </p>
       <div className="flex items-center gap-4 sm:gap-6">
         <SocialLinks />

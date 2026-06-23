@@ -180,3 +180,41 @@
 .animate-fade-only {
   animation: fade-only 0.5s ease-out forwards;
 }
+
+/* Theme View Transition (Swipe Left to Right) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
+  animation-fill-mode: both;
+}
+
+.theme-transition-swipe::view-transition-old(root) {
+  animation: none;
+  z-index: 1;
+}
+
+.theme-transition-swipe::view-transition-new(root) {
+  animation-name: swipe-right;
+  mix-blend-mode: normal;
+  z-index: 2;
+}
+
+/* Fallback for browsers that don't support root view transition completely or correctly */
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+.theme-transition-swipe * {
+  transition: none !important;
+}
+
+@keyframes swipe-right {
+  from {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
