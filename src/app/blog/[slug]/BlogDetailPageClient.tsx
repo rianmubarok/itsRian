@@ -77,7 +77,7 @@ export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
           }`}
       >
         {/* Hide list skeleton if we are navigating from the blog list */}
-        <BlogSkeleton hasMounted={hasMounted} />
+        <BlogSkeleton />
       </div>
 
       <div

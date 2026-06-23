@@ -7,7 +7,7 @@ export default function ProjectDetailLoading() {
       role="main"
     >
       <div className="absolute inset-0 w-full min-h-full z-10 bg-primary-light/80 dark:bg-primary-dark/80">
-        <ProjectDetailSkeleton hasMounted={false} />
+        <ProjectDetailSkeleton />
       </div>
     </main>
   );

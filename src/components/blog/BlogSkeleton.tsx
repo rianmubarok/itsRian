@@ -1,18 +1,12 @@
 import Skeleton from "../shared/ui/SkeletonLoader";
 import { BlogCardSkeleton } from "../shared/ui/SkeletonLoader";
 
-interface BlogSkeletonProps {
-  hasMounted: boolean;
-}
-
-export default function BlogSkeleton({ hasMounted }: BlogSkeletonProps) {
+export default function BlogSkeleton() {
   return (
     <div className="space-y-8">
       {/* Back Button Skeleton */}
       <div
-        className={`flex items-center gap-3 mb-8 transition-all duration-700 ease-out delay-100 ${
-          hasMounted ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
-        }`}
+        className={`flex items-center gap-3 mb-8 animate-fade-in-up [animation-fill-mode:both] [animation-delay:100ms]`}
       >
         <Skeleton className="w-8 h-8 rounded-full" />
         <Skeleton className="h-6 w-28 rounded" />
@@ -20,9 +14,7 @@ export default function BlogSkeleton({ hasMounted }: BlogSkeletonProps) {
 
       {/* Blog Header Skeleton - sesuai dengan BlogHeader.tsx */}
       <div
-        className={`mb-8 sm:mb-12 space-y-4 transition-all duration-700 ease-out delay-200 ${
-          hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        }`}
+        className={`mb-8 sm:mb-12 space-y-4 animate-fade-in-up [animation-fill-mode:both] [animation-delay:200ms]`}
       >
         {/* Title */}
         <Skeleton className="h-16 w-full rounded-lg" />
@@ -41,18 +33,14 @@ export default function BlogSkeleton({ hasMounted }: BlogSkeletonProps) {
 
       {/* Blog Thumbnail Skeleton */}
       <div
-        className={`mb-6 sm:mb-8 transition-all duration-700 ease-out delay-300 ${
-          hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        }`}
+        className={`mb-6 sm:mb-8 animate-fade-in-up [animation-fill-mode:both] [animation-delay:300ms]`}
       >
         <Skeleton className="h-72 w-full rounded-xl" />
       </div>
 
       {/* Blog Tags Skeleton - sesuai dengan BlogTags.tsx */}
       <div
-        className={`mb-6 sm:mb-8 transition-all duration-700 ease-out delay-400 ${
-          hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        }`}
+        className={`mb-6 sm:mb-8 animate-fade-in-up [animation-fill-mode:both] [animation-delay:400ms]`}
       >
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
           {/* Tags */}
@@ -68,9 +56,7 @@ export default function BlogSkeleton({ hasMounted }: BlogSkeletonProps) {
 
       {/* Blog Content Skeleton */}
       <div
-        className={`space-y-4 mb-16 transition-all duration-700 ease-out delay-500 ${
-          hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        }`}
+        className={`space-y-4 mb-16 animate-fade-in-up [animation-fill-mode:both] [animation-delay:500ms]`}
       >
         {[...Array(8)].map((_, i) => (
           <Skeleton
@@ -84,9 +70,7 @@ export default function BlogSkeleton({ hasMounted }: BlogSkeletonProps) {
 
       {/* Other Posts Skeleton */}
       <section
-        className={`mb-16 transition-all duration-700 ease-out delay-600 ${
-          hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        }`}
+        className={`mb-16 animate-fade-in-up [animation-fill-mode:both] [animation-delay:600ms]`}
       >
         <div className="flex items-center justify-between mb-8">
           <Skeleton className="h-8 w-48 rounded" />

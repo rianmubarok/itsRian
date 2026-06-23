@@ -81,7 +81,7 @@ export default function ProjectDetailPageClient({
         className={`absolute inset-0 w-full min-h-full z-10 bg-primary-light/80 dark:bg-primary-dark/80 transition-opacity duration-500 ${showContent ? "opacity-0 pointer-events-none" : "opacity-100"
           }`}
       >
-        <ProjectDetailSkeleton hasMounted={hasMounted} />
+        <ProjectDetailSkeleton />
       </div>
 
       <div
