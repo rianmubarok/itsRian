@@ -137,31 +137,51 @@ export default function MarkdownRenderer({
             const listElements = childrenArray.filter((child: any) => typeof child === 'object' && child !== null);
             const firstChildStr = listElements.length > 0 ? extractText(listElements[0]) : '';
             const isStack = firstChildStr.includes('[STACK]');
+            const cardsMatch = /\[CARDS(?:_(\d+))?\]/.exec(firstChildStr);
+            const isCards = !!cardsMatch;
 
-            if (isStack) {
-              const stackTitle = firstChildStr.replace('[STACK]', '').trim();
-              const stackItems = listElements.slice(1); // Remove the [STACK] marker
+            if (isStack || isCards) {
+              const marker = isStack ? '[STACK]' : cardsMatch[0];
+              const groupTitle = firstChildStr.replace(marker, '').trim();
+              const groupItems = listElements.slice(1); // Remove the marker item
+
+              let gridClass = "grid-cols-1";
+              if (isCards) {
+                const cols = cardsMatch[1] ? parseInt(cardsMatch[1], 10) : 1;
+                if (cols === 2) gridClass = "grid-cols-1 md:grid-cols-2";
+                else if (cols === 3) gridClass = "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
+                else if (cols >= 4) gridClass = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
+              }
+
+              const containerClass = isStack
+                ? "flex flex-col w-full relative gap-8 md:gap-10"
+                : `grid ${gridClass} gap-4 w-full relative`;
+
               return (
                 <div className="flex flex-col gap-8 my-16 clear-both relative">
-                  {stackTitle && (
-                    <div className="w-full sticky top-[70px] md:top-[90px] z-0 py-4 md:py-6 border-b border-transparent">
-                      <h2 className="text-4xl md:text-5xl font-semibold m-0 text-primary-dark dark:text-primary-light tracking-tight">{stackTitle}</h2>
+                  {groupTitle && (
+                    <div className={`w-full py-4 md:py-6 border-b border-transparent ${isStack ? 'sticky top-[70px] md:top-[90px] z-0' : ''}`}>
+                      <h2 className="text-4xl md:text-5xl font-semibold m-0 text-primary-dark dark:text-primary-light tracking-tight">{groupTitle}</h2>
                     </div>
                   )}
-                  <div className="flex flex-col gap-8 md:gap-10 w-full relative">
-                    {stackItems.map((item: any, idx: number) => (
-                      <div 
-                        key={idx} 
-                        className="stack-card sticky bg-white dark:bg-[#161616] rounded-[24px] p-6 sm:p-8 border border-primary-gray/20 flex flex-col gap-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.4)] transition-all duration-300"
-                        style={{ 
-                          '--sticky-offset-mobile': `${160 + idx * 20}px`,
-                          '--sticky-offset-desktop': `${220 + idx * 24}px`,
-                          zIndex: idx + 10
-                        } as React.CSSProperties}
-                      >
-                        {item.props.children}
-                      </div>
-                    ))}
+                  <div className={containerClass}>
+                    {groupItems.map((item: any, idx: number) => {
+                      const baseClass = isStack
+                        ? "stack-card sticky bg-white dark:bg-[#161616] rounded-[24px] p-6 sm:p-8 border border-primary-gray/20 flex flex-col gap-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.4)] transition-all duration-300"
+                        : "regular-card bg-white dark:bg-[#161616] rounded-[24px] p-6 sm:p-8 border border-primary-gray/20 flex flex-col gap-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.4)]";
+
+                      const styleProps = isStack ? {
+                        '--sticky-offset-mobile': `${160 + idx * 20}px`,
+                        '--sticky-offset-desktop': `${220 + idx * 24}px`,
+                        zIndex: idx + 10
+                      } : {};
+
+                      return (
+                        <div key={idx} className={baseClass} style={styleProps as React.CSSProperties}>
+                          {item.props.children}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               );
