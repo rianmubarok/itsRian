@@ -10,8 +10,8 @@
     display: none;
   }
 
-  .font-playfair-medium-italic {
-    font-family: var(--font-playfair);
+  .font-fraunces-medium-italic {
+    font-family: var(--font-fraunces);
     font-weight: 500;
     font-style: italic;
   }

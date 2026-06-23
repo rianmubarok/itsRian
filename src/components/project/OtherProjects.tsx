@@ -38,7 +38,7 @@ export default function OtherProjects({
         </h2>
         <Link
           href="/projects"
-          className="group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300"
+          className="group text-base sm:text-lg font-fraunces italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300"
           aria-label="View all projects"
         >
           <span>View all</span>

@@ -72,7 +72,7 @@ export default function LicenseList() {
       {licenses.map((group, index) => (
         <div key={group.id} className="grid grid-cols-1 md:grid-cols-6 gap-4 items-start">
           <div className="md:col-span-2">
-            <p className="text-base lg:text-xl font-noto-serif-display italic mb-2 sticky top-24">
+            <p className="text-base lg:text-xl font-fraunces italic mb-2 sticky top-24">
               {group.issuer}
             </p>
           </div>

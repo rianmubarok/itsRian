@@ -18,7 +18,7 @@ export default function EducationList() {
             <h4 className="text-xl sm:text-2xl font-semibold text-primary-dark dark:text-primary-light mb-3">
               {edu.degree}
             </h4>
-            <p className="text-base lg:text-xl font-noto-serif-display italic mb-2">
+            <p className="text-base lg:text-xl font-fraunces italic mb-2">
               {edu.institution}
             </p>
             <p className="text-sm text-primary-gray dark:text-gray-300 mb-3 sm:mb-4 tracking-normal">

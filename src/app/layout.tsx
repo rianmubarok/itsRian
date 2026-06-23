@@ -2,10 +2,9 @@ import "../styles/globals.css";
 import Layout from "../components/Layout";
 
 import {
-  playfairDisplay,
+  fraunces,
   sacramento,
   manrope,
-  notoSerifDisplay,
 } from "../lib/fonts";
 import { siteMetadata } from "../lib/metadata";
 
@@ -119,7 +118,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${manrope.variable} ${playfairDisplay.variable} ${sacramento.variable} ${notoSerifDisplay.variable}`}
+      className={`${manrope.variable} ${fraunces.variable} ${sacramento.variable}`}
     >
       <head>
         <script

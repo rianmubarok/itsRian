@@ -93,7 +93,7 @@ export default function ProjectDetailPageClient({
             <Link
               ref={refs.backButtonRef}
               href={backHref}
-              className="group text-base sm:text-lg font-noto-serif-display italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 mb-6 sm:mb-8"
+              className="group text-base sm:text-lg font-fraunces italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 mb-6 sm:mb-8"
             >
               <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
               {backLabel}
@@ -122,7 +122,7 @@ export default function ProjectDetailPageClient({
               ref={refs.tagsRef}
               className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8"
             >
-              <h2 className="text-base sm:text-lg font-noto-serif-display italic">
+              <h2 className="text-base sm:text-lg font-fraunces italic">
                 Tech Stack :
               </h2>
               {project.tags.map((tag) => (

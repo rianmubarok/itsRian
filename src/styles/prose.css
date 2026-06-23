@@ -1,66 +1,106 @@
-/* Custom Blog Content Styles */
+/* ─── Custom Case Study / Blog Content Styles ─── */
 .prose {
   font-family: var(--font-manrope);
-  line-height: 1.5;
+  line-height: 1.8;
 }
 
-.prose h1,
-.prose h2 {
-  font-family: var(--font-playfair);
-}
-
+/* ── Typography ── */
 .prose h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  font-family: var(--font-fraunces);
+  font-size: 2.25rem;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  clear: both;
+  @apply text-primary-dark dark:text-primary-light;
 }
 
 .prose h2 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-top: 4rem;
-  margin-bottom: 2rem;
-  line-height: 2.5rem;
+  font-family: var(--font-fraunces);
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid;
+  clear: both;
+  @apply text-primary-dark border-primary-gray/20 dark:text-primary-light;
 }
 
 .prose h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  line-height: 1.75rem;
+  font-family: var(--font-manrope);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  clear: both;
+  @apply text-primary-dark dark:text-primary-light;
 }
 
 .prose p {
-  font-size: 1rem;
+  font-size: 0.95rem;
   margin-bottom: 1rem;
+  @apply text-primary-dark/80 dark:text-primary-light/80;
 }
 
-.prose blockquote {
-  border-left: 4px solid #4b5563;
-  padding-left: 1rem;
-  font-style: italic;
-  background: #f5f5f511;
-  margin: 1.5rem 0;
-}
-
-.prose ul,
-.prose ol {
-  font-size: 1rem;
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
-  list-style: disc;
-}
-
-.prose li {
-  margin-bottom: 0.5rem;
-}
-
+/* ── Divider ── */
 .prose hr {
   margin: 2rem 0;
+  border: none;
+  clear: both;
+  @apply border-t border-primary-gray/15;
 }
 
+/* ── Blockquote — TL;DR card ── */
+.prose blockquote {
+  @apply border-l-[3px] border-primary-gray/50 bg-primary-gray/5;
+  padding: 1rem 1.5rem;
+  border-radius: 0 10px 10px 0;
+  font-style: normal;
+  margin: 2rem 0;
+}
+.prose blockquote p {
+  margin: 0;
+  font-size: 0.9rem;
+  @apply text-primary-dark/70 dark:text-primary-light/70;
+}
+
+/* ── Lists ── */
+.prose ul {
+  font-size: 0.95rem;
+  margin-left: 0;
+  margin-bottom: 1.25rem;
+  list-style: none;
+  padding: 0;
+}
+
+.prose ul li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.6rem;
+  @apply text-primary-dark/80 dark:text-primary-light/80;
+}
+
+.prose ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  @apply text-primary-gray/50;
+}
+
+.prose ol {
+  font-size: 0.95rem;
+  margin-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose ol li {
+  margin-bottom: 0.6rem;
+  @apply text-primary-dark/80 dark:text-primary-light/80;
+}
+
+/* ── Links ── */
 .prose a {
   position: relative;
   text-decoration: none;
@@ -85,7 +125,135 @@
   transform: scaleX(1.05);
 }
 
-/* Inline external SVG icons coming from Markdown images */
+/* ── Inline Code — badge style ── */
+.prose code:not(pre code) {
+  @apply bg-primary-gray/10 text-primary-dark dark:text-primary-light;
+  padding: 0.15rem 0.45rem;
+  border-radius: 5px;
+  font-size: 0.82em;
+  font-weight: 600;
+  font-family: ui-monospace, monospace;
+}
+
+/* ── Tables ── */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.9rem;
+}
+
+.prose thead tr {
+  @apply border-b border-primary-gray/20;
+}
+
+.prose th {
+  text-align: left;
+  padding: 0.6rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  @apply text-primary-gray;
+}
+
+.prose td {
+  padding: 0.85rem 1rem;
+  @apply border-b border-primary-gray/10 text-primary-dark/80 dark:text-primary-light/80;
+}
+
+.prose tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Checkbox Task Lists ── */
+.prose li:has(input[type="checkbox"]) {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.prose li:has(input[type="checkbox"])::before {
+  display: none;
+}
+
+.prose input[type="checkbox"] {
+  @apply accent-primary-gray;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* ── Images ── */
+.prose img {
+  margin: 0;
+}
+
+/* Hide line breaks injected by remark-breaks between consecutive images */
+.prose .image-wrapper + br {
+  display: none;
+}
+
+/* ── Image Gallery ── */
+.gallery-grid br {
+  display: none !important;
+}
+.gallery-grid .image-wrapper {
+  margin: 0 !important;
+  width: 100% !important;
+  height: auto;
+  float: none !important;
+}
+.gallery-grid img {
+  border-radius: 16px !important;
+}
+
+/* ── Stack Cards ── */
+.stack-card {
+  top: var(--sticky-offset-mobile);
+}
+@media (min-width: 768px) {
+  .stack-card {
+    top: var(--sticky-offset-desktop);
+  }
+}
+.stack-card > *:first-child {
+  margin-top: 0 !important;
+}
+.stack-card > *:last-child {
+  margin-bottom: 0 !important;
+}
+.stack-card h3 {
+  font-size: 1.15rem;
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+  border: none;
+  padding: 0;
+}
+.stack-card .image-wrapper {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: 400px !important;
+  aspect-ratio: 16/9;
+  margin: 0.5rem 0 1rem 0 !important;
+}
+.stack-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 16px !important;
+  margin: 0 !important;
+}
+.stack-card p {
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Inline SVG icons ── */
 .prose img.md-inline-icon {
   display: inline-block;
   vertical-align: text-bottom;
@@ -96,10 +264,15 @@
   aspect-ratio: 1 / 1;
 }
 
-/* Ensure inline icons also work in headings and list items */
 .prose h1 img.md-inline-icon,
 .prose h2 img.md-inline-icon,
 .prose h3 img.md-inline-icon,
 .prose li img.md-inline-icon {
   vertical-align: baseline;
+}
+
+/* ── strong / bold ── */
+.prose strong {
+  font-weight: 700;
+  @apply text-primary-dark dark:text-primary-light;
 }

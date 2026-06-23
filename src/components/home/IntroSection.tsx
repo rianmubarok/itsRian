@@ -19,7 +19,7 @@ export default function IntroSection() {
         <header className="flex sm:items-center sm:justify-center gap-3 sm:gap-4">
           <p
             className={[
-              "text-base lg:text-xl transition-all duration-700 ease-out delay-200 font-noto-serif-display italic",
+              "text-base lg:text-xl transition-all duration-700 ease-out delay-200 font-fraunces italic",
               isIntersecting
                 ? "translate-x-0 opacity-100"
                 : "translate-x-4 opacity-0",

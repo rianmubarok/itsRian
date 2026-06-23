@@ -15,7 +15,7 @@ const SkillsSection = () => {
       className="space-y-4 sm:space-y-5 text-primary-dark dark:text-primary-light"
     >
       <div className="sm:text-center mb-10 text-primary-dark dark:text-primary-light">
-        <p className="text-base lg:text-lg font-noto-serif-display italic">
+        <p className="text-base lg:text-lg font-fraunces italic">
           Tech Stack and tools
         </p>
         <h2

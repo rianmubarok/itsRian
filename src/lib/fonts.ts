@@ -1,16 +1,15 @@
 import {
-  Playfair_Display,
+  Fraunces,
   Sacramento,
   Manrope,
-  Noto_Serif_Display,
 } from "next/font/google";
 
-export const playfairDisplay = Playfair_Display({
+export const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
   display: "swap",
-  variable: "--font-playfair",
+  variable: "--font-fraunces",
 });
 
 export const sacramento = Sacramento({
@@ -27,10 +26,3 @@ export const manrope = Manrope({
   variable: "--font-manrope",
 });
 
-export const notoSerifDisplay = Noto_Serif_Display({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
-  display: "swap",
-  variable: "--font-noto-serif-display",
-});
