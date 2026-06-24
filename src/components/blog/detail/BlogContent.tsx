@@ -40,7 +40,9 @@ export default function BlogContent({
           isFromUrl={isFromUrl}
         />
         {!isLoading && markdownContent && (
-          <MarkdownRenderer>{markdownContent}</MarkdownRenderer>
+          <div className="animate-fadein">
+            <MarkdownRenderer>{markdownContent}</MarkdownRenderer>
+          </div>
         )}
       </div>
     </article>
