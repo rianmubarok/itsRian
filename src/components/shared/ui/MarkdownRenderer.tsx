@@ -158,10 +158,10 @@ export default function MarkdownRenderer({
                 : `grid ${gridClass} gap-4 w-full relative`;
 
               return (
-                <div className="flex flex-col gap-8 my-16 clear-both relative">
+                <div className={`flex flex-col ${isStack ? 'gap-8' : 'gap-4 sm:gap-6'} my-10 sm:my-16 clear-both relative`}>
                   {groupTitle && (
-                    <div className={`w-full py-4 md:py-6 border-b border-transparent ${isStack ? 'sticky top-0 md:top-[20px] z-0' : ''}`}>
-                      <h2 className="text-4xl md:text-5xl font-semibold m-0 text-primary-dark dark:text-primary-light tracking-tight">{groupTitle}</h2>
+                    <div className={`w-full ${isStack ? 'py-4 md:py-6' : 'pt-2 pb-0'} border-b border-transparent ${isStack ? 'sticky top-0 md:top-[20px] z-0' : ''}`}>
+                      <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold m-0 text-primary-dark dark:text-primary-light tracking-tight">{groupTitle}</h2>
                     </div>
                   )}
                   <div className={containerClass}>
