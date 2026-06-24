@@ -15,24 +15,27 @@ import {
 } from "../../../components/blog";
 import { notFound } from "next/navigation";
 
+import { Blog } from "../../../types";
+
 interface BlogDetailPageProps {
   params: Promise<{
     slug: string;
   }>;
+  initialBlog?: Blog | null;
 }
 
-export default function BlogDetailPageClient({ params }: BlogDetailPageProps) {
+export default function BlogDetailPageClient({ params, initialBlog }: BlogDetailPageProps) {
   const { slug } = use(params);
   const searchParams = useSearchParams();
   const fromHome = searchParams.get("from") === "home";
   const backHref = fromHome ? "/" : "/blog";
   const backLabel = fromHome ? "Back to home" : "Back to blog";
 
-  const { blog, loading, error } = useBlog(slug);
+  const { blog, loading, error } = useBlog(slug, initialBlog);
   const { blogs } = useBlogs();
   const [currentLanguage, setCurrentLanguage] = useState<"en" | "id">("en");
 
-  const { hasMounted, showContent, handleContentShow } = useBlogAnimation();
+  const { hasMounted, showContent, handleContentShow } = useBlogAnimation(!!initialBlog);
 
   // Memoize the handleContentShow callback to prevent unnecessary re-renders
   const memoizedHandleContentShow = useCallback(() => {

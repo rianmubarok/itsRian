@@ -78,6 +78,8 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
 
 import BlogDetailPageClient from "@/app/blog/[slug]/BlogDetailPageClient";
 
-export default function BlogDetailPage({ params }: BlogDetailPageProps) {
-  return <BlogDetailPageClient params={params} />;
+export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
+  const { slug } = await params;
+  const blog = await getBlogBySlug(slug);
+  return <BlogDetailPageClient params={params} initialBlog={blog} />;
 }

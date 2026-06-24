@@ -4,9 +4,9 @@ import { useState, useEffect, useCallback } from "react";
 import { useIntersectionObserver } from "./useIntersectionObserver";
 import { Blog } from "../types";
 
-export function useBlogAnimation() {
+export function useBlogAnimation(initialShowContent: boolean = false) {
   const [hasMounted, setHasMounted] = useState(false);
-  const [showContent, setShowContent] = useState(false);
+  const [showContent, setShowContent] = useState(initialShowContent);
 
   useEffect(() => {
     setHasMounted(true);
@@ -45,8 +45,12 @@ export function useBlogAnimation() {
   const handleContentShow = useCallback(
     (loading: boolean, blog: Blog | null) => {
       if (!loading && blog) {
-        const timeout = setTimeout(() => setShowContent(true), 50);
-        return () => clearTimeout(timeout);
+        setShowContent((prev) => {
+          if (!prev) {
+            setTimeout(() => setShowContent(true), 50);
+          }
+          return prev; // keep true if already true
+        });
       } else {
         setShowContent(false);
       }

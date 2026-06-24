@@ -77,16 +77,16 @@ export function useBlogs() {
   return { blogs, loading, error };
 }
 
-export function useBlog(slug: string) {
-  const [blog, setBlog] = useState<Blog | null>(null);
-  const [loading, setLoading] = useState(true);
+export function useBlog(slug: string, initialBlog?: Blog | null) {
+  const [blog, setBlog] = useState<Blog | null>(initialBlog || null);
+  const [loading, setLoading] = useState(!initialBlog);
   const [error, setError] = useState<string | null>(null);
   const hasIncrementedRef = useRef(false);
 
   useEffect(() => {
     async function fetchBlog(isRefresh = false) {
       try {
-        if (!isRefresh) {
+        if (!initialBlog && !isRefresh) {
           setLoading(true);
         }
 

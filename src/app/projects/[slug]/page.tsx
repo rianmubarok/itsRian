@@ -82,6 +82,8 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
 
 import ProjectDetailPageClient from "./ProjectDetailPageClient";
 
-export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
-  return <ProjectDetailPageClient params={params} />;
+export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+  const { slug } = await params;
+  const project = await getProjectBySlug(slug);
+  return <ProjectDetailPageClient params={params} initialProject={project} />;
 }

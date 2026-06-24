@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "./useIntersectionObserver";
 import { Project } from "../types";
 
-export function useProjectAnimation() {
+export function useProjectAnimation(initialShowContent: boolean = false) {
   const [hasMounted, setHasMounted] = useState(false);
-  const [showContent, setShowContent] = useState(false);
+  const [showContent, setShowContent] = useState(initialShowContent);
 
   useEffect(() => {
     setHasMounted(true);
@@ -44,8 +44,10 @@ export function useProjectAnimation() {
 
   const handleContentShow = (loading: boolean, project: Project | null) => {
     if (!loading && project) {
-      const timeout = setTimeout(() => setShowContent(true), 50);
-      return () => clearTimeout(timeout);
+      if (!showContent) {
+        const timeout = setTimeout(() => setShowContent(true), 50);
+        return () => clearTimeout(timeout);
+      }
     } else {
       setShowContent(false);
     }

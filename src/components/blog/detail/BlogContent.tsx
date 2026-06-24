@@ -1,3 +1,5 @@
+"use client";
+
 import { MarkdownRenderer } from "@/components/shared/ui";
 import { useMarkdownContent } from "@/hooks";
 import MarkdownContentLoader from "@/components/shared/ui/MarkdownContentLoader";
@@ -25,9 +27,8 @@ export default function BlogContent({
 
   return (
     <article
-      className={`prose text-primary-dark dark:text-primary-light max-w-none mb-12 sm:mb-16 transition-all duration-700 ease-out delay-500 tracking-normal text-base ${
-        hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-      }`}
+      className={`prose text-primary-dark dark:text-primary-light max-w-none mb-12 sm:mb-16 transition-all duration-700 ease-out delay-500 tracking-normal text-base ${hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        }`}
     >
       <div
         key={currentLanguage}

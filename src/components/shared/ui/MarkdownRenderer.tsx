@@ -160,7 +160,7 @@ export default function MarkdownRenderer({
               return (
                 <div className="flex flex-col gap-8 my-16 clear-both relative">
                   {groupTitle && (
-                    <div className={`w-full py-4 md:py-6 border-b border-transparent ${isStack ? 'sticky top-[70px] md:top-[90px] z-0' : ''}`}>
+                    <div className={`w-full py-4 md:py-6 border-b border-transparent ${isStack ? 'sticky top-0 md:top-[20px] z-0' : ''}`}>
                       <h2 className="text-4xl md:text-5xl font-semibold m-0 text-primary-dark dark:text-primary-light tracking-tight">{groupTitle}</h2>
                     </div>
                   )}
@@ -171,8 +171,8 @@ export default function MarkdownRenderer({
                         : "regular-card bg-white dark:bg-[#161616] rounded-[24px] p-6 sm:p-8 border border-primary-gray/20 flex flex-col gap-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.4)]";
 
                       const styleProps = isStack ? {
-                        '--sticky-offset-mobile': `${160 + idx * 20}px`,
-                        '--sticky-offset-desktop': `${220 + idx * 24}px`,
+                        '--sticky-offset-mobile': `${90 + idx * 20}px`,
+                        '--sticky-offset-desktop': `${150 + idx * 24}px`,
                         zIndex: idx + 10
                       } : {};
 

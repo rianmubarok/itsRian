@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from 'react';
 import { fetchMarkdownFromUrl, shouldFetchFromUrl } from '@/utils/helpers';
 

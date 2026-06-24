@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { Project } from "../../../types";
-import { getProjectBySlug } from "../../../data/projects";
 import { notFound } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -18,40 +17,23 @@ interface ProjectDetailPageProps {
   params: Promise<{
     slug: string;
   }>;
+  initialProject?: Project | null;
 }
 
 export default function ProjectDetailPageClient({
   params,
+  initialProject,
 }: ProjectDetailPageProps) {
   const { slug } = use(params);
   const searchParams = useSearchParams();
   const fromHome = searchParams.get("from") === "home";
   const backHref = fromHome ? "/" : "/projects";
   const backLabel = fromHome ? "Back to home" : "Back to projects";
-  const [project, setProject] = useState<Project | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [project] = useState<Project | null>(initialProject || null);
+  const isLoading = false;
 
   const { showContent, handleContentShow, refs, hasMounted } =
-    useProjectAnimation();
-
-  useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const projectData = await getProjectBySlug(slug);
-        if (!projectData) {
-          notFound();
-        }
-        setProject(projectData);
-      } catch (error) {
-        console.error("Error fetching project:", error);
-        notFound();
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchProject();
-  }, [slug]);
+    useProjectAnimation(!!initialProject);
 
   useEffect(() => {
     handleContentShow(isLoading, project);
@@ -68,7 +50,7 @@ export default function ProjectDetailPageClient({
     };
   }, [showContent]);
 
-  if (!isLoading && !project) {
+  if (!project) {
     notFound();
   }
 
@@ -93,13 +75,20 @@ export default function ProjectDetailPageClient({
             <Link
               ref={refs.backButtonRef}
               href={backHref}
-              className="group text-base sm:text-lg font-fraunces italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 mb-6 sm:mb-8"
+              className={`group text-base sm:text-lg font-fraunces italic inline-flex items-center gap-2 hover:gap-4 transition-all duration-700 ease-out delay-100 mb-6 sm:mb-8 ${
+                hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              }`}
             >
               <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
               {backLabel}
             </Link>
 
-            <div ref={refs.headerRef} className="mb-8 sm:mb-12">
+            <div 
+              ref={refs.headerRef} 
+              className={`mb-8 sm:mb-12 transition-all duration-700 ease-out delay-200 ${
+                hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              }`}
+            >
               <h1 className="text-5xl font-semibold leading-tighter tracking-tighter mb-4">
                 {project.title}
               </h1>
@@ -108,7 +97,12 @@ export default function ProjectDetailPageClient({
               </p>
             </div>
 
-            <div ref={refs.imageRef} className="mb-8 sm:mb-12">
+            <div 
+              ref={refs.imageRef} 
+              className={`mb-8 sm:mb-12 transition-all duration-700 ease-out delay-300 ${
+                hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              }`}
+            >
               <div className="relative h-auto bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
                 <img
                   src={project.thumbnail}
@@ -120,7 +114,9 @@ export default function ProjectDetailPageClient({
 
             <div
               ref={refs.tagsRef}
-              className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8"
+              className={`flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 transition-all duration-700 ease-out delay-400 ${
+                hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              }`}
             >
               <h2 className="text-base sm:text-lg font-fraunces italic">
                 Tech Stack :
@@ -136,11 +132,11 @@ export default function ProjectDetailPageClient({
             </div>
 
             <div ref={refs.contentRef}>
-              <ProjectContent project={project} hasMounted={showContent} />
+              <ProjectContent project={project} hasMounted={hasMounted} />
             </div>
 
             {project.lottie && (
-              <div className={`transition-all duration-1000 delay-500 ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              <div className={`transition-all duration-1000 delay-500 ${hasMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}>
                 <LottieDisplay url={project.lottie} />
               </div>
@@ -148,7 +144,9 @@ export default function ProjectDetailPageClient({
 
             <div
               ref={refs.linksRef}
-              className="mt-20 sm:mt-24 md:mt-32 mb-12 sm:mb-16 flex flex-col items-start md:flex-row md:items-center md:justify-between gap-4 sm:gap-2 w-full "
+              className={`mt-20 sm:mt-24 md:mt-32 mb-12 sm:mb-16 flex flex-col items-start md:flex-row md:items-center md:justify-between gap-4 sm:gap-2 w-full transition-all duration-700 ease-out delay-500 ${
+                hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              }`}
             >
               <div className="px-5 py-3 rounded-full border border-primary-gray/20 text-primary-gray dark:text-gray-300 bg-gray-100 dark:bg-primary-light/5 flex flex-wrap items-center gap-4 sm:gap-8">
                 {project.sourceCode && (
@@ -202,10 +200,16 @@ export default function ProjectDetailPageClient({
             {!isLoading && (
               <>
                 <hr className="border-t border-primary-gray/20 my-8 sm:my-12" />
-                <OtherProjects
-                  currentProjectSlug={project.slug}
-                  isProjectDetailLoading={isLoading}
-                />
+                <div
+                  className={`transition-all duration-700 ease-out delay-[600ms] ${
+                    hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                  }`}
+                >
+                  <OtherProjects
+                    currentProjectSlug={project.slug}
+                    isProjectDetailLoading={isLoading}
+                  />
+                </div>
               </>
             )}
           </>

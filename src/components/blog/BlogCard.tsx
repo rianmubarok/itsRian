@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Eye, Clock } from "lucide-react";
 import { Blog } from "../../types";
