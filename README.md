@@ -52,7 +52,7 @@ cd itsRian
 # Install dependencies
 npm install
 
-# Setup environment
+# Setup environment (copy template, then fill in your credentials)
 cp .env.example .env.local
 
 # Start development server
@@ -107,31 +107,42 @@ NEXT_PUBLIC_FORMSPREE_FORM_ID=your_formspree_form_id
 
 **Blog Database Properties:**
 
-- `title` (Title) - Blog post title
-- `slug` (Text) - URL-friendly identifier
-- `description` (Text) - Brief description (Optional)
-- `tags` (Multi-select) - Categories/tags (Optional)
-- `date` (Date) - Publication date
-- `readingTime` (Text) - Estimated reading time (Optional)
-- `thumbnail` (URL) - Featured image (Optional)
-- `ogImage` (URL) - Open Graph image for social sharing (Optional)
-- `contentEn` (Text) - English content (Markdown)
-- `contentId` (Text) - Indonesian content (Markdown) (Optional)
+| Property | Type | Required | Description |
+|---|---|---|---|
+| `title` | Title | ✅ | Blog post title |
+| `slug` | Text | ✅ | URL-friendly identifier |
+| `Archive` | Checkbox | ✅ | Set to `false` to publish; `true` to hide |
+| `date` | Date | ✅ | Publication date |
+| `description` | Text | — | Brief description |
+| `tags` | Multi-select | — | Categories/tags |
+| `readingTime` | Text | — | Estimated reading time (e.g. `5 min read`) |
+| `thumbnail` | URL | — | Featured image URL |
+| `ogImage` | URL | — | Open Graph image for social sharing |
+| `contentEn` | Text | — | Fallback English content (Markdown) |
+| `contentId` | Text | — | Fallback Indonesian content (Markdown) |
+
+> **Note**: Blog post content is primarily read from **Notion page blocks** (the page body). The `contentEn` and `contentId` rich text properties are used only as fallback if the page body is empty. You can also use external `.md` file URLs in those fields.
 
 **Portfolio Database Properties:**
 
-- `title` (Title) - Project name
-- `slug` (Text) - URL-friendly identifier
-- `description` (Text) - Project description (Optional)
-- `content` (Text) - Detailed project information (Markdown) (Optional)
-- `thumbnail` (URL) - Project screenshot (Optional)
-- `ogImage` (URL) - Open Graph image for social sharing (Optional)
-- `tags` (Multi-select) - Technologies used
-- `createdAt` (Date) - Project creation date
-- `sourceCode` (URL) - GitHub/repository link (Optional)
-- `liveProject` (URL) - Live demo link (Optional)
+| Property | Type | Required | Description |
+|---|---|---|---|
+| `title` | Title | ✅ | Project name |
+| `slug` | Text | ✅ | URL-friendly identifier |
+| `createdAt` | Date | ✅ | Project creation date |
+| `tags` | Multi-select | ✅ | Technologies used |
+| `description` | Text | — | Project description (Markdown supported) |
+| `content` | Text | — | Fallback detailed content (Markdown) |
+| `thumbnail` | URL | — | Project screenshot URL |
+| `ogImage` | URL | — | Open Graph image for social sharing |
+| `sourceCode` | URL | — | GitHub/repository link |
+| `liveProject` | URL | — | Live demo link |
+| `resources-1` | Text | — | Space-separated additional resource URLs |
+| `resources-2` | Text | — | Space-separated additional resource URLs |
+| `lottie` | URL | — | Lottie animation JSON file URL |
 
-Tip. Markdown content can also use external links with the `.md` extension.
+> **Note**: Project detail content is primarily read from **Notion page blocks** (the page body). The `content` rich text property is used only as fallback.
+
 
 ### 🗄️ Supabase Setup
 
