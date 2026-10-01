@@ -334,20 +334,10 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
     const response = await notion.databases.query({
       database_id: databaseId!,
       filter: {
-        and: [
-          {
-            property: "slug",
-            rich_text: {
-              equals: slug,
-            },
-          },
-          {
-            property: "Archive",
-            checkbox: {
-              equals: false,
-            },
-          },
-        ],
+        property: "slug",
+        rich_text: {
+          equals: slug,
+        },
       },
     });
 
