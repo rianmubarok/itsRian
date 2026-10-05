@@ -1,6 +1,52 @@
 import { Project } from "../types/index";
 
-export const fallbackProjects: Project[] = [];
+export const fallbackProjects: Project[] = [
+  {
+    id: 101,
+    title: "Aspect-Based Sentiment Analysis on DANA App",
+    slug: "absa-dana",
+    description:
+      "Penelitian eksperimen analisis sentimen berbasis aspek pada ulasan pengguna aplikasi DANA di Google Play Store menggunakan IndoBERT & SVM.",
+    content: "/content/absa-dana/1.md",
+    thumbnail: "",
+    tags: [
+      "Experiment",
+      "NLP",
+      "Python",
+      "Machine Learning",
+      "IndoBERT",
+      "SVM",
+      "ABSA",
+    ],
+    createdAt: "2026-08-15",
+    sourceCode: "https://github.com/rianmubarok",
+    isSeries: true,
+    totalParts: 20,
+    seriesManifestUrl: "/content/absa-dana/manifest.json",
+  },
+  {
+    id: 102,
+    title: "Plantix - Time Series & Change Point Detection",
+    slug: "plantix",
+    description:
+      "Penelitian eksperimen analisis perubahan karakteristik ulasan pengguna aplikasi Plantix menggunakan metode Change Point Detection (PELT) & Mann-Whitney U test.",
+    content: "/content/plantix/1.md",
+    thumbnail: "",
+    tags: [
+      "Experiment",
+      "Time Series",
+      "Python",
+      "Data Analysis",
+      "PELT",
+      "Statistics",
+    ],
+    createdAt: "2026-09-01",
+    sourceCode: "https://github.com/rianmubarok",
+    isSeries: true,
+    totalParts: 19,
+    seriesManifestUrl: "/content/plantix/manifest.json",
+  },
+];
 
 export async function getProjectsFromAPI(): Promise<Project[]> {
   try {

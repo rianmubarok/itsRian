@@ -116,14 +116,19 @@ function getPlainTextFromMultiSelect(
 
 import notion from "./notion";
 import { Project } from "../types";
+import { fallbackProjects } from "../data/projects";
 import { getPageContentBlocks, blocksToMarkdown } from "./notion-service";
 
 const projectsDatabaseId = process.env.NOTION_PROJECTS_DATABASE_ID;
 
 export async function getProjects(): Promise<Project[]> {
   try {
+    if (!projectsDatabaseId) {
+      return fallbackProjects;
+    }
+
     const response = await notion.databases.query({
-      database_id: projectsDatabaseId!,
+      database_id: projectsDatabaseId,
       sorts: [
         {
           property: "createdAt",
@@ -132,7 +137,7 @@ export async function getProjects(): Promise<Project[]> {
       ],
     });
 
-    return response.results.map(
+    const notionProjects: Project[] = response.results.map(
       (page: Record<string, unknown>, index: number) => {
         const properties = page.properties as Record<string, NotionProperty>;
         return {
@@ -167,16 +172,35 @@ export async function getProjects(): Promise<Project[]> {
         };
       }
     );
+
+    // Merge fallbackProjects that are not present in Notion
+    const mergedProjects = [...notionProjects];
+    for (const fb of fallbackProjects) {
+      if (!mergedProjects.some((p) => p.slug === fb.slug)) {
+        mergedProjects.push(fb);
+      }
+    }
+
+    return mergedProjects;
   } catch (error) {
     console.error("Error fetching projects from Notion:", error);
-    return [];
+    return fallbackProjects;
   }
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  const localProject = fallbackProjects.find((p) => p.slug === slug);
+  if (localProject) {
+    return localProject;
+  }
+
   try {
+    if (!projectsDatabaseId) {
+      return null;
+    }
+
     const response = await notion.databases.query({
-      database_id: projectsDatabaseId!,
+      database_id: projectsDatabaseId,
       filter: {
         property: "slug",
         rich_text: {

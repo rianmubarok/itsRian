@@ -26,10 +26,49 @@ export default function ProjectDetailPageClient({
 }: ProjectDetailPageProps) {
   const { slug } = use(params);
   const searchParams = useSearchParams();
-  const fromHome = searchParams.get("from") === "home";
-  const backHref = fromHome ? "/" : "/projects";
-  const backLabel = fromHome ? "Back to home" : "Back to projects";
   const [project] = useState<Project | null>(initialProject || null);
+  const fromParam = searchParams.get("from");
+  const partParam = searchParams.get("part");
+  const currentPartNum = partParam ? parseInt(partParam, 10) : null;
+  const isExperimentProject = project?.tags.some((tag) => tag.toLowerCase() === "experiment");
+
+  const [manifest, setManifest] = useState<{
+    parts: Array<{ part: number; title: string; description: string }>;
+  } | null>(null);
+
+  useEffect(() => {
+    if (isExperimentProject && project?.slug) {
+      const manifestUrl = project.seriesManifestUrl || `/content/${project.slug}/manifest.json`;
+      fetch(manifestUrl)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => setManifest(data))
+        .catch(() => setManifest(null));
+    }
+  }, [isExperimentProject, project?.seriesManifestUrl, project?.slug]);
+
+  const activePart = currentPartNum && manifest
+    ? manifest.parts.find((p) => p.part === currentPartNum)
+    : null;
+
+  const displayTitle = activePart ? activePart.title : project?.title;
+  const displayDescription = activePart ? activePart.description : project?.description;
+
+  const backHref = activePart
+    ? `/projects/${project?.slug}${fromParam === "experiment" ? "?from=experiment" : ""}`
+    : fromParam === "home"
+    ? "/"
+    : fromParam === "experiment" || isExperimentProject
+    ? "/projects/experiment"
+    : "/projects";
+
+  const backLabel = activePart
+    ? "Back to table of content"
+    : fromParam === "home"
+    ? "Back to home"
+    : fromParam === "experiment" || isExperimentProject
+    ? "Back to experiment"
+    : "Back to projects";
+
   const isLoading = false;
 
   const { showContent, handleContentShow, refs, hasMounted } =
@@ -90,46 +129,50 @@ export default function ProjectDetailPageClient({
               }`}
             >
               <h1 className="text-5xl font-semibold leading-tighter tracking-tighter mb-4">
-                {project.title}
+                {displayTitle}
               </h1>
               <p className="text-base text-primary-dark dark:text-gray-300 mb-4 sm:mb-6 tracking-normal">
-                {project.description}
+                {displayDescription}
               </p>
             </div>
 
-            <div 
-              ref={refs.imageRef} 
-              className={`mb-8 sm:mb-12 transition-all duration-700 ease-out delay-300 ${
-                hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-              }`}
-            >
-              <div className="relative h-auto bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
-                <img
-                  src={project.thumbnail}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
+            {Boolean(project.thumbnail) && (
+              <div 
+                ref={refs.imageRef} 
+                className={`mb-8 sm:mb-12 transition-all duration-700 ease-out delay-300 ${
+                  hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                }`}
+              >
+                <div className="relative h-auto bg-gray-200 dark:bg-white/50 overflow-hidden rounded-xl">
+                  <img
+                    src={project.thumbnail}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
-            <div
-              ref={refs.tagsRef}
-              className={`flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 transition-all duration-700 ease-out delay-400 ${
-                hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-              }`}
-            >
-              <h2 className="text-base sm:text-lg font-fraunces italic">
-                Tech Stack :
-              </h2>
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-4 py-1 text-sm rounded-full border border-primary-gray/20 text-primary-gray dark:text-gray-300 bg-gray-100 dark:bg-primary-light/5 items-center"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            {!isExperimentProject && (
+              <div
+                ref={refs.tagsRef}
+                className={`flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 transition-all duration-700 ease-out delay-400 ${
+                  hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                }`}
+              >
+                <h2 className="text-base sm:text-lg font-fraunces italic">
+                  Tech Stack :
+                </h2>
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-4 py-1 text-sm rounded-full border border-primary-gray/20 text-primary-gray dark:text-gray-300 bg-gray-100 dark:bg-primary-light/5 items-center"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
 
             <div ref={refs.contentRef}>
               <ProjectContent project={project} hasMounted={hasMounted} />
@@ -142,60 +185,62 @@ export default function ProjectDetailPageClient({
               </div>
             )}
 
-            <div
-              ref={refs.linksRef}
-              className={`mt-20 sm:mt-24 md:mt-32 mb-12 sm:mb-16 flex flex-col items-start md:flex-row md:items-center md:justify-between gap-4 sm:gap-2 w-full transition-all duration-700 ease-out delay-500 ${
-                hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-              }`}
-            >
-              <div className="px-5 py-3 rounded-full border border-primary-gray/20 text-primary-gray dark:text-gray-300 bg-gray-100 dark:bg-primary-light/5 flex flex-wrap items-center gap-4 sm:gap-8">
-                {project.sourceCode && (
-                  <Link
-                    href={project.sourceCode}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 sm:gap-3"
-                  >
-                    <Github className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
-                    <span>Source Code</span>
-                  </Link>
-                )}
-
-                {project.sourceCode && project.liveProject && (
-                  <span className="text-primary-gray">|</span>
-                )}
-
-                {project.liveProject && (
-                  <Link
-                    href={project.liveProject}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 sm:gap-3"
-                  >
-                    <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
-                    <span>Live Project</span>
-                  </Link>
-                )}
-
-                {!project.sourceCode && !project.liveProject && (
-                  <p className="text-sm sm:text-base text-primary-gray">
-                    Oops! This project has no live link — maybe it&apos;s
-                    private or in progress.{" "}
+            {!isExperimentProject && (
+              <div
+                ref={refs.linksRef}
+                className={`mt-20 sm:mt-24 md:mt-32 mb-12 sm:mb-16 flex flex-col items-start md:flex-row md:items-center md:justify-between gap-4 sm:gap-2 w-full transition-all duration-700 ease-out delay-500 ${
+                  hasMounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                }`}
+              >
+                <div className="px-5 py-3 rounded-full border border-primary-gray/20 text-primary-gray dark:text-gray-300 bg-gray-100 dark:bg-primary-light/5 flex flex-wrap items-center gap-4 sm:gap-8">
+                  {project.sourceCode && (
                     <Link
-                      href="/contact"
-                      className="inline-flex items-center hover:text-primary-dark dark:hover:text-primary-light transition-colors duration-200"
+                      href={project.sourceCode}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 sm:gap-3"
                     >
-                      <span>Contact me if you&apos;re interested</span>
+                      <Github className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
+                      <span>Source Code</span>
                     </Link>
-                    .
-                  </p>
-                )}
-              </div>
+                  )}
 
-              <span className="text-xs text-primary-gray mt-6 sm:mt-10 md:mt-0 md:text-right tracking-normal">
-                Created: {formatDate(project.createdAt)}
-              </span>
-            </div>
+                  {project.sourceCode && project.liveProject && (
+                    <span className="text-primary-gray">|</span>
+                  )}
+
+                  {project.liveProject && (
+                    <Link
+                      href={project.liveProject}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 sm:gap-3"
+                    >
+                      <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />
+                      <span>Live Project</span>
+                    </Link>
+                  )}
+
+                  {!project.sourceCode && !project.liveProject && (
+                    <p className="text-sm sm:text-base text-primary-gray">
+                      Oops! This project has no live link — maybe it&apos;s
+                      private or in progress.{" "}
+                      <Link
+                        href="/contact"
+                        className="inline-flex items-center hover:text-primary-dark dark:hover:text-primary-light transition-colors duration-200"
+                      >
+                        <span>Contact me if you&apos;re interested</span>
+                      </Link>
+                      .
+                    </p>
+                  )}
+                </div>
+
+                <span className="text-xs text-primary-gray mt-6 sm:mt-10 md:mt-0 md:text-right tracking-normal">
+                  Created: {formatDate(project.createdAt)}
+                </span>
+              </div>
+            )}
 
             {!isLoading && (
               <>
@@ -208,6 +253,7 @@ export default function ProjectDetailPageClient({
                   <OtherProjects
                     currentProjectSlug={project.slug}
                     isProjectDetailLoading={isLoading}
+                    isCurrentExperiment={isExperimentProject}
                   />
                 </div>
               </>

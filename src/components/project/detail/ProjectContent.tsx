@@ -1,11 +1,11 @@
 import { MarkdownRenderer } from "@/components/shared/ui";
 import { useMarkdownContent } from "@/hooks";
 import MarkdownContentLoader from "@/components/shared/ui/MarkdownContentLoader";
+import SeriesExperimentViewer from "./SeriesExperimentViewer";
+import { Project } from "@/types";
 
 interface ProjectContentProps {
-  project: {
-    content: string;
-  };
+  project: Project;
   hasMounted: boolean;
 }
 
@@ -13,6 +13,14 @@ export default function ProjectContent({
   project,
   hasMounted,
 }: ProjectContentProps) {
+  const isSeries =
+    project.isSeries ||
+    project.tags?.some((t) => t.toLowerCase() === "experiment");
+
+  if (isSeries) {
+    return <SeriesExperimentViewer project={project} hasMounted={hasMounted} />;
+  }
+
   const { markdownContent, isLoading, error, isFromUrl } = useMarkdownContent({
     content: project.content,
     language: "en",

@@ -24,6 +24,9 @@ export interface Project {
   resources1?: string[];
   resources2?: string[];
   lottie?: string;
+  isSeries?: boolean;
+  totalParts?: number;
+  seriesManifestUrl?: string;
 }
 
 export interface BlogPost {

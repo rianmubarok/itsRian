@@ -1,0 +1,127 @@
+{
+  "title": "Aspect-Based Sentiment Analysis on DANA App",
+  "description": "A deep-dive research experiment analyzing 2,199 user reviews of the DANA e-wallet app using IndoBERT fine-tuning vs SVM TF-IDF baselines across multiple aspect categories.",
+  "totalParts": 20,
+  "parts": [
+    {
+      "part": 1,
+      "title": "Understanding My ABSA Thesis Data",
+      "description": "Memahami data ulasan pengguna aplikasi DANA sebelum masuk ke algoritma machine learning dan statistik",
+      "fileName": "1.md"
+    },
+    {
+      "part": 2,
+      "title": "Why General Sentiment Analysis Is Not Enough",
+      "description": "Mengapa analisis sentimen tradisional berbasis dokumen atau kalimat tidak cukup untuk aplikasi e-wallet",
+      "fileName": "2.md"
+    },
+    {
+      "part": 3,
+      "title": "What Is Aspect-Based Sentiment Analysis?",
+      "description": "Memahami definisi formal, sub-task NLP, dan formulasi matematis Aspect Category Sentiment Classification (ACSC)",
+      "fileName": "3.md"
+    },
+    {
+      "part": 4,
+      "title": "Defining Aspect Taxonomy for E-Wallet",
+      "description": "Merumuskan 5 taksonomi aspek utama DANA secara rasional berdasarkan eksplorasi data rill",
+      "fileName": "4.md"
+    },
+    {
+      "part": 5,
+      "title": "Creating Codebook v1 for Objective Annotation",
+      "description": "Menyusun panduan baku Codebook v1 untuk menjaga konsistensi, objektivitas, dan standar kualitas anotasi data",
+      "fileName": "5.md"
+    },
+    {
+      "part": 6,
+      "title": "Dataset Annotation Process and Deleting Neutral Class",
+      "description": "Bedah proses pelabelan data 2-batch, fenomena sparsity kelas Netral, dan pertimbangan ilmiah di balik penghapusannya",
+      "fileName": "6.md"
+    },
+    {
+      "part": 7,
+      "title": "Validating Inter-Annotator Agreement with Cohen's Kappa",
+      "description": "Menguji keandalan dan objektivitas dataset menggunakan metode statistik Cohen's Kappa",
+      "fileName": "7.md"
+    },
+    {
+      "part": 8,
+      "title": "Data Splitting without Data Leakage: Grouped Stratified Split",
+      "description": "Mencegah kebocoran informasi antar set data melalui teknik Grouped Stratified Split berdasarkan review_id",
+      "fileName": "8.md"
+    },
+    {
+      "part": 9,
+      "title": "Understanding the Accuracy Paradox and Macro F1",
+      "description": "Mengapa Akurasi biasa menipu pada dataset imbalanced dan mengapa Macro F1-Score adalah standar sejati evaluasi skripsi",
+      "fileName": "9.md"
+    },
+    {
+      "part": 10,
+      "title": "Building the Baseline Model: SVM with TF-IDF",
+      "description": "Membangun dan mengevaluasi model pembanding tradisional menggunakan pembobot TF-IDF dan LinearSVC",
+      "fileName": "10.md"
+    },
+    {
+      "part": 11,
+      "title": "Understanding Transformer Architecture and BERT",
+      "description": "Memahami arsitektur Transformer, mekanisme Self-Attention, pre-training IndoBERT, dan keunggulannya dibanding model statistik",
+      "fileName": "11.md"
+    },
+    {
+      "part": 12,
+      "title": "Formulating ABSA Input for IndoBERT",
+      "description": "Memahami formulasi masukan Sentence Pair Classification dengan token pemisah [SEP] untuk menghubungkan aspek dan teks ulasan",
+      "fileName": "12.md"
+    },
+    {
+      "part": 13,
+      "title": "Fine-Tuning Setup and Loss Function Calibration",
+      "description": "Bedah konfigurasi hyperparameter, arsitektur Colab GPU, dan kalibrasi Weighted Cross-Entropy Loss untuk menangani class imbalance",
+      "fileName": "13.md"
+    },
+    {
+      "part": 14,
+      "title": "Comparing Global Performance: SVM vs IndoBERT",
+      "description": "Bedah statistik hasil pengujian Test Set final: Pembuktian keunggulan empiris IndoBERT dibanding baseline SVM",
+      "fileName": "14.md"
+    },
+    {
+      "part": 15,
+      "title": "Deep-Dive Per-Aspect Analysis",
+      "description": "Membedah hasil performa per kategori aspek: Di mana IndoBERT menang mutlak dan mengapa SVM hancur di aspek tertentu",
+      "fileName": "15.md"
+    },
+    {
+      "part": 16,
+      "title": "Comprehensive Error Analysis",
+      "description": "Menganalisis 9 kesalahan SVM vs 5 kesalahan IndoBERT: Membedah kasus sarkasme, sentimen implisit, ulasan campuran, dan typo parah",
+      "fileName": "16.md"
+    },
+    {
+      "part": 17,
+      "title": "Preparing for Advisor & Examiner Q&A (Sidang Simulation)",
+      "description": "Simulasi 10 pertanyaan tersulit dewan penguji sidang skripsi beserta draf jawaban argumentatif dan bukti empirisnya",
+      "fileName": "17.md"
+    },
+    {
+      "part": 18,
+      "title": "Seeing the Whole Thesis Story in One Mental Picture",
+      "description": "Menyambungkan seluruh bagian skripsi dari latar belakang hingga temuan akhir dalam satu cerita ilmiah yang tidak terbantahkan",
+      "fileName": "18.md"
+    },
+    {
+      "part": 19,
+      "title": "What Did My ABSA Thesis Actually Contribute?",
+      "description": "Rangkuman temuan utama, kontribusi akademis & praktis, batasan penelitian, serta penutup perjalanan skripsi",
+      "fileName": "19.md"
+    },
+    {
+      "part": 20,
+      "title": "Literature Review and State of the Art (SOTA)",
+      "description": "Bedah 8 paper kunci yang dikutip untuk memperkuat posisi akademis, keunggulan judul, dan urgensi skripsi ABSA DANA",
+      "fileName": "20.md"
+    }
+  ]
+}

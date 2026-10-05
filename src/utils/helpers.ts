@@ -161,6 +161,10 @@ export function getFilenameFromUrl(url: string): string {
 export function shouldFetchFromUrl(content: string): boolean {
   if (!content || typeof content !== "string") return false;
 
+  if (content.startsWith("/") && content.endsWith(".md")) {
+    return true;
+  }
+
   try {
     const url = new URL(content);
     // Check if it's a valid URL and contains markdown file or is from Supabase

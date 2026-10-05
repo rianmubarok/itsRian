@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from "react";
 
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import ProjectCard from "../../components/project/ProjectCard";
 import {
   useInfiniteScroll,
@@ -10,11 +12,24 @@ import {
 } from "../../hooks";
 import { ProjectCardSkeleton } from "../../components/shared/ui/SkeletonLoader";
 
-export default function ProjectsPageClient() {
+interface ProjectsPageClientProps {
+  initialTab?: "projects" | "experiment";
+}
+
+export default function ProjectsPageClient({
+  initialTab = "projects",
+}: ProjectsPageClientProps) {
+  const router = useRouter();
   const { projects, loading, error } = useProjects();
   const [activeTab, setActiveTab] = useState<"projects" | "experiment">(
-    "projects"
+    initialTab
   );
+
+  const handleTabChange = (tab: "projects" | "experiment") => {
+    setActiveTab(tab);
+    const targetPath = tab === "experiment" ? "/projects/experiment" : "/projects";
+    router.push(targetPath, { scroll: false });
+  };
 
   const { ref: headerRef, isIntersecting: headerIntersecting } =
     useIntersectionObserver<HTMLHeadingElement>({
@@ -74,7 +89,7 @@ export default function ProjectsPageClient() {
         <aside className="lg:col-span-1 space-y-4">
           <div className="flex flex-col space-y-2 sticky top-32">
             <button
-              onClick={() => setActiveTab("projects")}
+              onClick={() => handleTabChange("projects")}
               className={`text-left text-lg transition-colors duration-200 cursor-pointer ${activeTab === "projects"
                 ? "text-primary-dark dark:text-primary-light font-medium"
                 : "text-primary-gray dark:text-gray-400 hover:text-primary-dark dark:hover:text-primary-light"
@@ -83,7 +98,7 @@ export default function ProjectsPageClient() {
               Projects
             </button>
             <button
-              onClick={() => setActiveTab("experiment")}
+              onClick={() => handleTabChange("experiment")}
               className={`text-left text-lg transition-colors duration-200 cursor-pointer ${activeTab === "experiment"
                 ? "text-primary-dark dark:text-primary-light font-medium"
                 : "text-primary-gray dark:text-gray-400 hover:text-primary-dark dark:hover:text-primary-light"
@@ -123,7 +138,7 @@ export default function ProjectsPageClient() {
                       animationFillMode: "forwards",
                     }}
                   >
-                    <ProjectCard project={project} variant="grid" />
+                    <ProjectCard project={project} variant="grid" fromTab={activeTab} />
                   </div>
                 );
               })}

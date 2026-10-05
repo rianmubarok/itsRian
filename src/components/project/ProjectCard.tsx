@@ -3,19 +3,37 @@ import { useState } from "react";
 import { Project } from "../../types/index";
 import CollageRotator from "../shared/ui/CollageRotator";
 import Skeleton from "../shared/ui/SkeletonLoader";
+import ExperimentCard from "./ExperimentCard";
 
 interface ProjectCardProps {
   project: Project;
   variant?: "featured" | "grid";
   fromHome?: boolean;
+  fromTab?: "projects" | "experiment";
 }
 
 export default function ProjectCard({
   project,
   variant = "grid",
   fromHome = false,
+  fromTab,
 }: ProjectCardProps) {
-  const href = `/projects/${project.slug}${fromHome ? "?from=home" : ""}`;
+  const isExperiment =
+    fromTab === "experiment" ||
+    project.tags.some((t) => t.toLowerCase() === "experiment");
+
+  if (isExperiment) {
+    return (
+      <ExperimentCard
+        project={project}
+        fromHome={fromHome}
+        fromTab={fromTab}
+      />
+    );
+  }
+
+  const fromParam = fromHome ? "?from=home" : "";
+  const href = `/projects/${project.slug}${fromParam}`;
 
   return (
     <div

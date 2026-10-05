@@ -1,0 +1,121 @@
+{
+  "title": "Plantix - Time Series & Change Point Detection",
+  "description": "A statistical research experiment identifying user behavior shifts and performance change points in Plantix Play Store reviews using PELT algorithm and Mann-Whitney U test.",
+  "totalParts": 19,
+  "parts": [
+    {
+      "part": 1,
+      "title": "Understanding My Thesis Data",
+      "description": "Memahami data penelitian Plantix sebelum masuk ke algoritma dan statistik",
+      "fileName": "1.md"
+    },
+    {
+      "part": 2,
+      "title": "Reading Review Characteristics",
+      "description": "Memahami apa yang sebenarnya diukur dari setiap ulasan pengguna",
+      "fileName": "2.md"
+    },
+    {
+      "part": 3,
+      "title": "From Reviews to Time Series",
+      "description": "Mengubah ribuan ulasan menjadi deret waktu yang bisa dianalisis",
+      "fileName": "3.md"
+    },
+    {
+      "part": 4,
+      "title": "What Is a Change Point?",
+      "description": "Memahami titik perubahan sebelum belajar cara algoritma menemukannya",
+      "fileName": "4.md"
+    },
+    {
+      "part": 5,
+      "title": "Understanding Change Point Detection",
+      "description": "Memahami cara kerja deteksi perubahan sebelum masuk ke algoritma PELT",
+      "fileName": "5.md"
+    },
+    {
+      "part": 6,
+      "title": "Understanding PELT",
+      "description": "Memahami bagaimana PELT mencari segmentasi terbaik pada deret waktu",
+      "fileName": "6.md"
+    },
+    {
+      "part": 7,
+      "title": "Penalty and Segmentation",
+      "description": "Memahami mengapa PELT tidak boleh membuat change point sebanyak mungkin",
+      "fileName": "7.md"
+    },
+    {
+      "part": 8,
+      "title": "Understanding the RBF Cost Function",
+      "description": "Memahami bagaimana PELT menilai apakah sebuah segmen memiliki pola yang berbeda",
+      "fileName": "8.md"
+    },
+    {
+      "part": 9,
+      "title": "PELT Across Multiple Features",
+      "description": "Memahami mengapa empat karakteristik menghasilkan change point yang berbeda",
+      "fileName": "9.md"
+    },
+    {
+      "part": 10,
+      "title": "Finding a Consensus Change Point",
+      "description": "Memahami bagaimana beberapa hasil deteksi digabungkan menjadi titik perubahan yang lebih konsisten",
+      "fileName": "10.md"
+    },
+    {
+      "part": 11,
+      "title": "Looking Before and After the Change",
+      "description": "Memahami apa yang dilakukan setelah consensus change point ditemukan",
+      "fileName": "11.md"
+    },
+    {
+      "part": 12,
+      "title": "Understanding the Mann-Whitney U Test",
+      "description": "Memahami bagaimana menguji perbedaan karakteristik ulasan sebelum dan sesudah change point",
+      "fileName": "12.md"
+    },
+    {
+      "part": 13,
+      "title": "P-values, Significance, and Bonferroni",
+      "description": "Memahami arti p-value, batas signifikansi, dan mengapa banyak pengujian membutuhkan koreksi",
+      "fileName": "13.md"
+    },
+    {
+      "part": 14,
+      "title": "Understanding Effect Size",
+      "description": "Memahami seberapa besar perubahan sebelum dan sesudah change point menggunakan Cliff’s Delta",
+      "fileName": "14.md"
+    },
+    {
+      "part": 15,
+      "title": "Reading Change Points Through App Versions",
+      "description": "Memahami hubungan temporal antara change point dan versi aplikasi tanpa mengubahnya menjadi klaim kausal",
+      "fileName": "15.md"
+    },
+    {
+      "part": 16,
+      "title": "Learning from Previous Research",
+      "description": "Belajar membaca 15 penelitian terdahulu untuk memahami posisi penelitian kita",
+      "fileName": "16.md"
+    },
+    {
+      "part": 17,
+      "title": "Finding the Research Gap",
+      "description": "Membedah 15 penelitian terdahulu untuk menemukan posisi penelitian kita",
+      "fileName": "17.md"
+    },
+    {
+      "part": 18,
+      "title": "Seeing the Whole Thesis",
+      "description": "Melihat seluruh penelitian dari data sampai kesimpulan",
+      "fileName": "18.md"
+    },
+    {
+      "part": 19,
+      "title": "What Did My Thesis Actually Find?",
+      "description": "Membaca temuan empiris dari deteksi change point pada ulasan Plantix (2019–2026)",
+      "fileName": "19.md"
+    }
+  ]
+}
