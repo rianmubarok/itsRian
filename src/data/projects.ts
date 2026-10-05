@@ -6,7 +6,7 @@ export const fallbackProjects: Project[] = [
     title: "Aspect-Based Sentiment Analysis on DANA App",
     slug: "absa-dana",
     description:
-      "Penelitian eksperimen analisis sentimen berbasis aspek pada ulasan pengguna aplikasi DANA di Google Play Store menggunakan IndoBERT & SVM.",
+      "Analisis Sentimen Berbasis Aspek Ulasan Pengguna Aplikasi DANA di Google Play Store Menggunakan IndoBERT dan Support Vector Machine",
     content: "/content/absa-dana/1.md",
     thumbnail: "",
     tags: [
@@ -29,7 +29,7 @@ export const fallbackProjects: Project[] = [
     title: "Plantix - Time Series & Change Point Detection",
     slug: "plantix",
     description:
-      "Penelitian eksperimen analisis perubahan karakteristik ulasan pengguna aplikasi Plantix menggunakan metode Change Point Detection (PELT) & Mann-Whitney U test.",
+      "Analisis Perubahan Karakteristik Ulasan Pengguna Aplikasi Plantix Menggunakan Metode Change Point Detection (PELT) dan Uji Mann-Whitney U",
     content: "/content/plantix/1.md",
     thumbnail: "",
     tags: [
