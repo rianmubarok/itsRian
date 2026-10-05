@@ -191,7 +191,7 @@ export default function SeriesExperimentViewer({
                 className={`group font-fraunces italic inline-flex items-center gap-2 text-base transition-all ${
                   currentPart <= 1
                     ? "opacity-30 cursor-not-allowed text-primary-gray"
-                    : "text-primary-dark dark:text-primary-light hover:gap-3"
+                    : "cursor-pointer text-primary-dark dark:text-primary-light hover:gap-3"
                 }`}
               >
                 <ArrowLeft className="w-5 h-5 stroke-1" />
@@ -204,7 +204,7 @@ export default function SeriesExperimentViewer({
                 className={`group font-fraunces italic inline-flex items-center gap-2 text-base transition-all ${
                   currentPart >= manifest.totalParts
                     ? "opacity-30 cursor-not-allowed text-primary-gray"
-                    : "text-primary-dark dark:text-primary-light hover:gap-3"
+                    : "cursor-pointer text-primary-dark dark:text-primary-light hover:gap-3"
                 }`}
               >
                 <span>Next Chapter</span>
