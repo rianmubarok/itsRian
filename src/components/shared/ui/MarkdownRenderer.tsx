@@ -5,6 +5,8 @@ import ReactMarkdown from "react-markdown";
 import type { DetailedHTMLProps, ImgHTMLAttributes } from "react";
 import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import CodeBlock from "./CodeBlock";
 
 interface MarkdownRendererProps {
@@ -52,7 +54,8 @@ export default function MarkdownRenderer({
   return (
     <div className={className}>
       <ReactMarkdown
-        remarkPlugins={[remarkGfm, remarkBreaks]}
+        remarkPlugins={[remarkGfm, remarkBreaks, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
         components={{
           // Upgrade a paragraph that only contains one inline code node like "bash npm i" to a proper CodeBlock
           p: ({ node, children }: PProps) => {

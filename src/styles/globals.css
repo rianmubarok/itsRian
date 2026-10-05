@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "nprogress/nprogress.css";
 @import "./nprogress.css";
+@import "katex/dist/katex.min.css";
 
 /* Import separated CSS files */
 @import "./variables.css";
