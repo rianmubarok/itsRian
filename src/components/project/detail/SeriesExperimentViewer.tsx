@@ -171,12 +171,12 @@ export default function SeriesExperimentViewer({
           {/* Main Content Area */}
           <article className="prose text-base tracking-normal text-primary-dark dark:text-primary-light max-w-none mb-12">
             <div className="prose prose-lg dark:prose-invert max-w-none min-h-[250px]">
-              <MarkdownContentLoader
-                isLoading={isLoading}
-                error={error}
-                isFromUrl={true}
-              />
-              {!isLoading && markdownContent && (
+              {error && (
+                <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6">
+                  <p className="text-red-600 dark:text-red-400">{error}</p>
+                </div>
+              )}
+              {markdownContent && (
                 <div key={currentPart} className="animate-fade-in-up">
                   <MarkdownRenderer>{markdownContent}</MarkdownRenderer>
                 </div>

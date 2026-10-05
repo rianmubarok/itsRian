@@ -120,12 +120,15 @@ export default function ProjectDetailPageClient({
       className="relative max-w-6xl mx-auto mt-24 sm:mt-32 md:mt-40 min-h-screen text-primary-dark dark:text-primary-light"
       role="main"
     >
-      <div
-        className={`absolute inset-0 w-full min-h-full z-10 bg-primary-light/80 dark:bg-primary-dark/80 transition-opacity duration-500 ${showContent ? "opacity-0 pointer-events-none" : "opacity-100"
+      {!isExperimentProject && (
+        <div
+          className={`absolute inset-0 w-full min-h-full z-10 bg-primary-light/80 dark:bg-primary-dark/80 transition-opacity duration-500 ${
+            showContent ? "opacity-0 pointer-events-none" : "opacity-100"
           }`}
-      >
-        <ProjectDetailSkeleton />
-      </div>
+        >
+          <ProjectDetailSkeleton />
+        </div>
+      )}
 
       <div
         className={`transition-opacity duration-500 ${showContent ? "opacity-100" : "opacity-0 pointer-events-none"
