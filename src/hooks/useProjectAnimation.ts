@@ -9,7 +9,17 @@ export function useProjectAnimation(initialShowContent: boolean = false) {
   const [showContent, setShowContent] = useState(initialShowContent);
 
   useEffect(() => {
-    setHasMounted(true);
+    let timer: NodeJS.Timeout;
+    const rafId = requestAnimationFrame(() => {
+      timer = setTimeout(() => {
+        setHasMounted(true);
+      }, 30);
+    });
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   const { ref: backButtonRef } = useIntersectionObserver<HTMLAnchorElement>({
