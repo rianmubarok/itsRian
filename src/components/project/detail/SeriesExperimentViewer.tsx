@@ -109,8 +109,6 @@ export default function SeriesExperimentViewer({
     const params = new URLSearchParams(searchParams.toString());
     params.set("part", partNumber.toString());
     router.push(`?${params.toString()}`, { scroll: false });
-
-    window.scrollTo({ top: 350, behavior: "smooth" });
   };
 
   const handleBackToOverview = () => {
