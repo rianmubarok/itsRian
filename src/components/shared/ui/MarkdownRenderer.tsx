@@ -274,7 +274,7 @@ export default function MarkdownRenderer({
           },
           table: ({ children, ...props }: any) => {
             return (
-              <div className="w-full max-w-full overflow-x-auto my-6 border border-primary-gray/20 rounded-xl shadow-sm">
+              <div className="w-full max-w-full overflow-x-auto my-6 border border-primary-gray/20 rounded-xl">
                 <table className="w-full min-w-[550px]" {...props}>
                   {children}
                 </table>
