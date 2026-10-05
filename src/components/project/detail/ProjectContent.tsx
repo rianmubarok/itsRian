@@ -7,18 +7,27 @@ import { Project } from "@/types";
 interface ProjectContentProps {
   project: Project;
   hasMounted: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  initialManifest?: any;
 }
 
 export default function ProjectContent({
   project,
   hasMounted,
+  initialManifest,
 }: ProjectContentProps) {
   const isSeries =
     project.isSeries ||
     project.tags?.some((t) => t.toLowerCase() === "experiment");
 
   if (isSeries) {
-    return <SeriesExperimentViewer project={project} hasMounted={hasMounted} />;
+    return (
+      <SeriesExperimentViewer
+        project={project}
+        hasMounted={hasMounted}
+        initialManifest={initialManifest}
+      />
+    );
   }
 
   const { markdownContent, isLoading, error, isFromUrl } = useMarkdownContent({

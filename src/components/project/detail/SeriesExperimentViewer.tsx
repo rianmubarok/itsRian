@@ -24,16 +24,18 @@ interface Manifest {
 interface SeriesExperimentViewerProps {
   project: Project;
   hasMounted: boolean;
+  initialManifest?: Manifest | null;
 }
 
 export default function SeriesExperimentViewer({
   project,
   hasMounted,
+  initialManifest = null,
 }: SeriesExperimentViewerProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [manifest, setManifest] = useState<Manifest | null>(null);
+  const [manifest, setManifest] = useState<Manifest | null>(initialManifest);
   const [currentPart, setCurrentPart] = useState<number | null>(null);
   const [markdownContent, setMarkdownContent] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -53,8 +55,10 @@ export default function SeriesExperimentViewer({
     setCurrentPart(null);
   }, [searchParams]);
 
-  // Fetch Manifest
+  // Fetch Manifest if not provided initially
   useEffect(() => {
+    if (manifest) return;
+
     const fetchManifest = async () => {
       try {
         const manifestUrl =
@@ -69,7 +73,7 @@ export default function SeriesExperimentViewer({
     };
 
     fetchManifest();
-  }, [project]);
+  }, [project, manifest]);
 
   // Fetch Markdown for Current Part
   useEffect(() => {
@@ -166,14 +170,14 @@ export default function SeriesExperimentViewer({
         <>
           {/* Main Content Area */}
           <article className="prose text-base tracking-normal text-primary-dark dark:text-primary-light max-w-none mb-12">
-            <div className="prose prose-lg dark:prose-invert max-w-none">
+            <div className="prose prose-lg dark:prose-invert max-w-none min-h-[250px]">
               <MarkdownContentLoader
                 isLoading={isLoading}
                 error={error}
                 isFromUrl={true}
               />
               {!isLoading && markdownContent && (
-                <div className="animate-fadein">
+                <div key={currentPart} className="animate-fade-in-up">
                   <MarkdownRenderer>{markdownContent}</MarkdownRenderer>
                 </div>
               )}

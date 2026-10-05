@@ -80,10 +80,32 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
   };
 }
 
+import fs from "fs";
+import path from "path";
 import ProjectDetailPageClient from "./ProjectDetailPageClient";
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   const { slug } = await params;
   const project = await getProjectBySlug(slug);
-  return <ProjectDetailPageClient params={params} initialProject={project} />;
+
+  let initialManifest = null;
+  if (project?.isSeries || project?.tags.some((t) => t.toLowerCase() === "experiment")) {
+    try {
+      const manifestPath = path.join(process.cwd(), "public", "content", slug, "manifest.json");
+      if (fs.existsSync(manifestPath)) {
+        const fileContent = fs.readFileSync(manifestPath, "utf-8");
+        initialManifest = JSON.parse(fileContent);
+      }
+    } catch (err) {
+      console.error("Failed to read series manifest on server:", err);
+    }
+  }
+
+  return (
+    <ProjectDetailPageClient
+      params={params}
+      initialProject={project}
+      initialManifest={initialManifest}
+    />
+  );
 }

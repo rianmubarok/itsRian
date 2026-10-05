@@ -13,41 +13,63 @@ import ProjectDetailSkeleton from "../../../components/project/ProjectDetailSkel
 import { useProjectAnimation } from "../../../hooks";
 import LottieDisplay from "@/components/project/detail/LottieDisplay";
 
+interface ManifestPart {
+  part: number;
+  title: string;
+  description: string;
+}
+
+interface Manifest {
+  title: string;
+  description: string;
+  totalParts: number;
+  parts: ManifestPart[];
+}
+
 interface ProjectDetailPageProps {
   params: Promise<{
     slug: string;
   }>;
   initialProject?: Project | null;
+  initialManifest?: Manifest | null;
 }
 
 export default function ProjectDetailPageClient({
   params,
   initialProject,
+  initialManifest = null,
 }: ProjectDetailPageProps) {
   const { slug } = use(params);
   const searchParams = useSearchParams();
   const [project] = useState<Project | null>(initialProject || null);
   const fromParam = searchParams.get("from");
   const partParam = searchParams.get("part");
-  const currentPartNum = partParam ? parseInt(partParam, 10) : null;
-  const isExperimentProject = project?.tags.some((tag) => tag.toLowerCase() === "experiment");
 
-  const [manifest, setManifest] = useState<{
-    parts: Array<{ part: number; title: string; description: string }>;
-  } | null>(null);
+  const [manifest, setManifest] = useState<Manifest | null>(initialManifest);
+
+  const [currentPart, setCurrentPart] = useState<number | null>(() => {
+    return partParam ? parseInt(partParam, 10) : null;
+  });
 
   useEffect(() => {
-    if (isExperimentProject && project?.slug) {
+    const p = searchParams.get("part");
+    setCurrentPart(p ? parseInt(p, 10) : null);
+  }, [searchParams]);
+
+  const isExperimentProject = project?.tags.some((tag) => tag.toLowerCase() === "experiment");
+
+  useEffect(() => {
+    if (isExperimentProject && project?.slug && !manifest) {
       const manifestUrl = project.seriesManifestUrl || `/content/${project.slug}/manifest.json`;
       fetch(manifestUrl)
         .then((res) => (res.ok ? res.json() : null))
         .then((data) => setManifest(data))
         .catch(() => setManifest(null));
     }
-  }, [isExperimentProject, project?.seriesManifestUrl, project?.slug]);
+  }, [isExperimentProject, project?.seriesManifestUrl, project?.slug, manifest]);
 
-  const activePart = currentPartNum && manifest
-    ? manifest.parts.find((p) => p.part === currentPartNum)
+  const activePart = currentPart && manifest
+    ? manifest.parts.find((p) => p.part === currentPart)
     : null;
 
   const displayTitle = activePart ? activePart.title : project?.title;
@@ -175,7 +197,11 @@ export default function ProjectDetailPageClient({
             )}
 
             <div ref={refs.contentRef}>
-              <ProjectContent project={project} hasMounted={hasMounted} />
+              <ProjectContent
+                project={project}
+                hasMounted={hasMounted}
+                initialManifest={manifest}
+              />
             </div>
 
             {project.lottie && (

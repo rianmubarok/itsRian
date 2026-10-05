@@ -35,10 +35,18 @@ export function useInfiniteScroll<T>(
     setIsLoading(false);
   }, [currentPage, items, itemsPerPage, isLoading, hasMore]);
 
+  const prevItemsRef = useRef(items);
   useEffect(() => {
-    const endIndex = currentPage * itemsPerPage;
-    setDisplayedItems(items.slice(0, endIndex));
-    setHasMore(items.length > endIndex);
+    if (prevItemsRef.current !== items) {
+      setCurrentPage(1);
+      prevItemsRef.current = items;
+      setDisplayedItems(items.slice(0, itemsPerPage));
+      setHasMore(items.length > itemsPerPage);
+    } else {
+      const endIndex = currentPage * itemsPerPage;
+      setDisplayedItems(items.slice(0, endIndex));
+      setHasMore(items.length > endIndex);
+    }
   }, [items, itemsPerPage, currentPage]);
 
   useEffect(() => {
