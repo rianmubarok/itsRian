@@ -106,13 +106,21 @@ export default function SeriesExperimentViewer({
     fetchPartContent();
   }, [project.slug, currentPart]);
 
+  // Scroll to top when currentPart changes
+  useEffect(() => {
+    if (currentPart !== null) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [currentPart]);
+
   const handleSelectPart = (partNumber: number) => {
     setCurrentPart(partNumber);
     setIsDropdownOpen(false);
 
     const params = new URLSearchParams(searchParams.toString());
     params.set("part", partNumber.toString());
-    router.push(`?${params.toString()}`, { scroll: false });
+    router.push(`?${params.toString()}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleBackToOverview = () => {
@@ -123,7 +131,8 @@ export default function SeriesExperimentViewer({
     params.delete("part");
     const newQuery = params.toString();
     const newPath = newQuery ? `?${newQuery}` : window.location.pathname;
-    router.push(newPath, { scroll: false });
+    router.push(newPath);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const activePartInfo = manifest?.parts.find((p) => p.part === currentPart);
